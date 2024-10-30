@@ -1,0 +1,37 @@
+
+<div class="relative overflow-x-auto">
+    <table class="table-fixed recipes-for-item-table text-gray-700">
+        <thead class="bg-item-list">
+            <tr>
+                <td>種類</td>
+                <td>レシピ名</td>
+                <td>作成物</td>
+                <td>消費個数</td>
+                <td>消費速度</td>
+                <td>作成個数</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+                {% set product = recipe.products[0] %}
+                {% set ingredient = recipe.find_ingredient(selected_item.id) %}
+                <tr>
+                    <td>{{ product.item.kind_name }}</td>
+                    <td>
+                        <a href="{{ recipe.jpwiki_link(True) }}">
+                            {{ recipe.name }}
+                        </a>
+                    </td>
+                    <td>
+                        {% with item = product.item %} 
+                        {% include 'links/item_link_with_image.html' %}
+                        {% endwith %}
+                    </td>
+                    <td>{{ ingredient.amount_str }}</td>
+                    <td>{{ ingredient.minute_str if not recipe.building.is_manual else '' }}</td>
+                    <td>{{ product.amount_str }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

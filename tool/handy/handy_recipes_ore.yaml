@@ -1,0 +1,94 @@
+- id: Iron Ore (Limestone)
+  name: 鉄鉱石（石灰岩）
+  jpwiki_id: Iron_Ore
+  link_anchor: N1
+  alternate: false
+
+- id: Copper Ore (Quartz)
+  name: 銅鉱石（石英）
+  jpwiki_id: Copper_Ore
+  link_anchor: N1
+  alternate: false
+- id: Copper Ore (Sulfur)
+  name: 銅鉱石（硫黄）
+  jpwiki_id: Copper_Ore
+  link_anchor: N2
+  alternate: false
+
+- id: Limestone (Sulfur)
+  name: 石灰岩（硫黄）
+  jpwiki_id: Limestone
+  link_anchor: N1
+  alternate: false
+
+- id: Coal (Iron)
+  name: 石炭（鉄）
+  jpwiki_id: Coal
+  link_anchor: N1
+  alternate: false
+- id: Coal (Limestone)
+  name: 石炭（石灰岩）
+  jpwiki_id: Coal
+  link_anchor: N2
+  alternate: false
+
+- id: Caterium Ore (Copper)
+  name: カテリウム鉱石（銅）
+  jpwiki_id: Caterium_Ore
+  link_anchor: N1
+  alternate: false
+- id: Caterium Ore (Quartz)
+  name: カテリウム鉱石（石英）
+  jpwiki_id: Caterium_Ore
+  link_anchor: N2
+  alternate: false
+
+- id: Raw Quartz (Coal)
+  name: 未加工石英（石炭）
+  jpwiki_id: Raw_Quartz
+  link_anchor: N1
+  alternate: false
+- id: Raw Quartz (Bauxite)
+  name: 未加工石英（ボーキサイト）
+  jpwiki_id: Raw_Quartz
+  link_anchor: N2
+  alternate: false
+
+- id: Sulfur (Iron)
+  name: 硫黄（鉄）
+  jpwiki_id: Sulfur
+  link_anchor: N1
+  alternate: false
+- id: Sulfur (Coal)
+  name: 硫黄（石炭）
+  jpwiki_id: Sulfur
+  link_anchor: N2
+  alternate: false
+
+- id: Bauxite (Copper)
+  name: ボーキサイト（銅）
+  jpwiki_id: Bauxite
+  link_anchor: N1
+  alternate: false
+- id: Bauxite (Caterium)
+  name: ボーキサイト（カテリウム）
+  jpwiki_id: Bauxite
+  link_anchor: N2
+  alternate: false
+
+- id: Uranium Ore (Bauxite)
+  name: ウラン鉱石（ボーキサイト）
+  jpwiki_id: Uranium
+  link_anchor: N1
+  alternate: false
+
+- id: Nitrogen Gas (Caterium)
+  name: 窒素ガス（カテリウム）
+  jpwiki_id: Nitrogen_Gas
+  link_anchor: N1
+  alternate: false
+- id: Nitrogen Gas (Bauxite)
+  name: 窒素ガス（ボーキサイト）
+  jpwiki_id: Nitrogen_Gas
+  link_anchor: N2
+  alternate: false

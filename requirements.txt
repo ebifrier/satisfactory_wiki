@@ -1,0 +1,9 @@
+attrdict3
+flask
+flask-assets
+flask-migrate
+flask-sqlalchemy
+libsass
+lxml
+requests
+pyyaml

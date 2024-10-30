@@ -1,0 +1,954 @@
+- id: MAM Alien Megafauna Research - Hog Research
+  name: ホッグ研究
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms01
+  items:
+  - id: Hog_Remains
+    amount: 1
+- id: MAM Alien Megafauna Research - Hatcher Research
+  name: ハッチャー研究
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms02
+  items:
+  - id: Hatcher_Remains
+    amount: 1
+- id: MAM Alien Megafauna Research - Stinger Research
+  name: スティンガー研究
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms03
+  items:
+  - id: Stinger_Remains
+    amount: 1
+- id: MAM Alien Megafauna Research - Spitter Research
+  name: スピッター研究
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms04
+  items:
+  - id: Spitter_Remains
+    amount: 1
+- id: MAM Alien Megafauna Research - Bio-Organic Properties
+  name: バイオ・オーガニック特性
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms05
+  items:
+  - id: Alien_Protein
+    amount: 5
+- id: MAM Alien Megafauna Research - Protein Inhaler
+  name: タンパク質吸入器
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms06
+  items:
+  - id: Alien_Protein
+    amount: 2
+  - id: Beryl_Nut
+    amount: 20
+  - id: Rotor
+    amount: 50
+- id: MAM Alien Megafauna Research - Structural Analysis
+  name: 構造分析
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms07
+  items:
+  - id: Alien_DNA_Capsule
+    amount: 5
+  - id: Iron_Rod
+    amount: 100
+- id: MAM Alien Megafauna Research - The Rebar Gun
+  name: 鉄筋ガン
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms08
+  items:
+  - id: Rotor
+    amount: 25
+  - id: Reinforced_Iron_Plate
+    amount: 50
+  - id: Screw
+    amount: 500
+- id: MAM Alien Megafauna Research - Inflated Pocket Dimension
+  name: ポケット次元の拡大
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms09
+  items:
+  - id: Alien_Protein
+    amount: 3
+  - id: Cable
+    amount: 1000
+- id: MAM Alien Megafauna Research - Expanded Toolbelt
+  name: ツールベルトの拡張
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms10
+  items:
+  - id: Alien_DNA_Capsule
+    amount: 5
+  - id: Steel_Beam
+    amount: 500
+- id: MAM Alien Megafauna Research - Hostile Organism Detection
+  name: 敵性生命体検知
+  category: 異星の巨型動物
+  time: 3
+  link_anchor: AlienOrganisms11
+  items:
+  - id: Alien_DNA_Capsule
+    amount: 10
+  - id: Crystal_Oscillator
+    amount: 5
+  - id: High-Speed_Connector
+    amount: 5
+- id: MAM Alien Technology Research - SAM Analysis
+  name: SAMの分析
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology01
+  items:
+  - id: SAM
+    amount: 10
+- id: MAM Alien Technology Research - SAM Reanimation
+  name: SAMの活性化
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology02
+  items:
+  - id: SAM
+    amount: 20
+- id: MAM Alien Technology Research - SAM Fluctuator
+  name: SAM変動機
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology03
+  items:
+  - id: Reanimated_SAM
+    amount: 10
+  - id: Steel_Pipe
+    amount: 100
+  - id: Wire
+    amount: 200
+- id: MAM Alien Technology Research - Mercer Sphere Analysis
+  name: マーサー・スフィアの分析
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology04
+  items:
+  - id: Mercer_Sphere
+    amount: 1
+- id: MAM Alien Technology Research - Somersloop Analysis
+  name: サマースループの分析
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology05
+  items:
+  - id: Somersloop
+    amount: 1
+- id: MAM Alien Technology Research - Dimensional Depot
+  name: 次元デポ
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology06
+  items:
+  - id: Mercer_Sphere
+    amount: 1
+  - id: SAM_Fluctuator
+    amount: 11
+- id: MAM Alien Technology Research - Alien Energy Harvesting
+  name: 異星エネルギーの活用
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology07
+  items:
+  - id: SAM_Fluctuator
+    amount: 10
+- id: MAM Alien Technology Research - Depot Expansion (200%)
+  name: デポ拡張（200％）
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology08
+  items:
+  - id: Mercer_Sphere
+    amount: 3
+  - id: SAM_Fluctuator
+    amount: 47
+- id: 'MAM Alien Technology Research - Upload Upgrade: 30/min'
+  name: 'アップロードのアップグレード: 30/分'
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology09
+  items:
+  - id: Mercer_Sphere
+    amount: 3
+  - id: SAM_Fluctuator
+    amount: 47
+- id: MAM Alien Technology Research - Power Augmenter
+  name: パワー増幅装置
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology10
+  items:
+  - id: Somersloop
+    amount: 1
+  - id: SAM_Fluctuator
+    amount: 100
+  - id: Computer
+    amount: 50
+- id: MAM Alien Technology Research - Production Amplifier
+  name: 生産増幅装置
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology11
+  items:
+  - id: Somersloop
+    amount: 1
+  - id: SAM_Fluctuator
+    amount: 100
+  - id: Circuit_Board
+    amount: 50
+- id: MAM Alien Technology Research - Manual Depot Uploader
+  name: 手動デポ・アップローダー
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology12
+  items:
+  - id: Mercer_Sphere
+    amount: 3
+  - id: Computer
+    amount: 17
+  - id: SAM_Fluctuator
+    amount: 29
+- id: MAM Alien Technology Research - Depot Expansion (300%)
+  name: デポ拡張（300％）
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology13
+  items:
+  - id: Mercer_Sphere
+    amount: 7
+  - id: SAM_Fluctuator
+    amount: 103
+- id: 'MAM Alien Technology Research - Upload Upgrade: 60/min'
+  name: 'アップロードのアップグレード: 60/分'
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology14
+  items:
+  - id: Mercer_Sphere
+    amount: 7
+  - id: SAM_Fluctuator
+    amount: 103
+- id: MAM Alien Technology Research - Alien Power Matrix
+  name: 異星のパワーマトリックス
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology15
+  items:
+  - id: Singularity_Cell
+    amount: 50
+  - id: Power_Shard
+    amount: 100
+  - id: SAM_Fluctuator
+    amount: 500
+- id: MAM Alien Technology Research - Depot Expansion (400%)
+  name: デポ拡張（400％）
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology16
+  items:
+  - id: Mercer_Sphere
+    amount: 13
+  - id: SAM_Fluctuator
+    amount: 151
+- id: 'MAM Alien Technology Research - Upload Upgrade: 120/min'
+  name: 'アップロードのアップグレード: 120/分'
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology17
+  items:
+  - id: Mercer_Sphere
+    amount: 13
+  - id: SAM_Fluctuator
+    amount: 151
+- id: MAM Alien Technology Research - Depot Expansion (500%)
+  name: デポ拡張（500％）
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology18
+  items:
+  - id: Mercer_Sphere
+    amount: 23
+  - id: SAM_Fluctuator
+    amount: 199
+- id: 'MAM Alien Technology Research - Upload Upgrade: 240/min'
+  name: 'アップロードのアップグレード: 240/分'
+  category: 異星のテクノロジー
+  time: 3
+  link_anchor: AlienTechnology19
+  items:
+  - id: Mercer_Sphere
+    amount: 23
+  - id: SAM_Fluctuator
+    amount: 199
+- id: MAM Caterium Research - Caterium
+  name: カテリウム
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium01
+  items:
+  - id: Caterium_Ore
+    amount: 10
+- id: MAM Caterium Research - Caterium Ingots
+  name: カテリウムのインゴット
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium02
+  items:
+  - id: Caterium_Ore
+    amount: 50
+- id: MAM Caterium Research - Quickwire
+  name: クイックワイヤー
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium03
+  items:
+  - id: Caterium_Ingot
+    amount: 50
+- id: MAM Caterium Research - Zipline
+  name: ジップライン
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium04
+  items:
+  - id: Quickwire
+    amount: 100
+  - id: Cable
+    amount: 50
+- id: MAM Caterium Research - Caterium Electronics
+  name: カテリウム機器
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium05
+  items:
+  - id: Quickwire
+    amount: 100
+- id: MAM Caterium Research - Stun Rebar
+  name: スタン鉄筋
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium06
+  items:
+  - id: Quickwire
+    amount: 50
+  - id: Iron_Rebar
+    amount: 10
+- id: MAM Caterium Research - AI Limiter
+  name: AIリミッター
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium07
+  items:
+  - id: Quickwire
+    amount: 200
+  - id: Copper_Sheet
+    amount: 50
+- id: MAM Caterium Research - Power Poles Mk.2
+  name: 電柱MK.2
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium08
+  items:
+  - id: Quickwire
+    amount: 300
+- id: MAM Caterium Research - High-Speed Connector
+  name: 高速コネクター
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium09
+  items:
+  - id: Quickwire
+    amount: 500
+  - id: Plastic
+    amount: 50
+- id: MAM Caterium Research - Power Poles Mk.3
+  name: 電柱MK.3
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium10
+  items:
+  - id: High-Speed_Connector
+    amount: 50
+  - id: Steel_Pipe
+    amount: 200
+- id: MAM Caterium Research - Smart Splitter
+  name: スマート分岐機
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium11
+  items:
+  - id: AI_Limiter
+    amount: 10
+  - id: Reinforced_Iron_Plate
+    amount: 50
+- id: MAM Caterium Research - Power Switch
+  name: 電源スイッチ
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium12
+  items:
+  - id: Steel_Beam
+    amount: 100
+  - id: AI_Limiter
+    amount: 50
+- id: MAM Caterium Research - Priority Power Switch
+  name: 優先電源スイッチ
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium13
+  items:
+  - id: High-Speed_Connector
+    amount: 25
+  - id: Quickwire
+    amount: 500
+- id: MAM Caterium Research - Bullet Guidance System
+  name: 弾丸誘導システム
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium14
+  items:
+  - id: High-Speed_Connector
+    amount: 10
+  - id: Rifle_Ammo
+    amount: 500
+- id: MAM Caterium Research - Programmable Splitter
+  name: プログラム式分岐機
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium15
+  items:
+  - id: AI_Limiter
+    amount: 100
+  - id: Computer
+    amount: 50
+  - id: Heavy_Modular_Frame
+    amount: 50
+- id: MAM Caterium Research - Geothermal Generator
+  name: 地熱発電機
+  category: カテリウム
+  time: 3
+  link_anchor: Caterium16
+  items:
+  - id: High-Speed_Connector
+    amount: 100
+  - id: Quickwire
+    amount: 1000
+  - id: Motor
+    amount: 50
+- id: MAM Mycelia Research - Mycelia
+  name: 菌糸
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia01
+  items:
+  - id: Mycelia
+    amount: 5
+- id: MAM Mycelia Research - Fabric
+  name: 布地
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia02
+  items:
+  - id: Mycelia
+    amount: 25
+  - id: Biomass
+    amount: 100
+- id: MAM Mycelia Research - Toxic Cellular Modification
+  name: 毒性細胞改変
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia03
+  items:
+  - id: Nobelisk
+    amount: 10
+  - id: Mycelia
+    amount: 100
+  - id: Biomass
+    amount: 200
+- id: MAM Mycelia Research - Medical Properties
+  name: 薬効成分
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia04
+  items:
+  - id: Mycelia
+    amount: 25
+  - id: Stator
+    amount: 10
+- id: MAM Mycelia Research - Parachute
+  name: パラシュート
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia05
+  items:
+  - id: Fabric
+    amount: 10
+  - id: Cable
+    amount: 50
+- id: MAM Mycelia Research - Expanded Toolbelt
+  name: ツールベルトの拡張
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia06
+  items:
+  - id: Fabric
+    amount: 50
+  - id: Rotor
+    amount: 100
+- id: MAM Mycelia Research - Synthetic Polyester Fabric
+  name: 合成ポリエステル生地
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia07
+  items:
+  - id: Fabric
+    amount: 25
+  - id: Polymer_Resin
+    amount: 100
+- id: MAM Mycelia Research - Gas Mask
+  name: ガスマスク
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia08
+  items:
+  - id: Coal
+    amount: 10
+  - id: Fabric
+    amount: 50
+  - id: Steel_Pipe
+    amount: 50
+- id: MAM Mycelia Research - Vitamin Inhaler
+  name: ビタミン吸入器
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia09
+  items:
+  - id: Mycelia
+    amount: 10
+  - id: Paleberry
+    amount: 5
+- id: MAM Mycelia Research - Therapeutic Inhaler
+  name: 治療用吸入器
+  category: 菌糸
+  time: 3
+  link_anchor: Mycelia10
+  items:
+  - id: Mycelia
+    amount: 15
+  - id: Bacon_Agaric
+    amount: 1
+  - id: Alien_Protein
+    amount: 1
+- id: MAM Nutrients Research - Beryl Nut
+  name: ベリル・ナッツ
+  category: 栄養素
+  time: 3
+  link_anchor: Nutrients01
+  items:
+  - id: Beryl_Nut
+    amount: 5
+- id: MAM Nutrients Research - Paleberry
+  name: パレベリー
+  category: 栄養素
+  time: 3
+  link_anchor: Nutrients02
+  items:
+  - id: Paleberry
+    amount: 2
+- id: MAM Nutrients Research - Bacon Agaric
+  name: ベーコンタケ
+  category: 栄養素
+  time: 3
+  link_anchor: Nutrients03
+  items:
+  - id: Bacon_Agaric
+    amount: 1
+- id: MAM Nutrients Research - Nutritional Processor
+  name: フードプロセッサー
+  category: 栄養素
+  time: 3
+  link_anchor: Nutrients04
+  items:
+  - id: Modular_Frame
+    amount: 25
+  - id: Steel_Pipe
+    amount: 50
+  - id: Wire
+    amount: 500
+- id: MAM Nutrients Research - Nutritional Inhaler
+  name: 栄養吸入器
+  category: 栄養素
+  time: 3
+  link_anchor: Nutrients05
+  items:
+  - id: Bacon_Agaric
+    amount: 2
+  - id: Paleberry
+    amount: 4
+  - id: Beryl_Nut
+    amount: 10
+- id: MAM Power Slugs Research - Blue Power Slugs
+  name: 青のパワー・スラッグ
+  category: パワー･スラッグ
+  time: 3
+  link_anchor: PowerSlug01
+  items:
+  - id: Blue_Power_Slug
+    amount: 1
+- id: MAM Power Slugs Research - Slug Scanning
+  name: スラッグのスキャン
+  category: パワー･スラッグ
+  time: 3
+  link_anchor: PowerSlug02
+  items:
+  - id: Iron_Rod
+    amount: 50
+  - id: Wire
+    amount: 100
+  - id: Screw
+    amount: 200
+- id: MAM Power Slugs Research - Yellow Power Shards
+  name: 黄のパワー・シャード
+  category: パワー･スラッグ
+  time: 3
+  link_anchor: PowerSlug03
+  items:
+  - id: Yellow_Power_Slug
+    amount: 1
+  - id: Rotor
+    amount: 25
+  - id: Cable
+    amount: 100
+- id: MAM Power Slugs Research - Overclock Production
+  name: 生産のオーバークロック
+  category: パワー･スラッグ
+  time: 3
+  link_anchor: PowerSlug04
+  items:
+  - id: Power_Shard
+    amount: 1
+  - id: Iron_Plate
+    amount: 50
+  - id: Wire
+    amount: 50
+- id: MAM Power Slugs Research - Purple Power Shards
+  name: 紫のパワー・シャード
+  category: パワー･スラッグ
+  time: 3
+  link_anchor: PowerSlug05
+  items:
+  - id: Purple_Power_Slug
+    amount: 1
+  - id: Modular_Frame
+    amount: 25
+  - id: Copper_Sheet
+    amount: 100
+- id: MAM Power Slugs Research - Synthetic Power Shards
+  name: 合成パワー・シャード
+  category: パワー･スラッグ
+  time: 3
+  link_anchor: PowerSlug06
+  items:
+  - id: Power_Shard
+    amount: 10
+  - id: Time_Crystal
+    amount: 100
+  - id: Quartz_Crystal
+    amount: 200
+- id: MAM Quartz Research - Quartz
+  name: 石英
+  category: 石英
+  time: 3
+  link_anchor: Quartz01
+  items:
+  - id: Raw_Quartz
+    amount: 10
+- id: MAM Quartz Research - Quartz Crystals
+  name: 石英結晶
+  category: 石英
+  time: 3
+  link_anchor: Quartz02
+  items:
+  - id: Raw_Quartz
+    amount: 20
+- id: MAM Quartz Research - Silica
+  name: シリカ
+  category: 石英
+  time: 3
+  link_anchor: Quartz03
+  items:
+  - id: Raw_Quartz
+    amount: 20
+- id: MAM Quartz Research - Shatter Rebar
+  name: 破砕鉄筋
+  category: 石英
+  time: 3
+  link_anchor: Quartz04
+  items:
+  - id: Quartz_Crystal
+    amount: 30
+  - id: Iron_Rebar
+    amount: 150
+- id: MAM Quartz Research - Crystal Oscillator
+  name: 水晶発振器
+  category: 石英
+  time: 3
+  link_anchor: Quartz05
+  items:
+  - id: Quartz_Crystal
+    amount: 100
+  - id: Reinforced_Iron_Plate
+    amount: 50
+- id: MAM Quartz Research - Blade Runners
+  name: ブレード・ランナーズ
+  category: 石英
+  time: 3
+  link_anchor: Quartz06
+  items:
+  - id: Silica
+    amount: 50
+  - id: Modular_Frame
+    amount: 10
+- id: MAM Quartz Research - Inflated Pocket Dimension
+  name: ポケット次元の拡大
+  category: 石英
+  time: 3
+  link_anchor: Quartz07
+  items:
+  - id: Silica
+    amount: 200
+- id: MAM Quartz Research - Explosive Resonance Application
+  name: 爆発的な共振の応用
+  category: 石英
+  time: 3
+  link_anchor: Quartz08
+  items:
+  - id: Crystal_Oscillator
+    amount: 5
+  - id: Nobelisk
+    amount: 100
+- id: MAM Quartz Research - The Explorer
+  name: エクスプローラー
+  category: 石英
+  time: 3
+  link_anchor: Quartz09
+  items:
+  - id: Crystal_Oscillator
+    amount: 10
+  - id: Modular_Frame
+    amount: 100
+- id: MAM Quartz Research - Radio Signal Scanning
+  name: 無線信号スキャン
+  category: 石英
+  time: 3
+  link_anchor: Quartz10
+  items:
+  - id: Crystal_Oscillator
+    amount: 100
+  - id: Motor
+    amount: 100
+  - id: Object_Scanner
+    amount: 1
+- id: MAM Quartz Research - Radar Technology
+  name: レーダー技術
+  category: 石英
+  time: 3
+  link_anchor: Quartz11
+  items:
+  - id: Crystal_Oscillator
+    amount: 50
+  - id: Heavy_Modular_Frame
+    amount: 50
+  - id: Computer
+    amount: 50
+- id: MAM Sulfur Research - Sulfur
+  name: 硫黄
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur01
+  items:
+  - id: Sulfur
+    amount: 10
+- id: MAM Sulfur Research - Black Powder
+  name: 黒色火薬
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur02
+  items:
+  - id: Sulfur
+    amount: 50
+  - id: Coal
+    amount: 25
+- id: MAM Sulfur Research - Experimental Power Generation
+  name: 実験的発電
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur03
+  items:
+  - id: Sulfur
+    amount: 25
+  - id: Modular_Frame
+    amount: 50
+  - id: Rotor
+    amount: 100
+- id: MAM Sulfur Research - Compacted Coal
+  name: 圧縮石炭
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur04
+  items:
+  - id: Hard_Drive
+    amount: 1
+  - id: Sulfur
+    amount: 25
+  - id: Coal
+    amount: 25
+- id: MAM Sulfur Research - Turbofuel
+  name: ターボ燃料
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur05
+  items:
+  - id: Hard_Drive
+    amount: 1
+  - id: Compacted_Coal
+    amount: 15
+  - id: Packaged_Fuel
+    amount: 50
+- id: MAM Sulfur Research - Expanded Toolbelt
+  name: ツールベルトの拡張
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur06
+  items:
+  - id: Black_Powder
+    amount: 100
+  - id: Encased_Industrial_Beam
+    amount: 50
+- id: MAM Sulfur Research - The Nobelisk Detonator
+  name: ノーベリスク起爆装置
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur07
+  items:
+  - id: Black_Powder
+    amount: 50
+  - id: Steel_Pipe
+    amount: 100
+  - id: Cable
+    amount: 200
+- id: MAM Sulfur Research - Smokeless Powder
+  name: 無煙火薬
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur08
+  items:
+  - id: Black_Powder
+    amount: 100
+  - id: Plastic
+    amount: 50
+- id: MAM Sulfur Research - Rocket Fuel
+  name: ロケット燃料
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur09
+  items:
+  - id: Hard_Drive
+    amount: 1
+  - id: Empty_Fluid_Tank
+    amount: 10
+  - id: Packaged_Turbofuel
+    amount: 100
+- id: MAM Sulfur Research - Ionized Fuel
+  name: イオン燃料
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur10
+  items:
+  - id: Hard_Drive
+    amount: 1
+  - id: Power_Shard
+    amount: 100
+  - id: Packaged_Rocket_Fuel
+    amount: 200
+- id: MAM Sulfur Research - Cluster Nobelisk
+  name: クラスター・ノーベリスク
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur11
+  items:
+  - id: Smokeless_Powder
+    amount: 100
+  - id: Nobelisk
+    amount: 200
+- id: MAM Sulfur Research - Explosive Rebar
+  name: 爆砕鉄筋
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur12
+  items:
+  - id: Smokeless_Powder
+    amount: 200
+  - id: Iron_Rebar
+    amount: 200
+  - id: Steel_Beam
+    amount: 200
+- id: MAM Sulfur Research - The Rifle
+  name: ライフル
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur13
+  items:
+  - id: Smokeless_Powder
+    amount: 50
+  - id: Motor
+    amount: 100
+  - id: Rubber
+    amount: 200
+- id: MAM Sulfur Research - Nuclear Deterrent Development
+  name: 核抑止力の開発
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur14
+  items:
+  - id: Nobelisk
+    amount: 500
+  - id: Encased_Uranium_Cell
+    amount: 10
+  - id: AI_Limiter
+    amount: 100
+- id: MAM Sulfur Research - Turbo Rifle Ammo
+  name: ターボライフル弾
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur15
+  items:
+  - id: Rifle_Ammo
+    amount: 1000
+  - id: Packaged_Turbofuel
+    amount: 50
+  - id: Aluminum_Casing
+    amount: 100
+- id: MAM Sulfur Research - Inflated Pocket Dimension
+  name: ポケット次元の拡大
+  category: 硫黄
+  time: 3
+  link_anchor: Sulfur16
+  items:
+  - id: Smokeless_Powder
+    amount: 50
+  - id: Computer
+    amount: 50

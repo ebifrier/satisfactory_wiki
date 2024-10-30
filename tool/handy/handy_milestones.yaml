@@ -1,0 +1,114 @@
+- id: Tier 0 - Hub Upgrade 1
+  name: HUBアップグレード1
+  link_anchor: Hub_Upgrade1
+- id: Tier 0 - Hub Upgrade 2
+  name: HUBアップグレード2
+  link_anchor: Hub_Upgrade2
+- id: Tier 0 - Hub Upgrade 3
+  name: HUBアップグレード3
+  link_anchor: Hub_Upgrade3
+- id: Tier 0 - Hub Upgrade 4
+  name: HUBアップグレード4
+  link_anchor: Hub_Upgrade4
+- id: Tier 0 - Hub Upgrade 5
+  name: HUBアップグレード5
+  link_anchor: Hub_Upgrade5
+- id: Tier 0 - Hub Upgrade 6
+  name: HUBアップグレード6
+  link_anchor: Hub_Upgrade6
+
+- id: Tier 1 - Base Building
+  name: 基礎建設
+- id: Tier 1 - Logistics
+  name: ロジスティックス
+- id: Tier 1 - Field Research
+  name: 実地調査
+
+- id: Tier 2 - Part Assembly
+  name: 部品組立
+- id: Tier 2 - Obstacle Clearing
+  name: 障害物の除去
+- id: Tier 2 - Jump Pads
+  name: ジャンプパッド
+- id: Tier 2 - Resource Sink Bonus Program
+  name: リソースシンク ボーナスプログラム
+- id: Tier 2 - Logistics Mk.2
+  name: ロジスティックスMk.2
+
+- id: Tier 3 - Coal Power
+  name: 石炭発電
+- id: Tier 3 - Vehicular Transport
+  name: 車両輸送
+- id: Tier 3 - Basic Steel Production
+  name: 基本的な鋼鉄生産
+- id: Tier 3 - Enhanced Asset Security
+  name: 改良式近接戦闘
+
+- id: Tier 4 - FICSIT Blueprints
+  name: FICSITブループリント
+- id: Tier 4 - Logistics Mk.3
+  name: ロジスティックスMk.3
+- id: Tier 4 - Advanced Steel Production
+  name: 先進的な鋼鉄生産
+- id: Tier 4 - Expanded Power Infrastructure
+  name: 拡張電力インフラ
+- id: Tier 4 - Hypertubes
+  name: ハイパーチューブ
+
+- id: Tier 5 - Jetpack
+  name: ジェットパック
+- id: Tier 5 - Oil Processing
+  name: 石油の精製
+- id: Tier 5 - Logistics Mk.4
+  name: ロジスティックスMk.4
+- id: Tier 5 - Fluid Packaging
+  name: 液体パッケージ
+- id: Tier 5 - Petroleum Power
+  name: 石油の力
+
+- id: Tier 6 - Industrial Manufacturing
+  name: 産業用製造工程
+- id: Tier 6 - Monorail Train Technology
+  name: モノレール列車技術
+- id: Tier 6 - Railway Signaling
+  name: 線路の信号
+  link_anchor: Railway_Signalling
+- id: Tier 6 - Pipeline Engineering Mk.2
+  name: パイプライン工学Mk.2
+- id: Tier 6 - FICSIT Blueprints Mk.2
+  name: FICSITブループリントMk.2
+
+- id: Tier 7 - Bauxite Refinement
+  name: ボーキサイト精製
+- id: Tier 7 - Hoverpack
+  name: ホバーパック
+  link_anchor: Hover_Pack
+- id: Tier 7 - Logistics Mk.5
+  name: ロジスティックスMk.5
+- id: Tier 7 - Hazmat Suit
+  name: 化学防護服
+- id: Tier 7 - Control System Development
+  name: 制御システム開発
+
+- id: Tier 8 - Aeronautical Engineering
+  name: 航空工学
+- id: Tier 8 - Nuclear Power
+  name: 原子力
+- id: Tier 8 - Advanced Aluminum Production
+  name: 先進的なアルミニウム生産
+- id: Tier 8 - Leading-Edge Production
+  name: 最先端生産技術
+  link_anchor: Leading_edge_Production
+- id: Tier 8 - Particle Enrichment
+  name: 粒子濃縮
+
+- id: Tier 9 - Matter Conversion
+  name: 物質変換
+- id: Tier 9 - Quantum Encoding
+  name: 量子エンコーディング
+- id: Tier 9 - FICSIT Blueprints Mk.3
+  name: FICSITブループリントMk.3
+- id: Tier 9 - Spatial Energy Regulation
+  name: 空間エネルギー調整
+- id: Tier 9 - Peak Efficiency
+  name: ピーク効率

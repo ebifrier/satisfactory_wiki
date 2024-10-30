@@ -1,0 +1,26 @@
+
+<div class="relative overflow-x-auto">
+    <table class="table-fixed conditions-table text-gray-700">
+        <thead class="bg-item-list">
+            <tr>
+                <td>ティア</td>
+                <td>マイルストーン</td>
+                <td>個数</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for milestone in milestones %}
+                {% set item = milestone.find_item(selected_item.id) %}
+                <tr>
+                    <td>ティア{{ milestone.tier }}</td>
+                    <td>
+                        <a href="{{ milestone.jpwiki_link(True) }}">
+                            {{ milestone.name }}
+                        </a>
+                    </td>
+                    <td class="text-right">{{ item.amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

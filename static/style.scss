@@ -1,0 +1,178 @@
+
+@charset "UTF-8";
+
+html, body {
+    font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', '游ゴシック', 'Yu Gothic', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+    font-size: 0.88em;
+
+    /*height: 100%;
+    max-height: 100%;*/
+}
+
+a {
+    text-decoration-color: #ccc !important;
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
+    text-decoration-thickness: 1px !important;
+    text-underline-offset: 2px !important;
+
+    &:visited {
+        text-decoration-color: #ccc;
+    }
+}
+
+.bg-ingredient {
+    background-color: khaki;
+}
+.bg-product {
+    background-color: palegreen;
+}
+
+table, th, td {
+    border: 1px solid #a9a9a9;
+    
+    td {
+        padding-top: 0.4em;
+        padding-bottom: 0.3em;
+        padding-left: 0.2em;
+        padding-right: 0.2em;
+        line-height: 1.5em;
+    }
+}
+
+textarea {
+    min-height: 6rem;
+}
+
+.recipe-table + .recipe-table {
+    margin-top: 1rem;
+}
+
+.recipe-table {
+    thead tr {
+        td:nth-child(1) {
+            text-align: left;
+        }
+        td:nth-child(2) {
+            text-align: center;
+        }
+        td:nth-child(3) {
+            text-align: center;
+        }
+    }
+
+    tbody tr {
+        td:nth-child(1) {
+            width: 240px;
+        }
+        td:nth-child(2) {
+            width: 40px;
+            text-align: right;
+        }
+        td:nth-child(3) {
+            background-color: khaki;
+            width: 50px;
+            text-align: right;
+        }
+        td:nth-child(4) {
+            width: 240px;
+        }
+        td:nth-child(5) {
+            width: 40px;
+            text-align: right;
+        }
+        td:nth-child(6) {
+            background-color: palegreen;
+            width: 50px;
+            text-align: right;
+        }
+        td:nth-child(7), td:nth-child(8) {
+            width: 80px;
+            text-align: center;
+        }
+    }
+}
+
+.recipes-for-item-table {
+    thead tr {
+        background-color: gold;
+
+        td {
+            text-align: center;
+        }
+    }
+    tbody tr {
+        td:nth-child(1) {
+            width: 60px;
+            text-align: center;
+        }
+        td:nth-child(2) {
+            width: 200px;
+        }
+        td:nth-child(3) {
+            width: 240px;
+        }
+        td:nth-child(4) {
+            width: 30px;
+            text-align: right;
+        }
+        td:nth-child(5) {
+            width: 40px;
+            text-align: right;
+        }
+        td:nth-child(6) {
+            width: 30px;
+            text-align: right;
+        }
+    }
+}
+
+.recipes-for-building-table {
+    thead tr {
+        background-color: gold;
+
+        td {
+            text-align: center;
+        }
+    }
+    tbody tr {
+        td:nth-child(1) {
+            width: 120px;
+            text-align: center;
+        }
+        td:nth-child(2) {
+            width: 120px;
+            text-align: center;
+        }
+        td:nth-child(3) {
+            width: 240px;
+        }
+        td:nth-child(4) {
+            width: 60px;
+            text-align: right;
+        }
+    }
+}
+
+.conditions-table {
+    thead tr {
+        background-color: gold;
+
+        td {
+            text-align: center;
+        }
+    }
+    tbody tr {
+        td:nth-child(1) {
+            width: 120px;
+            text-align: center;
+        }
+        td:nth-child(2) {
+            width: 250px;
+        }
+        td:nth-child(3) {
+            width: 50px;
+            text-align: right;
+        }
+    }
+}

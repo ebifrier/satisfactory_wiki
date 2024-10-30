@@ -1,0 +1,64 @@
+
+<div class="recipe-table relative overflow-x-auto">
+    <table class="table-fixed text-gray-700">
+        <thead style="background:{{ recipe.bg_color(selected_item.id) }}">
+            <tr>
+                <td colspan="6">
+                    <p class="font-bold text-left">{{ recipe.name }}</p>
+                    <p class="text-left">
+                        {% with cond = recipe.condition %} 
+                        {% include 'links/condition_link.html' %}
+                        {% endwith %}
+                    </p>
+                </td>
+                <td>
+                    {% with building = recipe.building %} 
+                    {% include 'links/building_link_big.html' %}
+                    {% endwith %}
+                </td>
+                {% if recipe.building2 is not none %}
+                    <td>
+                        {% with building = recipe.building2 %} 
+                        {% include 'links/building_link_big.html' %}
+                        {% endwith %}
+                    </td>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% set product_len = recipe.products | length %}
+            {% set prod_per_ing = recipe.building.max_inputs // (product_len if product_len != 0 else 1) %}
+            {% set rows = recipe.building.max_inouts %}
+            {% for i in range(0, rows) %}
+                {% set ing = recipe.get_ingredient(i) %}
+                <tr>
+                    {% if ing is not none %}
+                        {% with item = ing.item %} 
+                            <td>{% include 'links/item_link_with_image.html' %}</td>
+                            <td>{{ ing.amount_str }}</td>
+                            <td class="bg-ingredient">{{ ing.minute_str }}</td>
+                        {% endwith %}
+                    {% else %}
+                        <td class="!px-4">-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    {% endif %}
+                    {% if i % prod_per_ing == 0 %}
+                        {% set prod = recipe.get_product(i // prod_per_ing) %}
+                        {% with item = prod.item %} 
+                            <td rowspan="{{ prod_per_ing }}">{% include 'links/item_link_with_image.html' %}</td>
+                            <td rowspan="{{ prod_per_ing }}">{{ prod.amount_str }}</td>
+                            <td rowspan="{{ prod_per_ing }}" class="bg-product">{{ prod.minute_str }}</td>
+                        {% endwith %}
+                    {% endif %}
+                    {% if i == 0 %}
+                        <td rowspan="{{ rows }}">{{ recipe.production_time_str }}秒</td>
+                        {% if recipe.production_time2 is not none %}
+                            <td rowspan="{{ rows }}">{{ recipe.production_time2_str }}click</td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

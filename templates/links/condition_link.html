@@ -1,0 +1,25 @@
+{% if recipe.alternate %}
+<span>
+    分析[
+    <a href="https://wikiwiki.jp/sf-jp/代替レシピ" title="代替レシピ">
+        <span>ハードドライブ</span>
+    </a>
+    ]
+</span>
+{% elif cond.kind == 'milestone' %}
+<span>
+    マイルストーン[
+    <a href="{{ cond.jpwiki_link(True) }}" title="{{ cond.name }}">
+        <span>ティア{{ cond.tier }}:{{ cond.name }}</span>
+    </a>
+    ]
+</span>
+{% elif cond.kind == 'research' %}
+<span>
+    分析[
+    <a href="{{ cond.jpwiki_link(True) }}" title="{{ cond.name }}">
+        <span>{{ cond.category }}:{{ cond.name }}</span>
+    </a>
+    ]
+</span>
+{% endif %}

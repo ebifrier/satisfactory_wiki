@@ -1,0 +1,6 @@
+
+static/.webassets-cache
+.venv/
+**/__pycache__
+
+*.db

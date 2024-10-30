@@ -1,0 +1,195 @@
+- id: MAM Alien Megafauna Research - Hog Research
+  name: ホッグ研究
+- id: MAM Alien Megafauna Research - Hatcher Research
+  name: ハッチャー研究
+- id: MAM Alien Megafauna Research - Stinger Research
+  name: スティンガー研究
+- id: MAM Alien Megafauna Research - Spitter Research
+  name: スピッター研究
+- id: MAM Alien Megafauna Research - Bio-Organic Properties
+  name: バイオ・オーガニック特性
+- id: MAM Alien Megafauna Research - Protein Inhaler
+  name: タンパク質吸入器
+- id: MAM Alien Megafauna Research - Structural Analysis
+  name: 構造分析
+- id: MAM Alien Megafauna Research - The Rebar Gun
+  name: 鉄筋ガン
+- id: MAM Alien Megafauna Research - Inflated Pocket Dimension
+  name: ポケット次元の拡大
+- id: MAM Alien Megafauna Research - Expanded Toolbelt
+  name: ツールベルトの拡張
+- id: MAM Alien Megafauna Research - Hostile Organism Detection
+  name: 敵性生命体検知
+
+- id: MAM Alien Technology Research - SAM Analysis
+  name: SAMの分析
+- id: MAM Alien Technology Research - SAM Reanimation
+  name: SAMの活性化
+- id: MAM Alien Technology Research - SAM Fluctuator
+  name: SAM変動機
+- id: MAM Alien Technology Research - Mercer Sphere Analysis
+  name: マーサー・スフィアの分析
+- id: MAM Alien Technology Research - Somersloop Analysis
+  name: サマースループの分析
+- id: MAM Alien Technology Research - Dimensional Depot
+  name: 次元デポ
+- id: MAM Alien Technology Research - Alien Energy Harvesting
+  name: 異星エネルギーの活用
+- id: MAM Alien Technology Research - Depot Expansion (200%)
+  name: デポ拡張（200％）
+- id: "MAM Alien Technology Research - Upload Upgrade: 30/min"
+  name: "アップロードのアップグレード: 30/分"
+- id: MAM Alien Technology Research - Power Augmenter
+  name: パワー増幅装置
+- id: MAM Alien Technology Research - Production Amplifier
+  name: 生産増幅装置
+- id: MAM Alien Technology Research - Manual Depot Uploader
+  name: 手動デポ・アップローダー
+- id: MAM Alien Technology Research - Depot Expansion (300%)
+  name: デポ拡張（300％）
+- id: "MAM Alien Technology Research - Upload Upgrade: 60/min"
+  name: "アップロードのアップグレード: 60/分"
+- id: MAM Alien Technology Research - Alien Power Matrix
+  name: 異星のパワーマトリックス
+- id: MAM Alien Technology Research - Depot Expansion (400%)
+  name: デポ拡張（400％）
+- id: "MAM Alien Technology Research - Upload Upgrade: 120/min"
+  name: "アップロードのアップグレード: 120/分"
+- id: MAM Alien Technology Research - Depot Expansion (500%)
+  name: デポ拡張（500％）
+- id: "MAM Alien Technology Research - Upload Upgrade: 240/min"
+  name: "アップロードのアップグレード: 240/分"
+
+- id: MAM Caterium Research - Caterium
+  name: カテリウム
+- id: MAM Caterium Research - Caterium Ingots
+  name: カテリウムのインゴット
+- id: MAM Caterium Research - Quickwire
+  name: クイックワイヤー
+- id: MAM Caterium Research - Zipline
+  name: ジップライン
+- id: MAM Caterium Research - Caterium Electronics
+  name: カテリウム機器
+- id: MAM Caterium Research - Stun Rebar
+  name: スタン鉄筋
+- id: MAM Caterium Research - AI Limiter
+  name: AIリミッター
+- id: MAM Caterium Research - Power Poles Mk.2
+  name: 電柱MK.2
+- id: MAM Caterium Research - High-Speed Connector
+  name: 高速コネクター
+- id: MAM Caterium Research - Power Poles Mk.3
+  name: 電柱MK.3
+- id: MAM Caterium Research - Smart Splitter
+  name: スマート分岐機
+- id: MAM Caterium Research - Power Switch
+  name: 電源スイッチ
+- id: MAM Caterium Research - Priority Power Switch
+  name: 優先電源スイッチ
+- id: MAM Caterium Research - Bullet Guidance System
+  name: 弾丸誘導システム
+- id: MAM Caterium Research - Programmable Splitter
+  name: プログラム式分岐機
+- id: MAM Caterium Research - Geothermal Generator
+  name: 地熱発電機
+
+- id: MAM Mycelia Research - Mycelia
+  name: 菌糸
+- id: MAM Mycelia Research - Fabric
+  name: 布地
+- id: MAM Mycelia Research - Toxic Cellular Modification
+  name: 毒性細胞改変
+- id: MAM Mycelia Research - Medical Properties
+  name: 薬効成分
+- id: MAM Mycelia Research - Parachute
+  name: パラシュート
+- id: MAM Mycelia Research - Expanded Toolbelt
+  name: ツールベルトの拡張
+- id: MAM Mycelia Research - Synthetic Polyester Fabric
+  name: 合成ポリエステル生地
+- id: MAM Mycelia Research - Gas Mask
+  name: ガスマスク
+- id: MAM Mycelia Research - Vitamin Inhaler
+  name: ビタミン吸入器
+- id: MAM Mycelia Research - Therapeutic Inhaler
+  name: 治療用吸入器
+
+- id: MAM Nutrients Research - Beryl Nut
+  name: ベリル・ナッツ
+- id: MAM Nutrients Research - Paleberry
+  name: パレベリー
+- id: MAM Nutrients Research - Bacon Agaric
+  name: ベーコンタケ
+- id: MAM Nutrients Research - Nutritional Processor
+  name: フードプロセッサー
+- id: MAM Nutrients Research - Nutritional Inhaler
+  name: 栄養吸入器
+
+- id: MAM Power Slugs Research - Blue Power Slugs
+  name: 青のパワー・スラッグ
+- id: MAM Power Slugs Research - Slug Scanning
+  name: スラッグのスキャン
+- id: MAM Power Slugs Research - Yellow Power Shards
+  name: 黄のパワー・シャード
+- id: MAM Power Slugs Research - Overclock Production
+  name: 生産のオーバークロック
+- id: MAM Power Slugs Research - Purple Power Shards
+  name: 紫のパワー・シャード
+- id: MAM Power Slugs Research - Synthetic Power Shards
+  name: 合成パワー・シャード
+
+- id: MAM Quartz Research - Quartz
+  name: 石英
+- id: MAM Quartz Research - Quartz Crystals
+  name: 石英結晶
+- id: MAM Quartz Research - Silica
+  name: シリカ
+- id: MAM Quartz Research - Shatter Rebar
+  name: 破砕鉄筋
+- id: MAM Quartz Research - Crystal Oscillator
+  name: 水晶発振器
+- id: MAM Quartz Research - Blade Runners
+  name: ブレード・ランナーズ
+- id: MAM Quartz Research - Inflated Pocket Dimension
+  name: ポケット次元の拡大
+- id: MAM Quartz Research - Explosive Resonance Application
+  name: 爆発的な共振の応用
+- id: MAM Quartz Research - The Explorer
+  name: エクスプローラー
+- id: MAM Quartz Research - Radio Signal Scanning
+  name: 無線信号スキャン
+- id: MAM Quartz Research - Radar Technology
+  name: レーダー技術
+
+- id: MAM Sulfur Research - Sulfur
+  name: 硫黄
+- id: MAM Sulfur Research - Black Powder
+  name: 黒色火薬
+- id: MAM Sulfur Research - Experimental Power Generation
+  name: 実験的発電
+- id: MAM Sulfur Research - Compacted Coal
+  name: 圧縮石炭
+- id: MAM Sulfur Research - Turbofuel
+  name: ターボ燃料
+- id: MAM Sulfur Research - Expanded Toolbelt
+  name: ツールベルトの拡張
+- id: MAM Sulfur Research - The Nobelisk Detonator
+  name: ノーベリスク起爆装置
+- id: MAM Sulfur Research - Smokeless Powder
+  name: 無煙火薬
+- id: MAM Sulfur Research - Rocket Fuel
+  name: ロケット燃料
+- id: MAM Sulfur Research - Ionized Fuel
+  name: イオン燃料
+- id: MAM Sulfur Research - Cluster Nobelisk
+  name: クラスター・ノーベリスク
+- id: MAM Sulfur Research - Explosive Rebar
+  name: 爆砕鉄筋
+- id: MAM Sulfur Research - The Rifle
+  name: ライフル
+- id: MAM Sulfur Research - Nuclear Deterrent Development
+  name: 核抑止力の開発
+- id: MAM Sulfur Research - Turbo Rifle Ammo
+  name: ターボライフル弾
+- id: MAM Sulfur Research - Inflated Pocket Dimension
+  name: ポケット次元の拡大

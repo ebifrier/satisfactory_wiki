@@ -1,0 +1,943 @@
+- id: Iron Ore
+  name: 鉄鉱石
+  type: material
+  category: 鉱石類
+  comment: まだのアイテム => ダークマターx2 ダイヤモンド 時の結晶 フォトニック物質 シンギュラリティセル
+  coupons: 1
+- id: Copper Ore
+  name: 銅鉱石
+  type: material
+  category: 鉱石類
+  coupons: 3
+- id: Limestone
+  name: 石灰岩
+  type: material
+  category: 鉱石類
+  coupons: 2
+- id: Coal
+  name: 石炭
+  type: material
+  category: 鉱石類
+  coupons: 3
+- id: Caterium Ore
+  name: カテリウム鉱石
+  type: material
+  category: 鉱石類
+  coupons: 7
+- id: Raw Quartz
+  name: 未加工石英
+  type: material
+  category: 鉱石類
+  coupons: 15
+- id: Sulfur
+  name: 硫黄
+  type: material
+  category: 鉱石類
+  coupons: 11
+- id: Bauxite
+  name: ボーキサイト
+  type: material
+  category: 鉱石類
+  coupons: 8
+- id: Uranium
+  name: ウラン
+  type: material
+  category: 鉱石類
+  coupons: 35
+- id: SAM
+  name: SAM
+  jpwiki_id: S.A.M._Ore
+  type: material
+  category: 鉱石類
+  coupons: 20
+- id: Crude Oil
+  name: 原油
+  type: material
+  category: 鉱石類
+  coupons: 0
+- id: Water
+  name: 水
+  type: material
+  category: 鉱石類
+  coupons: 0
+- id: Nitrogen Gas
+  name: 窒素ガス
+  type: material
+  category: 鉱石類
+  coupons: 0
+
+- id: Leaves
+  name: 葉
+  type: material
+  category: 植物・動物類
+  coupons: 3
+- id: Wood
+  name: 木
+  type: material
+  category: 植物・動物類
+  coupons: 30
+- id: Mycelia
+  name: 菌糸
+  type: material
+  category: 植物・動物類
+  coupons: 10
+- id: Blue Power Slug
+  name: 青のパワー・スラッグ
+  jpwiki_id: Green_Power_Slug
+  type: material
+  category: 植物・動物類
+  coupons: 0
+- id: Yellow Power Slug
+  name: 黄のパワー・スラッグ
+  type: material
+  category: 植物・動物類
+  coupons: 0
+- id: Purple Power Slug
+  name: 紫のパワー・スラッグ
+  type: material
+  category: 植物・動物類
+  coupons: 0
+
+- id: Hog Remains
+  name: ホッグの遺骸
+  type: material
+  category: エイリアンの遺骸
+  coupons: 0
+- id: Hatcher Remains
+  name: ハッチャーの遺骸
+  type: material
+  category: エイリアンの遺骸
+  coupons: 0
+- id: Stinger Remains
+  name: スティンガーの遺骸
+  type: material
+  category: エイリアンの遺骸
+  coupons: 0
+- id: Spitter Remains
+  name: プラズマ・スピッターの遺骸
+  jpwiki_id: Plasma_Spitter_Remains
+  type: material
+  category: エイリアンの遺骸
+  coupons: 0
+- id: Alien Protein
+  name: エイリアンのタンパク質
+  type: material
+  category: エイリアンの遺骸
+  coupons: 0
+- id: Alien DNA Capsule
+  name: エイリアンのDNAカプセル
+  jpwiki_id: Organic_Data_Capsule
+  type: material
+  category: エイリアンの遺骸
+  coupons: 0
+
+- id: Beryl Nut
+  name: ベリル・ナッツ
+  type: material
+  category: 回復アイテム
+  coupons: 0
+- id: Paleberry
+  name: パレベリー
+  type: material
+  category: 回復アイテム
+  coupons: 0
+- id: Bacon Agaric
+  name: ベーコンタケ
+  type: material
+  category: 回復アイテム
+  coupons: 0
+
+- id: Hard Drive
+  name: ハードドライブ
+  type: material
+  category: その他
+  coupons: 0
+- id: FICSIT Coupon
+  name: FICSITクーポン
+  type: material
+  category: その他
+  coupons: 1
+- id: Mercer Sphere
+  name: マーサー・スフィア
+  type: material
+  category: その他
+  coupons: 0
+- id: Somersloop
+  name: ソマースループ
+  type: material
+  category: その他
+  coupons: 0
+
+- id: Power Shard
+  name: パワー・シャード
+  type: material
+  category: パワー・シャード
+  coupons: 0
+
+- id: Biomass
+  name: バイオマス
+  type: material
+  category: バイオマス
+  coupons: 12
+- id: Fabric
+  name: 布地
+  type: material
+  category: バイオマス
+  coupons: 140
+- id: Solid Biofuel
+  name: 固体バイオ燃料
+  type: material
+  category: バイオマス
+  coupons: 48
+
+- id: Concrete
+  name: コンクリート
+  type: material
+  category: 化合物
+  coupons: 12
+- id: Quartz Crystal
+  name: 石英結晶
+  type: material
+  category: 化合物
+  coupons: 50
+- id: Silica
+  name: シリカ
+  type: material
+  category: 化合物
+  coupons: 20
+- id: Dissolved Silica
+  name: 溶解シリカ
+  type: material
+  category: 化合物
+  coupons: 0
+- id: Compacted Coal
+  name: 圧縮石炭
+  type: material
+  category: 化合物
+  coupons: 28
+- id: Copper Powder
+  name: 銅粉
+  type: material
+  category: 化合物
+  coupons: 72
+
+- id: Gas Filter
+  name: ガスフィルター
+  type: material
+  category: 消耗品
+  coupons: 608
+- id: Iodine-Infused Filter
+  name: ヨウ素充填フィルター
+  jpwiki_id: Iodine_Infused_Filter
+  type: material
+  category: 消耗品
+  coupons: 2274
+- id: Medicinal Inhaler
+  name: 薬用吸入器
+  type: equipment
+  category: 消耗品
+- id: Black Powder
+  name: 黒色火薬
+  type: material
+  category: 弾薬
+  coupons: 14
+- id: Smokeless Powder
+  name: 無煙火薬
+  type: material
+  category: 弾薬
+  coupons: 58
+- id: Iron Rebar
+  name: 鉄筋
+  jpwiki_id: Spiked_Rebar
+  type: material
+  category: 弾薬
+  coupons: 8
+- id: Stun Rebar
+  name: スタン鉄筋
+  type: material
+  category: 弾薬
+  coupons: 186
+- id: Shatter Rebar
+  name: 破砕鉄筋
+  type: material
+  category: 弾薬
+  coupons: 332
+- id: Explosive Rebar
+  name: 爆砕鉄筋
+  type: material
+  category: 弾薬
+  coupons: 360
+- id: Nobelisk
+  name: ノーベリスク
+  type: material
+  category: 弾薬
+  coupons: 152
+- id: Gas Nobelisk
+  name: ガス・ノーベリスク
+  type: material
+  category: 弾薬
+  coupons: 544
+- id: Cluster Nobelisk
+  name: クラスター・ノーベリスク
+  type: material
+  category: 弾薬
+  coupons: 1376
+- id: Pulse Nobelisk
+  name: パルス・ノーベリスク
+  type: material
+  category: 弾薬
+  coupons: 1533
+- id: Nuke Nobelisk
+  name: ニューク・ノーベリスク
+  type: material
+  category: 弾薬
+  coupons: 19600
+- id: Rifle Ammo
+  name: ライフル弾
+  jpwiki_id: Rifle_Cartridge
+  type: material
+  category: 弾薬
+  coupons: 25
+- id: Homing Rifle Ammo
+  name: ホーミングライフル弾
+  type: material
+  category: 弾薬
+  coupons: 855
+- id: Turbo Rifle Ammo
+  name: ターボライフル弾
+  type: material
+  category: 弾薬
+  coupons: 120
+
+- id: Iron Ingot
+  name: 鉄のインゴット
+  type: material
+  category: インゴット
+  coupons: 2
+- id: Copper Ingot
+  name: 銅のインゴット
+  type: material
+  category: インゴット
+  coupons: 6
+- id: Steel Ingot
+  name: 鋼鉄のインゴット
+  type: material
+  category: インゴット
+  coupons: 8
+- id: Caterium Ingot
+  name: カテリウムのインゴット
+  type: material
+  category: インゴット
+  coupons: 42
+- id: Aluminum Ingot
+  name: アルミのインゴット
+  type: material
+  category: インゴット
+  coupons: 131
+- id: Ficsite Ingot
+  name: FICSITEのインゴット
+  type: material
+  category: インゴット
+  coupons: 1936
+
+- id: Iron Plate
+  name: 鉄板
+  type: material
+  category: 基本部品
+  coupons: 6
+- id: Iron Rod
+  name: 鉄のロッド
+  type: material
+  category: 基本部品
+  coupons: 4
+- id: Screw
+  name: ネジ
+  type: material
+  category: 基本部品
+  coupons: 2
+- id: Reinforced Iron Plate
+  name: 強化鉄板
+  type: material
+  category: 基本部品
+  coupons: 120
+- id: Modular Frame
+  name: モジュラー・フレーム
+  type: material
+  category: 基本部品
+  coupons: 408
+- id: Copper Sheet
+  name: 銅板
+  type: material
+  category: 基本部品
+  coupons: 24
+- id: Steel Beam
+  name: 鋼梁
+  type: material
+  category: 基本部品
+  coupons: 64
+- id: Steel Pipe
+  name: 鋼管
+  type: material
+  category: 基本部品
+  coupons: 24
+- id: Encased Industrial Beam
+  name: コンクリート被覆型鋼梁
+  type: material
+  category: 基本部品
+  coupons: 528
+- id: Heavy Modular Frame
+  name: ヘビー・モジュラー・フレーム
+  type: material
+  category: 基本部品
+  coupons: 10800
+- id: Alclad Aluminum Sheet
+  name: アルクラッド・アルミシート
+  type: material
+  category: 基本部品
+  coupons: 266
+- id: Aluminum Casing
+  name: アルミ筐体
+  type: material
+  category: 基本部品
+  coupons: 393
+- id: Ficsite Trigon
+  name: FICSITEの三角板
+  type: material
+  category: 基本部品
+  coupons: 1291
+
+- id: Wire
+  name: ワイヤー
+  type: material
+  category: 電子機器
+  coupons: 6
+- id: Cable
+  name: ケーブル
+  type: material
+  category: 電子機器
+  coupons: 24
+- id: Quickwire
+  name: クイックワイヤー
+  type: material
+  category: 電子機器
+  coupons: 17
+- id: Circuit Board
+  name: 回路基板
+  type: material
+  category: 電子機器
+  coupons: 696
+- id: AI Limiter
+  name: AIリミッター
+  jpwiki_id: A.I._Limiter
+  type: material
+  category: 電子機器
+  coupons: 920
+- id: High-Speed Connector
+  name: 高速コネクター
+  type: material
+  category: 電子機器
+  coupons: 3776
+- id: Reanimated SAM
+  name: 活性SAM
+  type: material
+  category: 電子機器
+  coupons: 160
+- id: SAM Fluctuator
+  name: SAM変動機
+  type: material
+  category: 電子機器
+  coupons: 1968
+
+- id: Rotor
+  name: ローター
+  type: material
+  category: 産業用部品
+  coupons: 140
+- id: Stator
+  name: 固定子
+  type: material
+  category: 産業用部品
+  coupons: 240
+- id: Motor
+  name: モーター
+  type: material
+  category: 産業用部品
+  coupons: 1520
+- id: Heat Sink
+  name: ヒートシンク
+  type: material
+  category: 産業用部品
+  coupons: 2804
+- id: Turbo Motor
+  name: ターボ・モーター
+  type: material
+  category: 産業用部品
+  coupons: 240496
+- id: Battery
+  name: バッテリー
+  type: material
+  category: 産業用部品
+  coupons: 465
+- id: Fused Modular Frame
+  name: 溶融モジュラー・フレーム
+  type: material
+  category: 産業用部品
+  coupons: 62840
+- id: Cooling System
+  name: 冷却システム
+  type: material
+  category: 産業用部品
+  coupons: 12006
+
+- id: Crystal Oscillator
+  name: 水晶発振器
+  type: material
+  category: 通信
+  coupons: 3072
+- id: Computer
+  name: コンピューター
+  type: material
+  category: 通信
+  coupons: 8352
+- id: Supercomputer
+  name: スーパーコンピューター
+  type: material
+  category: 通信
+  coupons: 97352
+- id: Radio Control Unit
+  name: 無線制御ユニット
+  type: material
+  category: 通信
+  coupons: 32352
+
+- id: Plastic
+  name: プラスチック
+  type: material
+  category: 石油製品
+  coupons: 75
+- id: Rubber
+  name: ゴム
+  type: material
+  category: 石油製品
+  coupons: 60
+- id: Petroleum Coke
+  name: 石油コークス
+  type: material
+  category: 石油製品
+  coupons: 20
+- id: Polymer Resin
+  name: 合成樹脂
+  type: material
+  category: 石油製品
+  coupons: 12
+- id: Heavy Oil Residue
+  name: 廃重油
+  type: material
+  category: 石油製品
+  coupons: 0
+
+- id: Fuel
+  name: 燃料
+  type: material
+  category: 燃料
+  coupons: 0
+- id: Turbofuel
+  name: ターボ燃料
+  type: material
+  category: 燃料
+  coupons: 0
+- id: Rocket Fuel
+  name: ロケット燃料
+  type: material
+  category: 燃料
+  coupons: 0
+- id: Ionized Fuel
+  name: イオン燃料
+  type: material
+  category: 燃料
+  coupons: 0
+- id: Liquid Biofuel
+  name: 液体バイオ燃料
+  type: material
+  category: 燃料
+  coupons: 0
+
+- id: Aluminum Scrap
+  name: アルミのスクラップ
+  type: material
+  category: 先進的な精製
+  coupons: 27
+- id: Alumina Solution
+  name: アルミナ溶液
+  type: material
+  category: 先進的な精製
+  coupons: 0
+- id: Sulfuric Acid
+  name: 硫酸
+  type: material
+  category: 先進的な精製
+  coupons: 0
+- id: Nitric Acid
+  name: 硝酸
+  type: material
+  category: 先進的な精製
+  coupons: 0
+- id: Diamonds
+  name: ダイヤモンド
+  type: material
+  category: 先進的な精製
+  coupons: 240
+
+- id: Time Crystal
+  name: 時の結晶
+  type: material
+  category: 量子技術
+  coupons: 960
+- id: Excited Photonic Matter
+  name: 励起フォトニック物質
+  type: material
+  category: 量子技術
+  coupons: 0
+- id: Dark Matter Residue
+  name: ダークマターの残留物
+  type: material
+  category: 量子技術
+  coupons: 0
+- id: Dark Matter Crystal
+  name: ダークマターの結晶
+  type: material
+  category: 量子技術
+  coupons: 1780
+- id: Singularity Cell
+  name: シンギュラリティセル
+  type: material
+  category: 量子技術
+  coupons: 114675
+- id: Superposition Oscillator
+  name: 重ね合わせ発振器
+  type: material
+  category: 量子技術
+  coupons: 37292
+- id: Neural-Quantum Processor
+  name: ニューラル量子プロセッサー
+  type: material
+  category: 量子技術
+  coupons: 248034
+- id: Alien Power Matrix
+  name: 異星のパワーマトリックス
+  type: material
+  category: 量子技術
+  coupons: 210
+
+- id: Packaged Fuel
+  name: 包装済み燃料
+  type: material
+  category: 容器入り
+  coupons: 270
+- id: Packaged Turbofuel
+  name: 容器入りターボ燃料
+  type: material
+  category: 容器入り
+  coupons: 570
+- id: Packaged Liquid Biofuel
+  name: 包装済み液体バイオ燃料
+  type: material
+  category: 容器入り
+  coupons: 370
+- id: Packaged Heavy Oil Residue
+  name: 包装済み廃重油
+  type: material
+  category: 容器入り
+  coupons: 180
+- id: Packaged Oil
+  name: 包装済み原油
+  type: material
+  category: 容器入り
+  coupons: 180
+- id: Packaged Water
+  name: 包装済み水
+  type: material
+  category: 容器入り
+  coupons: 130
+- id: Packaged Sulfuric Acid
+  name: 包装済み硫酸
+  type: material
+  category: 容器入り
+  coupons: 152
+- id: Packaged Nitrogen Gas
+  name: 包装済み窒素ガス
+  type: material
+  category: 容器入り
+  coupons: 312
+- id: Packaged Nitric Acid
+  name: 包装済み硝酸
+  type: material
+  category: 容器入り
+  coupons: 412
+- id: Packaged Alumina Solution
+  name: 包装済みアルミナ溶液
+  type: material
+  category: 容器入り
+  coupons: 160
+- id: Packaged Rocket Fuel
+  name: 包装済みロケット燃料
+  type: material
+  category: 容器入り
+  coupons: 1028
+- id: Packaged Ionized Fuel
+  name: 包装済みイオン燃料
+  type: material
+  category: 容器入り
+  coupons: 5246
+
+- id: Empty Canister
+  name: 空の容器
+  type: material
+  category: 貯蔵庫
+  coupons: 60
+- id: Empty Fluid Tank
+  name: 空の液体タンク
+  type: material
+  category: 貯蔵庫
+  coupons: 170
+- id: Pressure Conversion Cube
+  name: 圧力変換キューブ
+  type: material
+  category: 貯蔵庫
+  coupons: 255088
+
+- id: Electromagnetic Control Rod
+  name: 電磁制御棒
+  type: material
+  category: 原子力
+  coupons: 2560
+- id: Encased Uranium Cell
+  name: 被覆型ウラン･セル
+  type: material
+  category: 原子力
+  coupons: 147
+- id: Uranium Fuel Rod
+  name: ウラン燃料棒
+  type: material
+  category: 原子力
+  coupons: 43468
+- id: Uranium Waste
+  name: ウラン廃棄物
+  type: material
+  category: 原子力
+  coupons: 0
+- id: Non-Fissile Uranium
+  name: 非分裂性ウラン
+  jpwiki_id: Non-fissile_Uranium
+  type: material
+  category: 原子力
+  coupons: 0
+- id: Plutonium Pellet
+  name: プルトニウム・ペレット
+  type: material
+  category: 原子力
+  coupons: 0
+- id: Encased Plutonium Cell
+  name: 被覆型プルトニウム・セル
+  type: material
+  category: 原子力
+  coupons: 0
+- id: Plutonium Fuel Rod
+  name: プルトニウム燃料棒
+  type: material
+  category: 原子力
+  coupons: 153184
+- id: Plutonium Waste
+  name: プルトニウム廃棄物
+  type: material
+  category: 原子力
+  coupons: 0
+- id: Ficsonium
+  name: FICSONIUM
+  type: material
+  category: 原子力
+  coupons: 0
+- id: Ficsonium Fuel Rod
+  name: FICSONIUM燃料棒
+  type: material
+  category: 原子力
+  coupons: 0
+
+- id: Smart Plating
+  name: スマート･プレート
+  type: material
+  category: 軌道エレベーター
+  coupons: 520
+- id: Versatile Framework
+  name: 多目的フレームワーク
+  type: material
+  category: 軌道エレベーター
+  coupons: 1176
+- id: Automated Wiring
+  name: 自動ワイヤー
+  type: material
+  category: 軌道エレベーター
+  coupons: 1440
+- id: Modular Engine
+  name: モジュラーエンジン
+  type: material
+  category: 軌道エレベーター
+  coupons: 9960
+- id: Adaptive Control Unit
+  name: 自律制御ユニット
+  type: material
+  category: 軌道エレベーター
+  coupons: 76368
+- id: Assembly Director System
+  name: 組立指揮システム
+  type: material
+  category: 軌道エレベーター
+  coupons: 500176
+- id: Magnetic Field Generator
+  name: 磁界発生装置
+  type: material
+  category: 軌道エレベーター
+  coupons: 11000
+- id: Thermal Propulsion Rocket
+  name: 熱推進型ロケット
+  type: material
+  category: 軌道エレベーター
+  coupons: 728508
+- id: Nuclear Pasta
+  name: 核パスタ
+  type: material
+  category: 軌道エレベーター
+  coupons: 538976
+- id: Biochemical Sculptor
+  name: 生化学スカルプター
+  type: material
+  category: 軌道エレベーター
+  coupons: 301778
+- id: AI Expansion Server
+  name: AI拡張サーバー
+  type: material
+  category: 軌道エレベーター
+  coupons: 597652
+- id: Ballistic Warp Drive
+  name: 弾道ワープドライブ
+  type: material
+  category: 軌道エレベーター
+  coupons: 2895334
+
+- id: Portable Miner
+  name: 携帯式採鉱機
+  type: equipment
+  category: ツール
+- id: Factory Cart
+  name: ファクトリーカート
+  type: equipment
+  category: ツール
+- id: Golden Factory Cart
+  name: ゴールデンファクトリーカート
+  type: equipment
+  category: ツール
+- id: Object Scanner
+  name: オブジェクト・スキャナー
+  type: equipment
+  category: ツール
+- id: Zipline
+  name: ジップライン
+  type: equipment
+  category: ツール
+- id: Chainsaw
+  name: チェーンソー
+  type: equipment
+  category: ツール
+
+- id: Xeno-Zapper
+  name: ゼノ・ザッパー
+  type: equipment
+  category: 武器
+- id: Xeno-Basher
+  name: ゼノ・ザッパー
+  type: equipment
+  category: 武器
+- id: Rebar Gun
+  name: 鉄筋ガン
+  type: equipment
+  category: 武器
+- id: Nobelisk Detonator
+  name: ノーベリスク起爆装置
+  type: equipment
+  category: 武器
+- id: Rifle
+  name: ライフル
+  type: equipment
+  category: 武器
+
+- id: Gas Mask
+  name: ガスマスク
+  type: equipment
+  category: 装備品
+- id: Hazmat Suit
+  name: 化学防護服
+  type: equipment
+  category: 装備品
+- id: Jetpack
+  name: ジェットパック
+  type: equipment
+  category: 装備品
+- id: Parachute
+  name: パラシュート
+  type: equipment
+  category: 装備品
+- id: Hoverpack
+  name: ホバーパック
+  jpwiki_id: Hover_Pack
+  type: equipment
+  category: 装備品
+- id: Blade Runners
+  name: ブレード・ランナーズ
+  type: equipment
+  category: 装備品
+
+- id: Cup
+  name: カップ
+  type: equipment
+  category: 特殊
+- id: Boom Box
+  name: Boom Box
+  type: equipment
+  category: 特殊
+- id: Adequate Pioneering Statue
+  name: 優良開拓者の像
+  type: equipment
+  category: 特殊
+- id: Satisfactory Pioneering Statue
+  name: サティスファクトリーな開拓者の像
+  type: equipment
+  category: 特殊
+- id: Pretty Good Pioneering Statue
+  name: 優秀開拓者の像
+  type: equipment
+  category: 特殊
+- id: Golden Nut Statue
+  name: 金色のナッツの像
+  type: equipment
+  category: 特殊
+- id: Lizard Doggo Statue
+  name: トカゲイヌの像
+  type: equipment
+  category: 特殊
+- id: Confusing Creature Statue
+  name: 変な生物の像
+  type: equipment
+  category: 特殊
+- id: Silver Hog Statue
+  name: 銀の豚の像
+  type: equipment
+  category: 特殊
+
+- id: Color Gun
+  name: カラー・ガン
+  type: equipment
+  category: 削除された装備品
+- id: Beacon
+  name: ビーコン
+  type: equipment
+  category: 削除された装備品

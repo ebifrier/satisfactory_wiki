@@ -1,0 +1,137 @@
+- name: Coal burning
+  name_jp: 石炭発電機　石炭発電時
+  page_id: Coal
+  link_anchor: N1
+  buildings:
+  - Coal-Powered Generator
+  production_times:
+  - 4
+  alternate: false
+  ingredients:
+  - name: Coal
+    amount: 1
+    minute: 15
+  - name: Water
+    amount: 3
+    minute: 45
+  products: []
+- name: Compacted Coal burning
+  name_jp: 石炭発電機　圧縮石炭発電時
+  page_id: Compacted Coal
+  link_anchor: N1
+  buildings:
+  - Coal-Powered Generator
+  production_times:
+  - 8.4
+  alternate: false
+  ingredients:
+  - name: Compacted Coal
+    amount: 7.142857
+    minute: 7.142857
+  - name: Water
+    amount: 45
+    minute: 45
+  products: []
+- name: Petroleum Coke burning
+  name_jp: 石炭発電機　コークス発電時
+  page_id: Petroleum Coke
+  link_anchor: N1
+  buildings:
+  - Coal-Powered Generator
+  production_times:
+  - 2.4
+  alternate: false
+  ingredients:
+  - name: Petroleum Coke
+    amount: 5
+    minute: 25
+  - name: Water
+    amount: 9
+    minute: 45
+  products: []
+
+- name: Fuel burning
+  name_jp: 燃料式発電機　燃料発電時
+  page_id: Fuel
+  link_anchor: N1
+  buildings:
+  - Fuel-Powered Generator
+  production_times:
+  - 3
+  alternate: false
+  ingredients:
+  - name: Fuel
+    amount: 1
+    minute: 20
+  products: []
+- name: Liquid Biofuel burning
+  name_jp: 燃料式発電機　液体バイオ燃料発電時
+  page_id: Liquid Biofuel
+  link_anchor: N1
+  buildings:
+  - Fuel-Powered Generator
+  production_times:
+  - 3
+  alternate: false
+  ingredients:
+  - name: Liquid Biofuel
+    amount: 1
+    minute: 20
+  products: []
+- name: Turbofuel burning
+  name_jp: 燃料式発電機　ターボ燃料発電時
+  page_id: Turbofuel
+  link_anchor: N1
+  buildings:
+  - Fuel-Powered Generator
+  production_times:
+  - 8
+  alternate: false
+  ingredients:
+  - name: Turbofuel
+    amount: 1
+    minute: 7.5
+  products: []
+- name: Rocket Fuel burning
+  name_jp: 燃料式発電機　ロケット燃料発電時
+  page_id: Rocket Fuel
+  link_anchor: N1
+  buildings:
+  - Fuel-Powered Generator
+  production_times:
+  - 14.4
+  alternate: false
+  ingredients:
+  - name: Rocket Fuel
+    amount: 1
+    minute: 4.166666
+  products: []
+- name: Ionized Fuel burning
+  name_jp: 燃料式発電機　イオン燃料発電時
+  page_id: Ionized Fuel
+  link_anchor: N1
+  buildings:
+  - Fuel-Powered Generator
+  production_times:
+  - 20
+  alternate: false
+  ingredients:
+  - name: Ionized Fuel
+    amount: 1
+    minute: 3
+  products: []
+
+- name: Ficsonium Fuel Rod burning
+  name_jp: 原子力発電所　FICONIUM発電時
+  page_id: Ficsonium Fuel Rod
+  link_anchor: N1
+  buildings:
+  - Nuclear Power Plant
+  production_times:
+  - 60
+  alternate: false
+  ingredients:
+  - name: Ficsonium Fuel Rod
+    amount: 1
+    minute: 1
+  products: []

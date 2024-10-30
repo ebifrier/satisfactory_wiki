@@ -1,0 +1,629 @@
+- id: The HUB
+  name: HUB
+  category: 特殊
+  subcategory: 特殊
+- id: MAM
+  name: MAM
+  jpwiki_id: M.A.M.
+  category: 特殊
+  subcategory: 特殊
+- id: Space Elevator
+  name: 軌道エレベーター
+  category: 特殊
+  subcategory: 特殊
+- id: AWESOME Sink
+  name: AWESOMEシンク
+  category: 特殊
+  subcategory: 特殊
+- id: AWESOME Shop
+  name: AWESOMEショップ
+  category: 特殊
+  subcategory: 特殊
+- id: Blueprint Designer Mk.1
+  name: ブループリント・デザイナーMk.1
+  category: 特殊
+  subcategory: 特殊
+- id: Blueprint Designer Mk.2
+  name: ブループリント・デザイナーMk.2
+  category: 特殊
+  subcategory: 特殊
+- id: Blueprint Designer Mk.3
+  name: ブループリント・デザイナーMk.3
+  category: 特殊
+  subcategory: 特殊
+- id: Craft Bench
+  name: 工作台
+  category: 特殊
+  subcategory: 特殊
+- id: Equipment Workshop
+  name: 装備品作業場
+  category: 特殊
+  subcategory: 特殊
+- id: Build Gun
+  name: 手動設置
+  category: 特殊
+  subcategory: 特殊
+
+- id: Water Extractor
+  name: 揚水ポンプ
+  power: -20
+  category: 生産
+  subcategory: 流体抽出機
+- id: Oil Extractor
+  name: 原油抽出機
+  power: -40
+  category: 生産
+  subcategory: 流体抽出機
+- id: Resource Well Pressurizer
+  name: 資源井加圧機
+  power: -150
+  category: 生産
+  subcategory: 流体抽出機
+- id: Resource Well Extractor
+  name: 資源井抽出機
+  power: 0
+  category: 生産
+  subcategory: 流体抽出機
+
+- id: Miner Mk.1
+  name: 採鉱機Mk.1
+  max_inputs: 0
+  max_outputs: 1
+  power: -5
+  category: 生産
+  subcategory: 採鉱機
+- id: Miner Mk.2
+  name: 採鉱機Mk.2
+  max_inputs: 0
+  max_outputs: 1
+  power: -15
+  category: 生産
+  subcategory: 採鉱機
+- id: Miner Mk.3
+  name: 採鉱機Mk.3
+  max_inputs: 0
+  max_outputs: 1
+  power: -45
+  category: 生産
+  subcategory: 採鉱機
+
+- id: Smelter
+  name: 精錬炉
+  max_inputs: 1
+  max_outputs: 1
+  power: -4
+  category: 生産
+  subcategory: 製錬炉
+- id: Foundry
+  max_inputs: 2
+  max_outputs: 1
+  power: -16
+  name: 鋳造炉
+  category: 生産
+  subcategory: 製錬炉
+
+- id: Constructor
+  name: 製作機
+  max_inputs: 1
+  max_outputs: 1
+  power: -4
+  category: 生産
+  subcategory: 製造機
+- id: Assembler
+  name: 組立機
+  max_inputs: 2
+  max_outputs: 1
+  power: -15
+  category: 生産
+  subcategory: 製造機
+- id: Manufacturer
+  name: 製造機
+  max_inputs: 4
+  max_outputs: 1
+  power: -55
+  category: 生産
+  subcategory: 製造機
+- id: Packager
+  name: 充填機
+  max_inputs: 2
+  max_outputs: 2
+  power: -10
+  category: 生産
+  subcategory: 製造機
+- id: Refinery
+  name: 精製機
+  max_inputs: 2
+  max_outputs: 2
+  power: -30
+  category: 生産
+  subcategory: 製造機
+- id: Blender
+  name: 混合機
+  max_inputs: 4
+  max_outputs: 2
+  power: -75
+  category: 生産
+  subcategory: 製造機
+- id: Particle Accelerator
+  name: 粒子加速器
+  max_inputs: 3
+  max_outputs: 1
+  power: -1500
+  category: 生産
+  subcategory: 製造機
+- id: Quantum Encoder
+  name: 量子エンコーダー
+  max_inputs: 4
+  max_outputs: 2
+  power: -2000
+  category: 生産
+  subcategory: 製造機
+- id: Converter
+  name: 変換機
+  max_inputs: 2
+  max_outputs: 2
+  power: -400
+  category: 生産
+  subcategory: 製造機
+
+- id: Biomass Burner
+  name: バイオマス・バーナー
+  power: 30
+  category: 電力
+  subcategory: 発電機
+- id: Coal-Powered Generator
+  name: 石炭発電機
+  power: 75
+  category: 電力
+  subcategory: 発電機
+- id: Fuel-Powered Generator
+  name: 燃料式発電機
+  jpwiki_id: Fuel_Generator
+  power: 250
+  category: 電力
+  subcategory: 発電機
+- id: Geothermal Generator
+  name: 地熱発電機
+  power: 150
+  category: 電力
+  subcategory: 発電機
+- id: Nuclear Power Plant
+  name: 原子力発電所
+  power: 2500
+  category: 電力
+  subcategory: 発電機
+- id: Alien Power Augmenter
+  name: 異星の増幅装置
+  power: 500
+  category: 電力
+  subcategory: 発電機
+- id: Power Storage
+  name: 蓄電装置
+  category: 電力
+  subcategory: 発電機
+
+- id: Power Pole Mk.1
+  name: 電柱 Mk.1
+  category: 電力
+  subcategory: 電柱
+- id: Power Pole Mk.2
+  name: 電柱 Mk.2
+  category: 電力
+  subcategory: 電柱
+- id: Power Pole Mk.3
+  name: 電柱 Mk.3
+  category: 電力
+  subcategory: 電柱
+- id: Power Tower
+  name: 送電塔
+  category: 電力
+  subcategory: 電柱
+- id: Power Tower Platform
+  name: 送電塔台
+  category: 電力
+  subcategory: 電柱
+- id: Power Line
+  name: 電線
+  category: 電力
+  subcategory: 電柱
+- id: Power Switch
+  name: 電源スイッチ
+  category: 電力
+  subcategory: 電柱
+- id: Priority Power Switch
+  name: 優先電源スイッチ
+  category: 電力
+  subcategory: 電柱
+
+- id: Wall Outlet Mk.1
+  name: 壁用電源差込口 Mk.1
+  category: 電力
+  subcategory: 壁用電源差込口
+- id: Wall Outlet Mk.2
+  name: 壁用電源差込口 Mk.2
+  category: 電力
+  subcategory: 壁用電源差込口
+- id: Wall Outlet Mk.3
+  name: 壁用電源差込口 Mk.3
+  category: 電力
+  subcategory: 壁用電源差込口
+- id: Double Wall Outlet Mk.1
+  name: 両側壁用電源 Mk.1
+  category: 電力
+  subcategory: 壁用電源差込口
+- id: Double Wall Outlet Mk.2
+  name: 両側壁用電源 Mk.2
+  category: 電力
+  subcategory: 壁用電源差込口
+- id: Double Wall Outlet Mk.3
+  name: 両側壁用電源 Mk.3
+  category: 電力
+  subcategory: 壁用電源差込口
+
+- id: Conveyor Belt Mk.1
+  name: コンベア・ベルト Mk.1
+  category: ロジスティクス
+  subcategory: コンベア・ベルト
+- id: Conveyor Belt Mk.2
+  name: コンベア・ベルト Mk.2
+  category: ロジスティクス
+  subcategory: コンベア・ベルト
+- id: Conveyor Belt Mk.3
+  name: コンベア・ベルト Mk.3
+  category: ロジスティクス
+  subcategory: コンベア・ベルト
+- id: Conveyor Belt Mk.4
+  name: コンベア・ベルト Mk.4
+  category: ロジスティクス
+  subcategory: コンベア・ベルト
+- id: Conveyor Belt Mk.5
+  name: コンベア・ベルト Mk.5
+  category: ロジスティクス
+  subcategory: コンベア・ベルト
+- id: Conveyor Belt Mk.6
+  name: コンベア・ベルト Mk.6
+  category: ロジスティクス
+  subcategory: コンベア・ベルト
+
+- id: Conveyor Lift Mk.1
+  name: コンベア・リフト Mk.1
+  category: ロジスティクス
+  subcategory: コンベア・リフト
+- id: Conveyor Lift Mk.2
+  name: コンベア・リフト Mk.2
+  category: ロジスティクス
+  subcategory: コンベア・リフト
+- id: Conveyor Lift Mk.3
+  name: コンベア・リフト Mk.3
+  category: ロジスティクス
+  subcategory: コンベア・リフト
+- id: Conveyor Lift Mk.4
+  name: コンベア・リフト Mk.4
+  category: ロジスティクス
+  subcategory: コンベア・リフト
+- id: Conveyor Lift Mk.5
+  name: コンベア・リフト Mk.5
+  category: ロジスティクス
+  subcategory: コンベア・リフト
+- id: Conveyor Lift Mk.6
+  name: コンベア・リフト Mk.6
+  category: ロジスティクス
+  subcategory: コンベア・リフト
+
+- id: Conveyor Pole
+  name: コンベア・ポール
+  category: ロジスティクス
+  subcategory: コンベア支柱
+- id: Stackable Conveyor Pole
+  name: コンベア・ポール (スタック可能)
+  jpwiki_id: Conveyor_Pole_Stackable
+  category: ロジスティクス
+  subcategory: コンベア支柱
+- id: Conveyor Wall Mount
+  name: コンベア壁用マウント
+  category: ロジスティクス
+  subcategory: コンベア支柱
+- id: Conveyor Lift Floor Hole
+  name: コンベア・リフト用の床穴
+  category: ロジスティクス
+  subcategory: コンベア支柱
+- id: Conveyor Ceiling Mount
+  name: コンベア天井用マウント
+  category: ロジスティクス
+  subcategory: コンベア支柱
+
+- id: Pipeline Mk.1
+  name: パイプライン Mk.1
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Pipeline Mk.2
+  name: パイプライン Mk.2
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Clean Pipeline Mk.1
+  name: パイプライン Mk.1 (インジケーターなし)
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Clean Pipeline Mk.2
+  name: パイプライン Mk.2 (インジケーターなし)
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Pipeline Junction
+  name: パイプライン十字分岐
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Pipeline Pump Mk.1
+  name: パイプラインポンプ Mk.1
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Pipeline Pump Mk.2
+  name: パイプラインポンプ Mk.2
+  category: ロジスティクス
+  subcategory: パイプライン
+- id: Valve
+  name: バルブ
+  category: ロジスティクス
+  subcategory: パイプライン
+
+- id: Pipeline Support
+  name: パイプライン支柱
+  category: ロジスティクス
+  subcategory: パイプライン支柱
+- id: Stackable Pipeline Support
+  name: パイプライン支柱 (スタック可能)
+  category: ロジスティクス
+  subcategory: パイプライン支柱
+- id: Pipeline Wall Support
+  name: 壁用パイプライン支柱
+  category: ロジスティクス
+  subcategory: パイプライン支柱
+- id: Pipeline Wall Hole
+  name: パイプライン用の壁穴
+  category: ロジスティクス
+  subcategory: パイプライン支柱
+- id: Pipeline Floor Hole
+  name: パイプライン用の床穴
+  category: ロジスティクス
+  subcategory: パイプライン支柱
+
+- id: Conveyor Merger
+  name: コンベア合流機
+  category: ロジスティクス
+  subcategory: 整理
+- id: Conveyor Splitter
+  name: コンベア分岐機
+  category: ロジスティクス
+  subcategory: 整理
+- id: Smart Splitter
+  name: スマート分岐機
+  category: ロジスティクス
+  subcategory: 整理
+- id: Programmable Splitter
+  name: プログラム式分岐機
+  category: ロジスティクス
+  subcategory: 整理
+
+- id: Tractor
+  name: トラクター
+  category: 輸送
+  subcategory: 自動車
+- id: Truck
+  name: トラック
+  category: 輸送
+  subcategory: 自動車
+- id: Cyber Wagon
+  name: サイバーワゴン
+  category: 輸送
+  subcategory: 自動車
+- id: Explorer
+  name: エクスプローラー
+  category: 輸送
+  subcategory: 自動車
+- id: Factory Cart
+  name: ファクトリーカート
+  category: 輸送
+  subcategory: 自動車
+- id: Truck Station
+  name: トラック・ステーション
+  category: 輸送
+  subcategory: 自動車
+
+- id: Drone Port
+  name: ドローンポート
+  category: 輸送
+  subcategory: ドローン輸送
+- id: Drone
+  name: ドローン
+  category: 輸送
+  subcategory: ドローン輸送
+
+- id: Electric Locomotive
+  name: 電気機関車
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Freight Car
+  name: 貨物車
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Train Station
+  name: 駅
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Freight Platform
+  name: 貨物プラットフォーム
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Fluid Freight Platform
+  name: 液体貨物プラットフォーム
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Empty Platform
+  name: 空のプラットフォーム
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Empty Platform With Catwalk
+  name: 作業用通路付き空のプラットフォーム
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Railway
+  name: 線路
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Block Signal
+  name: ブロック信号
+  category: 輸送
+  subcategory: 鉄道輸送
+- id: Path Signal
+  name: パス信号
+  category: 輸送
+  subcategory: 鉄道輸送
+
+- id: Hypertube
+  name: ハイパーチューブ
+  category: 輸送
+  subcategory: ハイパーチューブ
+- id: Hypertube Entrance
+  name: ハイパーチューブ入り口
+  category: 輸送
+  subcategory: ハイパーチューブ
+- id: Hypertube Support
+  name: ハイパーチューブ支柱
+  category: 輸送
+  subcategory: ハイパーチューブ
+- id: Stackable Hypertube Support
+  name: ハイパーチューブ支柱 (スタック可能)
+  category: 輸送
+  subcategory: ハイパーチューブ
+- id: Hypertube Wall Support
+  name: 壁用ハイパーチューブ支柱
+  category: 輸送
+  subcategory: ハイパーチューブ
+- id: Hypertube Wall Hole
+  name: ハイパーチューブ用の壁穴
+  category: 輸送
+  subcategory: ハイパーチューブ
+- id: Hypertube Floor Hole
+  name: ハイパーチューブ用の床穴
+  category: 輸送
+  subcategory: ハイパーチューブ
+
+- id: Jump Pad
+  name: ジャンプパッド
+  category: 輸送
+  subcategory: ジャンプパッド
+- id: U-Jelly Landing Pad
+  name: Uジェル・着地パッド
+  category: 輸送
+  subcategory: ジャンプパッド
+
+- id: Main Portal
+  name: メインポータル
+  category: 輸送
+  subcategory: ポータル
+- id: Satellite Portal
+  name: サテライトポータル
+  category: 輸送
+  subcategory: ポータル
+
+- id: Light Control Panel
+  name: 照明コントロールパネル
+  category: 組織化
+  subcategory: 照明
+- id: Street Light
+  name: 街灯
+  category: 組織化
+  subcategory: 照明
+- id: Flood Light Tower
+  name: 投光照明器
+  category: 組織化
+  subcategory: 照明
+- id: Ceiling Light
+  name: 天井灯
+  category: 組織化
+  subcategory: 照明
+- id: Wall-Mounted Flood Light
+  name: 壁付投光器
+  category: 組織化
+  subcategory: 照明
+- id: Label Sign (2 m)
+  name: ラベル看板 2m
+  category: 組織化
+  subcategory: 看板
+- id: Label Sign (3 m)
+  name: ラベル看板 3m
+  category: 組織化
+  subcategory: 看板
+- id: Label Sign (4 m)
+  name: ラベル看板 4m
+  category: 組織化
+  subcategory: 看板
+- id: Display Sign
+  name: 展示看板
+  category: 組織化
+  subcategory: 看板
+- id: Portrait Sign
+  name: アイコン看板
+  category: 組織化
+  subcategory: 看板
+- id: Square Sign (0.5 m)
+  name: 正方形の看板 0.5m
+  category: 組織化
+  subcategory: 看板
+- id: Square Sign (1 m)
+  name: 正方形の看板 1m
+  category: 組織化
+  subcategory: 看板
+- id: Square Sign (2 m)
+  name: 正方形の看板 2m
+  category: 組織化
+  subcategory: 看板
+- id: Small Billboard
+  name: 小型看板
+  category: 組織化
+  subcategory: 看板
+- id: Large Billboard
+  name: 大型看板
+  category: 組織化
+  subcategory: 看板
+
+- id: Personal Storage Box
+  name: 個人用貯蔵箱
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Medical Storage Box
+  name: 医薬品貯蔵箱
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Hazard Storage Box
+  name: 危険物貯蔵箱
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Storage Container
+  name: 貯蔵コンテナ
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Industrial Storage Container
+  name: 産業用貯蔵コンテナ
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Fluid Buffer
+  name: 液体タンク
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Industrial Fluid Buffer
+  name: 産業用液体タンク
+  category: 組織化
+  subcategory: 貯蔵庫
+- id: Dimensional Depot Uploader
+  name: 次元デポ・アップローダー
+  category: 組織化
+  subcategory: 貯蔵庫
+
+- id: Lookout Tower
+  name: 展望タワー
+  category: 組織化
+  subcategory: タワー
+- id: Radar Tower
+  name: レーダー・タワー
+  category: 組織化
+  subcategory: タワー
