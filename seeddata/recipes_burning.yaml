@@ -26,10 +26,10 @@
   alternate: false
   ingredients:
   - name: Compacted Coal
-    amount: 7.142857
+    amount: 1
     minute: 7.142857
   - name: Water
-    amount: 45
+    amount: 6.3
     minute: 45
   products: []
 - name: Petroleum Coke burning
