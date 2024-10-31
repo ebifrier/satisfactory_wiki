@@ -1,9 +1,7 @@
-attrdict3
 flask
 flask-assets
 flask-migrate
 flask-sqlalchemy
+flup
 libsass
-lxml
-requests
 pyyaml
