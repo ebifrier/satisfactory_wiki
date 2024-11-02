@@ -11,6 +11,10 @@ class Item(db.Model):
     jpwiki_id = db.Column(db.String(128), nullable=False)
     category = db.Column(db.String(64), nullable=False)
     coupons = db.Integer()
+    
+    @property
+    def display_id(self) -> str:
+        return self.id.replace('_', ' ')
 
     @property
     def kind_name(self) -> str:
