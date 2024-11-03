@@ -1,8 +1,9 @@
 
 import os
-from flask import Flask, render_template, request
+from flask import Flask, request, render_template, send_from_directory
 from flask_migrate import Migrate
-from flask_assets import Environment, Bundle
+from flask_vite import Vite
+from flask_inertia import Inertia, render_inertia
 from sqlalchemy import asc, desc
 
 from jpwiki import *
@@ -14,17 +15,17 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, "satisfactory.db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['INERTIA_TEMPLATE'] = 'base.html' 
+app.config.from_object(__name__)
 
 db.init_app(app)
 migrate = Migrate(app, db)
+vite = Vite(app)
 
-assets = Environment(app)
-scss = Bundle('style.scss', filters='libsass', output='style.css')
-assets.register('style_all', scss)
+inertia = Inertia()
+inertia.init_app(app)
 
 with app.app_context():
-    scss.build()
     db.create_all()
     
     # 最初の実行時はシードデータを設定します。
@@ -47,6 +48,24 @@ def items_by_category(items: list[Item]) -> list[tuple[str, list[Item]]]:
         cat_items.append(item)
 
     return result
+
+
+@app.route('/static/<path:path>') # Vite側のアセットを表示するのに必要
+def send_public(path):
+    return send_from_directory('frontend/bundled', path)
+
+
+@app.route('/')
+def index():
+    for a in RecipeItem.query.all():
+        print(a.to_dict())
+
+    data = {}
+    return render_inertia(
+        component_name="index",
+        props=data,
+        view_data={},
+    )
 
 
 @app.route('/item')

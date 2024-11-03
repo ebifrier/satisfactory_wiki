@@ -1,7 +1,6 @@
 flask
-flask-assets
+flask-inertia
 flask-migrate
 flask-sqlalchemy
-flup
-libsass
+flask-vite
 pyyaml

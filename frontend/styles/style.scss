@@ -1,5 +1,9 @@
 
 @charset "UTF-8";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 html, body {
     font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', '游ゴシック', 'Yu Gothic', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
