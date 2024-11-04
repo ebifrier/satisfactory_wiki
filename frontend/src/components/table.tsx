@@ -10,6 +10,9 @@ import {
   TableUtil,
 } from "../table";
 
+//
+// <Tag>内で指定されている文字列を整形してhtmlタグに変換します。
+//
 export const Content: React.FC<{
   content: string;
   attr?: React.CSSProperties;
@@ -27,6 +30,9 @@ export const Content: React.FC<{
   );
 };
 
+//
+// <TableColumn>内に含まれる各要素
+//
 export const Tag: React.FC<{ tag: TTag | string }> = ({ tag }) => {
   if (_.isString(tag)) {
     return <Content content={tag} />;
@@ -46,13 +52,16 @@ export const Tag: React.FC<{ tag: TTag | string }> = ({ tag }) => {
       />
     );
   } else if (TagUtil.isLinkTag(tag)) {
-    const { refer, labelTags } = tag;
+    const { link, labelTags } = tag;
     const labels = labelTags.map((x, index) => <Tag key={index} tag={x}></Tag>);
-    return <a href={`https://wikiwiki.jp/sf-jp/${refer}`}>{labels}</a>;
+    return <a href={`https://wikiwiki.jp/sf-jp/${link}`}>{labels}</a>;
   }
   return null;
 };
 
+//
+// テーブルカラム
+//
 export const TableColumn: React.FC<{
   column: TTableColumn;
   colSpan: number;
@@ -72,18 +81,21 @@ export const TableColumn: React.FC<{
   );
 };
 
+//
+// テーブル行
+//
 export const TableRow: React.FC<{
   row: TTableRow;
   data: TTableData;
   formatter?: TTableRow;
 }> = ({ row, data, formatter }) => {
-  const getBaseAttr = (index: number): React.CSSProperties | undefined => {
+  const getBaseAttr = (colIndex: number): React.CSSProperties | undefined => {
     const { columns } = formatter ?? {};
     if (columns == null) {
       return undefined;
     }
 
-    for (let i = index; i < columns.length; ++i) {
+    for (let i = colIndex; i < columns.length; ++i) {
       if (columns[i].type == null) {
         return columns[i].attr;
       }
@@ -142,13 +154,16 @@ export const TableRow: React.FC<{
   return <tr>{htmlRows}</tr>;
 };
 
+//
+// テーブル
+//
 export const TableData: React.FC<{ data: TTableData }> = ({ data }) => {
   const htmlHeaders: React.ReactNode[] = [];
   const htmlRows: React.ReactNode[] = [];
   const htmlFooters: React.ReactNode[] = [];
-  const { rows } = data;
   let formatter: TTableRow | undefined = undefined;
 
+  const { rows } = data;
   for (const [i, row] of rows.entries()) {
     const args = { row, data, formatter };
     switch (row.type) {

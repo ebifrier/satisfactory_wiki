@@ -24,7 +24,7 @@ export interface TImageTag extends TTag {
 }
 
 export interface TLinkTag extends TTag {
-  refer: string;
+  link: string;
   labelTags: (TTag | string)[];
 }
 
@@ -41,7 +41,7 @@ export class TagUtil {
 
   static getLink = (label: string, link: string): TLinkTag => ({
     type: "link",
-    refer: link,
+    link,
     labelTags: [label],
   });
 
@@ -54,7 +54,7 @@ export class TagUtil {
     const imageTag = this.getImageTag(wikiId, size);
     return {
       type: "link",
-      refer: link,
+      link,
       labelTags: [imageTag, label],
     };
   };
@@ -119,7 +119,7 @@ export class TagUtil {
     } else if (TagUtil.isLinkTag(tag)) {
       const { labelTags } = tag;
       const labels = labelTags.map((x) => this.toWIKI(x));
-      return `[[${labels.join("")}>${tag.refer}]]`;
+      return `[[${labels.join("")}>${tag.link}]]`;
     }
     return "";
   };
