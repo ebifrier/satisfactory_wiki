@@ -1,27 +1,27 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import path, { resolve } from 'path'
-import tailwindcss from 'tailwindcss'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path, { resolve } from "path";
+import tailwindcss from "tailwindcss";
 
 // https://vite.dev/config/
-export default defineConfig(env => ({
+export default defineConfig((env) => ({
   plugins: [react()],
   base: env.mode === "development" ? "" : "/public",
   server: {
-    host: '127.0.0.1',
+    host: "127.0.0.1",
     port: 3000,
     open: false,
     watch: {
       usePolling: true,
       disableGlobbing: false,
     },
-    origin: env.mode === "development" ? 'http://127.0.0.1:3000' : "",
+    origin: env.mode === "development" ? "http://127.0.0.1:3000" : "",
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
-      '/main.js': path.resolve(__dirname, 'src/main.tsx')
-    }
+      "@": resolve(__dirname, "./src"),
+      "/main.js": path.resolve(__dirname, "src/main.tsx"),
+    },
   },
   css: {
     postcss: {
@@ -29,16 +29,17 @@ export default defineConfig(env => ({
     },
   },
   build: {
-    outDir: resolve('./bundled'),
+    outDir: resolve("./bundled"),
     assetsDir: "assets",
-    target: 'es2015',
+    target: "es2015",
     rollupOptions: {
       input: {
-        main: resolve('./src/main.tsx'),
+        main: resolve("./src/main.tsx"),
       },
       output: {
         entryFileNames: `assets/bundle.js`,
       },
+      external: ["dompurify"],
     },
   },
-}))
+}));
