@@ -39,7 +39,6 @@ export default defineConfig((env) => ({
       output: {
         entryFileNames: `assets/bundle.js`,
       },
-      external: ["dompurify"],
     },
   },
 }));

@@ -1,3 +1,22 @@
+//
+// <Select>タグで使います。
+//
+export type Option = {
+  value: string;
+  label: string;
+};
+
+//
+// Selectの選択項目をグルーピングします。
+//
+export type GroupOption = {
+  label: string;
+  options: Option[];
+};
+
+export const toId = (value: string): string => value.replace(/ /g, "_");
+export const toDisplayId = (value: string): string => value.replace(/_/g, " ");
+
 export type TBase = {
   id: string;
   name: string;
