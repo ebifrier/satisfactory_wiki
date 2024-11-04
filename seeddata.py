@@ -85,6 +85,7 @@ def load_buildings() -> Iterator[Building]:
 
 def load_recipes() -> Iterator[Recipe]:
     recipes_data = load_yaml('recipes.yaml')
+    #recipes_data.extend(load_yaml('recipes_burning.yaml'))
 
     for i, data in enumerate(recipes_data):
         recipe_id = to_id(data['id'])
