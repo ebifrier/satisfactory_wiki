@@ -6,7 +6,6 @@ from flask_vite import Vite
 from flask_inertia import Inertia, render_inertia
 from sqlalchemy import asc, desc
 
-from jpwiki import *
 from models import db, Item, Recipe, RecipeItem, Condition, ConditionItem
 from seeddata import make_seeddata
 
@@ -116,13 +115,6 @@ def index():
         'recipesForBuilding': [recipe.to_dict() for recipe in recipes_for_building],
         'milestones': [milestone.to_dict() for milestone in milestones],
         'researches': [research.to_dict() for research in researches],
-        
-        # 'recipe_producing_table_datas': [create_recipe_producing_table_data(selected_item_id, recipe)
-        #                                  for recipe in recipes_producing],
-        # 'recipes_for_item_table_data': create_recipes_for_item_table_data(selected_item_id, recipes_for_item),
-        # 'recipes_for_building_table_data': create_recipes_for_building_table_data(selected_item_id, recipes_for_building),
-        # 'milestones_table_data': create_milestones_table_data(selected_item_id, milestones),
-        # 'researches_table_data': create_researches_table_data(selected_item_id, researches),
     }
 
     return render_inertia(
@@ -130,70 +122,6 @@ def index():
         props=data,
         view_data={},
     )
-
-
-@app.route('/item2')
-def item_select():
-    items = Item.query.all()
-    selected_item_id = request.args.get('item_id')
-    selected_item = Item.query.get(selected_item_id) if selected_item_id else None
-
-    if not selected_item:
-        return render_template('item_detail.html',
-                               items_by_category=items_by_category(items))
-
-    recipes_producing = Recipe.query.join(RecipeItem) \
-        .filter(RecipeItem.item_id == selected_item_id,
-                RecipeItem.role == 'product') \
-        .order_by(asc(Recipe.alternate), asc(Recipe.index)) \
-        .all()
-    recipes_producing = sorted(recipes_producing,
-                               key=lambda recipe: recipe.is_byproduct(selected_item_id))
-
-    recipes_using = (Recipe.query
-        .join(RecipeItem)
-        .filter(RecipeItem.item_id == selected_item_id,
-                RecipeItem.role == 'ingredient')
-        .order_by(Recipe.index)
-        .all())
-
-    milestones = (Condition.query
-        .filter(Condition.kind == 'milestone')
-        .join(ConditionItem, Condition.id == ConditionItem.condition_id)
-        .filter(ConditionItem.item_id == selected_item_id)
-        .order_by(Condition.index)
-        .all())
-    researches = (Condition.query
-        .filter(Condition.kind == 'research')
-        .join(ConditionItem, Condition.id == ConditionItem.condition_id)
-        .filter(ConditionItem.item_id == selected_item_id)
-        .order_by(Condition.index)
-        .all())
-
-    recipes_for_item = filter(lambda x: x.products[0].item is not None,
-                              recipes_using)
-    recipes_for_item = list(recipes_for_item)
-    recipes_for_item = sorted(recipes_for_item,
-                              key=lambda x: x.products[0].item.kind_name)
-
-    recipes_for_building = filter(lambda x: x.products[0].as_building() is not None,
-                                  recipes_using)
-    recipes_for_building = sorted(recipes_for_building,
-                                  key=lambda x: x.products[0].as_building().index)
-
-    args = {
-        'recipe_producing_table_datas': [create_recipe_producing_table_data(selected_item_id, recipe)
-                                         for recipe in recipes_producing],
-        'recipes_for_item_table_data': create_recipes_for_item_table_data(selected_item_id, recipes_for_item),
-        'recipes_for_building_table_data': create_recipes_for_building_table_data(selected_item_id, recipes_for_building),
-        'milestones_table_data': create_milestones_table_data(selected_item_id, milestones),
-        'researches_table_data': create_researches_table_data(selected_item_id, researches),
-    }
-
-    return render_template('item_detail.html',
-                           items_by_category=items_by_category(items),
-                           selected_item=selected_item,
-                           **args)
 
 
 if __name__ == '__main__':
