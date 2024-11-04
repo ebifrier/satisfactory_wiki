@@ -1,6 +1,32 @@
+import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy.model import Model
 
 db = SQLAlchemy()
+
+
+def to_camel_case(text):
+    s = text.replace("_", " ")
+    s = s.split()
+    if len(text) == 0:
+        return text
+    return s[0] + ''.join(i.capitalize() for i in s[1:])
+
+
+def model_to_dict(model: type[Model]):
+    def convert(value: any) -> any:
+        match type(value):
+            case datetime.timedelta:
+                return value.total_seconds()
+        return value
+
+    result = {to_camel_case(column.name): convert(getattr(model, column.name))
+              for column in model.__table__.columns}
+    
+    link = getattr(model, 'jpwiki_link', None)
+    if link:
+        result['wikiLink'] = link
+    return result
 
 
 class Item(db.Model):
@@ -11,7 +37,10 @@ class Item(db.Model):
     jpwiki_id = db.Column(db.String(128), nullable=False)
     category = db.Column(db.String(64), nullable=False)
     coupons = db.Integer()
-    
+
+    def to_dict(self) -> dict:
+        return model_to_dict(self)
+
     @property
     def display_id(self) -> str:
         return self.id.replace('_', ' ')
@@ -44,6 +73,9 @@ class Building(db.Model):
     power = db.Column(db.Integer)
     max_inputs = db.Column(db.Integer)
     max_outputs = db.Column(db.Integer)
+
+    def to_dict(self) -> dict:
+        return model_to_dict(self)
 
     @property
     def max_inouts(self) -> int:
@@ -87,6 +119,16 @@ class RecipeItem(db.Model):
     index = db.Column(db.Integer, nullable=False)
     amount = db.Column(db.Float, nullable=False)
     minute = db.Column(db.Float, nullable=False)
+
+    def to_dict(self) -> dict:
+        dic = model_to_dict(self)
+        if self.item is not None:
+            dic['item'] = self.item.to_dict()
+        
+        building = self.as_building()
+        if building is not None:
+            dic['building'] = building.to_dict()
+        return dic
 
     @property
     def name(self) -> str:
@@ -137,6 +179,19 @@ class Recipe(db.Model):
                                primaryjoin="and_(Recipe.id == RecipeItem.recipe_id, RecipeItem.role == 'product')",
                                order_by='RecipeItem.index',
                                overlaps='ingredients')
+
+    def to_dict(self) -> dict:
+        dic = model_to_dict(self)
+        if self.condition is not None:
+            dic['condition'] = self.condition.to_dict()
+        if self.building is not None:
+            dic['building'] = self.building.to_dict()
+        if self.building2 is not None:
+            dic['building2'] = self.building2.to_dict()
+
+        dic['ingredients'] = [ing.to_dict() for ing in self.ingredients]
+        dic['products'] = [prod.to_dict() for prod in self.products]
+        return dic
 
     @property
     def jpwiki_link(self) -> str:
@@ -201,6 +256,12 @@ class ConditionItem(db.Model):
     index = db.Column(db.Integer, nullable=False)
     amount = db.Column(db.Integer, nullable=False)
 
+    def to_dict(self) -> dict:
+        dic = model_to_dict(self)
+        if self.item is not None:
+            dic['item'] = self.item.to_dict()
+        return dic
+
     def __str__(self):
         return self.name
 
@@ -217,6 +278,11 @@ class Condition(db.Model):
     items = db.relationship('ConditionItem',
                             primaryjoin="Condition.id == ConditionItem.condition_id",
                             order_by='ConditionItem.index')
+
+    def to_dict(self) -> dict:
+        dic = model_to_dict(self)
+        dic['items'] = [item.to_dict() for item in self.items]
+        return dic
 
     @property
     def jpwiki_link(self) -> str:
