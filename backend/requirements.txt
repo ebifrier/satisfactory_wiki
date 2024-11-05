@@ -1,6 +1,4 @@
 flask
-flask-inertia
 flask-migrate
 flask-sqlalchemy
-flask-vite
 pyyaml

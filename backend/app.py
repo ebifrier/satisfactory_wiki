@@ -1,9 +1,7 @@
 
 import os
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template
 from flask_migrate import Migrate
-from flask_vite import Vite
-from flask_inertia import Inertia, render_inertia
 from sqlalchemy import asc, desc
 
 from models import db, Item, Recipe, RecipeItem, Condition, ConditionItem
@@ -14,19 +12,13 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, "satisfactory.db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['INERTIA_TEMPLATE'] = 'base.html' 
-app.config.from_object(__name__)
 
 db.init_app(app)
 migrate = Migrate(app, db)
-vite = Vite(app)
-
-inertia = Inertia()
-inertia.init_app(app)
 
 with app.app_context():
     db.create_all()
-    
+
     # 最初の実行時はシードデータを設定します。
     if not Item.query.first():
         db.session.add_all(make_seeddata(db))
@@ -49,11 +41,6 @@ def items_by_category(items: list[Item]) -> list[tuple[str, list[dict]]]:
     return result
 
 
-@app.route('/static/<path:path>') # Vite側のアセットを表示するのに必要
-def send_public(path):
-    return send_from_directory('frontend/bundled', path)
-
-
 @app.route('/item')
 def index():
     items = Item.query.all()
@@ -62,7 +49,7 @@ def index():
 
     if not selected_item:
         data = {'items_by_category': items_by_category(items)}
-        return render_inertia(
+        return render_template(
             component_name="index",
             props=data,
             view_data={},
@@ -117,7 +104,7 @@ def index():
         'researches': [research.to_dict() for research in researches],
     }
 
-    return render_inertia(
+    return render_template(
         component_name="index",
         props=data,
         view_data={},
