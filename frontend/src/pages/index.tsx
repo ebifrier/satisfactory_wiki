@@ -1,6 +1,7 @@
 import React from "react";
-import Select, { SingleValue, GroupBase } from "react-select";
 import { useRouter } from "next/router";
+import Select, { SingleValue, GroupBase } from "react-select";
+import useSWR from "swr";
 import {
   Option,
   GroupOption,
@@ -54,87 +55,96 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
   );
 };
 
-type Props = {
-  selectedItem?: TItem;
-  itemsByCategory: [string, TItem[]][];
-  recipesProducing: TRecipe[];
-  recipesForItem: TRecipe[];
-  recipesForBuilding: TRecipe[];
-  milestones: TCondition[];
-  researches: TCondition[];
+import axios from "axios";
+
+async function fetcher<T>(url: string): Promise<T> {
+  return axios.get(`http://localhost:5000${url}`).then((res) => res.data);
+}
+
+type Recipes = {
+  recipesProducing?: TRecipe[];
+  recipesForItem?: TRecipe[];
+  recipesForBuilding?: TRecipe[];
 };
 
-function IndexPage({}: // selectedItem,
-// itemsByCategory,
-// recipesProducing,
-// recipesForItem,
-// recipesForBuilding,
-// milestones,
-// researches,
-Props) {
+function IndexPage() {
   const router = useRouter();
-  const onChangeItemId = React.useCallback(
-    (option: SingleValue<Option>) => {
-      router.push(`/item?item_id=${option?.value}`);
-    },
-    [router]
+  const { itemId: defaultId } = router.query;
+  const [itemId, setItemId] = React.useState<string | undefined>(
+    defaultId != null ? `${defaultId}` : undefined
   );
 
-  return (
-    <div>
-      <h1>title</h1>
-    </div>
+  const { data: itemsByCategory } = useSWR<[string, TItem[]][]>(
+    "/api/v1/items?grouping=true",
+    fetcher
   );
 
-  /*const itemOptions: GroupOption[] = React.useMemo(
+  const itemOptions: GroupOption[] = React.useMemo(
     () =>
-      itemsByCategory.map(([cat, items]) => ({
-        label: `${cat}`,
-        options: items.map((item) => ({
-          label: `${item.name} (${toDisplayId(item.id)})`,
-          value: item.id,
-        })),
-      })),
+      itemsByCategory == null
+        ? []
+        : itemsByCategory.map(([cat, items]) => ({
+            label: cat,
+            options: items.map((item) => ({
+              label: `${item.name} (${toDisplayId(item.id)})`,
+              value: item.id,
+            })),
+          })),
     [itemsByCategory]
   );
 
-  const selectedOption: Option | undefined = React.useMemo(() => {
-    for (const { options } of itemOptions) {
-      const option = options.find((x) => x.value === selectedItem?.id);
+  const selectedOption = React.useMemo(() => {
+    for (const { options } of itemOptions ?? []) {
+      const option = options.find((x) => x.value === itemId);
       if (option != null) {
         return option;
       }
     }
-    return itemOptions[0].options[0];
-  }, [selectedItem?.id, itemOptions]);
+    return undefined; //itemOptions[0].options[0];
+  }, [itemId, itemOptions]);
+
+  const { data: recipes } = useSWR<Recipes>(
+    `/api/v1/item/${itemId}/recipes?producing=true&for_item=true&for_building=true`,
+    fetcher
+  );
 
   const recipesProducingData = React.useMemo(
     () =>
-      recipesProducing.map((recipe) =>
-        createRecipeData(selectedItem?.id ?? "", recipe)
-      ),
-    [selectedItem?.id, recipesProducing]
+      recipes?.recipesProducing?.map((recipe) =>
+        createRecipeData(itemId ?? "", recipe)
+      ) ?? [],
+    [itemId, recipes?.recipesProducing]
   );
 
   const recipesForItemData = React.useMemo(
-    () => createRecipesForItemData(selectedItem?.id ?? "", recipesForItem),
-    [selectedItem?.id, recipesForItem]
+    () => createRecipesForItemData(itemId ?? "", recipes?.recipesForItem),
+    [itemId, recipes?.recipesForItem]
   );
 
   const recipesForBuildingData = React.useMemo(
     () =>
-      createRecipesForBuildingData(selectedItem?.id ?? "", recipesForBuilding),
-    [selectedItem?.id, recipesForBuilding]
+      createRecipesForBuildingData(itemId ?? "", recipes?.recipesForBuilding),
+    [itemId, recipes?.recipesForBuilding]
+  );
+
+  const { data: milestones } = useSWR<TCondition[]>(
+    `/api/v1/item/${itemId}/milestones`,
+    fetcher
   );
 
   const milestonesData = React.useMemo(
-    () => createMilestonesData(selectedItem?.id ?? "", milestones),
-    [selectedItem?.id, milestones]
+    () => createMilestonesData(itemId ?? "", milestones),
+    [itemId, milestones]
+  );
+
+  const { data: researches } = useSWR<TCondition[]>(
+    `/api/v1/item/${itemId}/researches`,
+    fetcher
   );
 
   const researchesData = React.useMemo(
-    () => createResearchesData(selectedItem?.id ?? "", researches),
-    [selectedItem?.id, researches]
+    () => createResearchesData(itemId ?? "", researches),
+    [itemId, researches]
   );
 
   return (
@@ -148,7 +158,7 @@ Props) {
           id="item-select"
           options={itemOptions}
           value={selectedOption}
-          onChange={onChangeItemId}
+          onChange={(option) => setItemId(option?.value)}
           isSearchable={true}
           className="mt-1 sm:text-sm"
         />
@@ -156,7 +166,7 @@ Props) {
 
       <div className="mt-6 col-span-full">
         <h1 className="text-4xl font-bold text-gray-800">
-          {selectedItem?.name}
+          {selectedOption?.label}
         </h1>
       </div>
 
@@ -197,7 +207,7 @@ Props) {
       <DataTableWithTitle title="マイルストーン" data={milestonesData} />
       <DataTableWithTitle title="分子分析機" data={researchesData} />
     </div>
-  );*/
+  );
 }
 
 export default IndexPage;

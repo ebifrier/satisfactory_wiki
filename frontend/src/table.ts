@@ -345,7 +345,7 @@ export const createRecipeData = (
 //
 export const createRecipesForItemData = (
   itemId: string,
-  recipes: TRecipe[]
+  recipes?: TRecipe[]
 ): TTableData => {
   if (recipes == null) {
     return { rows: [TableUtil.newRow([])] };
@@ -403,7 +403,7 @@ export const createRecipesForItemData = (
 //
 export const createRecipesForBuildingData = (
   itemId: string,
-  recipes: TRecipe[]
+  recipes?: TRecipe[]
 ): TTableData => {
   if (recipes == null) {
     return { rows: [TableUtil.newRow([])] };
@@ -460,7 +460,7 @@ export const createRecipesForBuildingData = (
 //
 export const createMilestonesData = (
   itemId: string,
-  milestones: TCondition[]
+  milestones?: TCondition[]
 ): TTableData => {
   if (milestones == null) {
     return { rows: [TableUtil.newRow([])] };
@@ -509,7 +509,7 @@ export const createMilestonesData = (
 //
 export const createResearchesData = (
   itemId: string,
-  researches: TCondition[]
+  researches?: TCondition[]
 ): TTableData => {
   if (researches == null) {
     return { rows: [TableUtil.newRow([])] };
