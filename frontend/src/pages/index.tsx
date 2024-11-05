@@ -46,7 +46,9 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
           ></textarea>
         </>
       ) : (
-        <p className="col-span-2 text-gray-500">表示する項目はありません。</p>
+        <p className="col-span-full text-gray-500">
+          表示する項目はありません。
+        </p>
       )}
     </>
   );
@@ -94,7 +96,7 @@ function App({
         return option;
       }
     }
-    return options[0];
+    return itemOptions[0].options[0];
   }, [selectedItem?.id, itemOptions]);
 
   const recipesProducingData = React.useMemo(
@@ -132,16 +134,14 @@ function App({
       </div>
 
       <div className="mt-6 col-span-full">
-        <form method="get" action="/item">
-          <Select<Option, false, GroupBase<Option>>
-            id="item-select"
-            options={itemOptions}
-            value={selectedOption}
-            onChange={onChangeItemId}
-            isSearchable={true}
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </form>
+        <Select<Option, false, GroupBase<Option>>
+          id="item-select"
+          options={itemOptions}
+          value={selectedOption}
+          onChange={onChangeItemId}
+          isSearchable={true}
+          className="mt-1 sm:text-sm"
+        />
       </div>
 
       <div className="mt-6 col-span-full">
@@ -157,8 +157,8 @@ function App({
       {recipesProducingData.length > 0 ? (
         <>
           <div className="recipes-producing-table">
-            {recipesProducingData.map((recipe) => (
-              <TableData data={recipe} />
+            {recipesProducingData.map((recipe, index) => (
+              <TableData key={index} data={recipe} />
             ))}
           </div>
           <textarea
