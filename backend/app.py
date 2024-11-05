@@ -1,10 +1,11 @@
 
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from flask_migrate import Migrate
-from sqlalchemy import asc, desc
+from sqlalchemy import orm, asc, desc
 
-from models import db, Item, Recipe, RecipeItem, Condition, ConditionItem
+from models import db, Item, Building, Recipe, RecipeItem, Condition, ConditionItem
 from seeddata import make_seeddata
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -12,6 +13,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(BASE_DIR, "satisfactory.db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+CORS(app)
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -41,74 +43,84 @@ def items_by_category(items: list[Item]) -> list[tuple[str, list[dict]]]:
     return result
 
 
-@app.route('/item')
-def index():
+@app.get('/api/v1/items')
+def items():
     items = Item.query.all()
-    selected_item_id = request.args.get('item_id')
-    selected_item = Item.query.get(selected_item_id) if selected_item_id else None
+    grouping = request.args.get('grouping', False)
+    if grouping:
+        items = items_by_category(items)
+    else:
+        items = [item.to_dict() for item in items]
 
-    if not selected_item:
-        data = {'items_by_category': items_by_category(items)}
-        return render_template(
-            component_name="index",
-            props=data,
-            view_data={},
-        )
+    return jsonify(items)
 
-    recipes_producing = Recipe.query.join(RecipeItem) \
-        .filter(RecipeItem.item_id == selected_item_id,
-                RecipeItem.role == 'product') \
-        .order_by(asc(Recipe.alternate), asc(Recipe.index)) \
-        .all()
-    recipes_producing = sorted(recipes_producing,
-                               key=lambda recipe: recipe.is_byproduct(selected_item_id))
 
-    recipes_using = (Recipe.query
-        .join(RecipeItem)
-        .filter(RecipeItem.item_id == selected_item_id,
-                RecipeItem.role == 'ingredient')
-        .order_by(Recipe.index)
-        .all())
+@app.get('/api/v1/item/<string:item_id>/recipes')
+def recipes(item_id: str):
+    producing = request.args.get('producing', False)
+    for_item = request.args.get('for_item', False)
+    for_building = request.args.get('for_building', False)
+    result = {}
 
+    if producing:
+        recipes = (Recipe.query.join(RecipeItem)
+            .filter(RecipeItem.item_id == item_id)
+            .filter(RecipeItem.role == 'product')
+            .order_by(asc(Recipe.alternate), asc(Recipe.index))
+            .all())
+        recipes = sorted(recipes, key=lambda r: r.is_byproduct(item_id))
+        result['recipesProducing'] = [recipe.to_dict() for recipe in recipes]
+
+    ingredient_alias = orm.aliased(RecipeItem)
+    product_alias = orm.aliased(RecipeItem)
+    recipes_query = (Recipe.query
+        .join(ingredient_alias, Recipe.id == ingredient_alias.recipe_id)
+        .filter(ingredient_alias.role == 'ingredient')
+        .filter(ingredient_alias.item_id == item_id))
+
+    if for_item:
+        recipes = (recipes_query
+            .join(product_alias, Recipe.id == product_alias.recipe_id)
+            .filter(product_alias.role == 'product')
+            .join(Item, product_alias.item_id == Item.id)
+            .order_by(asc(Recipe.index), desc(Item.kind))
+            .all())
+        result['recipesForItem'] =  [recipe.to_dict() for recipe in recipes]
+
+    if for_building:
+        recipes = (recipes_query
+            .join(product_alias, Recipe.id == product_alias.recipe_id)
+            .filter(product_alias.role == 'product')
+            .join(Building, product_alias.item_id == Building.id)
+            .order_by(asc(Building.index))
+            .all())
+        result['recipesForBuilding'] =  [recipe.to_dict() for recipe in recipes]
+
+    return jsonify(result)
+
+
+@app.get('/api/v1/item/<string:item_id>/milestones')
+def milestones(item_id: str):
     milestones = (Condition.query
         .filter(Condition.kind == 'milestone')
         .join(ConditionItem, Condition.id == ConditionItem.condition_id)
-        .filter(ConditionItem.item_id == selected_item_id)
+        .filter(ConditionItem.item_id == item_id)
         .order_by(Condition.index)
         .all())
+    
+    return jsonify([milestone.to_dict() for milestone in milestones])
+
+
+@app.get('/api/v1/item/<string:item_id>/researches')
+def research(item_id: str):
     researches = (Condition.query
         .filter(Condition.kind == 'research')
         .join(ConditionItem, Condition.id == ConditionItem.condition_id)
-        .filter(ConditionItem.item_id == selected_item_id)
+        .filter(ConditionItem.item_id == item_id)
         .order_by(Condition.index)
         .all())
 
-    recipes_for_item = filter(lambda x: x.products[0].item is not None,
-                              recipes_using)
-    recipes_for_item = list(recipes_for_item)
-    recipes_for_item = sorted(recipes_for_item,
-                              key=lambda x: x.products[0].item.kind_name)
-
-    recipes_for_building = filter(lambda x: x.products[0].as_building() is not None,
-                                  recipes_using)
-    recipes_for_building = sorted(recipes_for_building,
-                                  key=lambda x: x.products[0].as_building().index)
-
-    data = {
-        'selectedItem': selected_item.to_dict(),
-        'itemsByCategory': items_by_category(items),
-        'recipesProducing': [recipe.to_dict() for recipe in recipes_producing],
-        'recipesForItem': [recipe.to_dict() for recipe in recipes_for_item],
-        'recipesForBuilding': [recipe.to_dict() for recipe in recipes_for_building],
-        'milestones': [milestone.to_dict() for milestone in milestones],
-        'researches': [research.to_dict() for research in researches],
-    }
-
-    return render_template(
-        component_name="index",
-        props=data,
-        view_data={},
-    )
+    return jsonify([research.to_dict() for research in researches])
 
 
 if __name__ == '__main__':
