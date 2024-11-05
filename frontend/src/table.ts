@@ -151,8 +151,8 @@ export class TableUtil {
   static COLUMN_MERGE_RIGHT = ">";
   static COLUMN_MERGE_UP = "~";
 
-  static isColumn = (column: any): column is TTableColumn =>
-    column?.tags != null;
+  static isColumn = (column: unknown): column is TTableColumn =>
+    (column as TTableColumn)?.tags != null;
 
   static newColumn = (
     tag: (TTag | string) | (TTag | string)[] | TTableColumn
@@ -435,7 +435,7 @@ export const createRecipesForBuildingData = (
     )
   );
 
-  let recipeRows: { i: number; row: TTableRow }[] = [];
+  const recipeRows: { i: number; row: TTableRow }[] = [];
   for (const recipe of recipes) {
     const ingredient = RecipeUtil.findIngredient(recipe, itemId);
     const product = recipe.products[0].building;

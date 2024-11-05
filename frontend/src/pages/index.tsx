@@ -1,6 +1,6 @@
 import React from "react";
 import Select, { SingleValue, GroupBase } from "react-select";
-import { router } from "@inertiajs/react";
+import { useRouter } from "next/router";
 import {
   Option,
   GroupOption,
@@ -8,7 +8,7 @@ import {
   TItem,
   TRecipe,
   toDisplayId,
-} from "../types";
+} from "@/types";
 import {
   TableUtil,
   createRecipeData,
@@ -17,8 +17,8 @@ import {
   createMilestonesData,
   createResearchesData,
   TTableData,
-} from "../table";
-import { TableData } from "../components/table";
+} from "@/table";
+import { TableData } from "@/components/table";
 
 type DataTableWithTitleProps = {
   data: TTableData;
@@ -64,20 +64,29 @@ type Props = {
   researches: TCondition[];
 };
 
-function App({
-  selectedItem,
-  itemsByCategory,
-  recipesProducing,
-  recipesForItem,
-  recipesForBuilding,
-  milestones,
-  researches,
-}: Props) {
-  const onChangeItemId = React.useCallback((option: SingleValue<Option>) => {
-    router.get("/item", { item_id: option?.value });
-  }, []);
+function IndexPage({}: // selectedItem,
+// itemsByCategory,
+// recipesProducing,
+// recipesForItem,
+// recipesForBuilding,
+// milestones,
+// researches,
+Props) {
+  const router = useRouter();
+  const onChangeItemId = React.useCallback(
+    (option: SingleValue<Option>) => {
+      router.push(`/item?item_id=${option?.value}`);
+    },
+    [router]
+  );
 
-  const itemOptions: GroupOption[] = React.useMemo(
+  return (
+    <div>
+      <h1>title</h1>
+    </div>
+  );
+
+  /*const itemOptions: GroupOption[] = React.useMemo(
     () =>
       itemsByCategory.map(([cat, items]) => ({
         label: `${cat}`,
@@ -102,28 +111,29 @@ function App({
   const recipesProducingData = React.useMemo(
     () =>
       recipesProducing.map((recipe) =>
-        createRecipeData(selectedItem?.id!, recipe)
+        createRecipeData(selectedItem?.id ?? "", recipe)
       ),
     [selectedItem?.id, recipesProducing]
   );
 
   const recipesForItemData = React.useMemo(
-    () => createRecipesForItemData(selectedItem?.id!, recipesForItem),
+    () => createRecipesForItemData(selectedItem?.id ?? "", recipesForItem),
     [selectedItem?.id, recipesForItem]
   );
 
   const recipesForBuildingData = React.useMemo(
-    () => createRecipesForBuildingData(selectedItem?.id!, recipesForBuilding),
+    () =>
+      createRecipesForBuildingData(selectedItem?.id ?? "", recipesForBuilding),
     [selectedItem?.id, recipesForBuilding]
   );
 
   const milestonesData = React.useMemo(
-    () => createMilestonesData(selectedItem?.id!, milestones),
+    () => createMilestonesData(selectedItem?.id ?? "", milestones),
     [selectedItem?.id, milestones]
   );
 
   const researchesData = React.useMemo(
-    () => createResearchesData(selectedItem?.id!, researches),
+    () => createResearchesData(selectedItem?.id ?? "", researches),
     [selectedItem?.id, researches]
   );
 
@@ -187,7 +197,7 @@ function App({
       <DataTableWithTitle title="マイルストーン" data={milestonesData} />
       <DataTableWithTitle title="分子分析機" data={researchesData} />
     </div>
-  );
+  );*/
 }
 
-export default App;
+export default IndexPage;

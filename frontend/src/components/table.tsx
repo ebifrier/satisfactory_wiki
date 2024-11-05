@@ -8,7 +8,7 @@ import {
   TTableRow,
   TTableData,
   TableUtil,
-} from "../table";
+} from "@/table";
 
 //
 // <Tag>内で指定されている文字列を整形してhtmlタグに変換します。
@@ -190,3 +190,5 @@ export const TableData: React.FC<{ data: TTableData }> = ({ data }) => {
     </table>
   );
 };
+
+export default TableData;
