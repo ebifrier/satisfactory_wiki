@@ -67,14 +67,22 @@ type Recipes = {
   recipesForBuilding?: TRecipe[];
 };
 
+const paramToStr = (param?: string | string[]): string | undefined =>
+  param ? `${param}` : undefined;
+
 function IndexPage() {
   const router = useRouter();
-  const [itemId, setItemId] = React.useState<string>();
+  const itemId = paramToStr(router.query.itemId);
 
-  React.useEffect(() => {
-    const { itemId: defaultId } = router.query;
-    setItemId(defaultId ? `${defaultId}` : undefined);
-  }, [router.query]);
+  const setItemId = React.useCallback(
+    (value?: string) => {
+      if (itemId != value) {
+        const { pathname } = router;
+        router.replace({ pathname, query: { itemId: value } });
+      }
+    },
+    [router, itemId]
+  );
 
   const { data: itemsByCategory } = useSWR<[string, TItem[]][]>(
     "/api/v1/items?grouping=true",
