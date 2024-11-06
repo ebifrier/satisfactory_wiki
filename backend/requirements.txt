@@ -2,4 +2,6 @@ flask
 flask-cors
 flask-migrate
 flask-sqlalchemy
+setuptools
 pyyaml
+zappa
