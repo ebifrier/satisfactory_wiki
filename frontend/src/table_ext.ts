@@ -21,7 +21,8 @@ export const createRecipeData = (
   itemId: string,
   recipe: TRecipe
 ): TTableData => {
-  const { alternate, linkAnchor, building, building2 } = recipe;
+  const { alternate, linkAnchor, building, building2, ingredients, products } =
+    recipe;
   const rows: TTableRow[] = [];
 
   // ページ編集用の目印
@@ -102,10 +103,11 @@ export const createRecipeData = (
   }
 
   const { maxInputs, maxOutputs } = building;
-  for (let i = 0; i < maxInputs; ++i) {
-    const product =
-      i % maxOutputs == 0 ? recipe.products[i / Math.max(1, maxOutputs)] : null;
-    const ingredient = recipe.ingredients[i];
+  const nrows = Math.max(maxInputs, ingredients.length, products.length);
+  const noutputs = Math.max(1, maxOutputs);
+  for (let i = 0; i < nrows; ++i) {
+    const product = i % noutputs == 0 ? products[i / noutputs] : null;
+    const ingredient = ingredients[i];
     const columns = [
       TableUtil.newColumn(
         ingredient?.item ? TagUtil.getSmallImageLink(ingredient.item) : "　-"
