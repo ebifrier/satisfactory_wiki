@@ -1,7 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Select, { SingleValue, GroupBase } from "react-select";
+import Select, { GroupBase } from "react-select";
 import useSWR from "swr";
+import axios from "axios";
 import {
   Option,
   GroupOption,
@@ -10,16 +11,22 @@ import {
   TRecipe,
   toDisplayId,
 } from "@/types";
+import { TableUtil, TTableData } from "@/table";
 import {
-  TableUtil,
   createRecipeData,
   createRecipesForBuildingData,
   createRecipesForItemData,
   createMilestonesData,
   createResearchesData,
-  TTableData,
-} from "@/table";
+} from "@/table_ext";
 import { TableData } from "@/components/table";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+console.log(API_URL);
+
+async function fetcher<T>(url: string): Promise<T> {
+  return axios.get(`${API_URL}${url}`).then((res) => res.data);
+}
 
 type DataTableWithTitleProps = {
   data: TTableData;
@@ -55,12 +62,6 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
   );
 };
 
-import axios from "axios";
-
-async function fetcher<T>(url: string): Promise<T> {
-  return axios.get(`http://localhost:5000${url}`).then((res) => res.data);
-}
-
 type Recipes = {
   recipesProducing?: TRecipe[];
   recipesForItem?: TRecipe[];
@@ -69,10 +70,12 @@ type Recipes = {
 
 function IndexPage() {
   const router = useRouter();
-  const { itemId: defaultId } = router.query;
-  const [itemId, setItemId] = React.useState<string | undefined>(
-    defaultId != null ? `${defaultId}` : undefined
-  );
+  const [itemId, setItemId] = React.useState<string>();
+
+  React.useEffect(() => {
+    const { itemId: defaultId } = router.query;
+    setItemId(defaultId ? `${defaultId}` : undefined);
+  }, [router.query]);
 
   const { data: itemsByCategory } = useSWR<[string, TItem[]][]>(
     "/api/v1/items?grouping=true",
@@ -100,7 +103,7 @@ function IndexPage() {
         return option;
       }
     }
-    return undefined; //itemOptions[0].options[0];
+    return undefined;
   }, [itemId, itemOptions]);
 
   const { data: recipes } = useSWR<Recipes>(
