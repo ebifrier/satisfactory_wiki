@@ -32,7 +32,10 @@ export type TItem = TBase & {
 };
 
 export class ItemUtil {
-  static getWikiLink = (item: TItem): string => `素材/${item.jpwikiId}`;
+  static getWikiLink = ({ jpwikiId }: TItem): string => `素材/${jpwikiId}`;
+
+  static getFullName = ({ name, id }: TItem): string =>
+    `${name} [${toDisplayId(id)}]`;
 
   static getKindName = ({ kind }: TItem): string => {
     switch (kind) {

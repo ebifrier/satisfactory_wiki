@@ -6,9 +6,9 @@ import {
   Option,
   GroupOption,
   TCondition,
+  ItemUtil,
   TItem,
   TRecipe,
-  toDisplayId,
 } from "@/types";
 import { TableUtil, TTableData } from "@/table";
 import {
@@ -82,7 +82,7 @@ function ItemPage() {
             ([cat, items]): GroupOption => ({
               label: cat,
               options: items.map((item) => ({
-                label: `${item.name} (${toDisplayId(item.id)})`,
+                label: ItemUtil.getFullName(item),
                 value: item.id,
               })),
             })
@@ -176,8 +176,8 @@ function ItemPage() {
       ) : (
         <>
           <div className="recipes-producing-table">
-            {recipesProducingData.map((recipe, index) => (
-              <TableData key={index} data={recipe} />
+            {recipesProducingData.map((data, index) => (
+              <TableData key={index} data={data} />
             ))}
           </div>
           <textarea
