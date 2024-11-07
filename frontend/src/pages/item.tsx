@@ -1,8 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Select, { GroupBase } from "react-select";
-import useSWR from "swr";
-import axios from "axios";
+import useSWR, { fetcher } from "@/api";
 import {
   Option,
   GroupOption,
@@ -20,12 +19,6 @@ import {
   createResearchesData,
 } from "@/table_ext";
 import { TableData } from "@/components/table";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
-
-async function fetcher<T>(url: string): Promise<T> {
-  return axios.get(`${API_URL}${url}`).then((res) => res.data);
-}
 
 type DataTableWithTitleProps = {
   title: string;
@@ -63,7 +56,7 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
   );
 };
 
-function IndexPage() {
+function ItemPage() {
   const paramToStr = (param?: string | string[]): string | undefined =>
     param ? `${param}` : undefined;
   const router = useRouter();
@@ -79,7 +72,7 @@ function IndexPage() {
     [router, itemId]
   );
 
-  const { data: itemOptions, error } = useSWR(
+  const { data: itemOptions } = useSWR(
     "/api/v1/items?grouping=true",
     async (key: string) => {
       const data = await fetcher<[string, TItem[]][]>(key);
@@ -214,4 +207,4 @@ function IndexPage() {
   );
 }
 
-export default IndexPage;
+export default ItemPage;
