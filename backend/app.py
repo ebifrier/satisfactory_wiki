@@ -55,48 +55,52 @@ def items():
     return jsonify(items)
 
 
-@app.get('/api/v1/item/<string:item_id>/recipes')
-def recipes(item_id: str):
-    producing = request.args.get('producing', False)
-    for_item = request.args.get('for_item', False)
-    for_building = request.args.get('for_building', False)
-    result = {}
+@app.get('/api/v1/item/<string:item_id>/recipes/producing')
+def recipes_producing(item_id: str):
+    recipes = (Recipe.query.join(RecipeItem)
+        .filter(RecipeItem.item_id == item_id)
+        .filter(RecipeItem.role == 'product')
+        .order_by(asc(Recipe.alternate), asc(Recipe.index))
+        .all())
+    recipes = sorted(recipes, key=lambda r: r.is_byproduct(item_id))
 
-    if producing:
-        recipes = (Recipe.query.join(RecipeItem)
-            .filter(RecipeItem.item_id == item_id)
-            .filter(RecipeItem.role == 'product')
-            .order_by(asc(Recipe.alternate), asc(Recipe.index))
-            .all())
-        recipes = sorted(recipes, key=lambda r: r.is_byproduct(item_id))
-        result['recipesProducing'] = [recipe.to_dict() for recipe in recipes]
+    return jsonify([recipe.to_dict() for recipe in recipes])
 
+
+def get_using_recipes_query(item_id: str) -> tuple[orm.Query, type[RecipeItem]]:
     ingredient_alias = orm.aliased(RecipeItem)
     product_alias = orm.aliased(RecipeItem)
     recipes_query = (Recipe.query
         .join(ingredient_alias, Recipe.id == ingredient_alias.recipe_id)
         .filter(ingredient_alias.role == 'ingredient')
         .filter(ingredient_alias.item_id == item_id))
+    return recipes_query, product_alias
 
-    if for_item:
-        recipes = (recipes_query
-            .join(product_alias, Recipe.id == product_alias.recipe_id)
-            .filter(product_alias.role == 'product')
-            .join(Item, product_alias.item_id == Item.id)
-            .order_by(asc(Recipe.index), desc(Item.kind))
-            .all())
-        result['recipesForItem'] =  [recipe.to_dict() for recipe in recipes]
 
-    if for_building:
-        recipes = (recipes_query
-            .join(product_alias, Recipe.id == product_alias.recipe_id)
-            .filter(product_alias.role == 'product')
-            .join(Building, product_alias.item_id == Building.id)
-            .order_by(asc(Building.index))
-            .all())
-        result['recipesForBuilding'] =  [recipe.to_dict() for recipe in recipes]
+@app.get('/api/v1/item/<string:item_id>/recipes/using_for_item')
+def recipes_using_for_item(item_id: str):
+    query, product_alias = get_using_recipes_query(item_id)
+    recipes = (query
+        .join(product_alias, Recipe.id == product_alias.recipe_id)
+        .filter(product_alias.role == 'product')
+        .join(Item, product_alias.item_id == Item.id)
+        .order_by(asc(Recipe.index), desc(Item.kind))
+        .all())
 
-    return jsonify(result)
+    return jsonify([recipe.to_dict() for recipe in recipes])
+
+
+@app.get('/api/v1/item/<string:item_id>/recipes/using_for_building')
+def recipes_using_for_building(item_id: str):
+    query, product_alias = get_using_recipes_query(item_id)
+    recipes = (query
+        .join(product_alias, Recipe.id == product_alias.recipe_id)
+        .filter(product_alias.role == 'product')
+        .join(Building, product_alias.item_id == Building.id)
+        .order_by(asc(Building.index))
+        .all())
+
+    return jsonify([recipe.to_dict() for recipe in recipes])
 
 
 @app.get('/api/v1/item/<string:item_id>/milestones')

@@ -28,20 +28,26 @@ async function fetcher<T>(url: string): Promise<T> {
 }
 
 type DataTableWithTitleProps = {
-  data: TTableData;
   title: string;
+  data?: TTableData;
 };
 
 const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
-  data,
   title,
+  data,
 }) => {
   return (
     <>
       <div className="mt-8 col-span-full">
         <h2 className="text-2xl font-semibold">{title}</h2>
       </div>
-      {data.rows.length > 2 ? (
+      {data == null ? (
+        <p className="col-span-full text-gray-500">データ読み込み中...</p>
+      ) : data.rows.length <= 2 ? (
+        <p className="col-span-full text-gray-500">
+          表示する項目はありません。
+        </p>
+      ) : (
         <>
           <TableData data={data} />
 
@@ -52,25 +58,14 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
             defaultValue={`${TableUtil.dataToWIKI(data)}\n`}
           ></textarea>
         </>
-      ) : (
-        <p className="col-span-full text-gray-500">
-          表示する項目はありません。
-        </p>
       )}
     </>
   );
 };
 
-type Recipes = {
-  recipesProducing?: TRecipe[];
-  recipesForItem?: TRecipe[];
-  recipesForBuilding?: TRecipe[];
-};
-
-const paramToStr = (param?: string | string[]): string | undefined =>
-  param ? `${param}` : undefined;
-
 function IndexPage() {
+  const paramToStr = (param?: string | string[]): string | undefined =>
+    param ? `${param}` : undefined;
   const router = useRouter();
   const itemId = paramToStr(router.query.itemId);
 
@@ -84,23 +79,22 @@ function IndexPage() {
     [router, itemId]
   );
 
-  const { data: itemsByCategory } = useSWR<[string, TItem[]][]>(
+  const { data: itemOptions, error } = useSWR(
     "/api/v1/items?grouping=true",
-    fetcher
-  );
-
-  const itemOptions: GroupOption[] = React.useMemo(
-    () =>
-      itemsByCategory == null
+    async (key: string) => {
+      const data = await fetcher<[string, TItem[]][]>(key);
+      return data == null
         ? []
-        : itemsByCategory.map(([cat, items]) => ({
-            label: cat,
-            options: items.map((item) => ({
-              label: `${item.name} (${toDisplayId(item.id)})`,
-              value: item.id,
-            })),
-          })),
-    [itemsByCategory]
+        : data.map(
+            ([cat, items]): GroupOption => ({
+              label: cat,
+              options: items.map((item) => ({
+                label: `${item.name} (${toDisplayId(item.id)})`,
+                value: item.id,
+              })),
+            })
+          );
+    }
   );
 
   const selectedOption = React.useMemo(() => {
@@ -113,48 +107,44 @@ function IndexPage() {
     return undefined;
   }, [itemId, itemOptions]);
 
-  const { data: recipes } = useSWR<Recipes>(
-    `/api/v1/item/${itemId}/recipes?producing=true&for_item=true&for_building=true`,
-    fetcher
+  const { data: recipesProducingData } = useSWR(
+    [itemId, `/api/v1/item/${itemId}/recipes/producing`],
+    async ([itemId, key]) => {
+      const data = itemId != null ? await fetcher<TRecipe[]>(key) : [];
+      return data?.map((recipe) => createRecipeData(itemId ?? "", recipe));
+    }
   );
 
-  const recipesProducingData = React.useMemo(
-    () =>
-      recipes?.recipesProducing?.map((recipe) =>
-        createRecipeData(itemId ?? "", recipe)
-      ) ?? [],
-    [itemId, recipes?.recipesProducing]
+  const { data: recipesForItemData } = useSWR(
+    [itemId, `/api/v1/item/${itemId}/recipes/using_for_item`],
+    async ([itemId, key]) => {
+      const data = itemId != null ? await fetcher<TRecipe[]>(key) : [];
+      return createRecipesForItemData(itemId ?? "", data);
+    }
   );
 
-  const recipesForItemData = React.useMemo(
-    () => createRecipesForItemData(itemId ?? "", recipes?.recipesForItem),
-    [itemId, recipes?.recipesForItem]
+  const { data: recipesForBuildingData } = useSWR(
+    [itemId, `/api/v1/item/${itemId}/recipes/using_for_building`],
+    async ([itemId, key]) => {
+      const data = itemId != null ? await fetcher<TRecipe[]>(key) : [];
+      return createRecipesForBuildingData(itemId ?? "", data);
+    }
   );
 
-  const recipesForBuildingData = React.useMemo(
-    () =>
-      createRecipesForBuildingData(itemId ?? "", recipes?.recipesForBuilding),
-    [itemId, recipes?.recipesForBuilding]
+  const { data: milestonesData } = useSWR(
+    [itemId, `/api/v1/item/${itemId}/milestones`],
+    async ([itemId, key]) => {
+      const data = itemId != null ? await fetcher<TCondition[]>(key) : [];
+      return createMilestonesData(itemId ?? "", data);
+    }
   );
 
-  const { data: milestones } = useSWR<TCondition[]>(
-    `/api/v1/item/${itemId}/milestones`,
-    fetcher
-  );
-
-  const milestonesData = React.useMemo(
-    () => createMilestonesData(itemId ?? "", milestones),
-    [itemId, milestones]
-  );
-
-  const { data: researches } = useSWR<TCondition[]>(
-    `/api/v1/item/${itemId}/researches`,
-    fetcher
-  );
-
-  const researchesData = React.useMemo(
-    () => createResearchesData(itemId ?? "", researches),
-    [itemId, researches]
+  const { data: researchesData } = useSWR(
+    [itemId, `/api/v1/item/${itemId}/researches`],
+    async ([itemId, key]) => {
+      const data = itemId != null ? await fetcher<TCondition[]>(key) : [];
+      return createResearchesData(itemId ?? "", data);
+    }
   );
 
   return (
@@ -184,7 +174,13 @@ function IndexPage() {
         <h2 className="text-2xl font-semibold">作成レシピ</h2>
       </div>
 
-      {recipesProducingData.length > 0 ? (
+      {recipesProducingData == null ? (
+        <p className="col-span-full text-gray-500">データ読み込み中...</p>
+      ) : recipesProducingData.length == 0 ? (
+        <p className="col-span-full text-gray-500">
+          表示する項目はありません。
+        </p>
+      ) : (
         <>
           <div className="recipes-producing-table">
             {recipesProducingData.map((recipe, index) => (
@@ -200,8 +196,6 @@ function IndexPage() {
               .join("\n")}\n`}
           ></textarea>
         </>
-      ) : (
-        <p className="col-span-2 text-gray-500">表示する項目はありません。</p>
       )}
 
       <DataTableWithTitle
