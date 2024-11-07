@@ -55,6 +55,12 @@ def items():
     return jsonify(items)
 
 
+@app.get('/api/v1/recipes')
+def recipes():
+    recipes = Recipe.query.all()
+    return jsonify([recipe.to_dict() for recipe in recipes])
+
+
 @app.get('/api/v1/item/<string:item_id>/recipes/producing')
 def recipes_producing(item_id: str):
     recipes = (Recipe.query.join(RecipeItem)
