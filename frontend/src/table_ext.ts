@@ -184,7 +184,7 @@ export const createRecipesForItemData = (
     const ingredient = RecipeUtil.findIngredient(recipe, itemId);
     const product = recipe.products[0];
     const columns = [
-      ItemUtil.getTypeName(product.item!),
+      ItemUtil.getKindName(product.item!),
       TagUtil.getLink(recipe.name, recipe.wikiLink),
       TagUtil.getSmallImageLink(product.item!),
       TagUtil.amountToStr(ingredient?.amount) ?? "",
