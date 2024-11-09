@@ -1,16 +1,17 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Select, { GroupBase } from "react-select";
-import useSWR, { fetcher } from "@/api";
+import useSWR from "swr";
+import Select from "react-select";
 import {
   Option,
-  GroupOption,
   TCondition,
-  ItemUtil,
-  TItem,
   TRecipe,
-} from "@/types";
-import { TableUtil, TTableData } from "@/table";
+  TableUtil,
+  TTableData,
+  useItemOptions,
+  findSelectedItem,
+  fetcher,
+} from "@/index";
 import {
   createRecipeData,
   createRecipesForBuildingData,
@@ -72,33 +73,11 @@ function ItemPage() {
     [router, itemId]
   );
 
-  const { data: itemOptions } = useSWR(
-    "/api/v1/items?grouping=true",
-    async (key: string) => {
-      const data = await fetcher<[string, TItem[]][]>(key);
-      return data == null
-        ? []
-        : data.map(
-            ([cat, items]): GroupOption => ({
-              label: cat,
-              options: items.map((item) => ({
-                label: ItemUtil.getFullName(item),
-                value: item.id,
-              })),
-            })
-          );
-    }
+  const { itemOptions } = useItemOptions();
+  const selectedOption = React.useMemo(
+    () => findSelectedItem(itemId, itemOptions),
+    [itemId, itemOptions]
   );
-
-  const selectedOption = React.useMemo(() => {
-    for (const { options } of itemOptions ?? []) {
-      const option = options.find((x) => x.value === itemId);
-      if (option != null) {
-        return option;
-      }
-    }
-    return undefined;
-  }, [itemId, itemOptions]);
 
   const { data: recipesProducingData } = useSWR(
     [itemId, `/api/v1/item/${itemId}/recipes/producing`],
@@ -147,7 +126,7 @@ function ItemPage() {
       </div>
 
       <div className="mt-6 col-span-full">
-        <Select<Option, false, GroupBase<Option>>
+        <Select<Option, false>
           id="item-select"
           options={itemOptions}
           value={selectedOption}
