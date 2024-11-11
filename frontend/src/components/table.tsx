@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import DOMPurify from "dompurify";
 import _ from "lodash";
 import {
@@ -37,7 +37,8 @@ export const Tag: React.FC<{ tag: TTag | string }> = ({ tag }) => {
   if (_.isString(tag)) {
     return <Content content={tag} />;
   } else if (TagUtil.isTextTag(tag)) {
-    return <Content {...tag} />;
+    const attr: CSSProperties = { fontSize: tag.size };
+    return <Content attr={attr} {...tag} />;
   } else if (TagUtil.isImageTag(tag)) {
     const { refer, size = 20 } = tag;
     return (
@@ -183,7 +184,7 @@ export const TableData: React.FC<{ data: TTableData }> = ({ data }) => {
   }
 
   return (
-    <table>
+    <table className="data-table">
       {htmlHeaders.length > 0 ? <thead>{htmlHeaders}</thead> : null}
       {htmlRows.length > 0 ? <tbody>{htmlRows}</tbody> : null}
       {htmlFooters.length > 0 ? <tfoot>{htmlFooters}</tfoot> : null}

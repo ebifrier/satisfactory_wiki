@@ -47,6 +47,12 @@ td {
   }
 }
 
+.data-table {
+  thead td {
+    background: #eee;
+  }
+}
+
 textarea {
   min-height: 6rem;
 }
@@ -55,4 +61,8 @@ textarea {
   table + table {
     margin-top: 1rem;
   }
+}
+
+.recipe-item + .recipe-item {
+  margin-left: 0.1rem;
 }
