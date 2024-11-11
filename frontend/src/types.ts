@@ -63,6 +63,44 @@ export class BuildingUtil {
     const cat = category != "特殊" ? category : "スペシャル";
     return `建築物/${cat}#${jpwikiId}`;
   };
+
+  static getAreaSize = (buildingId: string): number => {
+    switch (buildingId) {
+      case "Smelter":
+        return 45;
+      case "Foundry":
+        return 90;
+      case "Constructor":
+        return 78; // 78.21;
+      case "Assembler":
+        return 150;
+      case "Manufacturer":
+        return 360;
+      case "Refinery":
+        return 200;
+      case "Blender":
+        return 288;
+      case "Particle_Accelerator":
+        return 912;
+      case "Converter":
+        return 256;
+      case "Quantum_Encoder":
+        return 1056;
+
+      case "Biomass_Burner":
+        return 64;
+      case "Coal-Powered_Generator":
+        return 260;
+      case "Fuel-Powered_Generator":
+        return 400;
+      case "Nuclear_Power_Plant":
+        return 1548;
+      case "Alien_Power_Augmenter":
+        return 784;
+    }
+
+    throw new Error(`${buildingId} is unknown building`);
+  };
 }
 
 export type TConditionItem = {
