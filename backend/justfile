@@ -1,0 +1,24 @@
+set shell := ["powershell.exe", "-c"]
+pwd := `(Get-Location).Path`
+
+create-venv:
+  @if (!(Test-Path -Path ".venv")) { \
+    python -m venv .venv \
+  }
+
+# makeはコマンド単位で環境が分割されるため、このコマンドは効果が持続しません。
+venv:
+	./.venv/Scripts/activate
+
+run:
+  $env:PYTHONPATH="{{ pwd }}"; \
+  flask --debug run
+
+db-init:
+	$env:PYTHONPATH="{{ pwd }}"; \
+	flask db init; \
+	flask db migrate -m "Initial migration."; \
+	flask db upgrade
+
+db-clear:
+	rm -rf migrations satisfactory.db
