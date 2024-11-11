@@ -7,6 +7,7 @@ from sqlalchemy import orm, asc, desc
 
 from models import db, Item, Building, Recipe, RecipeItem, Condition, ConditionItem
 from seeddata import make_seeddata
+from linerprog import ProductionPlanner
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -131,6 +132,40 @@ def research(item_id: str):
         .all())
 
     return jsonify([research.to_dict() for research in researches])
+
+
+@app.get('/api/v1/planner')
+def planner():
+    def split_product(value: str) -> tuple[str, float]:
+        index = value.find(':')
+        if index >= 0:
+            return value[:index].strip(), float(value[index+1:])
+        else:
+            return value.strip(), 100
+
+    recipes_str = request.args.get('recipes', '')
+    recipes_ids = [id.strip() for id in recipes_str.split(',')]
+
+    products_str = request.args.get('products', '')
+    products = [split_product(id) for id in products_str.split(',')]
+
+    ingredients_str = request.args.get('ingredients', '')
+    if ingredients_str:
+        ingredients = [id.strip() for id in ingredients_str.split(',')]
+    else:
+        ingredients = [item.id for item in db.session.query(Item.id)
+                       .filter(Item.category == '鉱石類').all()]
+
+    planner = ProductionPlanner(recipes_ids, products, ingredients)
+    net, consum, power = planner.solve()
+    return jsonify({
+        'consume': consum,
+        'power': power,
+        'net': net,
+        'buildings': planner.get_building_counts(),
+        'recipes': planner.get_recipe_counts(),
+        'ingredients': ingredients,
+    })
 
 
 if __name__ == '__main__':
