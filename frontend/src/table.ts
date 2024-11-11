@@ -8,6 +8,7 @@ export interface TTag {
 
 export interface TTextTag extends TTag {
   content: string;
+  size?: number;
 }
 
 export interface TImageTag extends TTag {
@@ -104,7 +105,11 @@ export class TagUtil {
     if (_.isString(tag)) {
       return tag;
     } else if (TagUtil.isTextTag(tag)) {
-      return tag.content;
+      if (tag.size != null) {
+        return `&size(${tag.size}){${tag.content}};`;
+      } else {
+        return tag.content;
+      }
     } else if (TagUtil.isImageTag(tag)) {
       const { size = 20 } = tag;
       return `&ref(Ref_img/${tag.refer},nolink,${size}x${size})`;
@@ -147,18 +152,21 @@ export class TableUtil {
     (column as TTableColumn)?.tags != null;
 
   static newColumn = (
-    tag: (TTag | string) | (TTag | string)[] | TTableColumn
+    tag: (TTag | string) | (TTag | string)[] | TTableColumn,
+    { type, attr }: { type?: string; attr?: CSSProperties } = {}
   ): TTableColumn => {
     return this.isColumn(tag)
       ? tag
       : _.isArray(tag)
-      ? { tags: tag }
+      ? { tags: tag, type, attr }
       : {
           tags: [tag],
           type:
-            tag === this.COLUMN_MERGE_RIGHT || tag === this.COLUMN_MERGE_UP
-              ? tag
+            type ??
+            (tag === this.COLUMN_MERGE_RIGHT || tag === this.COLUMN_MERGE_UP)
+              ? (tag as string)
               : undefined,
+          attr,
         };
   };
 
