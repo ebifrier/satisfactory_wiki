@@ -127,7 +127,6 @@ function ItemPage() {
 
       <div className="mt-6 col-span-full">
         <Select<Option, false>
-          id="item-select"
           options={itemOptions}
           value={selectedOption}
           onChange={(option) => setItemId(option?.value)}

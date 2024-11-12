@@ -100,7 +100,7 @@ export const RecipeSelection: React.FC<{
       className="p-2 mt-3 border-2 border-dashed rounded-lg min-h-[100px] bg-gray-100"
     >
       <h2 className="flex font-semibold mb-3">
-        <p className="flex-none p-1 inline-block">名前:</p>
+        <p className="flex-none p-1 my-auto inline-block">名前:</p>
         <input
           type="text"
           value={name}

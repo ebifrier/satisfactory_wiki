@@ -96,9 +96,7 @@ export class TagUtil {
       return undefined;
     }
 
-    const text2 = minute.toFixed(2);
-    const text3 = minute.toFixed(3);
-    return `${text2}0` === text3 ? text2 : text3;
+    return minute.toFixed(2);
   };
 
   static toWIKI = (tag: TTag | string): string => {
@@ -206,13 +204,16 @@ export class TableUtil {
     return `|${columns.join("|")}|`;
   };
 
-  static dataToWIKI = (data: TTableData): string => {
+  static dataToWIKI = (data?: TTableData): string => {
+    if (data == null) {
+      return "";
+    }
+
     const rows = data.rows.map((row) => this.rowToWIKI(row));
     const pre = data.wikiPreLines?.join("\n") ?? "";
     const post = data.wikiPostLines?.join("\n") ?? "";
     const preNL = pre.length > 0 ? "\n" : "";
     const postNL = post.length > 0 ? "\n" : "";
-
     return `${pre}${preNL}${rows.join("\n")}${postNL}${post}`;
   };
 }
