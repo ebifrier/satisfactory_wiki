@@ -1,49 +1,45 @@
 import React from "react";
 import useSWR from "swr";
-import Select from "react-select";
 import { DndProvider, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import * as Icon from "@heroicons/react/24/outline";
 import {
-  Option,
   TRecipe,
   fetcher,
+  useAppDispatch,
+  useAppSelector,
   useItemOptions,
-  findSelectedItem,
   TTableData,
   TableUtil,
 } from "@/index";
 import { TableData } from "@/components";
-import {
-  TRecipeSelection,
-  TProductAmount,
-  RecipeSelectionUtil,
-  createCompChartData,
-  executeCompChart,
-  ProductAmountUtil,
-} from "./_compchartTypes";
+import { createCompChartData, executeCompChart } from "./_compchartTypes";
 import {
   ItemTypes,
   DraggableRecipe,
   RecipeSelection,
-} from "./_compchartComponents";
+} from "./_recipeSelection";
+import { ProductAmountTable } from "./_productAmount";
+import { TRecipeSelection, actions } from "./_slice";
 
+//
 // 範囲外のドロップエリア
+//
 const OutsideDropArea: React.FC<
   React.PropsWithChildren<
     Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop"> & {
-      onDrop: (recipe: TRecipe) => void;
+      onDrop: (recipe: TRecipe, selIndex?: number) => void;
     }
   >
 > = ({ children, onDrop, ...args }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [, drop] = useDrop(() => ({
     accept: ItemTypes.RECIPE,
-    drop: (item: { recipe: TRecipe }, monitor) => {
+    drop: (item: { recipe: TRecipe; selIndex?: number }, monitor) => {
       if (monitor.didDrop()) {
         return;
       }
-      onDrop(item.recipe);
+      onDrop(item.recipe, item.selIndex);
     },
   }));
 
@@ -87,8 +83,14 @@ const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
   }));
 };
 
+//
 // メインコンポーネント
+//
 const RecipePage: React.FC = () => {
+  const { recipeSels, productAmounts } = useAppSelector(
+    (state) => state.compChart
+  );
+  const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = React.useState<string>("");
   const { data: recipes } = useSWR<TRecipe[]>("/api/v1/recipes", fetcher);
   const { itemOptions, data: itemsByGroup } = useItemOptions();
@@ -96,66 +98,37 @@ const RecipePage: React.FC = () => {
     () => itemsByGroup?.map(([, items]) => items)?.flat(),
     [itemsByGroup]
   );
-
-  const [recipeSels, setRecipeSels] = React.useState<TRecipeSelection[]>([
-    { name: "", recipes: [] },
-  ]);
-  const [productAmounts, setProductAmounts] = React.useState<TProductAmount[]>([
-    { amount: 100, itemId: "Ficsite_Ingot" },
-    { amount: 0, itemId: "Bauxite" },
-  ]);
   const [chartData, setChartData] = React.useState<TTableData>();
 
   React.useEffect(() => {
     if (recipes == null) return;
-    setRecipeSels(getDefaultRecipeSels(recipes));
-  }, [recipes]);
+    dispatch(actions.setRecipeSels(getDefaultRecipeSels(recipes)));
+  }, [dispatch, recipes]);
 
   // 検索ワードによるフィルタリング
-  const filteredRecipes = React.useMemo(
-    () =>
-      recipes?.filter(
-        (recipe) =>
-          recipe.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ),
-    [recipes, searchTerm]
-  );
-
-  const productOptions = React.useMemo(
-    () =>
-      productAmounts.map((product) =>
-        findSelectedItem(product.itemId, itemOptions)
-      ),
-    [productAmounts, itemOptions]
-  );
-
-  const handleDropOutside = React.useCallback((recipe: TRecipe) => {
-    setRecipeSels((prev) =>
-      prev.map((rs) => RecipeSelectionUtil.removeRecipe(rs, recipe))
+  const FilteredDraggableRecipes = React.useMemo(() => {
+    const filteredRecipes = recipes?.filter(
+      (recipe) =>
+        recipe.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, []);
 
-  const handleSetRecipeSel = React.useCallback(
-    (index: number, recipeSel?: TRecipeSelection, insert?: boolean) =>
-      setRecipeSels((prev) =>
-        RecipeSelectionUtil.updateSel(prev, index, recipeSel, insert)
-      ),
-    []
-  );
+    return (
+      <>
+        {filteredRecipes?.map((recipe) => (
+          <DraggableRecipe key={recipe.id} recipe={recipe} full={true} />
+        ))}
+      </>
+    );
+  }, [recipes, searchTerm]);
 
-  const handleSetProductAmount = React.useCallback(
-    (product: TProductAmount, index: number) =>
-      setProductAmounts((prev) =>
-        prev.map((pd, i) => (i == index ? product : pd))
-      ),
-    []
-  );
-
-  const handleDeleteProductAmounts = React.useCallback(
-    (index: number) =>
-      setProductAmounts((prev) => ProductAmountUtil.remove(prev, index)),
-    []
+  const handleDropOutside = React.useCallback(
+    (recipe: TRecipe, selIndex?: number) => {
+      if (selIndex != null) {
+        dispatch(actions.deleteRecipe({ index: selIndex, recipe }));
+      }
+    },
+    [dispatch]
   );
 
   const handleCompChart = React.useCallback(async () => {
@@ -168,11 +141,11 @@ const RecipePage: React.FC = () => {
     <DndProvider backend={HTML5Backend}>
       <OutsideDropArea
         onDrop={handleDropOutside}
-        className="grid grid-cols-2 gap-4 bg-white m-4"
+        className="grid grid-cols-2 gap-4 max-w-6xl bg-white mx-auto my-4"
       >
         {/* 左側: レシピ一覧と検索フィルター */}
         <div className="p-4 flex flex-col" style={{ maxHeight: "90vh" }}>
-          <h2 className="flex-none text-2xl font-bold mb-3">レシピ一覧</h2>
+          <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
           <input
             type="text"
             placeholder="検索..."
@@ -180,11 +153,7 @@ const RecipePage: React.FC = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full flex-none p-3 border rounded-lg mb-3"
           />
-          <div className="flex-1 overflow-auto">
-            {filteredRecipes?.map((recipe) => (
-              <DraggableRecipe key={recipe.id} recipe={recipe} full={true} />
-            ))}
-          </div>
+          <div className="flex-1 overflow-auto">{FilteredDraggableRecipes}</div>
         </div>
 
         {/* 右側: 使用するレシピのドロップエリア */}
@@ -195,64 +164,25 @@ const RecipePage: React.FC = () => {
               key={index}
               index={index}
               recipeSel={recipeSel}
-              setRecipeSel={handleSetRecipeSel}
               hasDelete={recipeSels.length > 1}
             />
           ))}
 
-          <h2 className="flex-none text-2xl font-bold mt-4 mb-4">生産物一覧</h2>
-          <table>
-            <thead>
-              <tr>
-                <td className="text-center">生産物</td>
-                <td className="text-center">生産個数</td>
-                <td className="text-center">削除</td>
-              </tr>
-            </thead>
-            <tbody>
-              {productAmounts.map((product, index) => (
-                <tr key={index}>
-                  <td>
-                    <Select<Option, false>
-                      options={itemOptions}
-                      value={productOptions[index]}
-                      onChange={(option) =>
-                        handleSetProductAmount(
-                          { ...product, itemId: option?.value },
-                          index
-                        )
-                      }
-                      isSearchable={true}
-                      className="sm:text-sm"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      className="text-right"
-                      min={0}
-                      value={product.amount}
-                      onChange={(ev) =>
-                        handleSetProductAmount(
-                          { ...product, amount: parseInt(ev.target.value) },
-                          index
-                        )
-                      }
-                    />
-                  </td>
-                  <td className="text-center">
-                    <button
-                      disabled={productAmounts.length <= 1}
-                      className="size-6 text-red-500 disabled:text-gray-200"
-                      onClick={() => handleDeleteProductAmounts(index)}
-                    >
-                      <Icon.TrashIcon />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <h2 className="flex-none text-2xl font-bold mt-4 mb-1">
+            生産物一覧
+            <span className="float-right font-normal">
+              <button
+                className="size-6 text-blue-400 align-bottom"
+                onClick={() => dispatch(actions.addProductAmount())}
+              >
+                <Icon.ArrowDownOnSquareIcon />
+              </button>
+            </span>
+          </h2>
+          <ProductAmountTable
+            productAmounts={productAmounts}
+            itemOptions={itemOptions}
+          />
 
           {/* <Select<Option, true>
             options={itemOptions}
@@ -289,7 +219,7 @@ const RecipePage: React.FC = () => {
           )}
 
           <textarea
-            className="w-full h-full border border-gray-500 focus:border-blue-500"
+            className="w-full border border-gray-500 focus:border-blue-500"
             wrap="off"
             placeholder="placeholder"
             value={`${TableUtil.dataToWIKI(chartData)}\n`}

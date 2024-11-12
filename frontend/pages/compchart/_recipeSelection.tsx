@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import * as Icon from "@heroicons/react/24/outline";
-import { TRecipe } from "@/types";
-import { TRecipeSelection, RecipeSelectionUtil } from "./_compchartTypes";
+import { useAppDispatch, TRecipe } from "@/index";
+import { TRecipeSelection, actions } from "./_slice";
 
 export const ItemTypes = {
   RECIPE: "recipe",
@@ -10,12 +10,16 @@ export const ItemTypes = {
 
 // ドラッグ可能なレシピコンポーネント
 export const DraggableRecipe: React.FC<
-  React.HTMLAttributes<HTMLDivElement> & { recipe: TRecipe; full: boolean }
-> = ({ recipe, full, className, ...args }) => {
+  React.HTMLAttributes<HTMLDivElement> & {
+    recipe: TRecipe;
+    full: boolean;
+    selIndex?: number;
+  }
+> = ({ recipe, full, selIndex, className, ...args }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [, drag] = useDrag(() => ({
     type: ItemTypes.RECIPE,
-    item: { recipe },
+    item: { recipe, selIndex },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -47,18 +51,12 @@ export const DraggableRecipe: React.FC<
   );
 };
 
-export type SetRecipeSelType = (
-  index: number,
-  recipe?: TRecipeSelection,
-  insert?: boolean
-) => void;
-
 export const RecipeSelection: React.FC<{
   index: number;
   recipeSel: TRecipeSelection;
-  setRecipeSel: SetRecipeSelType;
   hasDelete?: boolean;
-}> = ({ index, recipeSel, setRecipeSel, hasDelete }) => {
+}> = ({ index, recipeSel, hasDelete }) => {
+  const dispatch = useAppDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
   const [, drop] = useDrop(
     () => ({
@@ -68,7 +66,7 @@ export const RecipeSelection: React.FC<{
           return;
         }
 
-        setRecipeSel(index, RecipeSelectionUtil.addRecipe(recipeSel, recipe));
+        dispatch(actions.addRecipe({ index, recipe }));
       },
     }),
     [recipeSel]
@@ -78,26 +76,19 @@ export const RecipeSelection: React.FC<{
   const { recipes, name } = recipeSel;
   const handleName = React.useCallback(
     (ev: ChangeEvent<HTMLInputElement>) =>
-      setRecipeSel(index, { ...recipeSel, name: ev.target.value }),
-    [index, recipeSel, setRecipeSel]
+      dispatch(
+        actions.updateRecipeSel({
+          index,
+          recipeSel: { ...recipeSel, name: ev.target.value },
+        })
+      ),
+    [dispatch, index, recipeSel]
   );
-
-  const handleInsertSelUp = React.useCallback(() => {
-    setRecipeSel(index, { name: "", recipes: [] }, true);
-  }, [index, setRecipeSel]);
-
-  const handleInsertSelDown = React.useCallback(() => {
-    setRecipeSel(index + 1, { name: "", recipes: [] }, true);
-  }, [index, setRecipeSel]);
-
-  const handleDeleteSel = React.useCallback(() => {
-    setRecipeSel(index, undefined);
-  }, [index, setRecipeSel]);
 
   return (
     <div
       ref={ref}
-      className="p-2 mt-3 border-2 border-dashed rounded-lg min-h-[100px] bg-gray-100"
+      className="p-2 mt-2 border-2 border-dashed rounded-lg min-h-[100px] bg-gray-100"
     >
       <h2 className="flex font-semibold mb-3">
         <p className="flex-none p-1 my-auto inline-block">名前:</p>
@@ -109,20 +100,20 @@ export const RecipeSelection: React.FC<{
         />
         <p className="flex-none inline-block ml-auto">
           <button
-            className="inline-block ml-1 size-6 align-middle text-blue-500"
-            onClick={handleInsertSelUp}
+            className="inline-block ml-1 size-6 align-middle text-blue-400"
+            onClick={() => dispatch(actions.addRecipeSel({ index }))}
           >
             <Icon.ArrowUpOnSquareIcon />
           </button>
           <button
-            className="inline-block ml-1 size-6 align-middle text-blue-500"
-            onClick={handleInsertSelDown}
+            className="inline-block ml-1 size-6 align-middle text-blue-400"
+            onClick={() => dispatch(actions.addRecipeSel({ index: index + 1 }))}
           >
             <Icon.ArrowDownOnSquareIcon />
           </button>
           <button
-            className="inline-block ml-1 size-6 align-middle text-red-500 disabled:text-gray-300"
-            onClick={handleDeleteSel}
+            className="inline-block ml-1 size-6 align-middle text-red-400 disabled:text-gray-300"
+            onClick={() => dispatch(actions.deleteRecipeSel({ index }))}
             disabled={hasDelete != null && !hasDelete}
           >
             <Icon.TrashIcon />
@@ -137,6 +128,7 @@ export const RecipeSelection: React.FC<{
             key={recipe.id}
             recipe={recipe}
             full={false}
+            selIndex={index}
             className="recipe-item"
           />
         ))

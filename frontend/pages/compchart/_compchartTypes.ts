@@ -2,22 +2,12 @@ import _ from "lodash";
 import {
   fetcher,
   TItem,
-  TRecipe,
   BuildingUtil,
   TableUtil,
   TTableData,
   TTableColumn,
 } from "@/index";
-
-export type TRecipeSelection = {
-  name: string;
-  recipes: TRecipe[];
-};
-
-export type TProductAmount = {
-  itemId?: string;
-  amount: number;
-};
+import { TRecipeSelection, TProductAmount } from "./_slice";
 
 type StringToValueDic = { [key: string]: number };
 
@@ -30,54 +20,6 @@ type TCompChart = {
   power: number;
   name: string;
 };
-
-export class RecipeSelectionUtil {
-  static addRecipe = (
-    recipeSel: TRecipeSelection,
-    recipe: TRecipe
-  ): TRecipeSelection => {
-    const { recipes } = recipeSel;
-    return recipes.find((r) => r.id === recipe.id)
-      ? recipeSel
-      : { ...recipeSel, recipes: [...recipes, { ...recipe }] };
-  };
-
-  static removeRecipe = (
-    recipeSel: TRecipeSelection,
-    recipe: TRecipe
-  ): TRecipeSelection => {
-    const { recipes } = recipeSel;
-    return { ...recipeSel, recipes: recipes.filter((r) => r !== recipe) };
-  };
-
-  static updateSel = (
-    recipeSels: TRecipeSelection[],
-    index: number,
-    recipeSel?: TRecipeSelection,
-    insert?: boolean
-  ): TRecipeSelection[] =>
-    recipeSel == null
-      ? recipeSels.toSpliced(index, 1)
-      : insert === true
-      ? recipeSels.toSpliced(index, 0, recipeSel)
-      : recipeSels.map((rs, i) => (i == index ? recipeSel : rs));
-}
-
-export class ProductAmountUtil {
-  static add = (
-    productAmounts: TProductAmount[],
-    value: TProductAmount
-  ): TProductAmount[] => {
-    return productAmounts.concat({ ...value });
-  };
-
-  static remove = (
-    productAmounts: TProductAmount[],
-    index: number
-  ): TProductAmount[] => {
-    return productAmounts.toSpliced(index, 1);
-  };
-}
 
 const filterIngredients = (charts: TCompChart[]) => {
   const ingredients = [...charts[0].ingredients];
