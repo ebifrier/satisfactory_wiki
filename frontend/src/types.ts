@@ -67,36 +67,36 @@ export class BuildingUtil {
   static getAreaSize = (buildingId: string): number => {
     switch (buildingId) {
       case "Smelter":
-        return 45;
+        return 45 / 64;
       case "Foundry":
-        return 90;
+        return 90 / 64;
       case "Constructor":
-        return 78; // 78.21;
+        return 78.21 / 64;
       case "Assembler":
-        return 150;
+        return 150 / 64;
       case "Manufacturer":
-        return 360;
+        return 360 / 64;
       case "Refinery":
-        return 200;
+        return 200 / 64;
       case "Blender":
-        return 288;
+        return 288 / 64;
       case "Particle_Accelerator":
-        return 912;
+        return 912 / 64;
       case "Converter":
-        return 256;
+        return 256 / 64;
       case "Quantum_Encoder":
-        return 1056;
+        return 1056 / 64;
 
       case "Biomass_Burner":
-        return 64;
+        return 64 / 64;
       case "Coal-Powered_Generator":
-        return 260;
+        return 260 / 64;
       case "Fuel-Powered_Generator":
-        return 400;
+        return 400 / 64;
       case "Nuclear_Power_Plant":
-        return 1548;
+        return 1548 / 64;
       case "Alien_Power_Augmenter":
-        return 784;
+        return 784 / 64;
     }
 
     throw new Error(`${buildingId} is unknown building`);
