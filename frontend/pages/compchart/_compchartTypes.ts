@@ -1,8 +1,7 @@
 import _ from "lodash";
-
 import {
   fetcher,
-  TTextTag,
+  TItem,
   TRecipe,
   BuildingUtil,
   TableUtil,
@@ -64,7 +63,21 @@ export class RecipeSelectionUtil {
       : recipeSels.map((rs, i) => (i == index ? recipeSel : rs));
 }
 
-//export class CompChartUtil {}
+export class ProductAmountUtil {
+  static add = (
+    productAmounts: TProductAmount[],
+    value: TProductAmount
+  ): TProductAmount[] => {
+    return productAmounts.concat({ ...value });
+  };
+
+  static remove = (
+    productAmounts: TProductAmount[],
+    index: number
+  ): TProductAmount[] => {
+    return productAmounts.toSpliced(index, 1);
+  };
+}
 
 const filterIngredients = (charts: TCompChart[]) => {
   const ingredients = [...charts[0].ingredients];
@@ -92,16 +105,20 @@ const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
   );
 };
 
-export const createCompChartData = (charts: TCompChart[]): TTableData => {
+export const createCompChartData = (
+  charts: TCompChart[],
+  items: TItem[]
+): TTableData => {
   if (!charts || charts.length === 0) {
     return { rows: [] };
   }
 
   const ingredients = filterIngredients(charts);
   const ingColumns = ingredients.map(() => TableUtil.newColumn(">"));
-  if (ingColumns.length > 0) {
-    ingColumns.pop();
+  if (ingColumns.length === 0) {
+    return { rows: [] };
   }
+  ingColumns.pop();
 
   const rows = [
     TableUtil.newRow(
@@ -120,17 +137,16 @@ export const createCompChartData = (charts: TCompChart[]): TTableData => {
         ...ingColumns,
         TableUtil.newColumn("必要原料 (個/分)"),
         TableUtil.newColumn("消費電力&br;(MW)"),
-        TableUtil.newColumn([
-          "床面積&br;",
-          { type: "text", content: "(土台換算)", size: 10 } as TTextTag,
-        ]),
+        TableUtil.newColumn("床面積&br;(土台換算)"),
       ],
       TableUtil.ROW_HEADER
     ),
     TableUtil.newRow(
       [
         TableUtil.newColumn("~"),
-        ...ingredients.map((ingId) => TableUtil.newColumn(ingId)),
+        ...ingredients
+          .map((ingId) => items.find((item) => item.id === ingId))
+          .map((item) => TableUtil.newColumn(item?.name ?? "")),
         TableUtil.newColumn("~"),
         TableUtil.newColumn("~"),
         TableUtil.newColumn("~"),
@@ -155,14 +171,21 @@ export const createCompChartData = (charts: TCompChart[]): TTableData => {
 
   for (const { name, buildings, consume, net } of charts) {
     const columns: TTableColumn[] = [TableUtil.newColumn(name)];
+    const toFixed = (value: number) => {
+      return value.toFixed(0);
+      //const text2 = value.toFixed(2);
+      //return text2 === `${text0}.00` ? text0 : text2;
+    };
 
     for (const ingId of ingredients) {
-      const tag = ingId in net && net[ingId] < 0 ? `${-net[ingId]}` : "-";
+      const tag = ingId in net && net[ingId] < 0 ? toFixed(-net[ingId]) : "-";
       columns.push(TableUtil.newColumn(tag));
     }
 
-    columns.push(TableUtil.newColumn(`${consume}`));
-    columns.push(TableUtil.newColumn(`${getBuildingsAreaSize(buildings)}`));
+    columns.push(TableUtil.newColumn(consume.toFixed(0)));
+    columns.push(
+      TableUtil.newColumn(getBuildingsAreaSize(buildings).toFixed(0))
+    );
     rows.push(TableUtil.newRow(columns));
   }
 
@@ -178,13 +201,17 @@ export const executeCompChart = async (
     .map(({ itemId, amount }) => `${itemId}:${amount}`)
     .join(",");
 
+  const ingredients = ["Iron_Ingot"].join(",");
+
   const charts: TCompChart[] = [];
   for (const recipeSel of recipeSels) {
     const recipeIds = recipeSel.recipes.map((r) => r.id).join(",");
     const chart: TCompChart = await fetcher(
-      `/api/v1/planner?recipes=${recipeIds}&products=${productIds}`
+      `/api/v1/planner?recipes=${recipeIds}&products=${productIds}&ingredients=${ingredients}`
     );
     charts.push({ ...chart, name: recipeSel.name });
   }
+
+  console.log(charts);
   return charts;
 };

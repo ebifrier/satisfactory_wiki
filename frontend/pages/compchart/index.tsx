@@ -11,6 +11,7 @@ import {
   useItemOptions,
   findSelectedItem,
   TTableData,
+  TableUtil,
 } from "@/index";
 import { TableData } from "@/components";
 import {
@@ -19,6 +20,7 @@ import {
   RecipeSelectionUtil,
   createCompChartData,
   executeCompChart,
+  ProductAmountUtil,
 } from "./_compchartTypes";
 import {
   ItemTypes,
@@ -53,11 +55,47 @@ const OutsideDropArea: React.FC<
   );
 };
 
+const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
+  const findRecipe = (recipeId: string): TRecipe => {
+    return recipes.find((r) => r.id === recipeId)!;
+  };
+
+  const recipesArray = [
+    ["Iron_Ingot", "Iron_Plate", "Iron_Rod", "Screw", "Reinforced_Iron_Plate"],
+    ["Cast_Screw", "Iron_Plate", "Reinforced_Iron_Plate"],
+    ["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"],
+    ["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"],
+    ["Iron_Plate", "Stitched_Iron_Plate", "Wire"],
+
+    /*["Caterium_Ingot", "Reanimated_SAM", "Ficsite_Ingot_(Caterium)"],
+    ["Pure_Caterium_Ingot", "Reanimated_SAM", "Ficsite_Ingot_(Caterium)"],
+    [
+      "Bauxite_(Caterium)",
+      "Reanimated_SAM",
+      "Ficsite_Ingot_(Aluminum)",
+      "Pure_Aluminum_Ingot",
+      "Electrode_Aluminum_Scrap",
+      "Sloppy_Alumina",
+      "Heavy_Oil_Residue",
+      "Petroleum_Coke",
+    ],*/
+  ];
+
+  return recipesArray.map((recipes) => ({
+    name: "",
+    recipes: recipes.map(findRecipe),
+  }));
+};
+
 // メインコンポーネント
 const RecipePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = React.useState<string>("");
   const { data: recipes } = useSWR<TRecipe[]>("/api/v1/recipes", fetcher);
-  const { itemOptions } = useItemOptions();
+  const { itemOptions, data: itemsByGroup } = useItemOptions();
+  const items = React.useMemo(
+    () => itemsByGroup?.map(([, items]) => items)?.flat(),
+    [itemsByGroup]
+  );
 
   const [recipeSels, setRecipeSels] = React.useState<TRecipeSelection[]>([
     { name: "", recipes: [] },
@@ -70,37 +108,7 @@ const RecipePage: React.FC = () => {
 
   React.useEffect(() => {
     if (recipes == null) return;
-
-    const findRecipe = (recipeId: string): TRecipe => {
-      return recipes.find((r) => r.id === recipeId)!;
-    };
-
-    const cusrecipes = [
-      [
-        findRecipe("Caterium_Ingot"),
-        findRecipe("Reanimated_SAM"),
-        findRecipe("Ficsite_Ingot_(Caterium)"),
-      ],
-      [
-        findRecipe("Pure_Caterium_Ingot"),
-        findRecipe("Reanimated_SAM"),
-        findRecipe("Ficsite_Ingot_(Caterium)"),
-      ],
-      [
-        findRecipe("Bauxite_(Caterium)"),
-        findRecipe("Reanimated_SAM"),
-        findRecipe("Ficsite_Ingot_(Aluminum)"),
-        findRecipe("Pure_Aluminum_Ingot"),
-        findRecipe("Electrode_Aluminum_Scrap"),
-        findRecipe("Sloppy_Alumina"),
-        findRecipe("Heavy_Oil_Residue"),
-        findRecipe("Petroleum_Coke"),
-      ],
-    ];
-
-    setRecipeSels(() =>
-      cusrecipes.map((rs, i) => ({ name: "", recipes: cusrecipes[i] }))
-    );
+    setRecipeSels(getDefaultRecipeSels(recipes));
   }, [recipes]);
 
   // 検索ワードによるフィルタリング
@@ -144,10 +152,17 @@ const RecipePage: React.FC = () => {
     []
   );
 
+  const handleDeleteProductAmounts = React.useCallback(
+    (index: number) =>
+      setProductAmounts((prev) => ProductAmountUtil.remove(prev, index)),
+    []
+  );
+
   const handleCompChart = React.useCallback(async () => {
     const charts = await executeCompChart(recipeSels, productAmounts);
-    setChartData(createCompChartData(charts));
-  }, [recipeSels, productAmounts]);
+    //console.log(createCompChartData(charts, items ?? []));
+    setChartData(createCompChartData(charts, items ?? []));
+  }, [recipeSels, productAmounts, items]);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -174,7 +189,18 @@ const RecipePage: React.FC = () => {
 
         {/* 右側: 使用するレシピのドロップエリア */}
         <div className="p-4 flex flex-col bg-white rounded-lg shadow-md">
-          <h2 className="flex-none text-2xl font-bold mb-4">制作物一覧</h2>
+          <h2 className="flex-none text-2xl font-bold">使用レシピ一覧</h2>
+          {recipeSels.map((recipeSel, index) => (
+            <RecipeSelection
+              key={index}
+              index={index}
+              recipeSel={recipeSel}
+              setRecipeSel={handleSetRecipeSel}
+              hasDelete={recipeSels.length > 1}
+            />
+          ))}
+
+          <h2 className="flex-none text-2xl font-bold mt-4 mb-4">生産物一覧</h2>
           <table>
             <thead>
               <tr>
@@ -197,6 +223,7 @@ const RecipePage: React.FC = () => {
                         )
                       }
                       isSearchable={true}
+                      className="sm:text-sm"
                     />
                   </td>
                   <td>
@@ -217,6 +244,7 @@ const RecipePage: React.FC = () => {
                     <button
                       disabled={productAmounts.length <= 1}
                       className="size-6 text-red-500 disabled:text-gray-200"
+                      onClick={() => handleDeleteProductAmounts(index)}
                     >
                       <Icon.TrashIcon />
                     </button>
@@ -226,16 +254,21 @@ const RecipePage: React.FC = () => {
             </tbody>
           </table>
 
-          <h2 className="mt-4 flex-none text-2xl font-bold">使用レシピ一覧</h2>
-          {recipeSels.map((recipeSel, index) => (
-            <RecipeSelection
-              key={index}
-              index={index}
-              recipeSel={recipeSel}
-              setRecipeSel={handleSetRecipeSel}
-              hasDelete={recipeSels.length > 1}
-            />
-          ))}
+          {/* <Select<Option, true>
+            options={itemOptions}
+            isMulti={true}
+            onChange={handleChange}
+            // value={productOptions[index]}
+            // onChange={(option) =>
+            //   handleSetProductAmount(
+            //     { ...product, itemId: option?.value },
+            //     index
+            //   )
+            // }
+            isSearchable={true}
+            closeMenuOnSelect={false}
+            className="sm:text-sm"
+          /> */}
         </div>
 
         <button
@@ -254,6 +287,13 @@ const RecipePage: React.FC = () => {
           ) : (
             <TableData data={chartData} />
           )}
+
+          <textarea
+            className="w-full h-full border border-gray-500 focus:border-blue-500"
+            wrap="off"
+            placeholder="placeholder"
+            value={`${TableUtil.dataToWIKI(chartData)}\n`}
+          ></textarea>
         </div>
       </OutsideDropArea>
     </DndProvider>
