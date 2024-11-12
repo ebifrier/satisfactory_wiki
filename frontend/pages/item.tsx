@@ -18,7 +18,7 @@ import {
   createRecipesForItemData,
   createMilestonesData,
   createResearchesData,
-} from "@/table_ext";
+} from "@/tableExt";
 import { TableData } from "@/components/table";
 
 type DataTableWithTitleProps = {
