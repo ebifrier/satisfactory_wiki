@@ -110,7 +110,7 @@ export class TagUtil {
       }
     } else if (TagUtil.isImageTag(tag)) {
       const { size = 20 } = tag;
-      return `&ref(Ref_img/${tag.refer},nolink,${size}x${size})`;
+      return `&ref(Ref_img/${tag.refer},nolink,${size}x${size});`;
     } else if (TagUtil.isLinkTag(tag)) {
       const { labelTags } = tag;
       const labels = labelTags.map((x) => this.toWIKI(x));
