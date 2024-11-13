@@ -183,12 +183,12 @@ export class TableUtil {
       return "";
     }
     return [
-      attr.background ? `BGCOLOR(${attr.background})` : null,
-      attr.textAlign ? attr.textAlign.toUpperCase() : null,
+      attr.background ? `BGCOLOR(${attr.background}):` : null,
+      attr.textAlign ? `${attr.textAlign.toUpperCase()}:` : null,
       attr.width ? attr.width : null,
     ]
       .filter((x) => x != null)
-      .join(":");
+      .join("");
   };
 
   static columnToWIKI = (column: TTableColumn): string => {
@@ -201,7 +201,7 @@ export class TableUtil {
 
   static rowToWIKI = (row: TTableRow): string => {
     const columns = row.columns.map((column) => this.columnToWIKI(column));
-    return `|${columns.join("|")}|`;
+    return `|${columns.join("|")}|${row.type}`;
   };
 
   static dataToWIKI = (data?: TTableData): string => {
