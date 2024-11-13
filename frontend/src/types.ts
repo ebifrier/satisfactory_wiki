@@ -52,9 +52,9 @@ export type TBuilding = TBase & {
   wikiId: string;
   category: string;
   subcategory: string;
-  power: number;
-  maxInputs: number;
-  maxOutputs: number;
+  power?: number;
+  maxInputs?: number;
+  maxOutputs?: number;
 };
 
 export class BuildingUtil {
