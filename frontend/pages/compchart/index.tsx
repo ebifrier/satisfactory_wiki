@@ -12,7 +12,7 @@ import {
   TTableData,
   TableUtil,
 } from "@/index";
-import { TableData } from "@/components";
+import { PageHead, TableData } from "@/components";
 import { createCompChartData, executeCompChart } from "./_compchartTypes";
 import {
   ItemTypes,
@@ -210,12 +210,18 @@ const RecipePage: React.FC = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
+      <PageHead title="比較表" />
+
       <OutsideDropArea
         onDrop={handleDropOutside}
         className="grid grid-cols-2 gap-4 max-w-6xl bg-white mx-auto my-4"
       >
         {/* 左側: レシピ一覧と検索フィルター */}
-        <div className="p-4 flex flex-col" style={{ maxHeight: "90vh" }}>
+        <div
+          id="main"
+          className="p-4 flex flex-col"
+          style={{ maxHeight: "90vh" }}
+        >
           <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
           <input
             type="text"
