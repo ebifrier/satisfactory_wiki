@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import Link from "next/link";
 import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -20,22 +21,27 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <a href="/">
+          <Link href="/">
             <img
               src="./favicon.png"
               title="logo"
+              alt="logo"
               className="logo-image inline mr-2"
             />
             SATISFACTORY 日本語Wikiツール
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6" style={{ marginTop: "4px" }}>
           {HeaderLinks.map(([title, link]) => (
-            <a href={link} className="text-xl hover:text-gray-300">
+            <Link
+              key={link}
+              href={link}
+              className="text-xl hover:text-gray-300"
+            >
               {title}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -52,12 +58,13 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
       {/* Mobile Menu */}
       <nav className={`${mobileHidden ? "hidden" : ""} bg-gray-700 md:hidden`}>
         {HeaderLinks.map(([title, link]) => (
-          <a
+          <Link
+            key={link}
             href={link}
             className="block px-4 py-2 text-white hover:bg-gray-500"
           >
             {title}
-          </a>
+          </Link>
         ))}
       </nav>
     </header>
