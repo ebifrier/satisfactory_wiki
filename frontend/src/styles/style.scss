@@ -14,7 +14,11 @@ body {
     max-height: 100%;*/
 }
 
-a {
+#main {
+  margin-top: 1rem;
+}
+
+#main a {
   text-decoration-color: #ccc !important;
   text-decoration-line: underline !important;
   text-decoration-style: solid !important;
@@ -23,6 +27,13 @@ a {
 
   &:visited {
     text-decoration-color: #ccc;
+  }
+}
+
+header {
+  .logo-image {
+    height: 1.5rem; // font-2xlと同じサイズ
+    width: auto;
   }
 }
 
