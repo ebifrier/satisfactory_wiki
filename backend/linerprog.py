@@ -22,6 +22,12 @@ class ProductionPlanner:
                              for recipe in recipes]
         self.products = products
         self.ingredients = ingredients
+    
+    def has_product(self, item_id: str) -> bool:
+        for id, _ in self.products:
+            if item_id == id:
+                return True
+        return False
 
     def total_products(self, id: str) -> pulp.LpAffineExpression:
         values = []
@@ -76,7 +82,20 @@ class ProductionPlanner:
         net_productions = self._make_net_productions(prob)
         p_consum, p_power = self._get_powers()
         p_consum += net_productions['Water'] / 120 * 20
-        prob += p_consum
+
+        # 生産対象ではない副産物(valueが0以上)の合計生産量が
+        # 最小になるようにします。
+        values = []
+        for item_id, value in net_productions.items():
+            if self.has_product(item_id):
+                continue
+
+            # up0には max(value, 0) の値が入ります。
+            up0 = pulp.LpVariable(f'up0_{item_id}')
+            prob += up0 >= value
+            prob += up0 >= 0
+            values.append(up0)
+        prob += pulp.lpSum(values)
 
         solver = pulp.PULP_CBC_CMD(gapRel=1e-7)
         prob.solve(solver)
