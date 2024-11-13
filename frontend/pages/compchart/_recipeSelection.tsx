@@ -8,7 +8,9 @@ export const ItemTypes = {
   RECIPE: "recipe",
 };
 
+//
 // ドラッグ可能なレシピコンポーネント
+//
 export const DraggableRecipe: React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
     recipe: TRecipe;

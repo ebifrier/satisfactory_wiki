@@ -21,6 +21,7 @@ import {
 } from "./_recipeSelection";
 import { ProductAmountTable } from "./_productAmount";
 import { TRecipeSelection, actions } from "./_slice";
+import { IngredientMultiSelect } from "./_ingredientMultiSelect";
 
 //
 // 範囲外のドロップエリア
@@ -55,39 +56,105 @@ const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
   const findRecipe = (recipeId: string): TRecipe => {
     return recipes.find((r) => r.id === recipeId)!;
   };
+  const makeRecipes = (recipeIds: string[]): TRecipe[] => {
+    return recipeIds.map((id) => findRecipe(id));
+  };
 
-  const recipesArray = [
-    ["Iron_Ingot", "Iron_Plate", "Iron_Rod", "Screw", "Reinforced_Iron_Plate"],
-    ["Cast_Screw", "Iron_Plate", "Reinforced_Iron_Plate"],
-    ["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"],
-    ["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"],
-    ["Iron_Plate", "Stitched_Iron_Plate", "Wire"],
+  return [
+    // ["Iron_Ingot", "Iron_Plate", "Iron_Rod", "Screw", "Reinforced_Iron_Plate"],
+    // ["Cast_Screw", "Iron_Plate", "Reinforced_Iron_Plate"],
+    // ["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"],
+    // ["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"],
+    // ["Iron_Plate", "Stitched_Iron_Plate", "Wire"],
 
-    /*["Caterium_Ingot", "Reanimated_SAM", "Ficsite_Ingot_(Caterium)"],
-    ["Pure_Caterium_Ingot", "Reanimated_SAM", "Ficsite_Ingot_(Caterium)"],
-    [
-      "Bauxite_(Caterium)",
-      "Reanimated_SAM",
-      "Ficsite_Ingot_(Aluminum)",
-      "Pure_Aluminum_Ingot",
-      "Electrode_Aluminum_Scrap",
-      "Sloppy_Alumina",
-      "Heavy_Oil_Residue",
-      "Petroleum_Coke",
-    ],*/
+    {
+      name: "アルミ通常レシピ",
+      recipes: makeRecipes([
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Aluminum)",
+        "Alumina_Solution",
+        "Aluminum_Scrap",
+        "Aluminum_Ingot",
+        "Silica",
+      ]),
+    },
+    {
+      name: "アルミ代替レシピ",
+      recipes: makeRecipes([
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Aluminum)",
+        "Pure_Aluminum_Ingot",
+        "Electrode_Aluminum_Scrap",
+        "Sloppy_Alumina",
+        "Heavy_Oil_Residue",
+        "Petroleum_Coke",
+      ]),
+    },
+    {
+      name: "カテリウム基本",
+      recipes: makeRecipes([
+        "Caterium_Ingot",
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Caterium)",
+      ]),
+    },
+    {
+      name: "純カテリウムのインゴット",
+      recipes: makeRecipes([
+        "Pure_Caterium_Ingot",
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Caterium)",
+      ]),
+    },
+    {
+      name: "鉱石変換+アルミ通常レシピ",
+      recipes: makeRecipes([
+        "Bauxite_(Caterium)",
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Aluminum)",
+        "Alumina_Solution",
+        "Aluminum_Scrap",
+        "Aluminum_Ingot",
+        "Silica",
+      ]),
+    },
+    {
+      name: "鉱石変換+アルミ代替レシピ",
+      recipes: makeRecipes([
+        "Bauxite_(Caterium)",
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Aluminum)",
+        "Pure_Aluminum_Ingot",
+        "Electrode_Aluminum_Scrap",
+        "Sloppy_Alumina",
+        "Heavy_Oil_Residue",
+        "Petroleum_Coke",
+      ]),
+    },
+    {
+      name: "鉄基本",
+      recipes: makeRecipes([
+        "Iron_Ingot",
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Iron)",
+      ]),
+    },
+    {
+      name: "純鉄のインゴット",
+      recipes: makeRecipes([
+        "Pure_Iron_Ingot",
+        "Reanimated_SAM",
+        "Ficsite_Ingot_(Iron)",
+      ]),
+    },
   ];
-
-  return recipesArray.map((recipes) => ({
-    name: "",
-    recipes: recipes.map(findRecipe),
-  }));
 };
 
 //
 // メインコンポーネント
 //
 const RecipePage: React.FC = () => {
-  const { recipeSels, productAmounts } = useAppSelector(
+  const { recipeSels, productAmounts, ingredients } = useAppSelector(
     (state) => state.compChart
   );
   const dispatch = useAppDispatch();
@@ -132,10 +199,14 @@ const RecipePage: React.FC = () => {
   );
 
   const handleCompChart = React.useCallback(async () => {
-    const charts = await executeCompChart(recipeSels, productAmounts);
-    //console.log(createCompChartData(charts, items ?? []));
+    const charts = await executeCompChart(
+      recipeSels,
+      productAmounts,
+      ingredients
+    );
+    console.log(charts, createCompChartData(charts, items ?? []));
     setChartData(createCompChartData(charts, items ?? []));
-  }, [recipeSels, productAmounts, items]);
+  }, [recipeSels, productAmounts, ingredients, items]);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -184,21 +255,11 @@ const RecipePage: React.FC = () => {
             itemOptions={itemOptions}
           />
 
-          {/* <Select<Option, true>
-            options={itemOptions}
-            isMulti={true}
-            onChange={handleChange}
-            // value={productOptions[index]}
-            // onChange={(option) =>
-            //   handleSetProductAmount(
-            //     { ...product, itemId: option?.value },
-            //     index
-            //   )
-            // }
-            isSearchable={true}
-            closeMenuOnSelect={false}
-            className="sm:text-sm"
-          /> */}
+          <h2 className="flex-none text-2xl font-bold mt-4 mb-1">原料一覧</h2>
+          <IngredientMultiSelect
+            ingredients={ingredients}
+            itemOptions={itemOptions}
+          />
         </div>
 
         <button
@@ -223,6 +284,7 @@ const RecipePage: React.FC = () => {
             wrap="off"
             placeholder="placeholder"
             value={`${TableUtil.dataToWIKI(chartData)}\n`}
+            readOnly
           ></textarea>
         </div>
       </OutsideDropArea>

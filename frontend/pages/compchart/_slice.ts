@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TRecipe } from "@/index";
+import { ActionMeta } from "react-select";
+import { Option, TRecipe } from "@/index";
 
 export type TRecipeSelection = {
   name: string;
@@ -14,6 +15,7 @@ export type TProductAmount = {
 export interface CompChartState {
   recipeSels: TRecipeSelection[];
   productAmounts: TProductAmount[];
+  ingredients: string[];
 }
 
 const makeDefualtRecipeSel = () => ({ name: "", recipes: [] });
@@ -22,6 +24,7 @@ const makeDefualtTProductAmount = () => ({ amount: 100 });
 const initialState: CompChartState = {
   recipeSels: [makeDefualtRecipeSel()],
   productAmounts: [makeDefualtTProductAmount()],
+  ingredients: [],
 };
 
 export const COMPCHART_SLICE_NAME = "compchart";
@@ -135,6 +138,37 @@ const compChartSlice = createSlice({
       }
 
       productAmounts.splice(index, 1);
+    },
+
+    operateIngredients(
+      { ingredients },
+      {
+        payload,
+      }: PayloadAction<{
+        options: readonly Option[];
+        meta?: ActionMeta<Option>;
+      }>
+    ) {
+      const { options, meta } = payload;
+
+      switch (meta?.action) {
+        case "select-option":
+        case undefined:
+          const notIncluded = options
+            .map((option) => option.value)
+            .filter((ingId) => !ingredients.includes(ingId));
+          ingredients.push(...notIncluded);
+          break;
+        case "remove-value":
+          const index = ingredients.indexOf(meta.removedValue.value);
+          if (index >= 0) {
+            ingredients.splice(index, 1);
+          }
+          break;
+        case "clear":
+          ingredients.splice(0, ingredients.length);
+          break;
+      }
     },
   },
 });

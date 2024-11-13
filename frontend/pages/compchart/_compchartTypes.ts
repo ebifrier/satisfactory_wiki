@@ -21,24 +21,6 @@ type TCompChart = {
   name: string;
 };
 
-const filterIngredients = (charts: TCompChart[]) => {
-  const ingredients = [...charts[0].ingredients];
-
-  for (let i = 0; i < ingredients.length; ) {
-    const ingId = ingredients[i];
-    const entry = charts.find(
-      (chart) => ingId in chart.net && chart.net[ingId] < 0
-    );
-    if (entry == null) {
-      ingredients.splice(i, 1);
-    } else {
-      ++i;
-    }
-  }
-
-  return ingredients;
-};
-
 const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
   return _.sum(
     Object.entries(buildings).map(
@@ -55,7 +37,7 @@ export const createCompChartData = (
     return { rows: [] };
   }
 
-  const ingredients = filterIngredients(charts);
+  const ingredients = [...charts[0].ingredients];
   const ingColumns = ingredients.map(() => TableUtil.newColumn(">"));
   if (ingColumns.length === 0) {
     return { rows: [] };
@@ -91,18 +73,17 @@ export const createCompChartData = (
           .map((item) => TableUtil.newColumn(item?.name ?? "")),
         TableUtil.newColumn("~"),
         TableUtil.newColumn("~"),
-        TableUtil.newColumn("~"),
       ],
       TableUtil.ROW_HEADER
     ),
     TableUtil.newRow(
       [
         TableUtil.newColumn("", {
-          attr: { textAlign: "left", width: "180px" },
+          attr: { textAlign: "left", width: 180 },
         }),
         ...ingColumns,
         TableUtil.newColumn("", {
-          attr: { textAlign: "right", width: "60px" },
+          attr: { textAlign: "right", width: 60 },
         }),
         TableUtil.newColumn(">"),
         TableUtil.newColumn("", { attr: { textAlign: "right" } }),
@@ -115,8 +96,6 @@ export const createCompChartData = (
     const columns: TTableColumn[] = [TableUtil.newColumn(name)];
     const toFixed = (value: number) => {
       return value.toFixed(0);
-      //const text2 = value.toFixed(2);
-      //return text2 === `${text0}.00` ? text0 : text2;
     };
 
     for (const ingId of ingredients) {
@@ -136,24 +115,28 @@ export const createCompChartData = (
 
 export const executeCompChart = async (
   recipeSels: TRecipeSelection[],
-  productAmounts: TProductAmount[]
+  productAmounts: TProductAmount[],
+  ingredients: string[]
 ): Promise<TCompChart[]> => {
   const productIds = productAmounts
     .filter(({ itemId }) => itemId != null)
     .map(({ itemId, amount }) => `${itemId}:${amount}`)
     .join(",");
-
-  const ingredients = ["Iron_Ingot"].join(",");
+  const ingredientIds = ingredients.join(",");
 
   const charts: TCompChart[] = [];
   for (const recipeSel of recipeSels) {
     const recipeIds = recipeSel.recipes.map((r) => r.id).join(",");
+    const param = new URLSearchParams();
+    param.append("recipes", recipeIds);
+    param.append("products", productIds);
+    param.append("ingredients", ingredientIds);
+
     const chart: TCompChart = await fetcher(
-      `/api/v1/planner?recipes=${recipeIds}&products=${productIds}&ingredients=${ingredients}`
+      `/api/v1/planner?${param.toString()}`
     );
     charts.push({ ...chart, name: recipeSel.name });
   }
 
-  console.log(charts);
   return charts;
 };
