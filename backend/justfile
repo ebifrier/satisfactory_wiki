@@ -21,4 +21,5 @@ db-init:
 	flask db upgrade
 
 db-clear:
-	rm -rf migrations satisfactory.db
+	rm -r -fo satisfactory.db
+	rm -r -fo migrations

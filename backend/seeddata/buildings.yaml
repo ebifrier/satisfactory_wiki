@@ -162,7 +162,7 @@
   name: 変換機
   max_inputs: 2
   max_outputs: 2
-  power: -400
+  power: -250
   category: 生産
   subcategory: 製造機
 
