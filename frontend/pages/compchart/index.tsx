@@ -214,14 +214,10 @@ const RecipePage: React.FC = () => {
 
       <OutsideDropArea
         onDrop={handleDropOutside}
-        className="grid grid-cols-2 gap-4 max-w-6xl bg-white mx-auto my-4"
+        className="grid grid-cols-2 gap-4 max-w-6xl"
       >
         {/* 左側: レシピ一覧と検索フィルター */}
-        <div
-          id="main"
-          className="p-4 flex flex-col"
-          style={{ maxHeight: "90vh" }}
-        >
+        <div className="flex flex-col p-4" style={{ maxHeight: "90vh" }}>
           <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
           <input
             type="text"

@@ -120,10 +120,7 @@ function ItemPage() {
   );
 
   return (
-    <div
-      id="main"
-      className="bg-white grid grid-cols-1 md:grid-cols-[2fr_1fr] max-w-6xl gap-x-4 gap-y-2 mx-auto p-6 rounded-lg shadow-md"
-    >
+    <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-4 gap-y-2">
       <PageHead title="素材詳細" />
 
       <div className="col-span-full">

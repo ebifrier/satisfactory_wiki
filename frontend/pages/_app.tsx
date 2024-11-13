@@ -6,7 +6,9 @@ import store from "@/store";
 
 import "@/styles/style.scss";
 
-const Header: React.FC = () => {
+const HeaderLinks = [["素材詳細", "/item"]];
+
+const Header: React.FC<{ className?: string }> = ({ className }) => {
   const [mobileHidden, setMobileHidden] = React.useState(true);
   const toggleMenu = React.useCallback(
     () => setMobileHidden((prev) => !prev),
@@ -14,11 +16,11 @@ const Header: React.FC = () => {
   );
 
   return (
-    <header className="bg-gray-600 text-white">
+    <header className={`bg-gray-600 text-white ${className}`}>
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <a href="#">
+          <a href="/">
             <img
               src="./favicon.png"
               title="logo"
@@ -30,12 +32,11 @@ const Header: React.FC = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6" style={{ marginTop: "4px" }}>
-          <a href="#" className="text-xl hover:text-gray-300">
-            素材詳細
-          </a>
-          {/* <a href="#" className="hover:text-gray-300">About</a>
-        <a href="#" className="hover:text-gray-300">Services</a>
-        <a href="#" className="hover:text-gray-300">Contact</a> */}
+          {HeaderLinks.map(([title, link]) => (
+            <a href={link} className="text-xl hover:text-gray-300">
+              {title}
+            </a>
+          ))}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -49,19 +50,15 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <nav
-        id="mobile-menu"
-        className={`${mobileHidden ? "hidden" : ""} bg-gray-700 md:hidden`}
-      >
-        <a href="#" className="block px-4 py-2 text-white hover:bg-gray-500">
-          素材詳細
-        </a>
-        {/* <a href="#" className="block px-4 py-2 text-white hover:bg-gray-500"
-        >About</a
-      >
-      <a href="#" className="block px-4 py-2 text-white hover:bg-gray-500"
-        >Services</a
-      > */}
+      <nav className={`${mobileHidden ? "hidden" : ""} bg-gray-700 md:hidden`}>
+        {HeaderLinks.map(([title, link]) => (
+          <a
+            href={link}
+            className="block px-4 py-2 text-white hover:bg-gray-500"
+          >
+            {title}
+          </a>
+        ))}
       </nav>
     </header>
   );
@@ -74,8 +71,16 @@ export default function App({ Component, pageProps }: AppProps): ReactNode {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <Header />
-      <Component {...pageProps} />;
+
+      <div className="flex flex-col">
+        <Header className="flex-none" />
+        <div
+          id="main"
+          className="container flex-1 bg-white xl:max-w-7xl rounded-lg shadow-md p-6 mx-auto my-4"
+        >
+          <Component {...pageProps} />
+        </div>
+      </div>
     </Provider>
   );
 }
