@@ -25,14 +25,14 @@ export type TBase = {
 };
 
 export type TItem = TBase & {
-  jpwikiId: string;
+  wikiId: string;
   kind: string;
   category: string;
   coupons: number;
 };
 
 export class ItemUtil {
-  static getWikiLink = ({ jpwikiId }: TItem): string => `素材/${jpwikiId}`;
+  static getWikiLink = ({ wikiId }: TItem): string => `素材/${wikiId}`;
 
   static getFullName = ({ name, id }: TItem): string =>
     `${name} [${toDisplayId(id)}]`;
@@ -49,7 +49,7 @@ export class ItemUtil {
 }
 
 export type TBuilding = TBase & {
-  jpwikiId: string;
+  wikiId: string;
   category: string;
   subcategory: string;
   power: number;
@@ -59,9 +59,9 @@ export type TBuilding = TBase & {
 
 export class BuildingUtil {
   static getWIKILink = (building: TBuilding): string => {
-    const { jpwikiId, category } = building;
+    const { wikiId, category } = building;
     const cat = category != "特殊" ? category : "スペシャル";
-    return `建築物/${cat}#${jpwikiId}`;
+    return `建築物/${cat}#${wikiId}`;
   };
 
   static getAreaSize = (buildingId: string): number => {
@@ -145,7 +145,7 @@ export type TRecipeItem = {
 };
 
 export type TRecipe = TBase & {
-  jpwikiId: string;
+  wikiId: string;
   linkAnchor: string;
   alternate: boolean;
   conditionId: string;
@@ -162,8 +162,8 @@ export type TRecipe = TBase & {
 
 export class RecipeUtil {
   static getWIKILink = (recipe: TRecipe): string => {
-    const { jpwikiId, linkAnchor = "N1" } = recipe;
-    return `素材/${jpwikiId}#Recipe_${linkAnchor}`;
+    const { wikiId, linkAnchor = "N1" } = recipe;
+    return `素材/${wikiId}#Recipe_${linkAnchor}`;
   };
 
   static isByproduct = (recipe: TRecipe, itemId: string): boolean =>

@@ -53,14 +53,14 @@ export class TagUtil {
   };
 
   static getSmallImageLink = (item: TRecipe | TBuilding | TItem): TLinkTag => {
-    return this.getImageLink(item.name, item.wikiLink, item.jpwikiId);
+    return this.getImageLink(item.name, item.wikiLink, item.wikiId);
   };
 
   static getBuildingLink = (building: TBuilding): TLinkTag =>
     this.getImageLink(
       `&br;${building.name}`,
       building.wikiLink,
-      building.jpwikiId
+      building.wikiId
     );
 
   static getConditionLink = (recipe: TRecipe): (TTag | string)[] => {

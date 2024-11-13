@@ -23,7 +23,7 @@ def model_to_dict(model: type[Model]):
     result = {to_camel_case(column.name): convert(getattr(model, column.name))
               for column in model.__table__.columns}
     
-    link = getattr(model, 'jpwiki_link', None)
+    link = getattr(model, 'wiki_link', None)
     if link:
         result['wikiLink'] = link
     return result
@@ -34,7 +34,7 @@ class Item(db.Model):
     name = db.Column(db.String(128), nullable=False)
     index = db.Column(db.Integer, nullable=False)
     kind = db.Column(db.String(128), nullable=False)
-    jpwiki_id = db.Column(db.String(128), nullable=False)
+    wiki_id = db.Column(db.String(128), nullable=False)
     category = db.Column(db.String(64), nullable=False)
     coupons = db.Integer()
 
@@ -56,8 +56,8 @@ class Item(db.Model):
                 raise Exception(f'unknown item_type "{self.kind}"')
 
     @property
-    def jpwiki_link(self) -> str:
-        return f'素材/{self.jpwiki_id}'
+    def wiki_link(self) -> str:
+        return f'素材/{self.wiki_id}'
 
     def __str__(self):
         return self.name
@@ -67,7 +67,7 @@ class Building(db.Model):
     id = db.Column(db.String(128), primary_key=True)
     name = db.Column(db.String(128), nullable=False)
     index = db.Column(db.Integer, nullable=False)
-    jpwiki_id = db.Column(db.String(128), nullable=False)
+    wiki_id = db.Column(db.String(128), nullable=False)
     category = db.Column(db.String(64), nullable=False)
     subcategory = db.Column(db.String(64), nullable=False)
     power = db.Column(db.Integer)
@@ -102,9 +102,9 @@ class Building(db.Model):
         return self.is_buildgun or self.is_craftbench or self.is_equipment
 
     @property
-    def jpwiki_link(self) -> str:
+    def wiki_link(self) -> str:
         link_cat = self.category if self.category != '特殊' else 'スペシャル'
-        return f'建築物/{link_cat}#{self.jpwiki_id}'
+        return f'建築物/{link_cat}#{self.wiki_id}'
 
     def __str__(self):
         return self.name
@@ -135,12 +135,12 @@ class RecipeItem(db.Model):
         return self.item.name
 
     @property
-    def jpwiki_id(self) -> str:
-        return self.item.jpwiki_id
+    def wiki_id(self) -> str:
+        return self.item.wiki_id
 
     @property
-    def jpwiki_link(self) -> str:
-        return self.item.jpwiki_link
+    def wiki_link(self) -> str:
+        return self.item.wiki_link
 
     def as_building(self) -> Building | None:
         return Building.query.get(self.item_id)
@@ -161,7 +161,7 @@ class Recipe(db.Model):
     id = db.Column(db.String(128), primary_key=True)
     name = db.Column(db.String(128), nullable=False)
     index = db.Column(db.Integer, nullable=False)
-    jpwiki_id = db.Column(db.String(128), nullable=False)
+    wiki_id = db.Column(db.String(128), nullable=False)
     link_anchor = db.Column(db.String(32), nullable=False)
     alternate = db.Column(db.Boolean, nullable=False)
     condition_id = db.Column(db.String(256), db.ForeignKey('condition.id'), nullable=True)
@@ -194,9 +194,9 @@ class Recipe(db.Model):
         return dic
 
     @property
-    def jpwiki_link(self) -> str:
+    def wiki_link(self) -> str:
         link_anchor = self.link_anchor if self.link_anchor else "N1"
-        return f'素材/{self.jpwiki_id}#Recipe_{link_anchor}'
+        return f'素材/{self.wiki_id}#Recipe_{link_anchor}'
 
     def is_byproduct(self, item_id: str) -> bool:
         return self.products[0].item_id != item_id
@@ -285,7 +285,7 @@ class Condition(db.Model):
         return dic
 
     @property
-    def jpwiki_link(self) -> str:
+    def wiki_link(self) -> str:
         if self.kind == 'milestone':
             return f'プロジェクト/マイルストーン#{self.link_anchor}'
         elif self.kind == 'research':

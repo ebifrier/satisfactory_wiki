@@ -4,7 +4,7 @@
   subcategory: 特殊
 - id: MAM
   name: MAM
-  jpwiki_id: M.A.M.
+  wiki_id: M.A.M.
   category: 特殊
   subcategory: 特殊
 - id: Space Elevator
@@ -182,7 +182,7 @@
   subcategory: 発電機
 - id: Fuel-Powered Generator
   name: 燃料式発電機
-  jpwiki_id: Fuel_Generator
+  wiki_id: Fuel_Generator
   power: 250
   max_inputs: 1
   max_outputs: 0
@@ -324,7 +324,7 @@
   subcategory: コンベア支柱
 - id: Stackable Conveyor Pole
   name: コンベア・ポール (スタック可能)
-  jpwiki_id: Conveyor_Pole_Stackable
+  wiki_id: Conveyor_Pole_Stackable
   category: ロジスティクス
   subcategory: コンベア支柱
 - id: Conveyor Wall Mount

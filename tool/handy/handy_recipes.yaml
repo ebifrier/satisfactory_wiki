@@ -1,622 +1,622 @@
 - id: Biocoal
   name: バイオ炭
-  jpwiki_id: Coal
+  wiki_id: Coal
   category: 資源
   link_anchor: A1
   alternate: true
 - id: Charcoal
   name: 木炭
-  jpwiki_id: Coal
+  wiki_id: Coal
   category: 資源
   link_anchor: A2
   alternate: true
 - id: Unpackage Oil
   name: 原油･容器取り出し
-  jpwiki_id: Crude_Oil
+  wiki_id: Crude_Oil
   category: 資源
   link_anchor: N1
   alternate: false
 - id: Unpackage Water
   name: 水･容器取り出し
-  jpwiki_id: Water
+  wiki_id: Water
   category: 資源
   link_anchor: N1
   alternate: false
 - id: Unpackage Nitrogen Gas
   name: 窒素ガス・容器取り出し
-  jpwiki_id: Nitrogen_Gas
+  wiki_id: Nitrogen_Gas
   category: 資源
   link_anchor: N2
   alternate: false
 
 - id: Power Shard (1)
   name: パワー・シャード(1)
-  jpwiki_id: Power_Shard
+  wiki_id: Power_Shard
   category: パワー・シャード
   link_anchor: N1
   alternate: false
 - id: Power Shard (2)
   name: パワー・シャード(2)
-  jpwiki_id: Power_Shard
+  wiki_id: Power_Shard
   category: パワー・シャード
   link_anchor: N2
   alternate: false
 - id: Power Shard (5)
   name: パワー・シャード(5)
-  jpwiki_id: Power_Shard
+  wiki_id: Power_Shard
   category: パワー・シャード
   link_anchor: N3
   alternate: false
 - id: Synthetic Power Shard
   name: 合成パワー・シャード
-  jpwiki_id: Power_Shard
+  wiki_id: Power_Shard
   category: パワー・シャード
   link_anchor: N4
   alternate: false
 
 - id: Hog Protein
   name: ホッグのタンパク質
-  jpwiki_id: Alien_Protein
+  wiki_id: Alien_Protein
   category: エイリアンの遺骸/バイオマス
   link_anchor: N1
   alternate: false
 - id: Hatcher Protein
   name: ハッチャーのタンパク質
-  jpwiki_id: Alien_Protein
+  wiki_id: Alien_Protein
   category: エイリアンの遺骸/バイオマス
   link_anchor: N2
   alternate: false
 - id: Stinger Protein
   name: スティンガーのタンパク質
-  jpwiki_id: Alien_Protein
+  wiki_id: Alien_Protein
   category: エイリアンの遺骸/バイオマス
   link_anchor: N4
   alternate: false
 - id: Spitter Protein
   name: スピッターのタンパク質
-  jpwiki_id: Alien_Protein
+  wiki_id: Alien_Protein
   category: エイリアンの遺骸/バイオマス
   link_anchor: N3
   alternate: false
 
 - id: Alien DNA Capsule
   name: エイリアンのDNAカプセル
-  jpwiki_id: Organic_Data_Capsule
+  wiki_id: Organic_Data_Capsule
   category: エイリアンの遺骸/バイオマス
   link_anchor: N1
   alternate: false
 
 - id: Biomass (Leaves)
   name: バイオマス(葉)
-  jpwiki_id: Biomass
+  wiki_id: Biomass
   category: エイリアンの遺骸/バイオマス
   link_anchor: N1
   alternate: false
 - id: Biomass (Wood)
   name: バイオマス(木)
-  jpwiki_id: Biomass
+  wiki_id: Biomass
   category: エイリアンの遺骸/バイオマス
   link_anchor: N2
   alternate: false
 - id: Biomass (Mycelia)
   name: バイオマス(菌糸)
-  jpwiki_id: Biomass
+  wiki_id: Biomass
   category: エイリアンの遺骸/バイオマス
   link_anchor: N3
   alternate: false
 - id: Biomass (Alien Protein)
   name: バイオマス(エイリアンのタンパク質)
-  jpwiki_id: Biomass
+  wiki_id: Biomass
   category: エイリアンの遺骸/バイオマス
   link_anchor: N4
   alternate: false
 
 - id: Fabric
   name: 布地
-  jpwiki_id: Fabric
+  wiki_id: Fabric
   category: エイリアンの遺骸/バイオマス
   link_anchor: N1
   alternate: false
 - id: Polyester Fabric
   name: ポリエステル生地
-  jpwiki_id: Fabric
+  wiki_id: Fabric
   category: エイリアンの遺骸/バイオマス
   link_anchor: A1
   alternate: true
 
 - id: Solid Biofuel
   name: 固体バイオ燃料
-  jpwiki_id: Solid_Biofuel
+  wiki_id: Solid_Biofuel
   category: エイリアンの遺骸/バイオマス
   link_anchor: N1
   alternate: false
 
 - id: Concrete
   name: コンクリート
-  jpwiki_id: Concrete
+  wiki_id: Concrete
   category: 化合物
   link_anchor: N1
   alternate: false
 - id: Fine Concrete
   name: 上質コンクリート
-  jpwiki_id: Concrete
+  wiki_id: Concrete
   category: 化合物
   link_anchor: A1
   alternate: true
 - id: Rubber Concrete
   name: ラバー・コンクリート
-  jpwiki_id: Concrete
+  wiki_id: Concrete
   category: 化合物
   link_anchor: A2
   alternate: true
 - id: Wet Concrete
   name: 生コンクリート
-  jpwiki_id: Concrete
+  wiki_id: Concrete
   category: 化合物
   link_anchor: A3
   alternate: true
 
 - id: Quartz Crystal
   name: 石英結晶
-  jpwiki_id: Quartz_Crystal
+  wiki_id: Quartz_Crystal
   category: 化合物
   link_anchor: N1
   alternate: false
 - id: Pure Quartz Crystal
   name: 純石英結晶
-  jpwiki_id: Quartz_Crystal
+  wiki_id: Quartz_Crystal
   category: 化合物
   link_anchor: A2
   alternate: true
 - id: Fused Quartz Crystal
   name: 融合石英結晶
-  jpwiki_id: Quartz_Crystal
+  wiki_id: Quartz_Crystal
   category: 化合物
   link_anchor: A1
   alternate: true
 - id: Quartz Purification
   name: 精製石英結晶
-  jpwiki_id: Quartz_Crystal
+  wiki_id: Quartz_Crystal
   category: 化合物
   link_anchor: A3
   alternate: true
 
 - id: Silica
   name: シリカ
-  jpwiki_id: Silica
+  wiki_id: Silica
   category: 化合物
   link_anchor: N1
   alternate: false
 - id: Cheap Silica
   name: 廉価シリカ
-  jpwiki_id: Silica
+  wiki_id: Silica
   category: 化合物
   link_anchor: A1
   alternate: true
 - id: Distilled Silica
   name: 蒸留シリカ
-  jpwiki_id: Silica
+  wiki_id: Silica
   category: 化合物
   link_anchor: A2
   alternate: true
 
 - id: Compacted Coal
   name: 圧縮石炭
-  jpwiki_id: Compacted_Coal
+  wiki_id: Compacted_Coal
   link_anchor: A2
   alternate: true
 
 - id: Copper Powder
   name: 銅粉
-  jpwiki_id: Copper_Powder
+  wiki_id: Copper_Powder
   link_anchor: N1
   alternate: false
 
 - id: Gas Filter
   name: ガスフィルター
-  jpwiki_id: Gas_Filter
+  wiki_id: Gas_Filter
   link_anchor: N1
   alternate: false
 - id: Iodine-Infused Filter
   name: ヨウ素充填フィルター
-  jpwiki_id: Iodine_Infused_Filter
+  wiki_id: Iodine_Infused_Filter
   link_anchor: N1
   alternate: false
 
 - id: Vitamin Inhaler
   name: ビタミン吸入器
-  jpwiki_id: Medicinal_Inhaler
+  wiki_id: Medicinal_Inhaler
   link_anchor: N1
   alternate: false
 - id: Protein Inhaler
   name: タンパク質吸入器
-  jpwiki_id: Medicinal_Inhaler
+  wiki_id: Medicinal_Inhaler
   link_anchor: N2
   alternate: false
 - id: Nutritional Inhaler
   name: 栄養吸入器
-  jpwiki_id: Medicinal_Inhaler
+  wiki_id: Medicinal_Inhaler
   link_anchor: N3
   alternate: false
 - id: Therapeutic Inhaler
   name: 治療用吸入器
-  jpwiki_id: Medicinal_Inhaler
+  wiki_id: Medicinal_Inhaler
   link_anchor: N4
   alternate: false
 
 - id: Black Powder
   name: 黒色火薬
-  jpwiki_id: Black_Powder
+  wiki_id: Black_Powder
   link_anchor: N1
   alternate: false
 - id: Fine Black Powder
   name: 上質黒色火薬
-  jpwiki_id: Black_Powder
+  wiki_id: Black_Powder
   link_anchor: A1
   alternate: true
 - id: Smokeless Powder
   name: 無煙火薬
-  jpwiki_id: Smokeless_Powder
+  wiki_id: Smokeless_Powder
   link_anchor: N1
   alternate: false
 
 - id: Iron Rebar
   name: 鉄筋
-  jpwiki_id: Iron_Rebar
+  wiki_id: Iron_Rebar
   link_anchor: N1
   alternate: false
 - id: Stun Rebar
   name: スタン鉄筋
-  jpwiki_id: Stun_Rebar
+  wiki_id: Stun_Rebar
   link_anchor: N1
   alternate: false
 - id: Explosive Rebar
   name: 破砕鉄筋
-  jpwiki_id: Shatter_Rebar
+  wiki_id: Shatter_Rebar
   link_anchor: N1
   alternate: false
 - id: Shatter Rebar
   name: 爆砕鉄筋
-  jpwiki_id: Explosive_Rebar
+  wiki_id: Explosive_Rebar
   link_anchor: N1
   alternate: false
 
 - id: Rifle Ammo
   name: ライフル弾
-  jpwiki_id: Rifle_Ammo
+  wiki_id: Rifle_Ammo
   link_anchor: N1
   alternate: false
 - id: Turbo Rifle Ammo
   name: ターボライフル弾
-  jpwiki_id: Turbo_Rifle_Ammo
+  wiki_id: Turbo_Rifle_Ammo
   link_anchor: N1
   alternate: false
 - id: Turbo Rifle Ammo
   name: ターボライフル弾
-  jpwiki_id: Turbo_Rifle_Ammo
+  wiki_id: Turbo_Rifle_Ammo
   link_anchor: N2
   alternate: false
 - id: Homing Rifle Ammo
   name: ホーミングライフル弾
-  jpwiki_id: Homing_Rifle_Ammo
+  wiki_id: Homing_Rifle_Ammo
   link_anchor: N1
   alternate: false
 
 - id: Nobelisk
   name: ノーベリスク
-  jpwiki_id: Nobelisk
+  wiki_id: Nobelisk
   link_anchor: N1
   alternate: false
 - id: Gas Nobelisk
   name: ガス・ノーベリスク
-  jpwiki_id: Gas_Nobelisk
+  wiki_id: Gas_Nobelisk
   link_anchor: N1
   alternate: false
 - id: Cluster Nobelisk
   name: クラスター・ノーベリスク
-  jpwiki_id: Cluster_Nobelisk
+  wiki_id: Cluster_Nobelisk
   link_anchor: N1
   alternate: false
 - id: Pulse Nobelisk
   name: パルス・ノーベリスク
-  jpwiki_id: Pulse_Nobelisk
+  wiki_id: Pulse_Nobelisk
   link_anchor: N1
   alternate: false
 - id: Nuke Nobelisk
   name: ニューク・ノーベリスク
-  jpwiki_id: Nuke_Nobelisk
+  wiki_id: Nuke_Nobelisk
   link_anchor: N1
   alternate: false
 
 - id: Iron Ingot
   name: 鉄のインゴット
-  jpwiki_id: Iron_Ingot
+  wiki_id: Iron_Ingot
   link_anchor: N1
   alternate: false
 - id: Iron Alloy Ingot
   name: 鉄合金のインゴット
-  jpwiki_id: Iron_Ingot
+  wiki_id: Iron_Ingot
   link_anchor: A1
   alternate: true
 - id: Pure Iron Ingot
   name: 純鉄のインゴット
-  jpwiki_id: Iron_Ingot
+  wiki_id: Iron_Ingot
   link_anchor: A2
   alternate: true
 - id: Basic Iron Ingot
   name: 標準の鉄のインゴット
-  jpwiki_id: Iron_Ingot
+  wiki_id: Iron_Ingot
   link_anchor: A3
   alternate: true
 - id: Leached Iron Ingot
   name: 抽出鉄のインゴット
-  jpwiki_id: Iron_Ingot
+  wiki_id: Iron_Ingot
   link_anchor: A4
   alternate: true
 
 - id: Copper Ingot
   name: 銅のインゴット
-  jpwiki_id: Copper_Ingot
+  wiki_id: Copper_Ingot
   link_anchor: N1
   alternate: false
 - id: Copper Alloy Ingot
   name: 銅合金のインゴット
-  jpwiki_id: Copper_Ingot
+  wiki_id: Copper_Ingot
   link_anchor: A1
   alternate: true
 - id: Pure Copper Ingot
   name: 純銅のインゴット
-  jpwiki_id: Copper_Ingot
+  wiki_id: Copper_Ingot
   link_anchor: A2
   alternate: true
 - id: Tempered Copper Ingot
   name: 焼き戻し銅のインゴット
-  jpwiki_id: Copper_Ingot
+  wiki_id: Copper_Ingot
   link_anchor: A3
   alternate: true
 - id: Leached Copper Ingot
   name: 抽出銅のインゴット
-  jpwiki_id: Copper_Ingot
+  wiki_id: Copper_Ingot
   link_anchor: A4
   alternate: true
 
 - id: Steel Ingot
   name: 鋼鉄のインゴット
-  jpwiki_id: Steel_Ingot
+  wiki_id: Steel_Ingot
   link_anchor: N1
   alternate: false
 - id: Solid Steel Ingot
   name: 高密度鋼のインゴット
-  jpwiki_id: Steel_Ingot
+  wiki_id: Steel_Ingot
   link_anchor: A1
   alternate: true
 - id: Compacted Steel Ingot
   name: 圧縮鋼のインゴット
-  jpwiki_id: Steel_Ingot
+  wiki_id: Steel_Ingot
   link_anchor: A2
   alternate: true
 - id: Coke Steel Ingot
   name: コークス鋼のインゴット
-  jpwiki_id: Steel_Ingot
+  wiki_id: Steel_Ingot
   link_anchor: A3
   alternate: true
 
 - id: Caterium Ingot
   name: カテリウムのインゴット
-  jpwiki_id: Caterium_Ingot
+  wiki_id: Caterium_Ingot
   link_anchor: N1
   alternate: false
 - id: Pure Caterium Ingot
   name: 純カテリウムのインゴット
-  jpwiki_id: Caterium_Ingot
+  wiki_id: Caterium_Ingot
   link_anchor: A1
   alternate: true
 - id: Tempered Caterium Ingot
   name: 焼き戻しカテリウムのインゴット
-  jpwiki_id: Caterium_Ingot
+  wiki_id: Caterium_Ingot
   link_anchor: A2
   alternate: true
 - id: Leached Caterium Ingot
   name: 抽出カテリウムのインゴット
-  jpwiki_id: Caterium_Ingot
+  wiki_id: Caterium_Ingot
   link_anchor: A3
   alternate: true
 
 - id: Aluminum Ingot
   name: アルミのインゴット
-  jpwiki_id: Aluminum_Ingot
+  wiki_id: Aluminum_Ingot
   link_anchor: N1
   alternate: false
 - id: Pure Aluminum Ingot
   name: 純アルミニウムのインゴット
-  jpwiki_id: Aluminum_Ingot
+  wiki_id: Aluminum_Ingot
   link_anchor: A1
   alternate: true
 
 - id: Ficsite Ingot (Aluminum)
   name: FICSITEのインゴット(アルミ)
-  jpwiki_id: Ficsite_Ingot
+  wiki_id: Ficsite_Ingot
   link_anchor: N1
   alternate: false
 - id: Ficsite Ingot (Caterium)
   name: FICSITEのインゴット(カテリウム)
-  jpwiki_id: Ficsite_Ingot
+  wiki_id: Ficsite_Ingot
   link_anchor: N2
   alternate: false
 - id: Ficsite Ingot (Iron)
   name: FICSITEのインゴット(鉄)
-  jpwiki_id: Ficsite_Ingot
+  wiki_id: Ficsite_Ingot
   link_anchor: N3
   alternate: false
 
 - id: Iron Plate
   name: 鉄板
-  jpwiki_id: Iron_Plate
+  wiki_id: Iron_Plate
   link_anchor: N1
   alternate: false
 - id: Coated Iron Plate
   name: 被覆鉄板
-  jpwiki_id: Iron_Plate
+  wiki_id: Iron_Plate
   link_anchor: A1
   alternate: true
 - id: Steel Cast Plate
   name: 鋳造鋼板
-  jpwiki_id: Iron_Plate
+  wiki_id: Iron_Plate
   link_anchor: A2
   alternate: true
 
 - id: Iron Rod
   name: 鉄のロッド
-  jpwiki_id: Iron_Rod
+  wiki_id: Iron_Rod
   link_anchor: N1
   alternate: false
 - id: Steel Rod
   name: 鋼鉄のロッド
-  jpwiki_id: Iron_Rod
+  wiki_id: Iron_Rod
   link_anchor: A1
   alternate: true
 - id: Aluminum Rod
   name: アルミ棒
-  jpwiki_id: Iron_Rod
+  wiki_id: Iron_Rod
   link_anchor: A2
   alternate: true
 
 - id: Screw
   name: ネジ
-  jpwiki_id: Screw
+  wiki_id: Screw
   link_anchor: N1
   alternate: false
 - id: Cast Screw
   name: 鋳造ネジ
-  jpwiki_id: Screw
+  wiki_id: Screw
   link_anchor: A1
   alternate: true
 - id: Steel Screw
   name: 鋼鉄のネジ
-  jpwiki_id: Screw
+  wiki_id: Screw
   link_anchor: A2
   alternate: true
 
 - id: Reinforced Iron Plate
   name: 強化鉄板
-  jpwiki_id: Reinforced_Iron_Plate
+  wiki_id: Reinforced_Iron_Plate
   link_anchor: N1
   alternate: false
 - id: Stitched Iron Plate
   name: 縫合鉄板
-  jpwiki_id: Reinforced_Iron_Plate
+  wiki_id: Reinforced_Iron_Plate
   link_anchor: A1
   alternate: true
 - id: Bolted Iron Plate
   name: ネジ留め鉄板
-  jpwiki_id: Reinforced_Iron_Plate
+  wiki_id: Reinforced_Iron_Plate
   link_anchor: A2
   alternate: true
 - id: Adhered Iron Plate
   name: 接着鉄板
-  jpwiki_id: Reinforced_Iron_Plate
+  wiki_id: Reinforced_Iron_Plate
   link_anchor: A3
   alternate: true
 
 - id: Modular Frame
   name: モジュラー・フレーム
-  jpwiki_id: Modular_Frame
+  wiki_id: Modular_Frame
   link_anchor: N1
   alternate: false
 - id: Steeled Frame
   name: 鋼鉄のフレーム
-  jpwiki_id: Modular_Frame
+  wiki_id: Modular_Frame
   link_anchor: A1
   alternate: true
 - id: Bolted Frame
   name: ネジ留めフレーム
-  jpwiki_id: Modular_Frame
+  wiki_id: Modular_Frame
   link_anchor: A2
   alternate: true
 
 - id: Copper Sheet
   name: 銅板
-  jpwiki_id: Copper_Sheet
+  wiki_id: Copper_Sheet
   link_anchor: N1
   alternate: false
 - id: Steamed Copper Sheet
   name: 蒸気加熱銅板
-  jpwiki_id: Copper_Sheet
+  wiki_id: Copper_Sheet
   link_anchor: A1
   alternate: true
 
 - id: Steel Beam
   name: 鋼梁
-  jpwiki_id: Steel_Beam
+  wiki_id: Steel_Beam
   link_anchor: N1
   alternate: false
 - id: Aluminum Beam
   name: アルミ梁
-  jpwiki_id: Steel_Beam
+  wiki_id: Steel_Beam
   link_anchor: A1
   alternate: true
 - id: Molded Beam
   name: 成形された梁
-  jpwiki_id: Steel_Beam
+  wiki_id: Steel_Beam
   link_anchor: A2
   alternate: true
 
 - id: Steel Pipe
   name: 鋼管
-  jpwiki_id: Steel_Pipe
+  wiki_id: Steel_Pipe
   link_anchor: N1
   alternate: false
 - id: Iron Pipe
   name: 鉄のパイプ
-  jpwiki_id: Steel_Pipe
+  wiki_id: Steel_Pipe
   link_anchor: A1
   alternate: true
 - id: Molded Steel Pipe
   name: 成形鋼管
-  jpwiki_id: Steel_Pipe
+  wiki_id: Steel_Pipe
   link_anchor: A2
   alternate: true
 
 - id: Encased Industrial Beam
   name: コンクリート被覆型鋼梁
-  jpwiki_id: Encased_Industrial_Beam
+  wiki_id: Encased_Industrial_Beam
   link_anchor: N1
   alternate: false
 - id: Encased Industrial Pipe
   name: コンクリート被覆型鋼管
-  jpwiki_id: Encased_Industrial_Beam
+  wiki_id: Encased_Industrial_Beam
   link_anchor: A1
   alternate: true
 
 - id: Heavy Modular Frame
   name: ヘビー・モジュラー・フレーム
-  jpwiki_id: Heavy_Modular_Frame
+  wiki_id: Heavy_Modular_Frame
   link_anchor: N1
   alternate: false
 - id: Heavy Encased Frame
   name: 被覆型ヘビー・フレーム
-  jpwiki_id: Heavy_Modular_Frame
+  wiki_id: Heavy_Modular_Frame
   link_anchor: A1
   alternate: true
 - id: Heavy Flexible Frame
   name: ヘビー・フレキシブル・フレーム
-  jpwiki_id: Heavy_Modular_Frame
+  wiki_id: Heavy_Modular_Frame
   link_anchor: A2
   alternate: true
 
 - id: Alclad Aluminum Sheet
   name: アルクラッド・アルミシート
-  jpwiki_id: Alclad_Aluminum_Sheet
+  wiki_id: Alclad_Aluminum_Sheet
   link_anchor: N1
   alternate: false
 - id: Aluminum Casing
   name: アルミ筐体
-  jpwiki_id: Aluminum_Casing
+  wiki_id: Aluminum_Casing
   link_anchor: N1
   alternate: false
 - id: Alclad Casing
   name: アルクラッド筐体
-  jpwiki_id: Aluminum_Casing
+  wiki_id: Aluminum_Casing
   link_anchor: A1
   alternate: true
 
@@ -627,86 +627,86 @@
 
 - id: Wire
   name: ワイヤー
-  jpwiki_id: Wire
+  wiki_id: Wire
   link_anchor: N1
   alternate: false
 - id: Iron Wire
   name: 鉄のワイヤー
-  jpwiki_id: Wire
+  wiki_id: Wire
   link_anchor: A1
   alternate: true
 - id: Caterium Wire
   name: カテリウム・ワイヤー
-  jpwiki_id: Wire
+  wiki_id: Wire
   link_anchor: A2
   alternate: true
 - id: Fused Wire
   name: 溶融ワイヤー
-  jpwiki_id: Wire
+  wiki_id: Wire
   link_anchor: A3
   alternate: true
 
 - id: Cable
   name: ケーブル
-  jpwiki_id: Cable
+  wiki_id: Cable
   link_anchor: N1
   alternate: false
 - id: Insulated Cable
   name: 絶縁ケーブル
-  jpwiki_id: Cable
+  wiki_id: Cable
   link_anchor: A1
   alternate: true
 - id: Quickwire Cable
   name: クイックワイヤー・ケーブル
-  jpwiki_id: Cable
+  wiki_id: Cable
   link_anchor: A2
   alternate: true
 - id: Coated Cable
   name: 被覆ケーブル
-  jpwiki_id: Cable
+  wiki_id: Cable
   link_anchor: A3
   alternate: true
 
 - id: Quickwire
   name: クイックワイヤー
-  jpwiki_id: Quickwire
+  wiki_id: Quickwire
   link_anchor: N1
   alternate: false
 - id: Fused Quickwire
   name: 溶融クイックワイヤー
-  jpwiki_id: Quickwire
+  wiki_id: Quickwire
   link_anchor: A1
   alternate: true
 
 - id: Circuit Board
   name: 回路基板
-  jpwiki_id: Circuit_Board
+  wiki_id: Circuit_Board
   link_anchor: N1
   alternate: false
 - id: Silicon Circuit Board
   name: シリコン回路基板
-  jpwiki_id: Circuit_Board
+  wiki_id: Circuit_Board
   link_anchor: A1
   alternate: true
 - id: Caterium Circuit Board
   name: カテリウム回路基板
-  jpwiki_id: Circuit_Board
+  wiki_id: Circuit_Board
   link_anchor: A2
   alternate: true
 - id: Electrode Circuit Board
   name: 黒鉛電極・回路基板
-  jpwiki_id: Circuit_Board
+  wiki_id: Circuit_Board
   link_anchor: A3
   alternate: true
 
 - id: AI Limiter
   name: AIリミッター
-  jpwiki_id: AI_Limiter
+  wiki_id: AI_Limiter
   link_anchor: N1
   alternate: false
 - id: Plastic AI Limiter
   name: プラスチックAIリミッター
-  jpwiki_id: AI_Limiter
+  wiki_id: AI_Limiter
   link_anchor: A1
   alternate: true
 
@@ -721,163 +721,163 @@
 
 - id: Rotor
   name: ローター
-  jpwiki_id: Rotor
+  wiki_id: Rotor
   link_anchor: N1
   alternate: false
 - id: Steel Rotor
   name: 鋼鉄のローター
-  jpwiki_id: Rotor
+  wiki_id: Rotor
   link_anchor: A1
   alternate: true
 - id: Copper Rotor
   name: 銅のローター
-  jpwiki_id: Rotor
+  wiki_id: Rotor
   link_anchor: A2
   alternate: true
 
 - id: Stator
   name: 固定子
-  jpwiki_id: Stator
+  wiki_id: Stator
   link_anchor: N1
   alternate: false
 - id: Quickwire Stator
   name: クイックワイヤー固定子
-  jpwiki_id: Stator
+  wiki_id: Stator
   link_anchor: A1
   alternate: true
 
 - id: Motor
   name: モーター
-  jpwiki_id: Motor
+  wiki_id: Motor
   link_anchor: N1
   alternate: false
 - id: Rigor Motor
   name: 精密モーター
-  jpwiki_id: Motor
+  wiki_id: Motor
   link_anchor: A1
   alternate: true
 - id: Electric Motor
   name: 電動モーター
-  jpwiki_id: Motor
+  wiki_id: Motor
   link_anchor: A2
   alternate: true
 
 - id: Heat Sink
   name: ヒートシンク
-  jpwiki_id: Heat_Sink
+  wiki_id: Heat_Sink
   link_anchor: N1
   alternate: false
 - id: Heat Exchanger
   name: 熱交換器
-  jpwiki_id: Heat_Sink
+  wiki_id: Heat_Sink
   link_anchor: A1
   alternate: true
 
 - id: Turbo Motor
   name: ターボ・モーター
-  jpwiki_id: Turbo_Motor
+  wiki_id: Turbo_Motor
   link_anchor: N1
   alternate: false
 - id: Turbo Electric Motor
   name: ターボ電動モーター
-  jpwiki_id: Turbo_Motor
+  wiki_id: Turbo_Motor
   link_anchor: A1
   alternate: true
 - id: Turbo Pressure Motor
   name: ターボ・プレッシャー・モーター
-  jpwiki_id: Turbo_Motor
+  wiki_id: Turbo_Motor
   link_anchor: A2
   alternate: true
 
 - id: Battery
   name: バッテリー
-  jpwiki_id: Battery
+  wiki_id: Battery
   link_anchor: N1
   alternate: false
 - id: Classic Battery
   name: クラシック・バッテリー
-  jpwiki_id: Battery
+  wiki_id: Battery
   link_anchor: A1
   alternate: true
 
 - id: Fused Modular Frame
   name: 溶融モジュラー・フレーム
-  jpwiki_id: Fused_Modular_Frame
+  wiki_id: Fused_Modular_Frame
   link_anchor: N1
   alternate: false
 - id: Heat-Fused Frame
   name: 熱融合フレーム
-  jpwiki_id: Fused_Modular_Frame
+  wiki_id: Fused_Modular_Frame
   link_anchor: A1
   alternate: true
 
 - id: Cooling System
   name: 冷却システム
-  jpwiki_id: Cooling_System
+  wiki_id: Cooling_System
   link_anchor: N1
   alternate: false
 - id: Cooling Device
   name: 冷却装置
-  jpwiki_id: Cooling_System
+  wiki_id: Cooling_System
   link_anchor: A1
   alternate: true
 
 - id: Crystal Oscillator
   name: 水晶発振器
-  jpwiki_id: Crystal_Oscillator
+  wiki_id: Crystal_Oscillator
   link_anchor: N1
   alternate: false
 - id: Insulated Crystal Oscillator
   name: 絶縁水晶発振器
-  jpwiki_id: Crystal_Oscillator
+  wiki_id: Crystal_Oscillator
   link_anchor: A1
   alternate: true
 
 - id: Computer
   name: コンピューター
-  jpwiki_id: Computer
+  wiki_id: Computer
   link_anchor: N1
   alternate: false
 - id: Caterium Computer
   name: カテリウム・コンピューター
-  jpwiki_id: Computer
+  wiki_id: Computer
   link_anchor: A1
   alternate: true
 - id: Crystal Computer
   name: クリスタル・コンピューター
-  jpwiki_id: Computer
+  wiki_id: Computer
   link_anchor: A2
   alternate: true
 
 - id: Supercomputer
   name: スーパーコンピューター
-  jpwiki_id: Supercomputer
+  wiki_id: Supercomputer
   link_anchor: N1
   alternate: false
 - id: OC Supercomputer
   name: オーバークロック・スーパーコンピューター
-  jpwiki_id: Supercomputer
+  wiki_id: Supercomputer
   link_anchor: A1
   alternate: true
 - id: Super-State Computer
   name: 超性能コンピューター
-  jpwiki_id: Supercomputer
+  wiki_id: Supercomputer
   link_anchor: A2
   alternate: true
 
 - id: Radio Control Unit
   name: 無線制御ユニット
-  jpwiki_id: Radio_Control_Unit
+  wiki_id: Radio_Control_Unit
   link_anchor: N1
   alternate: false
 - id: Radio Control System
   name: 無線制御システム
-  jpwiki_id: Radio_Control_Unit
+  wiki_id: Radio_Control_Unit
   link_anchor: A1
   alternate: true
 - id: Radio Connection Unit
   name: 無線接続ユニット
-  jpwiki_id: Radio_Control_Unit
+  wiki_id: Radio_Control_Unit
   link_anchor: A2
   alternate: true
 
@@ -893,225 +893,225 @@
 
 - id: Plastic
   name: プラスチック
-  jpwiki_id: Plastic
+  wiki_id: Plastic
   link_anchor: N1
   alternate: false
 - id: Residual Plastic
   name: 残留プラスチック
-  jpwiki_id: Plastic
+  wiki_id: Plastic
   link_anchor: N2
   alternate: false
 - id: Recycled Plastic
   name: リサイクル・プラスチック
-  jpwiki_id: Plastic
+  wiki_id: Plastic
   link_anchor: A1
   alternate: true
 
 - id: Rubber
   name: ゴム
-  jpwiki_id: Rubber
+  wiki_id: Rubber
   link_anchor: N1
   alternate: false
 - id: Residual Rubber
   name: 残留ゴム
-  jpwiki_id: Rubber
+  wiki_id: Rubber
   link_anchor: N2
   alternate: false
 - id: Recycled Rubber
   name: リサイクル・ゴム
-  jpwiki_id: Rubber
+  wiki_id: Rubber
   link_anchor: A1
   alternate: true
 
 - id: Petroleum Coke
   name: 石油コークス
-  jpwiki_id: Petroleum_Coke
+  wiki_id: Petroleum_Coke
   link_anchor: N1
   alternate: false
 - id: Polymer Resin
   name: 合成樹脂
-  jpwiki_id: Polymer_Resin
+  wiki_id: Polymer_Resin
   link_anchor: A1
   alternate: true
 
 - id: Unpackage Heavy Oil Residue
   name: 未包装廃重油
-  jpwiki_id: Heavy_Oil_Residue
+  wiki_id: Heavy_Oil_Residue
   link_anchor: N2
   alternate: false
 - id: Heavy Oil Residue
   name: 廃重油
-  jpwiki_id: Heavy_Oil_Residue
+  wiki_id: Heavy_Oil_Residue
   link_anchor: N1
   alternate: true
 
 - id: Fuel
   name: 燃料
-  jpwiki_id: Fuel
+  wiki_id: Fuel
   link_anchor: N1
   alternate: false
 - id: Residual Fuel
   name: 残留燃料
-  jpwiki_id: Fuel
+  wiki_id: Fuel
   link_anchor: N2
   alternate: false
 - id: Diluted Fuel
   name: 希釈燃料
-  jpwiki_id: Fuel
+  wiki_id: Fuel
   link_anchor: A1
   alternate: true
 - id: Unpackage Fuel
   name: 未包装燃料
-  jpwiki_id: Fuel
+  wiki_id: Fuel
   link_anchor: N3
   alternate: false
 
 - id: Turbofuel
   name: ターボ燃料
-  jpwiki_id: Turbofuel
+  wiki_id: Turbofuel
   link_anchor: N1
   alternate: true
 - id: Unpackage Turbofuel
   name: 未包装ターボ燃料
-  jpwiki_id: Turbofuel
+  wiki_id: Turbofuel
   link_anchor: N2
   alternate: false
 - id: Turbo Heavy Fuel
   name: ターボ重油
-  jpwiki_id: Turbofuel
+  wiki_id: Turbofuel
   link_anchor: A1
   alternate: true
 - id: Turbo Blend Fuel
   name: 混合ターボ燃料
-  jpwiki_id: Turbofuel
+  wiki_id: Turbofuel
   link_anchor: A2
   alternate: true
 
 - id: Rocket Fuel
   name: ロケット燃料
-  jpwiki_id: Rocket_Fuel
+  wiki_id: Rocket_Fuel
   link_anchor: N1
   alternate: false
 - id: Unpackage Rocket Fuel
   name: 開封されたロケット燃料
-  jpwiki_id: Rocket_Fuel
+  wiki_id: Rocket_Fuel
   link_anchor: N2
   alternate: false
 - id: Nitro Rocket Fuel
   name: ニトロロケット燃料
-  jpwiki_id: Rocket_Fuel
+  wiki_id: Rocket_Fuel
   link_anchor: A1
   alternate: true
 
 - id: Ionized Fuel
   name: イオン燃料
-  jpwiki_id: Ionized_Fuel
+  wiki_id: Ionized_Fuel
   link_anchor: N1
   alternate: false
 - id: Unpackage Ionized Fuel
   name: 開封されたイオン燃料
-  jpwiki_id: Ionized_Fuel
+  wiki_id: Ionized_Fuel
   link_anchor: N2
   alternate: false
 - id: Dark-Ion Fuel
   name: ダークイオン燃料
-  jpwiki_id: Ionized_Fuel
+  wiki_id: Ionized_Fuel
   link_anchor: A1
   alternate: true
 
 - id: Liquid Biofuel
   name: 液体バイオ燃料
-  jpwiki_id: Liquid_Biofuel
+  wiki_id: Liquid_Biofuel
   link_anchor: N1
   alternate: false
 - id: Unpackage Liquid Biofuel
   name: 未包装液体バイオ燃料
-  jpwiki_id: Liquid_Biofuel
+  wiki_id: Liquid_Biofuel
   link_anchor: N2
   alternate: false
 
 - id: Aluminum Scrap
   name: アルミのスクラップ
-  jpwiki_id: Aluminum_Scrap
+  wiki_id: Aluminum_Scrap
   link_anchor: N1
   alternate: false
 - id: Electrode Aluminum Scrap
   name: 電極アルミ・スクラップ
-  jpwiki_id: Aluminum_Scrap
+  wiki_id: Aluminum_Scrap
   link_anchor: A1
   alternate: true
 - id: Instant Scrap
   name: 即席スクラップ
-  jpwiki_id: Aluminum_Scrap
+  wiki_id: Aluminum_Scrap
   link_anchor: A2
   alternate: true
 
 - id: Alumina Solution
   name: アルミナ溶液
-  jpwiki_id: Alumina_Solution
+  wiki_id: Alumina_Solution
   link_anchor: N1
   alternate: false
 - id: Unpackage Alumina Solution
   name: 未包装アルミナ溶液
-  jpwiki_id: Alumina_Solution
+  wiki_id: Alumina_Solution
   link_anchor: N2
   alternate: false
 - id: Sloppy Alumina
   name: 汚濁アルミナ溶液
-  jpwiki_id: Alumina_Solution
+  wiki_id: Alumina_Solution
   link_anchor: A1
   alternate: true
 
 - id: Sulfuric Acid
   name: 硫酸
-  jpwiki_id: Sulfuric_Acid
+  wiki_id: Sulfuric_Acid
   link_anchor: N1
   alternate: false
 - id: Unpackage Sulfuric Acid
   name: 未包装硫酸
-  jpwiki_id: Sulfuric_Acid
+  wiki_id: Sulfuric_Acid
   link_anchor: N2
   alternate: false
 
 - id: Nitric Acid
   name: 硝酸
-  jpwiki_id: Nitric_Acid
+  wiki_id: Nitric_Acid
   link_anchor: N1
   alternate: false
 - id: Unpackage Nitric Acid
   name: 未包装硝酸
-  jpwiki_id: Nitric_Acid
+  wiki_id: Nitric_Acid
   link_anchor: N2
   alternate: false
 
 - id: Diamonds
   name: ダイヤモンド
-  jpwiki_id: Diamonds
+  wiki_id: Diamonds
   link_anchor: N1
   alternate: false
 - id: Cloudy Diamonds
   name: ダイヤモンド(曇り)
-  jpwiki_id: Diamonds
+  wiki_id: Diamonds
   link_anchor: A1
   alternate: true
 - id: Oil-Based Diamonds
   name: ダイヤモンド(油性)
-  jpwiki_id: Diamonds
+  wiki_id: Diamonds
   link_anchor: A2
   alternate: true
 - id: Petroleum Diamonds
   name: ダイヤモンド(石油)
-  jpwiki_id: Diamonds
+  wiki_id: Diamonds
   link_anchor: A3
   alternate: true
 - id: Pink Diamonds
   name: ダイヤモンド(ピンク)
-  jpwiki_id: Diamonds
+  wiki_id: Diamonds
   link_anchor: A4
   alternate: true
 - id: Turbo Diamonds
   name: ダイヤモンド(ターボ)
-  jpwiki_id: Diamonds
+  wiki_id: Diamonds
   link_anchor: A5
   alternate: true
 
@@ -1127,17 +1127,17 @@
 
 - id: Dark Matter Crystal
   name: ダークマターの結晶
-  jpwiki_id: Dark_Matter_Crystal
+  wiki_id: Dark_Matter_Crystal
   link_anchor: N1
   alternate: false
 - id: Dark Matter Crystallization
   name: ダークマターの結晶化
-  jpwiki_id: Dark_Matter_Crystal
+  wiki_id: Dark_Matter_Crystal
   link_anchor: A1
   alternate: true
 - id: Dark Matter Trap
   name: ダークマターのトラップ
-  jpwiki_id: Dark_Matter_Crystal
+  wiki_id: Dark_Matter_Crystal
   link_anchor: A2
   alternate: true
 
@@ -1168,177 +1168,177 @@
 
 - id: Packaged Fuel
   name: 包装済み燃料
-  jpwiki_id: Packaged_Fuel
+  wiki_id: Packaged_Fuel
   link_anchor: N1
   alternate: false
 - id: Diluted Packaged Fuel
   name: 容器入り希釈燃料
-  jpwiki_id: Packaged_Fuel
+  wiki_id: Packaged_Fuel
   link_anchor: A1
   alternate: true
 - id: Packaged Turbofuel
   name: 容器入りターボ燃料
-  jpwiki_id: Packaged_Turbofuel
+  wiki_id: Packaged_Turbofuel
   link_anchor: N1
   alternate: false
 - id: Packaged Liquid Biofuel
   name: 包装済み液体バイオ燃料
-  jpwiki_id: Packaged_Liquid_Biofuel
+  wiki_id: Packaged_Liquid_Biofuel
   link_anchor: N1
   alternate: false
 - id: Packaged Heavy Oil Residue
   name: 包装済み廃重油
-  jpwiki_id: Packaged_Heavy_Oil_Residue
+  wiki_id: Packaged_Heavy_Oil_Residue
   link_anchor: N1
   alternate: false
 - id: Packaged Oil
   name: 包装済み原油
-  jpwiki_id: Packaged_Oil
+  wiki_id: Packaged_Oil
   link_anchor: N1
   alternate: false
 - id: Packaged Water
   name: 包装済み水
-  jpwiki_id: Packaged_Water
+  wiki_id: Packaged_Water
   link_anchor: N1
   alternate: false
 - id: Packaged Sulfuric Acid
   name: 包装済み硫酸
-  jpwiki_id: Packaged_Sulfuric_Acid
+  wiki_id: Packaged_Sulfuric_Acid
   link_anchor: N1
   alternate: false
 - id: Packaged Nitrogen Gas
   name: 包装済み窒素ガス
-  jpwiki_id: Packaged_Nitrogen_Gas
+  wiki_id: Packaged_Nitrogen_Gas
   link_anchor: N1
   alternate: false
 - id: Packaged Nitric Acid
   name: 包装済み硝酸
-  jpwiki_id: Packaged_Nitric_Acid
+  wiki_id: Packaged_Nitric_Acid
   link_anchor: N1
   alternate: false
 - id: Packaged Alumina Solution
   name: 包装済みアルミナ溶液
-  jpwiki_id: Packaged_Alumina_Solution
+  wiki_id: Packaged_Alumina_Solution
   link_anchor: N1
   alternate: false
 - id: Packaged Rocket Fuel
   name: 包装済みロケット燃料
-  jpwiki_id: Packaged_Rocket_Fuel
+  wiki_id: Packaged_Rocket_Fuel
   link_anchor: N1
   alternate: false
 - id: Packaged Ionized Fuel
   name: 包装済みイオン燃料
-  jpwiki_id: Packaged_Ionized_Fuel
+  wiki_id: Packaged_Ionized_Fuel
   link_anchor: N1
   alternate: false
 
 - id: Empty Canister
   name: 空の容器
-  jpwiki_id: Empty_Canister
+  wiki_id: Empty_Canister
   link_anchor: N1
   alternate: false
 - id: Steel Canister
   name: 鋼鉄容器
-  jpwiki_id: Empty_Canister
+  wiki_id: Empty_Canister
   link_anchor: A1
   alternate: true
 - id: Coated Iron Canister
   name: 被覆鉄板容器
-  jpwiki_id: Empty_Canister
+  wiki_id: Empty_Canister
   link_anchor: A2
   alternate: true
 
 - id: Empty Fluid Tank
   name: 空の液体タンク
-  jpwiki_id: Empty_Fluid_Tank
+  wiki_id: Empty_Fluid_Tank
   link_anchor: N1
   alternate: false
 
 - id: Pressure Conversion Cube
   name: 圧力変換キューブ
-  jpwiki_id: Pressure_Conversion_Cube
+  wiki_id: Pressure_Conversion_Cube
   link_anchor: N1
   alternate: false
 
 - id: Electromagnetic Control Rod
   name: 電磁制御棒
-  jpwiki_id: Electromagnetic_Control_Rod
+  wiki_id: Electromagnetic_Control_Rod
   link_anchor: N1
   alternate: false
 - id: Electromagnetic Connection Rod
   name: 電磁接続ロッド
-  jpwiki_id: Electromagnetic_Control_Rod
+  wiki_id: Electromagnetic_Control_Rod
   link_anchor: A1
   alternate: true
 
 - id: Encased Uranium Cell
   name: 被覆型ウラン･セル
-  jpwiki_id: Encased_Uranium_Cell
+  wiki_id: Encased_Uranium_Cell
   link_anchor: N1
   alternate: false
 - id: Infused Uranium Cell
   name: 注入型ウラン・セル
-  jpwiki_id: Encased_Uranium_Cell
+  wiki_id: Encased_Uranium_Cell
   link_anchor: A1
   alternate: true
 
 - id: Uranium Fuel Rod
   name: ウラン燃料棒
-  jpwiki_id: Uranium_Fuel_Rod
+  wiki_id: Uranium_Fuel_Rod
   link_anchor: N1
   alternate: false
 - id: Uranium Fuel Unit
   name: ウラン燃料ユニット
-  jpwiki_id: Uranium_Fuel_Rod
+  wiki_id: Uranium_Fuel_Rod
   link_anchor: A1
   alternate: true
 
 - id: Uranium Fuel Rod (burning)
   name: 原子力発電所　電力生成時
-  jpwiki_id: Uranium_Waste
+  wiki_id: Uranium_Waste
   link_anchor: N1
   alternate: false
 
 - id: Non-Fissile Uranium
   name: 非分裂性ウラン
-  jpwiki_id: Non-fissile_Uranium
+  wiki_id: Non-fissile_Uranium
   link_anchor: N1
   alternate: false
 - id: Fertile Uranium
   name: 親物質性ウラン
-  jpwiki_id: Non-fissile_Uranium
+  wiki_id: Non-fissile_Uranium
   link_anchor: A1
   alternate: true
 
 - id: Plutonium Pellet
   name: プルトニウム・ペレット
-  jpwiki_id: Plutonium_Pellet
+  wiki_id: Plutonium_Pellet
   link_anchor: N1
   alternate: false
 - id: Encased Plutonium Cell
   name: 被覆型プルトニウム・セル
-  jpwiki_id: Encased_Plutonium_Cell
+  wiki_id: Encased_Plutonium_Cell
   link_anchor: N1
   alternate: false
 - id: Instant Plutonium Cell
   name: 即席プルトニウム・セル
-  jpwiki_id: Encased_Plutonium_Cell
+  wiki_id: Encased_Plutonium_Cell
   link_anchor: A1
   alternate: true
 
 - id: Plutonium Fuel Rod
   name: プルトニウム燃料棒
-  jpwiki_id: Plutonium_Fuel_Rod
+  wiki_id: Plutonium_Fuel_Rod
   link_anchor: N1
   alternate: false
 - id: Plutonium Fuel Unit
   name: プルトニウム燃料ユニット
-  jpwiki_id: Plutonium_Fuel_Rod
+  wiki_id: Plutonium_Fuel_Rod
   link_anchor: A1
   alternate: true
 - id: Plutonium Fuel Rod (burning)
   name: 原子力発電所　電力生成時
-  jpwiki_id: Plutonium_Waste
+  wiki_id: Plutonium_Waste
   link_anchor: N1
   alternate: false
 
@@ -1354,65 +1354,65 @@
 
 - id: Smart Plating
   name: スマート･プレート
-  jpwiki_id: Smart_Plating
+  wiki_id: Smart_Plating
   link_anchor: N1
   alternate: false
 - id: Plastic Smart Plating
   name: プラスチック・スマート・プレート
-  jpwiki_id: Smart_Plating
+  wiki_id: Smart_Plating
   link_anchor: A1
   alternate: true
 
 - id: Versatile Framework
   name: 多目的フレームワーク
-  jpwiki_id: Versatile_Framework
+  wiki_id: Versatile_Framework
   link_anchor: N1
   alternate: false
 - id: Flexible Framework
   name: フレキシブル・フレームワーク
-  jpwiki_id: Versatile_Framework
+  wiki_id: Versatile_Framework
   link_anchor: A1
   alternate: true
 
 - id: Automated Wiring
   name: 自動ワイヤー
-  jpwiki_id: Automated_Wiring
+  wiki_id: Automated_Wiring
   link_anchor: N1
   alternate: false
 - id: Automated Speed Wiring
   name: 自動スピードワイヤー
-  jpwiki_id: Automated_Wiring
+  wiki_id: Automated_Wiring
   link_anchor: A1
   alternate: true
 
 - id: Modular Engine
   name: モジュラーエンジン
-  jpwiki_id: Modular_Engine
+  wiki_id: Modular_Engine
   link_anchor: N1
   alternate: false
 - id: Adaptive Control Unit
   name: 自律制御ユニット
-  jpwiki_id: Adaptive_Control_Unit
+  wiki_id: Adaptive_Control_Unit
   link_anchor: N1
   alternate: false
 - id: Assembly Director System
   name: 組立指揮システム
-  jpwiki_id: Assembly_Director_System
+  wiki_id: Assembly_Director_System
   link_anchor: N1
   alternate: false
 - id: Magnetic Field Generator
   name: 磁界発生装置
-  jpwiki_id: Magnetic_Field_Generator
+  wiki_id: Magnetic_Field_Generator
   link_anchor: N1
   alternate: false
 - id: Thermal Propulsion Rocket
   name: 熱推進型ロケット
-  jpwiki_id: Thermal_Propulsion_Rocket
+  wiki_id: Thermal_Propulsion_Rocket
   link_anchor: N1
   alternate: false
 - id: Nuclear Pasta
   name: 核パスタ
-  jpwiki_id: Nuclear_Pasta
+  wiki_id: Nuclear_Pasta
   link_anchor: N1
   alternate: false
 - id: Biochemical Sculptor
@@ -1430,38 +1430,38 @@
 
 - id: Portable Miner
   name: 携帯式採鉱機
-  jpwiki_id: Portable_Miner
+  wiki_id: Portable_Miner
   link_anchor: N1
   alternate: false
 - id: Automated Miner
   name: 自動採鉱機
-  jpwiki_id: Portable_Miner
+  wiki_id: Portable_Miner
   link_anchor: A1
   alternate: true
 
 - id: Factory Cart
   name: ファクトリーカート
-  jpwiki_id: Factory_Cart
+  wiki_id: Factory_Cart
   link_anchor: N1
   alternate: false
 - id: Golden Factory Cart
   name: ゴールデンファクトリーカート
-  jpwiki_id: Golden_Factory_Cart
+  wiki_id: Golden_Factory_Cart
   link_anchor: N1
   alternate: false
 - id: Zipline
   name: ジップライン
-  jpwiki_id: Zipline
+  wiki_id: Zipline
   link_anchor: N1
   alternate: false
 - id: Object Scanner
   name: オブジェクト・スキャナー
-  jpwiki_id: Object_Scanner
+  wiki_id: Object_Scanner
   link_anchor: N1
   alternate: false
 - id: Chainsaw
   name: チェーンソー
-  jpwiki_id: Chainsaw
+  wiki_id: Chainsaw
   link_anchor: N1
   alternate: false
 - id: Xeno-Zapper
@@ -1474,46 +1474,46 @@
   alternate: false
 - id: Rebar Gun
   name: 鉄筋ガン
-  jpwiki_id: Rebar_Gun
+  wiki_id: Rebar_Gun
   link_anchor: N1
   alternate: false
 - id: Nobelisk Detonator
   name: ノーベリスク起爆装置
-  jpwiki_id: Nobelisk_Detonator
+  wiki_id: Nobelisk_Detonator
   link_anchor: N1
   alternate: false
 - id: Rifle
   name: ライフル
-  jpwiki_id: Rifle
+  wiki_id: Rifle
   link_anchor: N1
   alternate: false
 - id: Gas Mask
   name: ガスマスク
-  jpwiki_id: Gas_Mask
+  wiki_id: Gas_Mask
   link_anchor: N1
   alternate: false
 - id: Parachute
   name: パラシュート
-  jpwiki_id: Parachute
+  wiki_id: Parachute
   link_anchor: N1
   alternate: false
 - id: Jetpack
   name: ジェットパック
-  jpwiki_id: Jetpack
+  wiki_id: Jetpack
   link_anchor: N1
   alternate: false
 - id: Hoverpack
   name: ホバーパック
-  jpwiki_id: Hover_Pack
+  wiki_id: Hover_Pack
   link_anchor: N1
   alternate: false
 - id: Hazmat Suit
   name: 化学防護服
-  jpwiki_id: Hazmat_Suit
+  wiki_id: Hazmat_Suit
   link_anchor: N1
   alternate: false
 - id: Blade Runners
   name: ブレード・ランナーズ
-  jpwiki_id: Blade_Runners
+  wiki_id: Blade_Runners
   link_anchor: N1
   alternate: false
