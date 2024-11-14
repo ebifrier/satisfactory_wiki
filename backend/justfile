@@ -3,24 +3,30 @@ set shell := ["powershell.exe", "-c"]
 # PYTHONPATHに現ディレクトリを設定
 export PYTHONPATH := justfile_directory()
 
-VENV := ".venv/Scripts/activate"
+PYTHON := "pipenv run python"
+
 
 [doc("一番最初のvenvの環境構築を行います。")]
+[unix]
 _create-venv:
-  @if (!(Test-Path -Path ".venv")) { \
-    python -m venv .venv \
+  if [ ! -d .venv ]; then \
+    {{PYTHON}} -m venv .venv; \
+  fi
+
+[windows]
+_create-venv:
+  if (!(Test-Path -Path ".venv")) { \
+    {{PYTHON}} -m venv .venv \
   }
 
 [doc("requirements.txtをvenv環境のパッケージリストに反映させます。")]
 install: _create-venv
-  {{ VENV }}; \
-  python -m pip install --upgrade pip; \
-  pip install -r requirements.txt
+  {{PYTHON}} -m pip install --upgrade pip; \
+  {{PYTHON}} -m pip install -r requirements.txt
 
 [doc("ローカル環境でbackendを実行します。")]
 run:
-  {{ VENV }}; \
-  flask --debug run
+  {{PYTHON}} -m flask --debug run
 
 [doc("本番環境にbackendをデプロイします。")]
 deploy:
@@ -34,10 +40,9 @@ deploy:
 
 [doc("DBにレシピなどの初期データを設定します。")]
 db-init:
-  {{ VENV }}; \
-  flask db init; \
-  flask db migrate -m "Initial migration."; \
-  flask db upgrade
+  {{PYTHON}} -m flask db init; \
+  {{PYTHON}} -m flask db migrate -m "Initial migration."; \
+  {{PYTHON}} -m flask db upgrade
 
 [doc("DBファイルをすべて削除します。")]
 db-clear:
