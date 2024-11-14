@@ -2,6 +2,7 @@ flask
 flask-cors
 flask-migrate
 flask-sqlalchemy
+serverless-wsgi
 setuptools
 pulp
 pyyaml

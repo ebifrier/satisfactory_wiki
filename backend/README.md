@@ -10,7 +10,12 @@ API は python で実装され、素材一覧やその使用先、レシピの�
 ### 前提条件
 
 ```
-# venv環境がない場合や、requirements.txtを更新した場合は、以下のコマンドを実行します。
+# Ubuntuでは以下のコマンドでpython3.12をインストールします。
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.12
+
+# venv環境を作っていない場合や、requirements.txtを更新した場合は、以下のコマンドを実行します。
 just install
 ```
 

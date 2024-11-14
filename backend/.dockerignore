@@ -1,0 +1,8 @@
+
+**/__pycache__
+migrations/
+
+Pipfile
+Pipfile.*
+justfile
+zappa_settings.json

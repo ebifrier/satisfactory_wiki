@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
 from sqlalchemy import orm, asc, desc
+import serverless_wsgi
 
 from models import db, Item, Building, Recipe, RecipeItem, Condition, ConditionItem
 from seeddata import make_seeddata
@@ -42,6 +43,16 @@ def items_by_category(items: list[Item]) -> list[tuple[str, list[dict]]]:
         cat_items.append(item.to_dict())
 
     return result
+
+
+# AWS Lambda用のハンドラーを設定
+def handler(event, context):
+    return serverless_wsgi.handle_request(app, event, context)
+
+
+@app.get('/')
+def echo():
+    return jsonify({"status": "ok"})
 
 
 @app.get('/api/v1/items')
