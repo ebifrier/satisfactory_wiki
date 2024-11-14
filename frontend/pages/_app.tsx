@@ -1,8 +1,10 @@
 import React, { ReactNode } from "react";
-import Link from "next/link";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import Link from "next/link";
 import store from "@/store";
 
 import "@/styles/style.scss";
@@ -81,12 +83,14 @@ export default function App({ Component, pageProps }: AppProps): ReactNode {
 
       <div className="flex flex-col">
         <Header className="flex-none" />
-        <div
-          id="main"
-          className="container flex-1 bg-white xl:max-w-7xl rounded-lg shadow-md p-6 mx-auto my-4"
-        >
-          <Component {...pageProps} />
-        </div>
+        <DndProvider backend={HTML5Backend}>
+          <div
+            id="main"
+            className="container flex-1 bg-white xl:max-w-7xl rounded-lg shadow-md p-6 mx-auto my-4"
+          >
+            <Component {...pageProps} />
+          </div>
+        </DndProvider>
       </div>
     </Provider>
   );

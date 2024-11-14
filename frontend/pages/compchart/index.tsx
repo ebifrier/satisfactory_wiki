@@ -1,7 +1,6 @@
 import React from "react";
 import useSWR from "swr";
-import { DndProvider, useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { useDrop } from "react-dnd";
 import * as Icon from "@heroicons/react/24/outline";
 import {
   TRecipe,
@@ -209,13 +208,12 @@ const RecipePage: React.FC = () => {
   }, [recipeSels, productAmounts, ingredients, items]);
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <PageHead title="比較表" />
-
       <OutsideDropArea
         onDrop={handleDropOutside}
         className="grid grid-cols-2 gap-4 max-w-6xl"
       >
+      <PageHead title="比較表" />
+
         {/* 左側: レシピ一覧と検索フィルター */}
         <div className="flex flex-col p-4" style={{ maxHeight: "90vh" }}>
           <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
@@ -290,7 +288,6 @@ const RecipePage: React.FC = () => {
           ></textarea>
         </div>
       </OutsideDropArea>
-    </DndProvider>
   );
 };
 
