@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, TRecipe } from "@/index";
-import { TRecipeSelection, actions } from "@/slices/compchartSlice";
+import { TRecipeSelection, actions } from "../slices/compchartSlice";
 
 export const ItemTypes = {
   RECIPE: "recipe",
@@ -53,7 +53,7 @@ export const DraggableRecipe: React.FC<
   );
 };
 
-const RecipeSelection: React.FC<{
+export const RecipeSelection: React.FC<{
   index: number;
   recipeSel: TRecipeSelection;
   hasDelete?: boolean;
@@ -75,7 +75,7 @@ const RecipeSelection: React.FC<{
   );
   drop(ref);
 
-  const { recipes, name } = recipeSel ?? {};
+  const { recipes, name } = recipeSel;
   const handleName = React.useCallback(
     (ev: ChangeEvent<HTMLInputElement>) =>
       dispatch(
@@ -122,7 +122,7 @@ const RecipeSelection: React.FC<{
           </button>
         </p>
       </h2>
-      {recipes == null || recipes.length === 0 ? (
+      {recipes.length === 0 ? (
         <p>レシピをここにドロップしてください</p>
       ) : (
         recipes.map((recipe) => (
@@ -138,5 +138,3 @@ const RecipeSelection: React.FC<{
     </div>
   );
 };
-
-export default RecipeSelection;

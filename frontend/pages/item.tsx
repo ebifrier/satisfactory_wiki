@@ -11,14 +11,12 @@ import {
   useItemOptions,
   findSelectedItem,
   fetcher,
-} from "@/index";
-import {
   createRecipeData,
   createRecipesForBuildingData,
   createRecipesForItemData,
   createMilestonesData,
   createResearchesData,
-} from "@/tableExt";
+} from "@/index";
 import { PageHead, TableData } from "@/components";
 
 type DataTableWithTitleProps = {

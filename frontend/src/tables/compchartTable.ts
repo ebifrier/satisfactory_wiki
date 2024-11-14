@@ -7,7 +7,7 @@ import {
   TTableData,
   TTableColumn,
 } from "@/index";
-import { TRecipeSelection, TProductAmount } from "./_slice";
+import { TRecipeSelection, TProductAmount } from "../slices/compchartSlice";
 
 type StringToValueDic = { [key: string]: number };
 

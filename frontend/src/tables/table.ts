@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 import _ from "lodash";
-import { TRecipe, TBuilding, TItem } from "./types";
+import { TRecipe, TBuilding, TItem } from "@/index";
 
 export interface TTag {
   type: string;

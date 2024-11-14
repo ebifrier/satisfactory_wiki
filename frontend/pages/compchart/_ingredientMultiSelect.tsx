@@ -1,7 +1,7 @@
 import React from "react";
 import Select, { GroupHeadingProps } from "react-select";
 import { Option, GroupOption, useAppDispatch, findSelectedItem } from "@/index";
-import { actions } from "./_slice";
+import { actions } from "@/slices/compchartSlice";
 
 const CustomGroupHeading: React.FC<GroupHeadingProps<Option, true>> = ({
   data,
@@ -22,8 +22,8 @@ const CustomGroupHeading: React.FC<GroupHeadingProps<Option, true>> = ({
   );
 };
 
-export const IngredientMultiSelect: React.FC<{
-  ingredients: string[];
+const IngredientMultiSelect: React.FC<{
+  ingredients?: string[];
   itemOptions?: GroupOption[];
 }> = ({ ingredients, itemOptions }) => {
   const dispatch = useAppDispatch();
@@ -31,8 +31,8 @@ export const IngredientMultiSelect: React.FC<{
   const selectedOptions = React.useMemo(
     () =>
       ingredients
-        .map((ing) => findSelectedItem(ing, itemOptions))
-        .filter((opt) => opt != null),
+        ?.map((ing) => findSelectedItem(ing, itemOptions))
+        ?.filter((opt) => opt != null),
     [ingredients, itemOptions]
   );
 
@@ -53,3 +53,5 @@ export const IngredientMultiSelect: React.FC<{
     />
   );
 };
+
+export default IngredientMultiSelect;

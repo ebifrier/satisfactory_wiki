@@ -8,7 +8,7 @@ import {
   TTableRow,
   TTableData,
   TableUtil,
-} from "@/table";
+} from "@/tables";
 
 //
 // <Tag>内で指定されている文字列を整形してhtmlタグに変換します。

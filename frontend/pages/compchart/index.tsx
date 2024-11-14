@@ -10,17 +10,17 @@ import {
   useItemOptions,
   TTableData,
   TableUtil,
+  createCompChartData,
+  executeCompChart,
 } from "@/index";
 import { PageHead, TableData } from "@/components";
-import { createCompChartData, executeCompChart } from "./_compchartTypes";
-import {
+import RecipeSelection, {
   ItemTypes,
   DraggableRecipe,
-  RecipeSelection,
 } from "./_recipeSelection";
-import { ProductAmountTable } from "./_productAmount";
-import { TRecipeSelection, actions } from "./_slice";
-import { IngredientMultiSelect } from "./_ingredientMultiSelect";
+import ProductAmountTable from "./_productAmount";
+import IngredientMultiSelect from "./_ingredientMultiSelect";
+import { TRecipeSelection, actions } from "@/slices/compchartSlice";
 
 //
 // 範囲外のドロップエリア
@@ -208,86 +208,86 @@ const RecipePage: React.FC = () => {
   }, [recipeSels, productAmounts, ingredients, items]);
 
   return (
-      <OutsideDropArea
-        onDrop={handleDropOutside}
-        className="grid grid-cols-2 gap-4 max-w-6xl"
-      >
+    <OutsideDropArea
+      onDrop={handleDropOutside}
+      className="grid grid-cols-2 gap-4 max-w-6xl"
+    >
       <PageHead title="比較表" />
 
-        {/* 左側: レシピ一覧と検索フィルター */}
-        <div className="flex flex-col p-4" style={{ maxHeight: "90vh" }}>
-          <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
-          <input
-            type="text"
-            placeholder="検索..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full flex-none p-3 border rounded-lg mb-3"
+      {/* 左側: レシピ一覧と検索フィルター */}
+      <div className="flex flex-col p-4" style={{ maxHeight: "90vh" }}>
+        <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
+        <input
+          type="text"
+          placeholder="検索..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full flex-none p-3 border rounded-lg mb-3"
+        />
+        <div className="flex-1 overflow-auto">{FilteredDraggableRecipes}</div>
+      </div>
+
+      {/* 右側: 使用するレシピのドロップエリア */}
+      <div className="p-4 flex flex-col bg-white rounded-lg shadow-md">
+        <h2 className="flex-none text-2xl font-bold">使用レシピ一覧</h2>
+        {recipeSels.map((recipeSel, index) => (
+          <RecipeSelection
+            key={index}
+            index={index}
+            recipeSel={recipeSel}
+            hasDelete={recipeSels.length > 1}
           />
-          <div className="flex-1 overflow-auto">{FilteredDraggableRecipes}</div>
-        </div>
+        ))}
 
-        {/* 右側: 使用するレシピのドロップエリア */}
-        <div className="p-4 flex flex-col bg-white rounded-lg shadow-md">
-          <h2 className="flex-none text-2xl font-bold">使用レシピ一覧</h2>
-          {recipeSels.map((recipeSel, index) => (
-            <RecipeSelection
-              key={index}
-              index={index}
-              recipeSel={recipeSel}
-              hasDelete={recipeSels.length > 1}
-            />
-          ))}
+        <h2 className="flex-none text-2xl font-bold mt-4 mb-1">
+          生産物一覧
+          <span className="float-right font-normal">
+            <button
+              className="size-6 text-blue-400 align-bottom"
+              onClick={() => dispatch(actions.addProductAmount())}
+            >
+              <Icon.ArrowDownOnSquareIcon />
+            </button>
+          </span>
+        </h2>
+        <ProductAmountTable
+          productAmounts={productAmounts}
+          itemOptions={itemOptions}
+        />
 
-          <h2 className="flex-none text-2xl font-bold mt-4 mb-1">
-            生産物一覧
-            <span className="float-right font-normal">
-              <button
-                className="size-6 text-blue-400 align-bottom"
-                onClick={() => dispatch(actions.addProductAmount())}
-              >
-                <Icon.ArrowDownOnSquareIcon />
-              </button>
-            </span>
-          </h2>
-          <ProductAmountTable
-            productAmounts={productAmounts}
-            itemOptions={itemOptions}
-          />
+        <h2 className="flex-none text-2xl font-bold mt-4 mb-1">原料一覧</h2>
+        <IngredientMultiSelect
+          ingredients={ingredients}
+          itemOptions={itemOptions}
+        />
+      </div>
 
-          <h2 className="flex-none text-2xl font-bold mt-4 mb-1">原料一覧</h2>
-          <IngredientMultiSelect
-            ingredients={ingredients}
-            itemOptions={itemOptions}
-          />
-        </div>
+      <button
+        className="col-span-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        onClick={handleCompChart}
+      >
+        計算
+      </button>
+      <div className="col-span-full border border-gray-500">
+        {chartData == null ? (
+          <p className="col-span-full text-gray-500">データはありません。</p>
+        ) : chartData.rows.length <= 2 ? (
+          <p className="col-span-full text-gray-500">
+            表示する項目はありません。
+          </p>
+        ) : (
+          <TableData data={chartData} />
+        )}
 
-        <button
-          className="col-span-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={handleCompChart}
-        >
-          計算
-        </button>
-        <div className="col-span-full border border-gray-500">
-          {chartData == null ? (
-            <p className="col-span-full text-gray-500">データはありません。</p>
-          ) : chartData.rows.length <= 2 ? (
-            <p className="col-span-full text-gray-500">
-              表示する項目はありません。
-            </p>
-          ) : (
-            <TableData data={chartData} />
-          )}
-
-          <textarea
-            className="w-full border border-gray-500 focus:border-blue-500"
-            wrap="off"
-            placeholder="placeholder"
-            value={`${TableUtil.dataToWIKI(chartData)}\n`}
-            readOnly
-          ></textarea>
-        </div>
-      </OutsideDropArea>
+        <textarea
+          className="w-full border border-gray-500 focus:border-blue-500"
+          wrap="off"
+          placeholder="placeholder"
+          value={`${TableUtil.dataToWIKI(chartData)}\n`}
+          readOnly
+        ></textarea>
+      </div>
+    </OutsideDropArea>
   );
 };
 

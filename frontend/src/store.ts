@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import compChartSlice from "../pages/compchart/_slice";
+import compChartSlice from "./slices/compchartSlice";
 
 const store = configureStore({
   reducer: {

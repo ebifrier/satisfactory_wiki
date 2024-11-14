@@ -2,17 +2,17 @@ import React from "react";
 import Select from "react-select";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, Option, GroupOption, findSelectedItem } from "@/index";
-import { TProductAmount, actions } from "./_slice";
+import { TProductAmount, actions } from "@/slices/compchartSlice";
 
-export const ProductAmountTable: React.FC<{
-  productAmounts: TProductAmount[];
+const ProductAmountTable: React.FC<{
+  productAmounts?: TProductAmount[];
   itemOptions?: GroupOption[];
 }> = ({ productAmounts, itemOptions }) => {
   const dispatch = useAppDispatch();
 
   const productOptions = React.useMemo(
     () =>
-      productAmounts.map((product) =>
+      productAmounts?.map((product) =>
         findSelectedItem(product.itemId, itemOptions)
       ),
     [productAmounts, itemOptions]
@@ -28,12 +28,12 @@ export const ProductAmountTable: React.FC<{
         </tr>
       </thead>
       <tbody>
-        {productAmounts.map((product, index) => (
+        {productAmounts?.map((product, index) => (
           <tr key={index}>
             <td>
               <Select<Option, false>
                 options={itemOptions}
-                value={productOptions[index]}
+                value={productOptions?.[index]}
                 onChange={(option) =>
                   dispatch(
                     actions.setProductAmount({
@@ -77,3 +77,5 @@ export const ProductAmountTable: React.FC<{
     </table>
   );
 };
+
+export default ProductAmountTable;

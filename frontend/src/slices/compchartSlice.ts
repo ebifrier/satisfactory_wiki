@@ -18,8 +18,8 @@ export interface CompChartState {
   ingredients: string[];
 }
 
-const makeDefualtRecipeSel = () => ({ name: "", recipes: [] });
-const makeDefualtTProductAmount = () => ({ amount: 100 });
+export const makeDefualtRecipeSel = () => ({ name: "", recipes: [] });
+export const makeDefualtTProductAmount = () => ({ amount: 100 });
 
 const initialState: CompChartState = {
   recipeSels: [makeDefualtRecipeSel()],

@@ -5,14 +5,12 @@ import {
   RecipeUtil,
   ItemUtil,
   ConditionUtil,
-} from "./types";
-import {
   TTableData,
   TTableRow,
   TTableColumn,
   TagUtil,
   TableUtil,
-} from "./table";
+} from "@/index";
 
 //
 // レシピをTableDataに変換します。
