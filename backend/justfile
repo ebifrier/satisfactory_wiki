@@ -1,25 +1,45 @@
 set shell := ["powershell.exe", "-c"]
-pwd := `(Get-Location).Path`
 
-create-venv:
+# PYTHONPATHに現ディレクトリを設定
+export PYTHONPATH := justfile_directory()
+
+VENV := ".venv/Scripts/activate"
+
+[doc("一番最初のvenvの環境構築を行います。")]
+_create-venv:
   @if (!(Test-Path -Path ".venv")) { \
     python -m venv .venv \
   }
 
-# makeはコマンド単位で環境が分割されるため、このコマンドは効果が持続しません。
-venv:
-	./.venv/Scripts/activate
+[doc("requirements.txtをvenv環境のパッケージリストに反映させます。")]
+install: _create-venv
+  {{ VENV }}; \
+  python -m pip install --upgrade pip; \
+  pip install -r requirements.txt
 
+[doc("ローカル環境でbackendを実行します。")]
 run:
-  $env:PYTHONPATH="{{ pwd }}"; \
+  {{ VENV }}; \
   flask --debug run
 
-db-init:
-	$env:PYTHONPATH="{{ pwd }}"; \
-	flask db init; \
-	flask db migrate -m "Initial migration."; \
-	flask db upgrade
+[doc("本番環境にbackendをデプロイします。")]
+deploy:
+  {{ VENV }}; \
+  zappa status prod | Out-Null; \
+  if (echo $?) { \
+    zappa update prod \
+  } else { \
+    zappa deploy prod \
+  }
 
+[doc("DBにレシピなどの初期データを設定します。")]
+db-init:
+  {{ VENV }}; \
+  flask db init; \
+  flask db migrate -m "Initial migration."; \
+  flask db upgrade
+
+[doc("DBファイルをすべて削除します。")]
 db-clear:
-	rm -r -fo satisfactory.db
-	rm -r -fo migrations
+  rm -r -fo satisfactory.db
+  rm -r -fo migrations
