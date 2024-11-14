@@ -1,0 +1,71 @@
+set windows-shell := ["powershell.exe", "-c"]
+
+# PYTHONPATHに現ディレクトリを設定
+export PYTHONPATH := justfile_directory()
+
+PYTHON := "pipenv run python"
+
+AWS_PROFILE := "sf-wikitool"
+AWS_REGION := "ap-northeast-1"
+AWS_ACCOUNT_ID := "084828571117"
+AWS_REPO_ARN := AWS_ACCOUNT_ID + ".dkr.ecr." + AWS_REGION + ".amazonaws.com"
+AWS_IMAGE_ID := AWS_REPO_ARN + "/satisfactory-wikitool/backend:latest"
+
+
+[doc("一番最初のvenvの環境構築を行います。")]
+[unix]
+_create-venv:
+  if [ ! -d .venv ]; then \
+    {{PYTHON}} -m venv .venv; \
+  fi
+
+[windows]
+_create-venv:
+  if (!(Test-Path -Path ".venv")) { \
+    {{PYTHON}} -m venv .venv \
+  }
+
+[doc("requirements.txtをvenv環境のパッケージリストに反映させます。")]
+install: _create-venv
+  {{PYTHON}} -m pip install --upgrade pip; \
+  {{PYTHON}} -m pip install -r requirements.txt
+
+[doc("ローカル環境でbackendを実行します。")]
+run:
+  {{PYTHON}} -m flask --debug run
+
+[doc("ECRを扱うためのAWS権限を取得します。")]
+login:
+  aws ecr get-login-password --profile {{AWS_PROFILE}} --region {{AWS_REGION}} | \
+  docker login --username AWS --password-stdin {{AWS_REPO_ARN}}
+
+[doc("dockerイメージを作成します。")]
+build:
+  docker build -t satisfactory-wikitool/backend:latest .
+
+_push-image: login build
+  docker tag satisfactory-wikitool/backend:latest {{AWS_IMAGE_ID}}
+  docker push {{AWS_IMAGE_ID}}
+
+#zappa deploy --docker-image-uri {{AWS_IMAGE_ID}} production
+[doc("本番環境にbackendをデプロイします。")]
+deploy-init: _push-image
+  {{PYTHON}} -m zappa.cli deploy --docker-image-uri {{AWS_IMAGE_ID}} production
+
+[doc("本番環境にデプロイした環境を更新します。")]
+deploy: _push-image
+  {{PYTHON}} -m zappa.cli update --docker-image-uri {{AWS_IMAGE_ID}} production
+
+undeploy:
+  {{PYTHON}} -m zappa.cli undeploy production
+
+[doc("DBにレシピなどの初期データを設定します。")]
+db-init:
+  {{PYTHON}} -m flask db init; \
+  {{PYTHON}} -m flask db migrate -m "Initial migration."; \
+  {{PYTHON}} -m flask db upgrade
+
+[doc("DBファイルをすべて削除します。")]
+db-clear:
+  rm -r -fo satisfactory.db
+  rm -r -fo migrations

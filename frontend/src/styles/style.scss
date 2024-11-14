@@ -14,7 +14,7 @@ body {
     max-height: 100%;*/
 }
 
-a {
+#main a {
   text-decoration-color: #ccc !important;
   text-decoration-line: underline !important;
   text-decoration-style: solid !important;
@@ -23,6 +23,13 @@ a {
 
   &:visited {
     text-decoration-color: #ccc;
+  }
+}
+
+header {
+  .logo-image {
+    height: 1.5rem; // font-2xlと同じサイズ
+    width: auto;
   }
 }
 
@@ -47,6 +54,12 @@ td {
   }
 }
 
+.data-table {
+  thead td {
+    background: #eee;
+  }
+}
+
 textarea {
   min-height: 6rem;
 }
@@ -55,4 +68,8 @@ textarea {
   table + table {
     margin-top: 1rem;
   }
+}
+
+.recipe-item + .recipe-item {
+  margin-left: 0.1rem;
 }

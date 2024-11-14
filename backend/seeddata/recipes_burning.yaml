@@ -1,6 +1,6 @@
 - id: Coal burning
   name: 石炭発電機　石炭発電時
-  jpwiki_id: Coal
+  wiki_id: Coal
   link_anchor: N1
   buildings:
     - Coal-Powered Generator
@@ -17,7 +17,7 @@
   products: []
 - id: Compacted Coal burning
   name: 石炭発電機　圧縮石炭発電時
-  jpwiki_id: Compacted Coal
+  wiki_id: Compacted Coal
   link_anchor: N1
   buildings:
     - Coal-Powered Generator
@@ -34,7 +34,7 @@
   products: []
 - id: Petroleum Coke burning
   name: 石炭発電機　コークス発電時
-  jpwiki_id: Petroleum Coke
+  wiki_id: Petroleum Coke
   link_anchor: N1
   buildings:
     - Coal-Powered Generator
@@ -52,7 +52,7 @@
 
 - id: Fuel burning
   name: 燃料式発電機　燃料発電時
-  jpwiki_id: Fuel
+  wiki_id: Fuel
   link_anchor: N1
   buildings:
     - Fuel-Powered Generator
@@ -66,7 +66,7 @@
   products: []
 - id: Liquid Biofuel burning
   name: 燃料式発電機　液体バイオ燃料発電時
-  jpwiki_id: Liquid Biofuel
+  wiki_id: Liquid Biofuel
   link_anchor: N1
   buildings:
     - Fuel-Powered Generator
@@ -80,7 +80,7 @@
   products: []
 - id: Turbofuel burning
   name: 燃料式発電機　ターボ燃料発電時
-  jpwiki_id: Turbofuel
+  wiki_id: Turbofuel
   link_anchor: N1
   buildings:
     - Fuel-Powered Generator
@@ -94,7 +94,7 @@
   products: []
 - id: Rocket Fuel burning
   name: 燃料式発電機　ロケット燃料発電時
-  jpwiki_id: Rocket Fuel
+  wiki_id: Rocket Fuel
   link_anchor: N1
   buildings:
     - Fuel-Powered Generator
@@ -108,7 +108,7 @@
   products: []
 - id: Ionized Fuel burning
   name: 燃料式発電機　イオン燃料発電時
-  jpwiki_id: Ionized Fuel
+  wiki_id: Ionized Fuel
   link_anchor: N1
   buildings:
     - Fuel-Powered Generator
@@ -123,7 +123,7 @@
 
 - id: Ficsonium Fuel Rod burning
   name: 原子力発電所　FICONIUM発電時
-  jpwiki_id: Ficsonium Fuel Rod
+  wiki_id: Ficsonium Fuel Rod
   link_anchor: N1
   buildings:
     - Nuclear Power Plant

@@ -46,7 +46,7 @@
   coupons: 35
 - id: SAM
   name: SAM
-  jpwiki_id: S.A.M._Ore
+  wiki_id: S.A.M._Ore
   type: material
   category: 鉱石類
   coupons: 20
@@ -83,7 +83,7 @@
   coupons: 10
 - id: Blue Power Slug
   name: 青のパワー・スラッグ
-  jpwiki_id: Green_Power_Slug
+  wiki_id: Green_Power_Slug
   type: material
   category: 植物・動物類
   coupons: 0
@@ -115,7 +115,7 @@
   coupons: 0
 - id: Spitter Remains
   name: プラズマ・スピッターの遺骸
-  jpwiki_id: Plasma_Spitter_Remains
+  wiki_id: Plasma_Spitter_Remains
   type: material
   category: エイリアンの遺骸
   coupons: 0
@@ -126,7 +126,7 @@
   coupons: 0
 - id: Alien DNA Capsule
   name: エイリアンのDNAカプセル
-  jpwiki_id: Organic_Data_Capsule
+  wiki_id: Organic_Data_Capsule
   type: material
   category: エイリアンの遺骸
   coupons: 0
@@ -228,7 +228,7 @@
   coupons: 608
 - id: Iodine-Infused Filter
   name: ヨウ素充填フィルター
-  jpwiki_id: Iodine_Infused_Filter
+  wiki_id: Iodine_Infused_Filter
   type: material
   category: 消耗品
   coupons: 2274
@@ -248,7 +248,7 @@
   coupons: 58
 - id: Iron Rebar
   name: 鉄筋
-  jpwiki_id: Spiked_Rebar
+  wiki_id: Spiked_Rebar
   type: material
   category: 弾薬
   coupons: 8
@@ -294,7 +294,7 @@
   coupons: 19600
 - id: Rifle Ammo
   name: ライフル弾
-  jpwiki_id: Rifle_Cartridge
+  wiki_id: Rifle_Cartridge
   type: material
   category: 弾薬
   coupons: 25
@@ -428,7 +428,7 @@
   coupons: 696
 - id: AI Limiter
   name: AIリミッター
-  jpwiki_id: A.I._Limiter
+  wiki_id: A.I._Limiter
   type: material
   category: 電子機器
   coupons: 920
@@ -728,7 +728,7 @@
   coupons: 0
 - id: Non-Fissile Uranium
   name: 非分裂性ウラン
-  jpwiki_id: Non-fissile_Uranium
+  wiki_id: Non-fissile_Uranium
   type: material
   category: 原子力
   coupons: 0
@@ -888,7 +888,7 @@
   category: 装備品
 - id: Hoverpack
   name: ホバーパック
-  jpwiki_id: Hover_Pack
+  wiki_id: Hover_Pack
   type: equipment
   category: 装備品
 - id: Blade Runners

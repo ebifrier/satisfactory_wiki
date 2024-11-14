@@ -25,17 +25,20 @@ export type TBase = {
 };
 
 export type TItem = TBase & {
-  jpwikiId: string;
+  wikiId: string;
   kind: string;
   category: string;
   coupons: number;
 };
 
 export class ItemUtil {
-  static getWikiLink = (item: TItem): string => `素材/${item.jpwikiId}`;
+  static getWikiLink = ({ wikiId }: TItem): string => `素材/${wikiId}`;
 
-  static getTypeName = (item: TItem): string => {
-    switch (item.kind) {
+  static getFullName = ({ name, id }: TItem): string =>
+    `${name} [${toDisplayId(id)}]`;
+
+  static getKindName = ({ kind }: TItem): string => {
+    switch (kind) {
       case "material":
         return "パーツ";
       case "equipment":
@@ -46,19 +49,57 @@ export class ItemUtil {
 }
 
 export type TBuilding = TBase & {
-  jpwikiId: string;
+  wikiId: string;
   category: string;
   subcategory: string;
-  power: number;
-  maxInputs: number;
-  maxOutputs: number;
+  power?: number;
+  maxInputs?: number;
+  maxOutputs?: number;
 };
 
 export class BuildingUtil {
   static getWIKILink = (building: TBuilding): string => {
-    const { jpwikiId, category } = building;
+    const { wikiId, category } = building;
     const cat = category != "特殊" ? category : "スペシャル";
-    return `建築物/${cat}#${jpwikiId}`;
+    return `建築物/${cat}#${wikiId}`;
+  };
+
+  static getAreaSize = (buildingId: string): number => {
+    switch (buildingId) {
+      case "Smelter":
+        return 45 / 64;
+      case "Foundry":
+        return 90 / 64;
+      case "Constructor":
+        return 78.21 / 64;
+      case "Assembler":
+        return 150 / 64;
+      case "Manufacturer":
+        return 360 / 64;
+      case "Refinery":
+        return 200 / 64;
+      case "Blender":
+        return 288 / 64;
+      case "Particle_Accelerator":
+        return 912 / 64;
+      case "Converter":
+        return 256 / 64;
+      case "Quantum_Encoder":
+        return 1056 / 64;
+
+      case "Biomass_Burner":
+        return 64 / 64;
+      case "Coal-Powered_Generator":
+        return 260 / 64;
+      case "Fuel-Powered_Generator":
+        return 400 / 64;
+      case "Nuclear_Power_Plant":
+        return 1548 / 64;
+      case "Alien_Power_Augmenter":
+        return 784 / 64;
+    }
+
+    throw new Error(`${buildingId} is unknown building`);
   };
 }
 
@@ -104,7 +145,7 @@ export type TRecipeItem = {
 };
 
 export type TRecipe = TBase & {
-  jpwikiId: string;
+  wikiId: string;
   linkAnchor: string;
   alternate: boolean;
   conditionId: string;
@@ -121,8 +162,8 @@ export type TRecipe = TBase & {
 
 export class RecipeUtil {
   static getWIKILink = (recipe: TRecipe): string => {
-    const { jpwikiId, linkAnchor = "N1" } = recipe;
-    return `素材/${jpwikiId}#Recipe_${linkAnchor}`;
+    const { wikiId, linkAnchor = "N1" } = recipe;
+    return `素材/${wikiId}#Recipe_${linkAnchor}`;
   };
 
   static isByproduct = (recipe: TRecipe, itemId: string): boolean =>

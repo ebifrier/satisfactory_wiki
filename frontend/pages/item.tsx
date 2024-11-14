@@ -1,24 +1,25 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Select, { GroupBase } from "react-select";
-import useSWR, { fetcher } from "@/api";
+import useSWR from "swr";
+import Select from "react-select";
 import {
   Option,
-  GroupOption,
   TCondition,
-  TItem,
   TRecipe,
-  toDisplayId,
-} from "@/types";
-import { TableUtil, TTableData } from "@/table";
+  TableUtil,
+  TTableData,
+  useItemOptions,
+  findSelectedItem,
+  fetcher,
+} from "@/index";
 import {
   createRecipeData,
   createRecipesForBuildingData,
   createRecipesForItemData,
   createMilestonesData,
   createResearchesData,
-} from "@/table_ext";
-import { TableData } from "@/components/table";
+} from "@/tableExt";
+import { PageHead, TableData } from "@/components";
 
 type DataTableWithTitleProps = {
   title: string;
@@ -72,33 +73,11 @@ function ItemPage() {
     [router, itemId]
   );
 
-  const { data: itemOptions } = useSWR(
-    "/api/v1/items?grouping=true",
-    async (key: string) => {
-      const data = await fetcher<[string, TItem[]][]>(key);
-      return data == null
-        ? []
-        : data.map(
-            ([cat, items]): GroupOption => ({
-              label: cat,
-              options: items.map((item) => ({
-                label: `${item.name} (${toDisplayId(item.id)})`,
-                value: item.id,
-              })),
-            })
-          );
-    }
+  const { itemOptions } = useItemOptions();
+  const selectedOption = React.useMemo(
+    () => findSelectedItem(itemId, itemOptions),
+    [itemId, itemOptions]
   );
-
-  const selectedOption = React.useMemo(() => {
-    for (const { options } of itemOptions ?? []) {
-      const option = options.find((x) => x.value === itemId);
-      if (option != null) {
-        return option;
-      }
-    }
-    return undefined;
-  }, [itemId, itemOptions]);
 
   const { data: recipesProducingData } = useSWR(
     [itemId, `/api/v1/item/${itemId}/recipes/producing`],
@@ -141,14 +120,15 @@ function ItemPage() {
   );
 
   return (
-    <div className="bg-white grid grid-cols-1 md:grid-cols-[2fr_1fr] max-w-6xl gap-x-4 gap-y-2 mx-auto p-6 rounded-lg shadow-md">
+    <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-4 gap-y-2">
+      <PageHead title="素材詳細" />
+
       <div className="col-span-full">
         <h1 className="text-4xl font-bold text-gray-800">素材詳細</h1>
       </div>
 
       <div className="mt-6 col-span-full">
-        <Select<Option, false, GroupBase<Option>>
-          id="item-select"
+        <Select<Option, false>
           options={itemOptions}
           value={selectedOption}
           onChange={(option) => setItemId(option?.value)}
@@ -176,8 +156,8 @@ function ItemPage() {
       ) : (
         <>
           <div className="recipes-producing-table">
-            {recipesProducingData.map((recipe, index) => (
-              <TableData key={index} data={recipe} />
+            {recipesProducingData.map((data, index) => (
+              <TableData key={index} data={data} />
             ))}
           </div>
           <textarea

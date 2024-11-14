@@ -50,7 +50,7 @@ def recipe_to_dict(recipe: TRecipe) -> dict | None:
     return {
         'id': to_id(hrecipe.id),
         'name': hrecipe.name,
-        'jpwiki_id': to_id(getattr(hrecipe, 'jpwiki_id', recipe.id)),
+        'wiki_id': to_id(getattr(hrecipe, 'wiki_id', recipe.id)),
         'link_anchor': hrecipe.link_anchor,
         'buildings': [to_id(id) for id in recipe.buildings],
         'production_times': recipe.production_times,
@@ -78,7 +78,7 @@ def recipe_to_dict_building(recipe: TRecipe) -> dict | None:
     return {
         'id': to_id(building.id),
         'name': building.name,
-        'jpwiki_id': to_id(getattr(building, 'jpwiki_id', recipe.id)),
+        'wiki_id': to_id(getattr(building, 'wiki_id', recipe.id)),
         'buildings': [to_id(id) for id in recipe.buildings],
         'production_times': recipe.production_times,
         'alternate': recipe.alternate,

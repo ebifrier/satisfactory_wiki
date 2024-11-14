@@ -8,6 +8,7 @@ export interface TTag {
 
 export interface TTextTag extends TTag {
   content: string;
+  size?: number;
 }
 
 export interface TImageTag extends TTag {
@@ -52,14 +53,14 @@ export class TagUtil {
   };
 
   static getSmallImageLink = (item: TRecipe | TBuilding | TItem): TLinkTag => {
-    return this.getImageLink(item.name, item.wikiLink, item.jpwikiId);
+    return this.getImageLink(item.name, item.wikiLink, item.wikiId);
   };
 
   static getBuildingLink = (building: TBuilding): TLinkTag =>
     this.getImageLink(
       `&br;${building.name}`,
       building.wikiLink,
-      building.jpwikiId
+      building.wikiId
     );
 
   static getConditionLink = (recipe: TRecipe): (TTag | string)[] => {
@@ -95,19 +96,21 @@ export class TagUtil {
       return undefined;
     }
 
-    const text2 = minute.toFixed(2);
-    const text3 = minute.toFixed(3);
-    return `${text2}0` === text3 ? text2 : text3;
+    return minute.toFixed(2);
   };
 
   static toWIKI = (tag: TTag | string): string => {
     if (_.isString(tag)) {
       return tag;
     } else if (TagUtil.isTextTag(tag)) {
-      return tag.content;
+      if (tag.size != null) {
+        return `&size(${tag.size}){${tag.content}};`;
+      } else {
+        return tag.content;
+      }
     } else if (TagUtil.isImageTag(tag)) {
       const { size = 20 } = tag;
-      return `&ref(Ref_img/${tag.refer},nolink,${size}x${size})`;
+      return `&ref(Ref_img/${tag.refer},nolink,${size}x${size});`;
     } else if (TagUtil.isLinkTag(tag)) {
       const { labelTags } = tag;
       const labels = labelTags.map((x) => this.toWIKI(x));
@@ -147,18 +150,21 @@ export class TableUtil {
     (column as TTableColumn)?.tags != null;
 
   static newColumn = (
-    tag: (TTag | string) | (TTag | string)[] | TTableColumn
+    tag: (TTag | string) | (TTag | string)[] | TTableColumn,
+    { type, attr }: { type?: string; attr?: CSSProperties } = {}
   ): TTableColumn => {
     return this.isColumn(tag)
       ? tag
       : _.isArray(tag)
-      ? { tags: tag }
+      ? { tags: tag, type, attr }
       : {
           tags: [tag],
           type:
-            tag === this.COLUMN_MERGE_RIGHT || tag === this.COLUMN_MERGE_UP
-              ? tag
+            type ??
+            (tag === this.COLUMN_MERGE_RIGHT || tag === this.COLUMN_MERGE_UP)
+              ? (tag as string)
               : undefined,
+          attr,
         };
   };
 
@@ -177,12 +183,12 @@ export class TableUtil {
       return "";
     }
     return [
-      attr.background ? `BGCOLOR(${attr.background})` : null,
-      attr.textAlign ? attr.textAlign.toUpperCase() : null,
+      attr.background ? `BGCOLOR(${attr.background}):` : null,
+      attr.textAlign ? `${attr.textAlign.toUpperCase()}:` : null,
       attr.width ? attr.width : null,
     ]
       .filter((x) => x != null)
-      .join(":");
+      .join("");
   };
 
   static columnToWIKI = (column: TTableColumn): string => {
@@ -195,16 +201,19 @@ export class TableUtil {
 
   static rowToWIKI = (row: TTableRow): string => {
     const columns = row.columns.map((column) => this.columnToWIKI(column));
-    return `|${columns.join("|")}|`;
+    return `|${columns.join("|")}|${row.type}`;
   };
 
-  static dataToWIKI = (data: TTableData): string => {
+  static dataToWIKI = (data?: TTableData): string => {
+    if (data == null) {
+      return "";
+    }
+
     const rows = data.rows.map((row) => this.rowToWIKI(row));
     const pre = data.wikiPreLines?.join("\n") ?? "";
     const post = data.wikiPostLines?.join("\n") ?? "";
     const preNL = pre.length > 0 ? "\n" : "";
     const postNL = post.length > 0 ? "\n" : "";
-
     return `${pre}${preNL}${rows.join("\n")}${postNL}${post}`;
   };
 }

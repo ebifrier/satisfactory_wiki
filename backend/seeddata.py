@@ -63,7 +63,7 @@ def load_items() -> Iterator[Item]:
                    kind = data['type'],
                    category = data['category'],
                    coupons = int(data.get('coupons', '0')),
-                   jpwiki_id = data.get('jpwiki_id', item_id))
+                   wiki_id = data.get('wiki_id', item_id))
 
 
 def load_buildings() -> Iterator[Building]:
@@ -80,7 +80,7 @@ def load_buildings() -> Iterator[Building]:
                        power = to_int(data.get('power', None)),
                        max_inputs = to_int(data.get('max_inputs', None)),
                        max_outputs = to_int(data.get('max_outputs', None)),
-                       jpwiki_id = data.get('jpwiki_id', building_id))
+                       wiki_id = data.get('wiki_id', building_id))
 
 
 def load_recipes() -> Iterator[Recipe]:
@@ -109,7 +109,7 @@ def load_recipes() -> Iterator[Recipe]:
         yield Recipe(id = recipe_id,
                      name = f"{prefix}{data['name']}",
                      index = i,
-                     jpwiki_id = data.get('jpwiki_id', to_id(recipe_id)),
+                     wiki_id = data.get('wiki_id', to_id(recipe_id)),
                      link_anchor = data.get('link_anchor', ''),
                      alternate = data['alternate'],
                      condition_id = condition_id,

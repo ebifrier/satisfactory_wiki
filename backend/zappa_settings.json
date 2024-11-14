@@ -1,6 +1,6 @@
 {
-  "prod": {
-    "app_function": "app.app",
+  "production": {
+    "app_function": "app.handler",
     "aws_region": "ap-northeast-1",
     "exclude": [
       "migrations",
@@ -11,11 +11,11 @@
       "s3transfer",
       "concurrent"
     ],
-    "profile_name": "default",
-    "project_name": "backend",
+    "profile_name": "sf-wikitool",
+    "project_name": "sf-wikitool-backend",
     "runtime": "python3.12",
     "apigateway_enabled": true,
     "cors": true,
-    "s3_bucket": "backend.sf-jp-wikitool"
+    "s3_bucket": "sf-wikitool-backend"
   }
 }

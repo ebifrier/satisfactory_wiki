@@ -102,11 +102,11 @@ export const createRecipeData = (
     rows.push(TableUtil.newRow(columns, TableUtil.ROW_FORMATTING));
   }
 
-  const { maxInputs, maxOutputs } = building;
-  const nrows = Math.max(maxInputs, ingredients.length, products.length);
-  const noutputs = Math.max(1, maxOutputs);
-  for (let i = 0; i < nrows; ++i) {
-    const product = i % noutputs == 0 ? products[i / noutputs] : null;
+  const { maxInputs = 0, maxOutputs = 0 } = building;
+  const nInputs = Math.max(maxInputs, ingredients.length, products.length);
+  const nOutputs = Math.max(1, maxOutputs);
+  for (let i = 0; i < nInputs; ++i) {
+    const product = i % nOutputs == 0 ? products[i / nOutputs] : null;
     const ingredient = ingredients[i];
     const columns = [
       TableUtil.newColumn(
@@ -184,7 +184,7 @@ export const createRecipesForItemData = (
     const ingredient = RecipeUtil.findIngredient(recipe, itemId);
     const product = recipe.products[0];
     const columns = [
-      ItemUtil.getTypeName(product.item!),
+      ItemUtil.getKindName(product.item!),
       TagUtil.getLink(recipe.name, recipe.wikiLink),
       TagUtil.getSmallImageLink(product.item!),
       TagUtil.amountToStr(ingredient?.amount) ?? "",
