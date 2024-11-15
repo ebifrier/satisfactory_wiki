@@ -37,6 +37,7 @@
   subcategory: 特殊
 - id: Crafting Bench
   name: 工作台
+  wiki_id: Craft_Bench
   category: 特殊
   subcategory: 特殊
 - id: Equipment Workshop
