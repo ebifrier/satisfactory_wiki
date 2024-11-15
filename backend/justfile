@@ -22,20 +22,24 @@ install:
 run:
   {{PYTHON}} -m flask --debug run
 
+[doc("PUBLIC ECRからイメージをpullするための権限を取得します。")]
+login-public:
+  aws ecr-public get-login-password --profile {{AWS_PROFILE}} --region us-east-1 | \
+  docker login --username AWS --password-stdin public.ecr.aws
+
 [doc("ECRを扱うためのAWS権限を取得します。")]
-login:
+login-private:
   aws ecr get-login-password --profile {{AWS_PROFILE}} --region {{AWS_REGION}} | \
   docker login --username AWS --password-stdin {{AWS_REPO_ARN}}
 
 [doc("dockerイメージを作成します。")]
-build:
+build: login-public
   docker build -t satisfactory-wikitool/backend:latest .
 
-_push-image: login build
+_push-image: build login-private
   docker tag satisfactory-wikitool/backend:latest {{AWS_IMAGE_ID}}
   docker push {{AWS_IMAGE_ID}}
 
-#zappa deploy --docker-image-uri {{AWS_IMAGE_ID}} production
 [doc("本番環境にbackendをデプロイします。")]
 deploy-init: _push-image
   {{PYTHON}} -m zappa.cli deploy --docker-image-uri {{AWS_IMAGE_ID}} production
