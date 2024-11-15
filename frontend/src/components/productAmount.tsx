@@ -19,11 +19,11 @@ export const ProductAmountTable: React.FC<{
   );
 
   return (
-    <table>
+    <table className="table-fixed">
       <thead>
         <tr>
           <td className="text-center">生産物</td>
-          <td className="text-center">生産個数</td>
+          <td className="text-center w-[4rem]">生産個数</td>
           <td className="text-center">削除</td>
         </tr>
       </thead>
@@ -50,7 +50,7 @@ export const ProductAmountTable: React.FC<{
             <td>
               <input
                 type="number"
-                className="w-full text-right"
+                className="text-right text-sm p-2 rounded-lg max-w-[5rem]"
                 min={0}
                 value={product.amount}
                 onChange={(ev) =>

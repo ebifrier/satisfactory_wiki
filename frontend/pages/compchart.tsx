@@ -22,7 +22,7 @@ import {
   ProductAmountTable,
   IngredientMultiSelect,
 } from "@/components";
-import { TRecipeSelection, actions } from "@/slices/compchartSlice";
+import { actions } from "@/slices/compchartSlice";
 
 //
 // 範囲外のドロップエリア
@@ -53,146 +53,146 @@ const OutsideDropArea: React.FC<
   );
 };
 
-const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
-  const findRecipe = (recipeId: string): TRecipe => {
-    return recipes.find((r) => r.id === recipeId)!;
-  };
-  const makeRecipes = (recipeIds: string[]): TRecipe[] => {
-    return recipeIds.map((id) => findRecipe(id));
-  };
+// const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
+//   const findRecipe = (recipeId: string): TRecipe => {
+//     return recipes.find((r) => r.id === recipeId)!;
+//   };
+//   const makeRecipes = (recipeIds: string[]): TRecipe[] => {
+//     return recipeIds.map((id) => findRecipe(id));
+//   };
 
-  return [
-    {
-      name: "基本",
-      recipes: makeRecipes([
-        "Iron_Ingot",
-        "Iron_Plate",
-        "Iron_Rod",
-        "Screw",
-        "Reinforced_Iron_Plate",
-      ]),
-    },
-    {
-      name: "基本 & 鋳造ネジ",
-      recipes: makeRecipes([
-        "Cast_Screw",
-        "Iron_Plate",
-        "Reinforced_Iron_Plate",
-      ]),
-    },
-    {
-      name: "ネジ留め鉄板 & 鋳造ネジ",
-      recipes: makeRecipes(["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"]),
-    },
-    {
-      name: "縫合鉄板 & 鉄のワイヤー",
-      recipes: makeRecipes(["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"]),
-    },
-    {
-      name: "縫合鉄板",
-      recipes: makeRecipes(["Iron_Plate", "Stitched_Iron_Plate", "Wire"]),
-    },
-    {
-      name: "鋼鉄のネジ",
-      recipes: makeRecipes([
-        "Steel_Beam",
-        "Steel_Screw",
-        "Iron_Plate",
-        "Reinforced_Iron_Plate",
-      ]),
-    },
-    {
-      name: "ネジ留め鉄板 & 鋼鉄のネジ",
-      recipes: makeRecipes([
-        "Steel_Beam",
-        "Steel_Screw",
-        "Iron_Plate",
-        "Bolted_Iron_Plate",
-      ]),
-    },
+//   return [
+//     {
+//       name: "基本",
+//       recipes: makeRecipes([
+//         "Iron_Ingot",
+//         "Iron_Plate",
+//         "Iron_Rod",
+//         "Screw",
+//         "Reinforced_Iron_Plate",
+//       ]),
+//     },
+//     {
+//       name: "基本 & 鋳造ネジ",
+//       recipes: makeRecipes([
+//         "Cast_Screw",
+//         "Iron_Plate",
+//         "Reinforced_Iron_Plate",
+//       ]),
+//     },
+//     {
+//       name: "ネジ留め鉄板 & 鋳造ネジ",
+//       recipes: makeRecipes(["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"]),
+//     },
+//     {
+//       name: "縫合鉄板 & 鉄のワイヤー",
+//       recipes: makeRecipes(["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"]),
+//     },
+//     {
+//       name: "縫合鉄板",
+//       recipes: makeRecipes(["Iron_Plate", "Stitched_Iron_Plate", "Wire"]),
+//     },
+//     {
+//       name: "鋼鉄のネジ",
+//       recipes: makeRecipes([
+//         "Steel_Beam",
+//         "Steel_Screw",
+//         "Iron_Plate",
+//         "Reinforced_Iron_Plate",
+//       ]),
+//     },
+//     {
+//       name: "ネジ留め鉄板 & 鋼鉄のネジ",
+//       recipes: makeRecipes([
+//         "Steel_Beam",
+//         "Steel_Screw",
+//         "Iron_Plate",
+//         "Bolted_Iron_Plate",
+//       ]),
+//     },
 
-    /*{
-      name: "アルミ通常レシピ",
-      recipes: makeRecipes([
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Aluminum)",
-        "Alumina_Solution",
-        "Aluminum_Scrap",
-        "Aluminum_Ingot",
-        "Silica",
-      ]),
-    },
-    {
-      name: "アルミ代替レシピ",
-      recipes: makeRecipes([
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Aluminum)",
-        "Pure_Aluminum_Ingot",
-        "Electrode_Aluminum_Scrap",
-        "Sloppy_Alumina",
-        "Heavy_Oil_Residue",
-        "Petroleum_Coke",
-      ]),
-    },
-    {
-      name: "カテリウム基本",
-      recipes: makeRecipes([
-        "Caterium_Ingot",
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Caterium)",
-      ]),
-    },
-    {
-      name: "純カテリウムのインゴット",
-      recipes: makeRecipes([
-        "Pure_Caterium_Ingot",
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Caterium)",
-      ]),
-    },
-    {
-      name: "鉱石変換+アルミ通常レシピ",
-      recipes: makeRecipes([
-        "Bauxite_(Caterium)",
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Aluminum)",
-        "Alumina_Solution",
-        "Aluminum_Scrap",
-        "Aluminum_Ingot",
-        "Silica",
-      ]),
-    },
-    {
-      name: "鉱石変換+アルミ代替レシピ",
-      recipes: makeRecipes([
-        "Bauxite_(Caterium)",
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Aluminum)",
-        "Pure_Aluminum_Ingot",
-        "Electrode_Aluminum_Scrap",
-        "Sloppy_Alumina",
-        "Heavy_Oil_Residue",
-        "Petroleum_Coke",
-      ]),
-    },
-    {
-      name: "鉄基本",
-      recipes: makeRecipes([
-        "Iron_Ingot",
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Iron)",
-      ]),
-    },
-    {
-      name: "純鉄のインゴット",
-      recipes: makeRecipes([
-        "Pure_Iron_Ingot",
-        "Reanimated_SAM",
-        "Ficsite_Ingot_(Iron)",
-      ]),
-    },*/
-  ];
-};
+//     /*{
+//       name: "アルミ通常レシピ",
+//       recipes: makeRecipes([
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Aluminum)",
+//         "Alumina_Solution",
+//         "Aluminum_Scrap",
+//         "Aluminum_Ingot",
+//         "Silica",
+//       ]),
+//     },
+//     {
+//       name: "アルミ代替レシピ",
+//       recipes: makeRecipes([
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Aluminum)",
+//         "Pure_Aluminum_Ingot",
+//         "Electrode_Aluminum_Scrap",
+//         "Sloppy_Alumina",
+//         "Heavy_Oil_Residue",
+//         "Petroleum_Coke",
+//       ]),
+//     },
+//     {
+//       name: "カテリウム基本",
+//       recipes: makeRecipes([
+//         "Caterium_Ingot",
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Caterium)",
+//       ]),
+//     },
+//     {
+//       name: "純カテリウムのインゴット",
+//       recipes: makeRecipes([
+//         "Pure_Caterium_Ingot",
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Caterium)",
+//       ]),
+//     },
+//     {
+//       name: "鉱石変換+アルミ通常レシピ",
+//       recipes: makeRecipes([
+//         "Bauxite_(Caterium)",
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Aluminum)",
+//         "Alumina_Solution",
+//         "Aluminum_Scrap",
+//         "Aluminum_Ingot",
+//         "Silica",
+//       ]),
+//     },
+//     {
+//       name: "鉱石変換+アルミ代替レシピ",
+//       recipes: makeRecipes([
+//         "Bauxite_(Caterium)",
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Aluminum)",
+//         "Pure_Aluminum_Ingot",
+//         "Electrode_Aluminum_Scrap",
+//         "Sloppy_Alumina",
+//         "Heavy_Oil_Residue",
+//         "Petroleum_Coke",
+//       ]),
+//     },
+//     {
+//       name: "鉄基本",
+//       recipes: makeRecipes([
+//         "Iron_Ingot",
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Iron)",
+//       ]),
+//     },
+//     {
+//       name: "純鉄のインゴット",
+//       recipes: makeRecipes([
+//         "Pure_Iron_Ingot",
+//         "Reanimated_SAM",
+//         "Ficsite_Ingot_(Iron)",
+//       ]),
+//     },*/
+//   ];
+// };
 
 //
 // メインコンポーネント
@@ -260,14 +260,18 @@ const CompChartPage: React.FC = () => {
   return (
     <OutsideDropArea
       onDrop={handleDropOutside}
-      className="grid grid-cols-2 gap-4"
+      className="grid grid-cols-1 md:grid-cols-2 gap-4"
     >
       <PageHead title="比較表" />
+
+      <div className="col-span-full mb-2">
+        <h1 className="text-4xl font-bold text-gray-800">必要量比較</h1>
+      </div>
 
       {/* 左側: レシピ一覧と検索フィルター */}
       <div
         className="flex flex-col p-4 bg-white rounded-lg shadow-md"
-        style={{ maxHeight: "80vh" }}
+        style={{ maxHeight: "70vh" }}
       >
         <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
         <input
@@ -283,7 +287,7 @@ const CompChartPage: React.FC = () => {
       {/* 右側: 使用するレシピのドロップエリア */}
       <div
         className="flex flex-col p-4 bg-white rounded-lg shadow-md overflow-auto"
-        style={{ maxHeight: "80vh" }}
+        style={{ maxHeight: "70vh" }}
       >
         <h2 className="flex-none text-2xl font-bold">使用レシピ一覧</h2>
         {recipeSels.map((recipeSel, index) => (
@@ -324,24 +328,22 @@ const CompChartPage: React.FC = () => {
       >
         計算
       </button>
-      <div className="col-span-full border border-gray-500">
-        {chartData == null ? (
-          <p className="col-span-full text-gray-500">データはありません。</p>
-        ) : chartData.rows.length <= 2 ? (
-          <p className="col-span-full text-gray-500">
-            表示する項目はありません。
-          </p>
-        ) : (
-          <TableData data={chartData} />
-        )}
 
-        <textarea
-          className="w-full border border-gray-500 focus:border-blue-500"
-          wrap="off"
-          placeholder="placeholder"
-          readOnly
+      {chartData == null ? (
+        <p className="text-gray-500">データはありません。</p>
+      ) : chartData.rows.length <= 2 ? (
+        <p className="text-gray-500">表示する項目はありません。</p>
+      ) : (
+        <TableData data={chartData} />
+      )}
+
+      <textarea
+        className="border border-gray-500 focus:outline-blue-400"
+        wrap="off"
+        placeholder="placeholder"
+        readOnly
         value={wikiText}
-        ></textarea>
+      ></textarea>
     </OutsideDropArea>
   );
 };

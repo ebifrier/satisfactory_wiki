@@ -90,15 +90,15 @@ export const RecipeSelection: React.FC<{
   return (
     <div
       ref={ref}
-      className="p-2 mt-2 border-2 border-dashed rounded-lg min-h-[100px] bg-gray-100"
+      className="p-2 mt-2 border-2 border-dashed border-gray-300 rounded-lg min-h-[100px] bg-gray-100"
     >
-      <h2 className="flex font-semibold mb-3">
+      <h2 className="flex mb-3">
         <p className="flex-none p-1 my-auto inline-block">名前:</p>
         <input
           type="text"
           value={name}
           onChange={handleName}
-          className="ml-2 p-1 flex-1 max-w-[20rem] focus:outline-gray-400 rounded-lg"
+          className="ml-2 p-1 flex-1 font-semibold max-w-[20rem] focus:outline-gray-400 rounded-lg"
         />
         <p className="flex-none inline-block ml-auto">
           <button
