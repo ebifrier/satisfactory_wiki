@@ -26,7 +26,7 @@ def find_handy_recipe(id: str) -> TRecipe | None:
 
 
 def save_recipes(recipes: any) -> None:
-    with open('../seeddata/recipes.yaml', 'w', encoding='utf-8') as fp:
+    with open('../backend/seeddata/recipes.yaml', 'w', encoding='utf-8') as fp:
         yaml.safe_dump(recipes, fp, allow_unicode=True, sort_keys=False)
 
 

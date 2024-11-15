@@ -66,7 +66,7 @@ def print_elem(elem: any) -> None:
 
 
 def load_items() -> list[AttrDict]:
-    with open('../seeddata/items.yaml', encoding='utf-8') as fp:
+    with open('../backend/seeddata/items.yaml', encoding='utf-8') as fp:
         items = yaml.safe_load(fp)
 
     return [AttrDict(item) for item in items]
@@ -82,7 +82,7 @@ def find_item(id: str) -> any:
 
 
 def load_buildings() -> list[AttrDict]:
-    with open('../seeddata/buildings.yaml', encoding='utf-8') as fp:
+    with open('../backend/seeddata/buildings.yaml', encoding='utf-8') as fp:
         buildings = yaml.safe_load(fp)
 
     return [AttrDict(building) for building in buildings]

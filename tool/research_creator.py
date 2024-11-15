@@ -23,7 +23,7 @@ def find_handy_research(id: str) -> TResearch | None:
 
 
 def save_researches(researches: any) -> None:
-    with open('../seeddata/researches.yaml', 'w', encoding='utf-8') as fp:
+    with open('../backend/seeddata/researches.yaml', 'w', encoding='utf-8') as fp:
         yaml.safe_dump(researches, fp, allow_unicode=True, sort_keys=False)
 
 

@@ -23,7 +23,7 @@ def find_handy_milestone(id: str) -> TMilestone | None:
 
 
 def save_milestones(milestones: any) -> None:
-    with open('../seeddata/milestones.yaml', 'w', encoding='utf-8') as fp:
+    with open('../backend/seeddata/milestones.yaml', 'w', encoding='utf-8') as fp:
         yaml.safe_dump(milestones, fp, allow_unicode=True, sort_keys=False)
 
 

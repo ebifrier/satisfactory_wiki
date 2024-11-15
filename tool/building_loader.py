@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import re
+import sys
 import requests
 import lxml.html
 import yaml
@@ -45,6 +46,5 @@ def load_building_from_wiki(page_name: str, category: str, subcategory: str) -> 
 
 
 buildings = load_building_from_wiki('Walls', '建築資材', '接続')
-with open('building.yaml', 'w', encoding='utf-8') as fp:
-    buildings = [class_to_dict(obj) for obj in buildings]
-    yaml.safe_dump(buildings, fp, allow_unicode=True, sort_keys=False)
+buildings = [class_to_dict(obj) for obj in buildings]
+yaml.safe_dump(buildings, sys.stdout, allow_unicode=True, sort_keys=False)
