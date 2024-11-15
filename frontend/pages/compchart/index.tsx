@@ -60,13 +60,56 @@ const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
   };
 
   return [
-    // ["Iron_Ingot", "Iron_Plate", "Iron_Rod", "Screw", "Reinforced_Iron_Plate"],
-    // ["Cast_Screw", "Iron_Plate", "Reinforced_Iron_Plate"],
-    // ["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"],
-    // ["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"],
-    // ["Iron_Plate", "Stitched_Iron_Plate", "Wire"],
-
     {
+      name: "基本",
+      recipes: makeRecipes([
+        "Iron_Ingot",
+        "Iron_Plate",
+        "Iron_Rod",
+        "Screw",
+        "Reinforced_Iron_Plate",
+      ]),
+    },
+    {
+      name: "基本 & 鋳造ネジ",
+      recipes: makeRecipes([
+        "Cast_Screw",
+        "Iron_Plate",
+        "Reinforced_Iron_Plate",
+      ]),
+    },
+    {
+      name: "ネジ留め鉄板 & 鋳造ネジ",
+      recipes: makeRecipes(["Bolted_Iron_Plate", "Cast_Screw", "Iron_Plate"]),
+    },
+    {
+      name: "縫合鉄板 & 鉄のワイヤー",
+      recipes: makeRecipes(["Iron_Plate", "Iron_Wire", "Stitched_Iron_Plate"]),
+    },
+    {
+      name: "縫合鉄板",
+      recipes: makeRecipes(["Iron_Plate", "Stitched_Iron_Plate", "Wire"]),
+    },
+    {
+      name: "鋼鉄のネジ",
+      recipes: makeRecipes([
+        "Steel_Beam",
+        "Steel_Screw",
+        "Iron_Plate",
+        "Reinforced_Iron_Plate",
+      ]),
+    },
+    {
+      name: "ネジ留め鉄板 & 鋼鉄のネジ",
+      recipes: makeRecipes([
+        "Steel_Beam",
+        "Steel_Screw",
+        "Iron_Plate",
+        "Bolted_Iron_Plate",
+      ]),
+    },
+
+    /*{
       name: "アルミ通常レシピ",
       recipes: makeRecipes([
         "Reanimated_SAM",
@@ -145,7 +188,7 @@ const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
         "Reanimated_SAM",
         "Ficsite_Ingot_(Iron)",
       ]),
-    },
+    },*/
   ];
 };
 
@@ -210,7 +253,7 @@ const RecipePage: React.FC = () => {
   return (
     <OutsideDropArea
       onDrop={handleDropOutside}
-      className="grid grid-cols-2 gap-4 max-w-6xl"
+      className="grid grid-cols-2 gap-4"
     >
       <PageHead title="比較表" />
 
