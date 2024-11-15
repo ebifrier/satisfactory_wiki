@@ -28,6 +28,28 @@ const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
   );
 };
 
+const convertItemName = (name?: string): string => {
+  if (name == null) {
+    return "";
+  }
+
+  switch (name) {
+    case "未加工石英":
+      return "未加工&br;石英";
+    case "カテリウム鉱石":
+      return "カテリウム&br;鉱石";
+    case "ボーキサイト":
+      return "ボーキ&br;サイト";
+  }
+
+  const index = name.indexOf("のインゴット");
+  if (index >= 0) {
+    return `${name.substring(0, index)}の&br;インゴット`;
+  }
+
+  return name;
+};
+
 export const createCompChartData = (
   charts: TCompChart[],
   ingredientIds: string[],
@@ -71,7 +93,9 @@ export const createCompChartData = (
     TableUtil.newRow(
       [
         TableUtil.newColumn("~"),
-        ...ingredients.map((item) => TableUtil.newColumn(item?.name ?? "")),
+        ...ingredients.map((item) =>
+          TableUtil.newColumn(convertItemName(item?.name))
+        ),
         TableUtil.newColumn("~"),
         TableUtil.newColumn("~"),
       ],
