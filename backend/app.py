@@ -161,11 +161,7 @@ def planner():
     products = [split_product(id) for id in products_str.split(',')]
 
     ingredients_str = request.args.get('ingredients', '')
-    if ingredients_str:
-        ingredients = [id.strip() for id in ingredients_str.split(',')]
-    else:
-        ingredients = [item.id for item in db.session.query(Item.id)
-                       .filter(Item.category == '鉱石類').all()]
+    ingredients = [id.strip() for id in ingredients_str.split(',')]
 
     planner = ProductionPlanner(recipes_ids, products, ingredients)
     net, consum, power = planner.solve()
@@ -175,7 +171,6 @@ def planner():
         'net': net,
         'buildings': planner.get_building_counts(),
         'recipes': planner.get_recipe_counts(),
-        'ingredients': ingredients,
     })
 
 

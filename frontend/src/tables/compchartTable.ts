@@ -13,7 +13,6 @@ type StringToValueDic = { [key: string]: number };
 
 type TCompChart = {
   recipes: StringToValueDic;
-  ingredients: string[];
   buildings: StringToValueDic;
   net: StringToValueDic;
   consume: number;
@@ -31,13 +30,17 @@ const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
 
 export const createCompChartData = (
   charts: TCompChart[],
+  ingredientIds: string[],
   items: TItem[]
 ): TTableData => {
   if (!charts || charts.length === 0) {
     return { rows: [] };
   }
 
-  const ingredients = [...charts[0].ingredients];
+  const ingredients = ingredientIds.map((ingId) =>
+    items.find((item) => item.id === ingId)
+  );
+
   const ingColumns = ingredients.map(() => TableUtil.newColumn(">"));
   if (ingColumns.length === 0) {
     return { rows: [] };
@@ -68,9 +71,7 @@ export const createCompChartData = (
     TableUtil.newRow(
       [
         TableUtil.newColumn("~"),
-        ...ingredients
-          .map((ingId) => items.find((item) => item.id === ingId))
-          .map((item) => TableUtil.newColumn(item?.name ?? "")),
+        ...ingredients.map((item) => TableUtil.newColumn(item?.name ?? "")),
         TableUtil.newColumn("~"),
         TableUtil.newColumn("~"),
       ],
@@ -98,7 +99,7 @@ export const createCompChartData = (
       return value.toFixed(0);
     };
 
-    for (const ingId of ingredients) {
+    for (const ingId of ingredientIds) {
       const tag = ingId in net && net[ingId] < 0 ? toFixed(-net[ingId]) : "-";
       columns.push(TableUtil.newColumn(tag));
     }
