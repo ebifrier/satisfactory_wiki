@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:staging": "cross-env APP_ENV=\"staging\" next build",
+    "build:main": "npm run build:production",
+    "build:production": "cross-env APP_ENV=\"production\" next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -31,6 +33,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-redux": "^7.1.34",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
     "postcss": "^8",

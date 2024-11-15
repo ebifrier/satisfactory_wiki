@@ -1,14 +1,12 @@
 import type { NextConfig } from "next";
+const config = require(`./env/env.${process.env.APP_ENV || "development"}.js`);
 
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   env: {
     NEXT_TELEMETRY_DISABLED: "1",
-    NEXT_PUBLIC_API_URL:
-      process.env.NODE_ENV === "production"
-        ? "https://backend.sf-jp-wikitool.com"
-        : "http://localhost:5000",
+    ...config,
   },
 };
 

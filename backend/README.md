@@ -36,9 +36,16 @@ just run
 # 本番環境用のビルド
 just build
 
+# ステージング環境にデプロイ
+just deploy-init staging (最初のみ)
+just deploy staging
+
 # 本番環境にデプロイ
-just deploy
+just deploy-init production (最初のみ)
+just deploy production
 ```
+
+- deploy-init コマンドは 1 度では上手くいかないことがあります。少し時間を置いてから何度か実行してみてください。
 
 ## just のインストール方法
 
