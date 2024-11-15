@@ -9,7 +9,10 @@ import store from "@/store";
 
 import "@/styles/style.scss";
 
-const HeaderLinks = [["素材詳細", "/item"]];
+const HeaderLinks = [
+  ["素材詳細", "/item"],
+  ["必要量比較", "/compchart"],
+];
 
 const Header: React.FC<{ className?: string }> = ({ className }) => {
   const [mobileHidden, setMobileHidden] = React.useState(true);
