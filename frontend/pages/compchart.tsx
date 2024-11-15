@@ -13,13 +13,15 @@ import {
   createCompChartData,
   executeCompChart,
 } from "@/index";
-import { PageHead, TableData } from "@/components";
-import RecipeSelection, {
+import {
+  PageHead,
+  TableData,
   ItemTypes,
+  RecipeSelection,
   DraggableRecipe,
-} from "./_recipeSelection";
-import ProductAmountTable from "./_productAmount";
-import IngredientMultiSelect from "./_ingredientMultiSelect";
+  ProductAmountTable,
+  IngredientMultiSelect,
+} from "@/components";
 import { TRecipeSelection, actions } from "@/slices/compchartSlice";
 
 //
@@ -195,7 +197,7 @@ const getDefaultRecipeSels = (recipes: TRecipe[]): TRecipeSelection[] => {
 //
 // メインコンポーネント
 //
-const RecipePage: React.FC = () => {
+const CompChartPage: React.FC = () => {
   const { recipeSels, productAmounts, ingredients } = useAppSelector(
     (state) => state.compChart
   );
@@ -246,8 +248,9 @@ const RecipePage: React.FC = () => {
       productAmounts,
       ingredients
     );
-    console.log(charts, createCompChartData(charts, items ?? []));
-    setChartData(createCompChartData(charts, items ?? []));
+    const chartData = createCompChartData(charts, ingredients, items ?? []);
+    console.log(chartData);
+    setChartData(chartData);
   }, [recipeSels, productAmounts, ingredients, items]);
 
   return (
@@ -258,7 +261,10 @@ const RecipePage: React.FC = () => {
       <PageHead title="比較表" />
 
       {/* 左側: レシピ一覧と検索フィルター */}
-      <div className="flex flex-col p-4" style={{ maxHeight: "90vh" }}>
+      <div
+        className="flex flex-col p-4 bg-white rounded-lg shadow-md"
+        style={{ maxHeight: "80vh" }}
+      >
         <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
         <input
           type="text"
@@ -271,7 +277,10 @@ const RecipePage: React.FC = () => {
       </div>
 
       {/* 右側: 使用するレシピのドロップエリア */}
-      <div className="p-4 flex flex-col bg-white rounded-lg shadow-md">
+      <div
+        className="flex flex-col p-4 bg-white rounded-lg shadow-md overflow-auto"
+        style={{ maxHeight: "80vh" }}
+      >
         <h2 className="flex-none text-2xl font-bold">使用レシピ一覧</h2>
         {recipeSels.map((recipeSel, index) => (
           <RecipeSelection
@@ -334,4 +343,4 @@ const RecipePage: React.FC = () => {
   );
 };
 
-export default RecipePage;
+export default CompChartPage;

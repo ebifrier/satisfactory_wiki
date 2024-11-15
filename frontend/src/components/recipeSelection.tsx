@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, TRecipe } from "@/index";
-import { TRecipeSelection, actions } from "../slices/compchartSlice";
+import { TRecipeSelection, actions } from "@/slices/compchartSlice";
 
 export const ItemTypes = {
   RECIPE: "recipe",
@@ -75,7 +75,7 @@ export const RecipeSelection: React.FC<{
   );
   drop(ref);
 
-  const { recipes, name } = recipeSel;
+  const { recipes, name } = recipeSel ?? {};
   const handleName = React.useCallback(
     (ev: ChangeEvent<HTMLInputElement>) =>
       dispatch(
@@ -98,7 +98,7 @@ export const RecipeSelection: React.FC<{
           type="text"
           value={name}
           onChange={handleName}
-          className="ml-2 p-1 flex-1 max-w-[20rem] border border-gray-300 rounded-lg"
+          className="ml-2 p-1 flex-1 max-w-[20rem] focus:outline-gray-400 rounded-lg"
         />
         <p className="flex-none inline-block ml-auto">
           <button
@@ -122,7 +122,7 @@ export const RecipeSelection: React.FC<{
           </button>
         </p>
       </h2>
-      {recipes.length === 0 ? (
+      {recipes == null || recipes.length === 0 ? (
         <p>レシピをここにドロップしてください</p>
       ) : (
         recipes.map((recipe) => (

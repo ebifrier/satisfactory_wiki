@@ -4,7 +4,7 @@ import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, Option, GroupOption, findSelectedItem } from "@/index";
 import { TProductAmount, actions } from "@/slices/compchartSlice";
 
-const ProductAmountTable: React.FC<{
+export const ProductAmountTable: React.FC<{
   productAmounts?: TProductAmount[];
   itemOptions?: GroupOption[];
 }> = ({ productAmounts, itemOptions }) => {
@@ -78,5 +78,3 @@ const ProductAmountTable: React.FC<{
     </table>
   );
 };
-
-export default ProductAmountTable;

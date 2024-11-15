@@ -22,7 +22,7 @@ const CustomGroupHeading: React.FC<GroupHeadingProps<Option, true>> = ({
   );
 };
 
-const IngredientMultiSelect: React.FC<{
+export const IngredientMultiSelect: React.FC<{
   ingredients?: string[];
   itemOptions?: GroupOption[];
 }> = ({ ingredients, itemOptions }) => {
@@ -54,5 +54,3 @@ const IngredientMultiSelect: React.FC<{
     />
   );
 };
-
-export default IngredientMultiSelect;
