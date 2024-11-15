@@ -13,21 +13,9 @@ AWS_IMAGE_ID := AWS_REPO_ARN + "/satisfactory-wikitool/backend:latest"
 
 
 [doc("一番最初のvenvの環境構築を行います。")]
-[unix]
-_create-venv:
-  if [ ! -d .venv ]; then \
-    {{PYTHON}} -m venv .venv; \
-  fi
-
-[windows]
-_create-venv:
-  if (!(Test-Path -Path ".venv")) { \
-    {{PYTHON}} -m venv .venv \
-  }
-
-[doc("requirements.txtをvenv環境のパッケージリストに反映させます。")]
-install: _create-venv
-  {{PYTHON}} -m pip install --upgrade pip; \
+install:
+  pipenv install
+  {{PYTHON}} -m pip install --upgrade pip
   {{PYTHON}} -m pip install -r requirements.txt
 
 [doc("ローカル環境でbackendを実行します。")]

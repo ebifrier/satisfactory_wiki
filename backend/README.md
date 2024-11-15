@@ -10,13 +10,15 @@ API は python で実装され、素材一覧やその使用先、レシピの�
 ### 前提条件
 
 ```
+# 動作にはpython3.12が必要です。
+
 # Ubuntuでは以下のコマンドでpython3.12をインストールします。
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.12
 
-# venv環境を作っていない場合や、requirements.txtを更新した場合は、以下のコマンドを実行します。
-just install
+# pipenvを事前にインストールします。
+pip install pipenv
 ```
 
 ### コマンド一覧
@@ -24,6 +26,9 @@ just install
 ```
 # コマンド一覧を確認
 just --list
+
+# pipenv環境の作成や、requirements.txtを更新した場合
+just install
 
 # ローカル環境での実行
 just run
@@ -35,9 +40,25 @@ just build
 just deploy
 ```
 
-## windows での just のインストール方法
+## just のインストール方法
 
 just は windows でも使えるタスクランナーです。make がない環境でもコマンドを簡単に実行することができます。
+
+### Ubuntu へのインストール
+
+以下のコマンドを実行します。
+
+```
+wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | gpg --dearmor | sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
+
+echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
+
+sudo apt update
+
+sudo apt install just
+```
+
+### windows へのインストール
 
 1. https://scoop.sh/ から scoop をインストールします。
 1. 以下のコマンドを実行します。 \
