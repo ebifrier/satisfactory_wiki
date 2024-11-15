@@ -10,6 +10,7 @@ import {
   TTableData,
   useItemOptions,
   findSelectedItem,
+  paramToStr,
   fetcher,
   createRecipeData,
   createRecipesForBuildingData,
@@ -61,8 +62,6 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
 };
 
 function ItemPage() {
-  const paramToStr = (param?: string | string[]): string | undefined =>
-    param ? `${param}` : undefined;
   const router = useRouter();
   const itemId = paramToStr(router.query.itemId);
 
