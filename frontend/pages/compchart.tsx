@@ -210,6 +210,10 @@ const CompChartPage: React.FC = () => {
     [itemsByGroup]
   );
   const [chartData, setChartData] = React.useState<TTableData>();
+  const wikiText = React.useMemo(
+    () => `${TableUtil.dataToWIKI(chartData)}\n`,
+    [chartData]
+  );
 
   // React.useEffect(() => {
   //   if (recipes == null) return;
@@ -335,10 +339,9 @@ const CompChartPage: React.FC = () => {
           className="w-full border border-gray-500 focus:border-blue-500"
           wrap="off"
           placeholder="placeholder"
-          value={`${TableUtil.dataToWIKI(chartData)}\n`}
           readOnly
+        value={wikiText}
         ></textarea>
-      </div>
     </OutsideDropArea>
   );
 };

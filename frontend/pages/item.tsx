@@ -28,6 +28,11 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
   title,
   data,
 }) => {
+  const wikiText = React.useMemo(
+    () => `${TableUtil.dataToWIKI(data)}\n`,
+    [data]
+  );
+
   return (
     <>
       <div className="mt-8 col-span-full">
@@ -47,7 +52,7 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
             className="w-full h-full border border-gray-500 focus:border-blue-500"
             wrap="off"
             placeholder="placeholder"
-            defaultValue={`${TableUtil.dataToWIKI(data)}\n`}
+            defaultValue={wikiText}
           ></textarea>
         </>
       )}
