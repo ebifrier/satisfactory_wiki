@@ -98,7 +98,7 @@ const RecipeSelection: React.FC<{
           type="text"
           value={name}
           onChange={handleName}
-          className="ml-2 p-1 flex-1 max-w-[20rem] border border-gray-300 rounded-lg"
+          className="ml-2 p-1 flex-1 max-w-[20rem] focus:outline-gray-400 rounded-lg"
         />
         <p className="flex-none inline-block ml-auto">
           <button

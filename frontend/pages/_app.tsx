@@ -86,7 +86,7 @@ export default function App({ Component, pageProps }: AppProps): ReactNode {
         <DndProvider backend={HTML5Backend}>
           <div
             id="main"
-            className="container flex-1 bg-white xl:max-w-7xl rounded-lg shadow-md p-6 mx-auto my-4"
+            className="container flex-1 bg-white 2xl:max-w-8xl rounded-lg shadow-md p-6 mx-auto my-4"
           >
             <Component {...pageProps} />
           </div>
