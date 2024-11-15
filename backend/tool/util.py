@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import re
 import yaml
 import lxml
 from collections import namedtuple
@@ -15,14 +16,22 @@ TResearch = namedtuple('TResearch', ['id', 'category', 'time', 'link_anchor', 'i
 
 
 def to_id(word: str) -> str:
+    word = re.sub(r'\s*[(]([.\d]+)\s*m[)]\s*$', r'_\1m', word)
     word = word.replace('\n', '')
     word = word.replace("™", '')
     word = word.replace(' ', '_')
-
-    if word == 'Plasma_Spitter_Remains':
-        return 'Spitter_Remains'
-    else:
-        return word
+    
+    match word:
+        case 'Straight_Catwalk':
+            return 'Catwalk_Straight'
+        case 'Tarp_Construction_Fence_(Tar)':
+            return 'Tarp_Construction_Fence'
+        case 'Road_Barrier_(Concrete)':
+            return 'Road_Barrier'
+        case 'Plasma_Spitter_Remains':
+            return 'Spitter_Remains'
+        case _:
+            return word
 
 
 def normalize_value(value: str) -> str:

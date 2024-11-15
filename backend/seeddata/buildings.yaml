@@ -35,6 +35,10 @@
   name: 工作台
   category: 特殊
   subcategory: 特殊
+- id: Crafting Bench
+  name: 工作台
+  category: 特殊
+  subcategory: 特殊
 - id: Equipment Workshop
   name: 装備品作業場
   category: 特殊
@@ -553,15 +557,16 @@
   name: 壁付投光器
   category: 組織化
   subcategory: 照明
-- id: Label Sign (2 m)
+
+- id: Label Sign 2m
   name: ラベル看板 2m
   category: 組織化
   subcategory: 看板
-- id: Label Sign (3 m)
+- id: Label Sign 3m
   name: ラベル看板 3m
   category: 組織化
   subcategory: 看板
-- id: Label Sign (4 m)
+- id: Label Sign 4m
   name: ラベル看板 4m
   category: 組織化
   subcategory: 看板
@@ -573,15 +578,15 @@
   name: アイコン看板
   category: 組織化
   subcategory: 看板
-- id: Square Sign (0.5 m)
+- id: Square Sign 0.5m
   name: 正方形の看板 0.5m
   category: 組織化
   subcategory: 看板
-- id: Square Sign (1 m)
+- id: Square Sign 1m
   name: 正方形の看板 1m
   category: 組織化
   subcategory: 看板
-- id: Square Sign (2 m)
+- id: Square Sign 2m
   name: 正方形の看板 2m
   category: 組織化
   subcategory: 看板
@@ -606,6 +611,7 @@
   name: 危険物貯蔵箱
   category: 組織化
   subcategory: 貯蔵庫
+
 - id: Storage Container
   name: 貯蔵コンテナ
   category: 組織化
@@ -635,3 +641,166 @@
   name: レーダー・タワー
   category: 組織化
   subcategory: タワー
+
+- id: Frame_Floor
+  name: 床フレーム
+  category: 建築資材
+  subcategory: フレーム
+- id: Frame_Foundation
+  name: フレーム土台
+  category: 建築資材
+  subcategory: フレーム
+- id: Frame_Ramp
+  name: フレームスロープ
+  category: 建築資材
+  subcategory: フレーム
+- id: Inverted_Frame_Ramp
+  name: フレーム逆スロープ
+  category: 建築資材
+  subcategory: フレーム
+- id: Frame_Wall
+  name: 壁フレーム
+  category: 建築資材
+  subcategory: フレーム
+- id: Glass_Frame_Foundation
+  name: ガラスフレーム土台
+  category: 建築資材
+  subcategory: フレーム
+
+- id: Metal Beam
+  name: 金属梁
+  category: 建築資材
+  subcategory: 梁
+- id: Painted Beam
+  name: 塗装梁
+  category: 梁
+  subcategory: フレーム
+- id: Beam Connector
+  name: 梁接合部
+  category: 建築資材
+  subcategory: 梁
+- id: Double Beam Connector
+  name: 梁接合部・ダブル
+  category: 建築資材
+  subcategory: 梁
+- id: Beam Support
+  name: 梁支持部
+  category: 建築資材
+  subcategory: 梁
+
+- id: Big_Pillar_Support
+  name: 大型柱脚
+  category: 建築資材
+  subcategory: 柱
+- id: Big_Metal_Pillar
+  name: 大型金属柱
+  category: 建築資材
+  subcategory: 柱
+- id: Big_Concrete_Pillar
+  name: 大型コンクリート柱
+  category: 建築資材
+  subcategory: 柱
+- id: Big_Frame_Pillar
+  name: 大型フレーム柱
+  category: 建築資材
+  subcategory: 柱
+- id: Small_Pillar_Support
+  name: 小型柱脚
+  category: 建築資材
+  subcategory: 柱
+- id: Small_Metal_Pillar
+  name: 小型金属柱
+  category: 建築資材
+  subcategory: 柱
+- id: Small_Concrete_Pillar
+  name: 小型コンクリート柱
+  category: 建築資材
+  subcategory: 柱
+- id: Small_Frame_Pillar
+  name: 小型フレーム柱
+  category: 建築資材
+  subcategory: 柱
+
+- id: Walkway_Straight
+  name: 通路・直線
+  category: 建築資材
+  subcategory: 通路
+- id: Walkway_Corner
+  name: 通路・コーナー
+  category: 建築資材
+  subcategory: 通路
+- id: Walkway_Intersection
+  name: 通路・分岐
+  category: 建築資材
+  subcategory: 通路
+- id: Walkway_T-Junction
+  name: 通路・Tジャンクション
+  category: 建築資材
+  subcategory: 通路
+- id: Walkway_Ramp
+  name: 通路・スロープ
+  category: 建築資材
+  subcategory: 通路
+
+- id: Catwalk_Straight
+  name: 作業用通路・直線
+  category: 建築資材
+  subcategory: 作業用通路
+- id: Catwalk_Corner
+  name: 作業用通路・コーナー
+  category: 建築資材
+  subcategory: 作業用通路
+- id: Catwalk_Intersection
+  name: 作業用通路・分岐
+  category: 建築資材
+  subcategory: 作業用通路
+- id: Catwalk_T-Junction
+  name: 作業用通路・Tジャンクション
+  category: 建築資材
+  subcategory: 作業用通路
+- id: Catwalk_Ramp
+  name: 作業用通路・スロープ
+  category: 建築資材
+  subcategory: 作業用通路
+- id: Catwalk_Stairs
+  name: 作業用通路・階段
+  category: 建築資材
+  subcategory: 作業用通路
+
+- id: Automated_Gate
+  name: 自動ゲート
+  category: 壁
+  subcategory: ドア
+
+- id: Ladder
+  name: はしご
+  category: 建築資材
+  subcategory: 接続
+- id: Modern_Railing
+  name: モダンな手すり
+  category: 建築資材
+  subcategory: 接続
+- id: Industrial_Railing
+  name: 産業用手すり
+  category: 建築資材
+  subcategory: 接続
+- id: Road_Barrier
+  name: ロードバリア
+  category: 建築資材
+  subcategory: 接続
+- id: Low_Barrier
+  name: ローバリア
+  category: 建築資材
+  subcategory: 接続
+- id: High_Barrier
+  name: ハイバリア
+  category: 建築資材
+  subcategory: 接続
+- id: Construction_Fence
+  name: 建設用フェンス
+  category: 建築資材
+  subcategory: 接続
+- id: Tarp_Construction_Fence
+  name: タープ付き建設用フェンス
+  category: 建築資材
+  subcategory: 接続
