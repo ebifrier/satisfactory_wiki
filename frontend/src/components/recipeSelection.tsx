@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, TRecipe } from "@/index";
-import { TRecipeSelection, actions } from "@/slices/compchartSlice";
+import { TRecipeSelection, actions } from "@/features/compchartSlice";
 
 export const ItemTypes = {
   RECIPE: "recipe",
@@ -54,10 +54,11 @@ export const DraggableRecipe: React.FC<
 };
 
 export const RecipeSelection: React.FC<{
+  chartId: string;
   index: number;
   recipeSel: TRecipeSelection;
   hasDelete?: boolean;
-}> = ({ index, recipeSel, hasDelete }) => {
+}> = ({ chartId, index, recipeSel, hasDelete }) => {
   const dispatch = useAppDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
   const [, drop] = useDrop(
@@ -68,7 +69,7 @@ export const RecipeSelection: React.FC<{
           return;
         }
 
-        dispatch(actions.addRecipe({ index, recipe }));
+        dispatch(actions.addRecipe({ chartId, index, recipe }));
       },
     }),
     [recipeSel]
@@ -80,11 +81,12 @@ export const RecipeSelection: React.FC<{
     (ev: ChangeEvent<HTMLInputElement>) =>
       dispatch(
         actions.updateRecipeSel({
+          chartId,
           index,
           recipeSel: { ...recipeSel, name: ev.target.value },
         })
       ),
-    [dispatch, index, recipeSel]
+    [dispatch, chartId, index, recipeSel]
   );
 
   return (
@@ -103,19 +105,23 @@ export const RecipeSelection: React.FC<{
         <p className="flex-none inline-block ml-auto">
           <button
             className="inline-block ml-1 size-6 align-middle text-blue-400"
-            onClick={() => dispatch(actions.addRecipeSel({ index }))}
+            onClick={() => dispatch(actions.addRecipeSel({ chartId, index }))}
           >
             <Icon.ArrowUpOnSquareIcon />
           </button>
           <button
             className="inline-block ml-1 size-6 align-middle text-blue-400"
-            onClick={() => dispatch(actions.addRecipeSel({ index: index + 1 }))}
+            onClick={() =>
+              dispatch(actions.addRecipeSel({ chartId, index: index + 1 }))
+            }
           >
             <Icon.ArrowDownOnSquareIcon />
           </button>
           <button
             className="inline-block ml-1 size-6 align-middle text-red-400 disabled:text-gray-300"
-            onClick={() => dispatch(actions.deleteRecipeSel({ index }))}
+            onClick={() =>
+              dispatch(actions.deleteRecipeSel({ chartId, index }))
+            }
             disabled={hasDelete != null && !hasDelete}
           >
             <Icon.TrashIcon />

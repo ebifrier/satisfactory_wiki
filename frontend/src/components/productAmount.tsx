@@ -2,12 +2,13 @@ import React from "react";
 import Select from "react-select";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, Option, GroupOption, findSelectedItem } from "@/index";
-import { TProductAmount, actions } from "@/slices/compchartSlice";
+import { TProductAmount, actions } from "@/features/compchartSlice";
 
 export const ProductAmountTable: React.FC<{
+  chartId: string;
   productAmounts?: TProductAmount[];
   itemOptions?: GroupOption[];
-}> = ({ productAmounts, itemOptions }) => {
+}> = ({ chartId, productAmounts, itemOptions }) => {
   const dispatch = useAppDispatch();
 
   const productOptions = React.useMemo(
@@ -37,6 +38,7 @@ export const ProductAmountTable: React.FC<{
                 onChange={(option) =>
                   dispatch(
                     actions.setProductAmount({
+                      chartId,
                       index,
                       value: { ...product, itemId: option?.value },
                     })
@@ -56,6 +58,7 @@ export const ProductAmountTable: React.FC<{
                 onChange={(ev) =>
                   dispatch(
                     actions.setProductAmount({
+                      chartId,
                       index,
                       value: { ...product, amount: parseInt(ev.target.value) },
                     })
@@ -67,7 +70,9 @@ export const ProductAmountTable: React.FC<{
               <button
                 disabled={productAmounts.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"
-                onClick={() => dispatch(actions.deleteProductAmount({ index }))}
+                onClick={() =>
+                  dispatch(actions.deleteProductAmount({ chartId, index }))
+                }
               >
                 <Icon.TrashIcon />
               </button>

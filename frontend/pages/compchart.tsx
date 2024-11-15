@@ -1,9 +1,11 @@
 import React from "react";
-import useSWR from "swr";
+import { useRouter } from "next/router";
 import { useDrop } from "react-dnd";
+import useSWR from "swr";
 import * as Icon from "@heroicons/react/24/outline";
 import {
   TRecipe,
+  paramToStr,
   fetcher,
   useAppDispatch,
   useAppSelector,
@@ -22,7 +24,7 @@ import {
   ProductAmountTable,
   IngredientMultiSelect,
 } from "@/components";
-import { actions } from "@/slices/compchartSlice";
+import { actions } from "@/features/compchartSlice";
 
 //
 // 範囲外のドロップエリア
@@ -198,8 +200,10 @@ const OutsideDropArea: React.FC<
 // メインコンポーネント
 //
 const CompChartPage: React.FC = () => {
-  const { recipeSels, productAmounts, ingredients } = useAppSelector(
-    (state) => state.compChart
+  const { query } = useRouter();
+  const chartId = paramToStr(query.id) ?? "";
+  const chart = useAppSelector((state) =>
+    state.compCharts.find((c) => c.id === chartId)
   );
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = React.useState<string>("");
@@ -215,9 +219,20 @@ const CompChartPage: React.FC = () => {
     [chartData]
   );
 
+  const {
+    recipeSels = [],
+    productAmounts = [],
+    ingredients = [],
+  } = chart ?? {};
+
   // React.useEffect(() => {
   //   if (recipes == null) return;
-  //   dispatch(actions.setRecipeSels(getDefaultRecipeSels(recipes)));
+  //   dispatch(
+  //     actions.setRecipeSels({
+  //       chartId,
+  //       recipeSels: getDefaultRecipeSels(recipes),
+  //     })
+  //   );
   // }, [dispatch, recipes]);
 
   // 検索ワードによるフィルタリング
@@ -240,10 +255,10 @@ const CompChartPage: React.FC = () => {
   const handleDropOutside = React.useCallback(
     (recipe: TRecipe, selIndex?: number) => {
       if (selIndex != null) {
-        dispatch(actions.deleteRecipe({ index: selIndex, recipe }));
+        dispatch(actions.deleteRecipe({ chartId, index: selIndex, recipe }));
       }
     },
-    [dispatch]
+    [dispatch, chartId]
   );
 
   const handleCompChart = React.useCallback(async () => {
@@ -293,6 +308,7 @@ const CompChartPage: React.FC = () => {
         {recipeSels.map((recipeSel, index) => (
           <RecipeSelection
             key={index}
+            chartId={chartId}
             index={index}
             recipeSel={recipeSel}
             hasDelete={recipeSels.length > 1}
@@ -304,19 +320,21 @@ const CompChartPage: React.FC = () => {
           <span className="float-right font-normal">
             <button
               className="size-6 text-blue-400 align-bottom"
-              onClick={() => dispatch(actions.addProductAmount())}
+              onClick={() => dispatch(actions.addProductAmount({ chartId }))}
             >
               <Icon.ArrowDownOnSquareIcon />
             </button>
           </span>
         </h2>
         <ProductAmountTable
+          chartId={chartId}
           productAmounts={productAmounts}
           itemOptions={itemOptions}
         />
 
         <h2 className="flex-none text-2xl font-bold mt-4 mb-1">原料一覧</h2>
         <IngredientMultiSelect
+          chartId={chartId}
           ingredients={ingredients}
           itemOptions={itemOptions}
         />

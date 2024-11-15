@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import compChartSlice from "./slices/compchartSlice";
+import compChartSlice from "./features/compchartSlice";
 
 const persistConfig = {
   key: "root",
@@ -10,7 +10,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  compChart: compChartSlice.reducer,
+  compCharts: compChartSlice.reducer,
 });
 
 const store = configureStore({

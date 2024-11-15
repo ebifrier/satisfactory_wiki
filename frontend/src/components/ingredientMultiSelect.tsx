@@ -1,18 +1,17 @@
 import React from "react";
 import Select, { GroupHeadingProps } from "react-select";
 import { Option, GroupOption, useAppDispatch, findSelectedItem } from "@/index";
-import { actions } from "@/slices/compchartSlice";
+import { actions } from "@/features/compchartSlice";
 
-const CustomGroupHeading: React.FC<GroupHeadingProps<Option, true>> = ({
-  data,
-  children,
-}) => {
+const CustomGroupHeading: React.FC<
+  GroupHeadingProps<Option, true> & { chartId: string }
+> = ({ chartId, data, children }) => {
   const dispatch = useAppDispatch();
 
   return (
     <div
       onClick={() =>
-        dispatch(actions.operateIngredients({ options: data.options }))
+        dispatch(actions.operateIngredients({ chartId, options: data.options }))
       }
       className="font-bold py-2 px-4 bg-gray-100 cursor-pointer"
     >
@@ -23,9 +22,10 @@ const CustomGroupHeading: React.FC<GroupHeadingProps<Option, true>> = ({
 };
 
 export const IngredientMultiSelect: React.FC<{
+  chartId: string;
   ingredients?: string[];
   itemOptions?: GroupOption[];
-}> = ({ ingredients, itemOptions }) => {
+}> = ({ chartId, ingredients, itemOptions }) => {
   const dispatch = useAppDispatch();
 
   const selectedOptions = React.useMemo(
@@ -41,7 +41,7 @@ export const IngredientMultiSelect: React.FC<{
       options={itemOptions}
       value={selectedOptions}
       onChange={(options, meta) =>
-        dispatch(actions.operateIngredients({ options, meta }))
+        dispatch(actions.operateIngredients({ chartId, options, meta }))
       }
       isMulti={true}
       isSearchable={true}
@@ -49,7 +49,9 @@ export const IngredientMultiSelect: React.FC<{
       menuPlacement="top"
       className="sm:text-sm"
       components={{
-        GroupHeading: (props) => <CustomGroupHeading {...props} />,
+        GroupHeading: (props) => (
+          <CustomGroupHeading {...props} chartId={chartId} />
+        ),
       }}
     />
   );

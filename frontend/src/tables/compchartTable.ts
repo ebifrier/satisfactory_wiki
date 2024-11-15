@@ -7,11 +7,11 @@ import {
   TTableData,
   TTableColumn,
 } from "@/index";
-import { TRecipeSelection, TProductAmount } from "../slices/compchartSlice";
+import { TRecipeSelection, TProductAmount } from "../features/compchartSlice";
 
 type StringToValueDic = { [key: string]: number };
 
-type TCompChart = {
+type APICompChartResult = {
   recipes: StringToValueDic;
   buildings: StringToValueDic;
   net: StringToValueDic;
@@ -51,7 +51,7 @@ const convertItemName = (name?: string): string => {
 };
 
 export const createCompChartData = (
-  charts: TCompChart[],
+  charts: APICompChartResult[],
   ingredientIds: string[],
   items: TItem[]
 ): TTableData => {
@@ -142,14 +142,14 @@ export const executeCompChart = async (
   recipeSels: TRecipeSelection[],
   productAmounts: TProductAmount[],
   ingredients: string[]
-): Promise<TCompChart[]> => {
+): Promise<APICompChartResult[]> => {
   const productIds = productAmounts
     .filter(({ itemId }) => itemId != null)
     .map(({ itemId, amount }) => `${itemId}:${amount}`)
     .join(",");
   const ingredientIds = ingredients.join(",");
 
-  const charts: TCompChart[] = [];
+  const charts = [];
   for (const recipeSel of recipeSels) {
     const recipeIds = recipeSel.recipes.map((r) => r.id).join(",");
     const param = new URLSearchParams();
@@ -157,7 +157,7 @@ export const executeCompChart = async (
     param.append("products", productIds);
     param.append("ingredients", ingredientIds);
 
-    const chart: TCompChart = await fetcher(
+    const chart = await fetcher<APICompChartResult>(
       `/api/v1/planner?${param.toString()}`
     );
     charts.push({ ...chart, name: recipeSel.name });
