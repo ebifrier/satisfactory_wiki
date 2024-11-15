@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 setuptools = "*"
-mangum = "*"
 flask = "*"
 flask-cors = "*"
 flask-migrate = "*"
