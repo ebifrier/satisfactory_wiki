@@ -2,10 +2,11 @@ import React, { ReactNode } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
-import store from "@/store";
+import store, { persistor } from "@/store";
 
 import "@/styles/style.scss";
 
@@ -79,22 +80,27 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
 export default function App({ Component, pageProps }: AppProps): ReactNode {
   return (
     <Provider store={store}>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
+      <PersistGate loading={null} persistor={persistor}>
+        <Head>
+          <meta charSet="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+        </Head>
 
-      <div className="flex flex-col">
-        <Header className="flex-none" />
-        <DndProvider backend={HTML5Backend}>
-          <div
-            id="main"
-            className="container flex-1 bg-white 2xl:max-w-8xl rounded-lg shadow-md p-6 mx-auto my-4"
-          >
-            <Component {...pageProps} />
-          </div>
-        </DndProvider>
-      </div>
+        <div className="flex flex-col">
+          <Header className="flex-none" />
+          <DndProvider backend={HTML5Backend}>
+            <div
+              id="main"
+              className="container flex-1 bg-white 2xl:max-w-8xl rounded-lg shadow-md p-6 mx-auto my-4"
+            >
+              <Component {...pageProps} />
+            </div>
+          </DndProvider>
+        </div>
+      </PersistGate>
     </Provider>
   );
 }

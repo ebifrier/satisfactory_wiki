@@ -211,10 +211,10 @@ const CompChartPage: React.FC = () => {
   );
   const [chartData, setChartData] = React.useState<TTableData>();
 
-  React.useEffect(() => {
-    if (recipes == null) return;
-    dispatch(actions.setRecipeSels(getDefaultRecipeSels(recipes)));
-  }, [dispatch, recipes]);
+  // React.useEffect(() => {
+  //   if (recipes == null) return;
+  //   dispatch(actions.setRecipeSels(getDefaultRecipeSels(recipes)));
+  // }, [dispatch, recipes]);
 
   // 検索ワードによるフィルタリング
   const FilteredDraggableRecipes = React.useMemo(() => {
