@@ -54,6 +54,11 @@ db-init:
   {{PYTHON}} -m flask db upgrade
 
 [doc("DBファイルをすべて削除します。")]
+[unix]
+db-clear:
+  rm -rf satisfactory.db migrations
+
+[windows]
 db-clear:
   rm -r -fo satisfactory.db
   rm -r -fo migrations
