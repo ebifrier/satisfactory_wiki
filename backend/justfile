@@ -9,7 +9,7 @@ AWS_PROFILE := "sf-wikitool"
 AWS_REGION := "ap-northeast-1"
 AWS_ACCOUNT_ID := "084828571117"
 AWS_REPO_ARN := AWS_ACCOUNT_ID + ".dkr.ecr." + AWS_REGION + ".amazonaws.com"
-AWS_IMAGE_ID := AWS_REPO_ARN + "/satisfactory-wikitool/backend:latest"
+AWS_IMAGE_ID := AWS_REPO_ARN + "/satisfactory-wikitool/backend"
 
 
 [doc("一番最初のvenvの環境構築を行います。")]
@@ -36,20 +36,20 @@ login-private:
 build: login-public
   docker build -t satisfactory-wikitool/backend:latest .
 
-_push-image: build login-private
-  docker tag satisfactory-wikitool/backend:latest {{AWS_IMAGE_ID}}
-  docker push {{AWS_IMAGE_ID}}
+_push-image branch: build login-private
+  docker tag satisfactory-wikitool/backend:latest {{AWS_IMAGE_ID}}:{{branch}}-latest
+  docker push {{AWS_IMAGE_ID}}:{{branch}}-latest
 
 [doc("本番環境にbackendをデプロイします。")]
-deploy-init: _push-image
-  {{PYTHON}} -m zappa.cli deploy --docker-image-uri {{AWS_IMAGE_ID}} production
+deploy-init branch: (_push-image branch)
+  {{PYTHON}} -m zappa.cli deploy --docker-image-uri {{AWS_IMAGE_ID}}:{{branch}}-latest {{branch}}
 
 [doc("本番環境にデプロイした環境を更新します。")]
-deploy: _push-image
-  {{PYTHON}} -m zappa.cli update --docker-image-uri {{AWS_IMAGE_ID}} production
+deploy branch: (_push-image branch)
+  {{PYTHON}} -m zappa.cli update --docker-image-uri {{AWS_IMAGE_ID}}:{{branch}}-latest {{branch}}
 
-undeploy:
-  {{PYTHON}} -m zappa.cli undeploy production
+undeploy branch:
+  {{PYTHON}} -m zappa.cli undeploy {{branch}}
 
 [doc("DBにレシピなどの初期データを設定します。")]
 db-init:
