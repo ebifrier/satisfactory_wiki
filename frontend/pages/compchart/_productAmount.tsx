@@ -43,6 +43,7 @@ const ProductAmountTable: React.FC<{
                   )
                 }
                 isSearchable={true}
+                menuPlacement="top"
                 className="sm:text-sm"
               />
             </td>

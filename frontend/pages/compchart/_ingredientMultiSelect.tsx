@@ -46,6 +46,7 @@ const IngredientMultiSelect: React.FC<{
       isMulti={true}
       isSearchable={true}
       closeMenuOnSelect={false}
+      menuPlacement="top"
       className="sm:text-sm"
       components={{
         GroupHeading: (props) => <CustomGroupHeading {...props} />,
