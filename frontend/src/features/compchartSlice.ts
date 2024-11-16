@@ -104,10 +104,10 @@ const compChartSlice = createSlice({
     addRecipeSel(
       { charts },
       {
-        payload: { chartId, index, recipeSel },
+        payload: { chartId, selIndex, recipeSel },
       }: PayloadAction<{
         chartId: string;
-        index: number;
+        selIndex: number;
         recipeSel?: TRecipeSelection;
       }>
     ) {
@@ -116,20 +116,20 @@ const compChartSlice = createSlice({
         return;
       }
 
-      if (index < 0 || index > chart.recipeSels.length) {
+      if (selIndex < 0 || selIndex > chart.recipeSels.length) {
         return;
       }
 
-      chart.recipeSels.splice(index, 0, recipeSel ?? makeDefualtRecipeSel());
+      chart.recipeSels.splice(selIndex, 0, recipeSel ?? makeDefualtRecipeSel());
     },
 
     updateRecipeSel(
       { charts },
       {
-        payload: { chartId, index, recipeSel },
+        payload: { chartId, selIndex, recipeSel },
       }: PayloadAction<{
         chartId: string;
-        index: number;
+        selIndex: number;
         recipeSel: TRecipeSelection;
       }>
     ) {
@@ -138,47 +138,47 @@ const compChartSlice = createSlice({
         return;
       }
 
-      if (index < 0 || index >= chart.recipeSels.length) {
+      if (selIndex < 0 || selIndex >= chart.recipeSels.length) {
         return;
       }
 
-      chart.recipeSels[index] = recipeSel;
+      chart.recipeSels[selIndex] = recipeSel;
     },
 
     deleteRecipeSel(
       { charts },
       {
-        payload: { chartId, index },
-      }: PayloadAction<{ chartId: string; index: number }>
+        payload: { chartId, selIndex },
+      }: PayloadAction<{ chartId: string; selIndex: number }>
     ) {
       const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
 
-      if (index < 0 || index >= chart.recipeSels.length) {
+      if (selIndex < 0 || selIndex >= chart.recipeSels.length) {
         return;
       }
 
-      chart.recipeSels.splice(index, 1);
+      chart.recipeSels.splice(selIndex, 1);
     },
 
     addRecipe(
       { charts },
       {
-        payload: { chartId, index, recipe },
-      }: PayloadAction<{ chartId: string; index: number; recipe: TRecipe }>
+        payload: { chartId, selIndex, recipe },
+      }: PayloadAction<{ chartId: string; selIndex: number; recipe: TRecipe }>
     ) {
       const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
 
-      if (index < 0 || index >= chart.recipeSels.length) {
+      if (selIndex < 0 || selIndex >= chart.recipeSels.length) {
         return;
       }
 
-      const { recipes } = chart.recipeSels[index];
+      const { recipes } = chart.recipeSels[selIndex];
       if (recipes.find((r) => r.id === recipe.id) == null) {
         recipes.push({ ...recipe });
       }
@@ -187,19 +187,19 @@ const compChartSlice = createSlice({
     deleteRecipe(
       { charts },
       {
-        payload: { chartId, index, recipe },
-      }: PayloadAction<{ chartId: string; index: number; recipe: TRecipe }>
+        payload: { chartId, selIndex, recipe },
+      }: PayloadAction<{ chartId: string; selIndex: number; recipe: TRecipe }>
     ) {
       const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
 
-      if (index < 0 || index >= chart.recipeSels.length) {
+      if (selIndex < 0 || selIndex >= chart.recipeSels.length) {
         return;
       }
 
-      const { recipes } = chart.recipeSels[index];
+      const { recipes } = chart.recipeSels[selIndex];
       const recipeIndex = recipes.findIndex((r) => r.id === recipe.id);
       if (recipeIndex >= 0) {
         recipes.splice(recipeIndex, 1);

@@ -88,7 +88,7 @@ export const RecipeSelection: React.FC<{
           return;
         }
 
-        dispatch(actions.addRecipe({ chartId, index, recipe }));
+        dispatch(actions.addRecipe({ chartId, selIndex, recipe }));
       },
     }),
     [recipeSel]
@@ -101,7 +101,7 @@ export const RecipeSelection: React.FC<{
       dispatch(
         actions.updateRecipeSel({
           chartId,
-          index,
+          selIndex,
           recipeSel: { ...recipeSel, name: ev.target.value },
         })
       ),
@@ -150,12 +150,13 @@ export const RecipeSelection: React.FC<{
       {recipes == null || recipes.length === 0 ? (
         <p>レシピをここにドロップしてください</p>
       ) : (
-        recipes.map((recipe) => (
+        recipes.map((recipe, index) => (
           <DraggableRecipe
             key={recipe.id}
             recipe={recipe}
             full={false}
-            selIndex={index}
+            selIndex={selIndex}
+            errors={recipeErrors?.[index]?.errors}
             className="recipe-item"
           />
         ))

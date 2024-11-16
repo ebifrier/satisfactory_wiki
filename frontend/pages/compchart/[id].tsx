@@ -124,7 +124,7 @@ const CompChartPage: React.FC = () => {
   const handleDropOutside = React.useCallback(
     (recipe: TRecipe, selIndex?: number) => {
       if (selIndex != null) {
-        dispatch(actions.deleteRecipe({ chartId, index: selIndex, recipe }));
+        dispatch(actions.deleteRecipe({ chartId, selIndex, recipe }));
       }
     },
     [dispatch, chartId]
@@ -204,7 +204,7 @@ const CompChartPage: React.FC = () => {
           <RecipeSelection
             key={index}
             chartId={chartId}
-            index={index}
+            selIndex={index}
             recipeSel={recipeSel}
             hasDelete={recipeSels.length > 1}
           />
