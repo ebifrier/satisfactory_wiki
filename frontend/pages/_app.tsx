@@ -29,7 +29,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
         <div className="text-2xl font-bold">
           <Link href="/">
             <img
-              src="./favicon.png"
+              src="/favicon.png"
               title="logo"
               alt="logo"
               className="logo-image inline mr-2"
@@ -86,6 +86,12 @@ export default function App({ Component, pageProps }: AppProps): ReactNode {
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="icon" href="/favicon.ico" id="favicon" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
           />
         </Head>
 
