@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { Tooltip } from "react-tooltip";
 import * as Icon from "@heroicons/react/24/outline";
-import { useAppDispatch, TRecipe } from "@/index";
+import { useAppDispatch, TRecipe, RecipeUtil } from "@/index";
 import { TRecipeSelection, actions } from "@/features/compchartSlice";
 
 export const ItemTypes = {
@@ -28,7 +29,7 @@ export const DraggableRecipe: React.FC<
   }));
   drag(ref);
 
-  const getDisplayName = ({ name, ingredients, products }: TRecipe): string => {
+  const getRecipeArgs = ({ ingredients, products }: TRecipe): string => {
     const ingList = ingredients
       .map((ing) => ing.item?.name)
       .filter((n) => n != null)
@@ -37,18 +38,36 @@ export const DraggableRecipe: React.FC<
       .map((prod) => prod.item?.name)
       .filter((n) => n != null)
       .join(", ");
-    return `${name} ［${ingList}］→［${prodList}］`;
+    return `［${ingList}］→［${prodList}］`;
   };
+
+  const tooltipContent = React.useMemo(() => {
+    return (
+      <>
+        <div>{RecipeUtil.getFullName(recipe)}</div>
+        <div className="ml-2 mt-2">{getRecipeArgs(recipe)}</div>
+      </>
+    );
+  }, [recipe]);
+
+  const getDisplayName = ({ name }: TRecipe): string => {
+    return `${name} ${getRecipeArgs(recipe)}`;
+  };
+  const tooltipId = `recipe-${selIndex}-${recipe.id}`;
 
   return (
     <div
       ref={ref}
+      data-tooltip-id={tooltipId}
       className={`p-2 mb-1 border rounded-lg bg-white cursor-move shadow-md ${
         full ? "" : "inline-block"
       } ${className ?? ""}`}
       {...args}
     >
       {full ? getDisplayName(recipe) : recipe.name}
+      <Tooltip id={tooltipId} place="bottom">
+        {tooltipContent}
+      </Tooltip>
     </div>
   );
 };

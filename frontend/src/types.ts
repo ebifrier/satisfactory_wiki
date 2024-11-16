@@ -166,6 +166,9 @@ export class RecipeUtil {
     return `素材/${wikiId}#Recipe_${linkAnchor}`;
   };
 
+  static getFullName = ({ name, id }: TRecipe): string =>
+    `${name} [${toDisplayId(id)}]`;
+
   static isByproduct = (recipe: TRecipe, itemId: string): boolean =>
     recipe.products[0]?.itemId !== itemId;
 
