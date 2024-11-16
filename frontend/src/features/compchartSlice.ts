@@ -27,10 +27,17 @@ export type TCompChartListState = {
 export const makeDefualtRecipeSel = () => ({ name: "", recipes: [] });
 export const makeDefualtTProductAmount = () => ({ amount: 100 });
 
+const getUniqueStr = (strong?: number): string => {
+  return (
+    new Date().getTime().toString(16) +
+    Math.floor((strong ?? 1000) * Math.random()).toString(16)
+  );
+};
+
 const initialState: TCompChartListState = {
   charts: [
     {
-      id: "0",
+      id: getUniqueStr(),
       name: "default",
       recipeSels: [makeDefualtRecipeSel()],
       productAmounts: [makeDefualtTProductAmount()],
@@ -46,6 +53,33 @@ const compChartSlice = createSlice({
   name: "compchart",
   initialState,
   reducers: {
+    addChart(
+      { charts },
+      { payload: { chart } }: PayloadAction<{ chart?: TCompChartState }>
+    ) {
+      charts.push(
+        chart ?? {
+          id: getUniqueStr(),
+          name: "新規比較表",
+          recipeSels: [makeDefualtRecipeSel()],
+          productAmounts: [makeDefualtTProductAmount()],
+          ingredients: [],
+        }
+      );
+    },
+
+    deleteChart(
+      { charts },
+      { payload: { chartId } }: PayloadAction<{ chartId: string }>
+    ) {
+      const index = charts.findIndex(({ id }) => id === chartId);
+      if (index < 0) {
+        return;
+      }
+
+      charts.splice(index, 1);
+    },
+
     setRecipeSels(
       { charts },
       {

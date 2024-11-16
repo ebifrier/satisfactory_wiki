@@ -12,7 +12,7 @@ import "@/styles/style.scss";
 
 const HeaderLinks = [
   ["素材詳細", "/item"],
-  ["必要量比較", "/compchart"],
+  ["レシピ比較", "/compchart"],
 ];
 
 const Header: React.FC<{ className?: string }> = ({ className }) => {

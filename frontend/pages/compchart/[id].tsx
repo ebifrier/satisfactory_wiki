@@ -89,7 +89,15 @@ const CompChartPage: React.FC = () => {
         const partial = await getRecipes(page);
         rs = rs.concat(partial);
         setRecipes(rs);
-        if (partial.length < 50) break;
+        if (partial.length < 50) {
+          // dispatch(
+          //   actions.setRecipeSels({
+          //     chartId,
+          //     recipeSels: getDefaultRecipeSels(rs),
+          //   })
+          // );
+          break;
+        }
       }
     };
 
@@ -101,16 +109,6 @@ const CompChartPage: React.FC = () => {
     productAmounts = [],
     ingredients = [],
   } = chart ?? {};
-
-  // React.useEffect(() => {
-  //   if (recipes == null || !recipesCompleted) return;
-  //   dispatch(
-  //     actions.setRecipeSels({
-  //       chartId,
-  //       recipeSels: getDefaultRecipeSels(recipes),
-  //     })
-  //   );
-  // }, [dispatch, chartId, recipes, recipesCompleted]);
 
   // 検索ワードによるフィルタリング
   const FilteredDraggableRecipes = React.useMemo(() => {
@@ -156,8 +154,16 @@ const CompChartPage: React.FC = () => {
     >
       <PageHead title="レシピ比較表" />
 
-      <div className="col-span-full mb-2">
-        <h1 className="text-4xl font-bold text-gray-800">レシピ比較表</h1>
+      <div className="col-span-full flex text-4xl font-semibold mb-2">
+        <h1 className="flex-none inline-block my-auto text-gray-800">
+          レシピ比較表:
+        </h1>
+        <input
+          type="text"
+          className="flex-1 inline-block p-2 ml-2 my-auto min-w-[4rem] border border-gray-400 rounded-lg"
+          title="名前"
+          value={chart?.name ?? ""}
+        />
       </div>
 
       {/* 左側: レシピ一覧と検索フィルター */}
