@@ -24,7 +24,6 @@ import {
   IngredientMultiSelect,
 } from "@/components";
 import { actions } from "@/features/compchartSlice";
-import { getDefaultRecipeSels } from "@/features/defaultRecipes";
 
 //
 // 範囲外のドロップエリア
@@ -67,7 +66,6 @@ const CompChartPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = React.useState<string>("");
   const [recipes, setRecipes] = React.useState<TRecipe[]>([]);
-  const [recipesCompleted, setRecipesCompleted] = React.useState(false);
   const { itemOptions, data: itemsByGroup } = useItemOptions();
   const items = React.useMemo(
     () => itemsByGroup?.map(([, items]) => items)?.flat(),
@@ -86,19 +84,15 @@ const CompChartPage: React.FC = () => {
 
     const func = async () => {
       let rs: TRecipe[] = [];
+
       for (let page = 0; ; page++) {
         const partial = await getRecipes(page);
         rs = rs.concat(partial);
         setRecipes(rs);
-
-        if (partial.length < 50) {
-          setRecipesCompleted(true);
-          break;
-        }
+        if (partial.length < 50) break;
       }
     };
 
-    setRecipesCompleted(false);
     func();
   }, []);
 
@@ -160,10 +154,10 @@ const CompChartPage: React.FC = () => {
       onDrop={handleDropOutside}
       className="grid grid-cols-1 md:grid-cols-2 gap-4"
     >
-      <PageHead title="比較表" />
+      <PageHead title="レシピ比較表" />
 
       <div className="col-span-full mb-2">
-        <h1 className="text-4xl font-bold text-gray-800">必要量比較</h1>
+        <h1 className="text-4xl font-bold text-gray-800">レシピ比較表</h1>
       </div>
 
       {/* 左側: レシピ一覧と検索フィルター */}
