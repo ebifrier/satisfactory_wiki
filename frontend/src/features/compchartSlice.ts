@@ -24,8 +24,22 @@ export type TCompChartListState = {
   charts: TCompChartState[];
 };
 
-export const makeDefualtRecipeSel = () => ({ name: "", recipes: [] });
-export const makeDefualtTProductAmount = () => ({ amount: 100 });
+const makeDefualtRecipeSel = (): TRecipeSelection => ({
+  name: "",
+  recipes: [],
+});
+
+const makeDefualtProductAmount = (): TProductAmount => ({
+  amount: 100,
+});
+
+const makeDefaultChart = (): TCompChartState => ({
+  id: getUniqueStr(),
+  name: "新規レシピ比較表",
+  recipeSels: [makeDefualtRecipeSel()],
+  productAmounts: [makeDefualtProductAmount()],
+  ingredients: [],
+});
 
 const getUniqueStr = (strong?: number): string => {
   return (
@@ -35,15 +49,7 @@ const getUniqueStr = (strong?: number): string => {
 };
 
 const initialState: TCompChartListState = {
-  charts: [
-    {
-      id: getUniqueStr(),
-      name: "default",
-      recipeSels: [makeDefualtRecipeSel()],
-      productAmounts: [makeDefualtTProductAmount()],
-      ingredients: [],
-    },
-  ],
+  charts: [makeDefaultChart()],
 };
 
 //
@@ -57,15 +63,7 @@ const compChartSlice = createSlice({
       { charts },
       { payload: { chart } }: PayloadAction<{ chart?: TCompChartState }>
     ) {
-      charts.push(
-        chart ?? {
-          id: getUniqueStr(),
-          name: "新規比較表",
-          recipeSels: [makeDefualtRecipeSel()],
-          productAmounts: [makeDefualtTProductAmount()],
-          ingredients: [],
-        }
-      );
+      charts.push(chart ?? makeDefaultChart());
     },
 
     deleteChart(
@@ -213,7 +211,7 @@ const compChartSlice = createSlice({
         return;
       }
 
-      chart.productAmounts.push(productAmounts ?? makeDefualtTProductAmount());
+      chart.productAmounts.push(productAmounts ?? makeDefualtProductAmount());
     },
 
     setProductAmount(
