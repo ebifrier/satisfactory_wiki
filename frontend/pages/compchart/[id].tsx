@@ -104,12 +104,6 @@ const CompChartPage: React.FC = () => {
     func();
   }, []);
 
-  const {
-    recipeSels = [],
-    productAmounts = [],
-    ingredients = [],
-  } = chart ?? {};
-
   // 検索ワードによるフィルタリング
   const FilteredDraggableRecipes = React.useMemo(() => {
     const filteredRecipes = recipes?.filter(
@@ -136,6 +130,12 @@ const CompChartPage: React.FC = () => {
     [dispatch, chartId]
   );
 
+  const {
+    recipeSels = [],
+    productAmounts = [],
+    ingredients = [],
+  } = chart ?? {};
+
   const handleCompChart = React.useCallback(async () => {
     const charts = await executeCompChart(
       recipeSels,
@@ -147,6 +147,14 @@ const CompChartPage: React.FC = () => {
     setChartData(chartData);
   }, [recipeSels, productAmounts, ingredients, items]);
 
+  if (chart == null) {
+    return (
+      <div className="col-span-full mb-2 text-red-400">
+        レシピ比較表が見つかりません。
+      </div>
+    );
+  }
+
   return (
     <OutsideDropArea
       onDrop={handleDropOutside}
@@ -154,19 +162,23 @@ const CompChartPage: React.FC = () => {
     >
       <PageHead title="レシピ比較表" />
 
-      <div className="col-span-full flex text-4xl font-semibold mb-2">
-        <h1 className="flex-none inline-block my-auto text-gray-800">
+      <div className="col-span-full flex mb-2">
+        <h1 className="flex-none inline-block text-3xl my-auto text-gray-800">
           レシピ比較表:
         </h1>
         <input
           type="text"
-          className="flex-1 inline-block p-2 ml-2 my-auto min-w-[4rem] border border-gray-400 rounded-lg"
+          className="flex-1 inline-block font-semibold text-2xl p-2 ml-2 my-auto min-w-[4rem] border border-gray-400 rounded-lg"
           title="名前"
           value={chart?.name ?? ""}
+          onChange={(ev) =>
+            dispatch(
+              actions.setChart({ ...(chart ?? {}), name: ev.target.value })
+            )
+          }
         />
       </div>
 
-      {/* 左側: レシピ一覧と検索フィルター */}
       <div
         className="flex flex-col p-4 bg-white rounded-lg shadow-md"
         style={{ maxHeight: "70vh" }}

@@ -78,6 +78,15 @@ const compChartSlice = createSlice({
       charts.splice(index, 1);
     },
 
+    setChart({ charts }, { payload: chart }: PayloadAction<TCompChartState>) {
+      const existedChart = charts.find(({ id }) => id === chart.id);
+      if (existedChart == null) {
+        return;
+      }
+
+      Object.assign(existedChart, chart);
+    },
+
     setRecipeSels(
       { charts },
       {
