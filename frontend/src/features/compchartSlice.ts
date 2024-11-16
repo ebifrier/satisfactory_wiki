@@ -20,20 +20,24 @@ export interface TCompChartState {
   ingredients: string[];
 }
 
-export type TCompChartListState = TCompChartState[];
+export type TCompChartListState = {
+  charts: TCompChartState[];
+};
 
 export const makeDefualtRecipeSel = () => ({ name: "", recipes: [] });
 export const makeDefualtTProductAmount = () => ({ amount: 100 });
 
-const initialState: TCompChartListState = [
-  {
-    id: "0",
-    name: "default",
-    recipeSels: [makeDefualtRecipeSel()],
-    productAmounts: [makeDefualtTProductAmount()],
-    ingredients: [],
-  },
-];
+const initialState: TCompChartListState = {
+  charts: [
+    {
+      id: "0",
+      name: "default",
+      recipeSels: [makeDefualtRecipeSel()],
+      productAmounts: [makeDefualtTProductAmount()],
+      ingredients: [],
+    },
+  ],
+};
 
 //
 //
@@ -43,12 +47,12 @@ const compChartSlice = createSlice({
   initialState,
   reducers: {
     setRecipeSels(
-      state,
+      { charts },
       {
         payload: { chartId, recipeSels },
       }: PayloadAction<{ chartId: string; recipeSels: TRecipeSelection[] }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -57,7 +61,7 @@ const compChartSlice = createSlice({
     },
 
     addRecipeSel(
-      state,
+      { charts },
       {
         payload: { chartId, index, recipeSel },
       }: PayloadAction<{
@@ -66,7 +70,7 @@ const compChartSlice = createSlice({
         recipeSel?: TRecipeSelection;
       }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -79,7 +83,7 @@ const compChartSlice = createSlice({
     },
 
     updateRecipeSel(
-      state,
+      { charts },
       {
         payload: { chartId, index, recipeSel },
       }: PayloadAction<{
@@ -88,7 +92,7 @@ const compChartSlice = createSlice({
         recipeSel: TRecipeSelection;
       }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -101,12 +105,12 @@ const compChartSlice = createSlice({
     },
 
     deleteRecipeSel(
-      state,
+      { charts },
       {
         payload: { chartId, index },
       }: PayloadAction<{ chartId: string; index: number }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -119,12 +123,12 @@ const compChartSlice = createSlice({
     },
 
     addRecipe(
-      state,
+      { charts },
       {
         payload: { chartId, index, recipe },
       }: PayloadAction<{ chartId: string; index: number; recipe: TRecipe }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -140,12 +144,12 @@ const compChartSlice = createSlice({
     },
 
     deleteRecipe(
-      state,
+      { charts },
       {
         payload: { chartId, index, recipe },
       }: PayloadAction<{ chartId: string; index: number; recipe: TRecipe }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -162,7 +166,7 @@ const compChartSlice = createSlice({
     },
 
     addProductAmount(
-      state,
+      { charts },
       {
         payload: { chartId, productAmounts },
       }: PayloadAction<{
@@ -170,7 +174,7 @@ const compChartSlice = createSlice({
         productAmounts?: TProductAmount;
       }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -179,7 +183,7 @@ const compChartSlice = createSlice({
     },
 
     setProductAmount(
-      state,
+      { charts },
       {
         payload: { chartId, index, value },
       }: PayloadAction<{
@@ -188,7 +192,7 @@ const compChartSlice = createSlice({
         value: TProductAmount;
       }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -201,12 +205,12 @@ const compChartSlice = createSlice({
     },
 
     deleteProductAmount(
-      state,
+      { charts },
       {
         payload: { chartId, index },
       }: PayloadAction<{ chartId: string; index: number }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }
@@ -219,7 +223,7 @@ const compChartSlice = createSlice({
     },
 
     operateIngredients(
-      state,
+      { charts },
       {
         payload: { chartId, options, meta },
       }: PayloadAction<{
@@ -228,7 +232,7 @@ const compChartSlice = createSlice({
         meta?: ActionMeta<Option>;
       }>
     ) {
-      const chart = state.find(({ id }) => id === chartId);
+      const chart = charts.find(({ id }) => id === chartId);
       if (chart == null) {
         return;
       }

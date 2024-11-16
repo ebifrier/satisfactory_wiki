@@ -62,7 +62,7 @@ const CompChartPage: React.FC = () => {
   const { query } = useRouter();
   const chartId = paramToStr(query.id) ?? "";
   const chart = useAppSelector((state) =>
-    state.compCharts.find((c) => c.id === chartId)
+    state.compCharts.charts.find((c) => c.id === chartId)
   );
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = React.useState<string>("");
