@@ -69,7 +69,13 @@ def items():
 
 @app.get('/api/v1/recipes')
 def recipes():
-    recipes = Recipe.query.all()
+    page = int(request.args.get('page', '0'))
+    count = int(request.args.get('count', '50'))
+    recipes = (Recipe.query
+               .order_by(asc(Recipe.index))
+               .offset(page * count)
+               .limit(count)
+               .all())
     return jsonify([recipe.to_dict() for recipe in recipes])
 
 
