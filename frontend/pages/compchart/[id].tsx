@@ -89,15 +89,7 @@ const CompChartPage: React.FC = () => {
         const partial = await getRecipes(page);
         rs = rs.concat(partial);
         setRecipes(rs);
-        if (partial.length < 50) {
-          // dispatch(
-          //   actions.setRecipeSels({
-          //     chartId,
-          //     recipeSels: getDefaultRecipeSels(rs),
-          //   })
-          // );
-          break;
-        }
+        if (partial.length < 50) break;
       }
     };
 
@@ -142,9 +134,8 @@ const CompChartPage: React.FC = () => {
       productAmounts,
       ingredients
     );
-    const chartData = createCompChartData(charts, ingredients, items ?? []);
-    console.log(chartData);
-    setChartData(chartData);
+    console.log(charts);
+    setChartData(createCompChartData(charts, ingredients, items ?? []));
   }, [recipeSels, productAmounts, ingredients, items]);
 
   if (chart == null) {
@@ -206,6 +197,7 @@ const CompChartPage: React.FC = () => {
             chartId={chartId}
             selIndex={index}
             recipeSel={recipeSel}
+            ingredients={ingredients}
             hasDelete={recipeSels.length > 1}
           />
         ))}

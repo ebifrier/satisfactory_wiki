@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, TRecipe, RecipeUtil } from "@/index";
 import { TRecipeSelection, actions } from "@/features/compchartSlice";
+import { validateRecipes } from "@/features/validationRecipe";
 
 export const ItemTypes = {
   RECIPE: "recipe",
@@ -17,8 +18,9 @@ export const DraggableRecipe: React.FC<
     recipe: TRecipe;
     full: boolean;
     selIndex?: number;
+    errors?: string[];
   }
-> = ({ recipe, full, selIndex, className, ...args }) => {
+> = ({ recipe, full, selIndex, errors = [], className, ...args }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [, drag] = useDrag(() => ({
     type: ItemTypes.RECIPE,
@@ -45,7 +47,7 @@ export const DraggableRecipe: React.FC<
     return (
       <>
         <div>{RecipeUtil.getFullName(recipe)}</div>
-        <div className="ml-2 mt-2">{getRecipeArgs(recipe)}</div>
+        <div className="ml-2 mt-1">{getRecipeArgs(recipe)}</div>
       </>
     );
   }, [recipe]);
@@ -59,27 +61,45 @@ export const DraggableRecipe: React.FC<
     <div
       ref={ref}
       data-tooltip-id={tooltipId}
-      className={`p-2 mb-1 border rounded-lg bg-white cursor-move shadow-md ${
+      className={`p-2 mb-1 border rounded-lg cursor-move shadow-md ${
         full ? "" : "inline-block"
-      } ${className ?? ""}`}
+      } ${errors.length > 0 ? "bg-red-500 text-white" : "bg-white"} ${
+        className ?? ""
+      }`}
       {...args}
     >
       {full ? getDisplayName(recipe) : recipe.name}
-      <Tooltip id={tooltipId} place="bottom">
-        {tooltipContent}
-      </Tooltip>
+      {!full ? (
+        <Tooltip id={tooltipId} place="bottom" className="z-10">
+          {tooltipContent}
+          {errors.length > 0 ? (
+            <div className="mt-2">
+              エラー
+              {errors.map((err, index) => (
+                <p key={index}>{err}</p>
+              ))}
+            </div>
+          ) : null}
+        </Tooltip>
+      ) : null}
     </div>
   );
 };
 
+//
+// 選択したレシピリストと、その名前を表示します。
+//
 export const RecipeSelection: React.FC<{
   chartId: string;
-  index: number;
+  selIndex: number;
   recipeSel: TRecipeSelection;
+  ingredients?: string[];
   hasDelete?: boolean;
-}> = ({ chartId, index, recipeSel, hasDelete }) => {
+}> = ({ chartId, selIndex, recipeSel, ingredients, hasDelete }) => {
   const dispatch = useAppDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
+  const { recipes, name } = recipeSel ?? {};
+
   const [, drop] = useDrop(
     () => ({
       accept: ItemTypes.RECIPE,
@@ -95,7 +115,6 @@ export const RecipeSelection: React.FC<{
   );
   drop(ref);
 
-  const { recipes, name } = recipeSel ?? {};
   const handleName = React.useCallback(
     (ev: ChangeEvent<HTMLInputElement>) =>
       dispatch(
@@ -105,7 +124,28 @@ export const RecipeSelection: React.FC<{
           recipeSel: { ...recipeSel, name: ev.target.value },
         })
       ),
-    [dispatch, chartId, index, recipeSel]
+    [dispatch, chartId, selIndex, recipeSel]
+  );
+
+  const handleAddUpRecipe = React.useCallback(
+    () => dispatch(actions.addRecipeSel({ chartId, selIndex })),
+    [dispatch, chartId, selIndex]
+  );
+
+  const handleAddDownRecipe = React.useCallback(
+    () => dispatch(actions.addRecipeSel({ chartId, selIndex: selIndex + 1 })),
+    [dispatch, chartId, selIndex]
+  );
+
+  const handleDeleteRecipe = React.useCallback(
+    () => dispatch(actions.deleteRecipeSel({ chartId, selIndex })),
+    [dispatch, chartId, selIndex]
+  );
+
+  const recipeErrors = React.useMemo(
+    () =>
+      ingredients != null ? validateRecipes(recipes, ingredients) : undefined,
+    [recipes, ingredients]
   );
 
   return (
@@ -124,23 +164,19 @@ export const RecipeSelection: React.FC<{
         <p className="flex-none inline-block ml-auto">
           <button
             className="inline-block ml-1 size-6 align-middle text-blue-400"
-            onClick={() => dispatch(actions.addRecipeSel({ chartId, index }))}
+            onClick={handleAddUpRecipe}
           >
             <Icon.ArrowUpOnSquareIcon />
           </button>
           <button
             className="inline-block ml-1 size-6 align-middle text-blue-400"
-            onClick={() =>
-              dispatch(actions.addRecipeSel({ chartId, index: index + 1 }))
-            }
+            onClick={handleAddDownRecipe}
           >
             <Icon.ArrowDownOnSquareIcon />
           </button>
           <button
             className="inline-block ml-1 size-6 align-middle text-red-400 disabled:text-gray-300"
-            onClick={() =>
-              dispatch(actions.deleteRecipeSel({ chartId, index }))
-            }
+            onClick={handleDeleteRecipe}
             disabled={hasDelete != null && !hasDelete}
           >
             <Icon.TrashIcon />
