@@ -6,18 +6,24 @@ import {
   TableUtil,
   TTableData,
   TTableColumn,
+  TTextTag,
 } from "@/index";
 import { TRecipeSelection, TProductAmount } from "../features/compchartSlice";
 
 type StringToValueDic = { [key: string]: number };
 
-type APICompChartResult = {
+type APICompChart = {
   recipes: StringToValueDic;
   buildings: StringToValueDic;
   net: StringToValueDic;
   consume: number;
   power: number;
   name: string;
+};
+
+type APICompChartResult = {
+  charts: APICompChart[];
+  errors: string[];
 };
 
 const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
@@ -28,7 +34,7 @@ const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
   );
 };
 
-const convertItemName = (name?: string): string => {
+const convertItemName = (name?: string): string | TTextTag => {
   if (name == null) {
     return "";
   }
@@ -37,7 +43,7 @@ const convertItemName = (name?: string): string => {
     case "未加工石英":
       return "未加工&br;石英";
     case "カテリウム鉱石":
-      return "カテリウム&br;鉱石";
+      return { type: "text", content: "カテリウム&br;鉱石", size: 10 };
     case "ボーキサイト":
       return "ボーキ&br;サイト";
   }
@@ -51,7 +57,7 @@ const convertItemName = (name?: string): string => {
 };
 
 export const createCompChartData = (
-  charts: APICompChartResult[],
+  charts: APICompChart[],
   ingredientIds: string[],
   items: TItem[]
 ): TTableData => {
@@ -142,14 +148,29 @@ export const executeCompChart = async (
   recipeSels: TRecipeSelection[],
   productAmounts: TProductAmount[],
   ingredients: string[]
-): Promise<APICompChartResult[]> => {
+): Promise<APICompChartResult> => {
+  const errors: string[] = [];
+
+  if (ingredients.length === 0) {
+    errors.push("原料が指定されていません。");
+  }
+
+  const filtered = productAmounts.filter(({ itemId }) => itemId != null);
+  if (filtered.length === 0) {
+    errors.push("生産物が指定されていません。");
+  }
+
+  if (errors.length > 0) {
+    return { charts: [], errors };
+  }
+
   const productIds = productAmounts
     .filter(({ itemId }) => itemId != null)
     .map(({ itemId, amount }) => `${itemId}:${amount}`)
     .join(",");
   const ingredientIds = ingredients.join(",");
 
-  const charts = [];
+  const charts: APICompChart[] = [];
   for (const recipeSel of recipeSels) {
     const recipeIds = recipeSel.recipes.map((r) => r.id).join(",");
     const param = new URLSearchParams();
@@ -157,11 +178,11 @@ export const executeCompChart = async (
     param.append("products", productIds);
     param.append("ingredients", ingredientIds);
 
-    const chart = await fetcher<APICompChartResult>(
+    const chart = await fetcher<APICompChart>(
       `/api/v1/planner?${param.toString()}`
     );
     charts.push({ ...chart, name: recipeSel.name });
   }
 
-  return charts;
+  return { charts, errors };
 };

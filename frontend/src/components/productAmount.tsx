@@ -20,11 +20,11 @@ export const ProductAmountTable: React.FC<{
   );
 
   return (
-    <table className="table-fixed">
+    <table className="table w-full">
       <thead>
         <tr>
           <td className="text-center">生産物</td>
-          <td className="text-center w-[4rem]">生産個数</td>
+          <td className="text-center w-[6rem]">生産個数</td>
           <td className="text-center">削除</td>
         </tr>
       </thead>

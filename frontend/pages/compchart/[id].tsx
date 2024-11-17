@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useDrop } from "react-dnd";
 import * as Icon from "@heroicons/react/24/outline";
+import * as SolidIcon from "@heroicons/react/24/solid";
 import {
   TRecipe,
   paramToStr,
@@ -54,6 +55,8 @@ const OutsideDropArea: React.FC<
   );
 };
 
+const tabList = ["レシピ編成", "原料／生産物", "WIKIテーブル"];
+
 //
 // メインコンポーネント
 //
@@ -71,7 +74,9 @@ const CompChartPage: React.FC = () => {
     () => itemsByGroup?.map(([, items]) => items)?.flat(),
     [itemsByGroup]
   );
+  const [activeTab, setActiveTab] = React.useState(0);
   const [chartData, setChartData] = React.useState<TTableData>();
+  const [chartErrors, setChartErrors] = React.useState<string[]>();
   const wikiText = React.useMemo(
     () => `${TableUtil.dataToWIKI(chartData)}\n`,
     [chartData]
@@ -129,13 +134,19 @@ const CompChartPage: React.FC = () => {
   } = chart ?? {};
 
   const handleCompChart = React.useCallback(async () => {
-    const charts = await executeCompChart(
+    const { charts, errors } = await executeCompChart(
       recipeSels,
       productAmounts,
       ingredients
     );
-    console.log(charts);
-    setChartData(createCompChartData(charts, ingredients, items ?? []));
+    console.log(charts, errors);
+
+    if (errors.length === 0) {
+      setChartData(createCompChartData(charts, ingredients, items ?? []));
+    }
+
+    setChartErrors(errors);
+    setActiveTab(2);
   }, [recipeSels, productAmounts, ingredients, items]);
 
   if (chart == null) {
@@ -147,19 +158,16 @@ const CompChartPage: React.FC = () => {
   }
 
   return (
-    <OutsideDropArea
-      onDrop={handleDropOutside}
-      className="grid grid-cols-1 md:grid-cols-2 gap-4"
-    >
+    <OutsideDropArea onDrop={handleDropOutside}>
       <PageHead title="レシピ比較表" />
 
-      <div className="col-span-full flex mb-2">
-        <h1 className="flex-none inline-block text-3xl my-auto text-gray-800">
+      <div className="flex mb-2">
+        <h1 className="flex-none inline-block text-2xl my-auto text-gray-800">
           レシピ比較表:
         </h1>
         <input
           type="text"
-          className="flex-1 inline-block font-semibold text-2xl p-2 ml-2 my-auto min-w-[4rem] border border-gray-400 rounded-lg"
+          className="flex-1 inline-block font-semibold text-xl p-2 ml-2 my-auto min-w-[4rem] border border-gray-400 rounded-lg"
           title="名前"
           value={chart?.name ?? ""}
           onChange={(ev) =>
@@ -170,39 +178,75 @@ const CompChartPage: React.FC = () => {
         />
       </div>
 
+      <ul className="flex flex-wrap mt-6 mb-6 text-sm font-medium text-center text-gray-500 border-b border-gray-300">
+        {tabList.map((tabName, index) => (
+          <li className="me-2">
+            <button
+              type="button"
+              className={`inline-block p-4 rounded-t-lg ${
+                index === activeTab
+                  ? "text-gray-800 bg-gray-100 active"
+                  : "text-gray-700 hover:text-gray-600 hover:bg-gray-50"
+              }`}
+              onClick={() => setActiveTab(index)}
+            >
+              {tabName}
+            </button>
+          </li>
+        ))}
+        <li className="ms-auto me-0 my-auto">
+          <button
+            className="py-2 px-4 min-w-[5rem] bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full"
+            onClick={handleCompChart}
+          >
+            計算
+          </button>
+        </li>
+      </ul>
+
+      {/* レシピ編成タブ */}
       <div
-        className="flex flex-col p-4 bg-white rounded-lg shadow-md"
-        style={{ maxHeight: "70vh" }}
+        className={`grid grid-cols-1 md:grid-cols-[4fr_5fr] gap-4 ${
+          activeTab === 0 ? "" : "hidden"
+        }`}
       >
-        <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2>
-        <input
-          type="text"
-          placeholder="検索..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full flex-none p-3 border rounded-lg mb-3"
-        />
-        <div className="flex-1 overflow-auto">{FilteredDraggableRecipes}</div>
+        <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
+          {/* <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2> */}
+          <input
+            type="text"
+            placeholder="検索..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full flex-none p-3 border border-gray-400 rounded-lg mb-3"
+          />
+          <div className="flex-1 overflow-auto">{FilteredDraggableRecipes}</div>
+        </div>
+
+        <div className="flex flex-col p-4 bg-white rounded-lg shadow-md overflow-auto">
+          <h2 className="flex-none mt-2 text-2xl font-bold">レシピ編成</h2>
+          {recipeSels.map((recipeSel, index) => (
+            <RecipeSelection
+              key={index}
+              chartId={chartId}
+              selIndex={index}
+              recipeSel={recipeSel}
+              ingredients={ingredients}
+              hasDelete={recipeSels.length > 1}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* 右側: 使用するレシピのドロップエリア */}
-      <div
-        className="flex flex-col p-4 bg-white rounded-lg shadow-md overflow-auto"
-        style={{ maxHeight: "70vh" }}
-      >
-        <h2 className="flex-none text-2xl font-bold">使用レシピ一覧</h2>
-        {recipeSels.map((recipeSel, index) => (
-          <RecipeSelection
-            key={index}
-            chartId={chartId}
-            selIndex={index}
-            recipeSel={recipeSel}
-            ingredients={ingredients}
-            hasDelete={recipeSels.length > 1}
-          />
-        ))}
+      {/* 原料／生産物タブ */}
+      <div className={`${activeTab === 1 ? "" : "hidden"}`}>
+        <h2 className="text-2xl font-bold mb-1">原料一覧</h2>
+        <IngredientMultiSelect
+          chartId={chartId}
+          ingredients={ingredients}
+          itemOptions={itemOptions}
+        />
 
-        <h2 className="flex-none text-2xl font-bold mt-4 mb-1">
+        <h2 className="text-2xl font-bold mt-6 mb-1">
           生産物一覧
           <span className="float-right font-normal">
             <button
@@ -218,37 +262,47 @@ const CompChartPage: React.FC = () => {
           productAmounts={productAmounts}
           itemOptions={itemOptions}
         />
-
-        <h2 className="flex-none text-2xl font-bold mt-4 mb-1">原料一覧</h2>
-        <IngredientMultiSelect
-          chartId={chartId}
-          ingredients={ingredients}
-          itemOptions={itemOptions}
-        />
       </div>
 
-      <button
-        className="col-span-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        onClick={handleCompChart}
-      >
-        計算
-      </button>
+      {/* WIKIテーブルタブ */}
+      <div className={`${activeTab === 2 ? "" : "hidden"}`}>
+        {chartErrors != null && chartErrors.length > 0 ? (
+          <div
+            className="flex items-center p-4 mb-4 text-sm border rounded-lg bg-gray-800 text-red-400 border-red-800"
+            role="alert"
+          >
+            <div>
+              <p className="text-xl font-bold">
+                <SolidIcon.ExclamationCircleIcon className="inline size-6 align-top me-1" />
+                <span className="inline align-middle">実行エラー</span>
+              </p>
+              <ul className="mt-3">
+                {chartErrors.map((err) => (
+                  <li>{err}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ) : null}
 
-      {chartData == null ? (
-        <p className="text-gray-500">データはありません。</p>
-      ) : chartData.rows.length <= 2 ? (
-        <p className="text-gray-500">表示する項目はありません。</p>
-      ) : (
-        <TableData data={chartData} />
-      )}
+        <h2 className="text-2xl font-bold mb-1">テーブル</h2>
+        {chartData == null ? (
+          <p className="text-gray-500">データはありません。</p>
+        ) : chartData.rows.length <= 2 ? (
+          <p className="text-gray-500">表示する項目はありません。</p>
+        ) : (
+          <TableData data={chartData} />
+        )}
 
-      <textarea
-        className="border border-gray-500 focus:outline-blue-400"
-        wrap="off"
-        placeholder="placeholder"
-        readOnly
-        value={wikiText}
-      ></textarea>
+        <h2 className="text-2xl font-bold mt-6 mb-1">WIKI用</h2>
+        <textarea
+          className="w-full border border-gray-500 focus:outline-blue-400 min-h-[300px]"
+          wrap="off"
+          placeholder="placeholder"
+          readOnly
+          value={wikiText}
+        ></textarea>
+      </div>
     </OutsideDropArea>
   );
 };
