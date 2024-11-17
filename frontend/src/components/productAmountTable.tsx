@@ -20,12 +20,12 @@ export const ProductAmountTable: React.FC<{
   );
 
   return (
-    <table className="table w-full">
+    <table className="table-fixed w-full">
       <thead>
         <tr>
           <td className="text-center">生産物</td>
           <td className="text-center w-[6rem]">生産個数</td>
-          <td className="text-center">削除</td>
+          <td className="text-center w-[6rem]">削除</td>
         </tr>
       </thead>
       <tbody>
@@ -45,7 +45,6 @@ export const ProductAmountTable: React.FC<{
                   )
                 }
                 isSearchable={true}
-                menuPlacement="top"
                 className="sm:text-sm"
               />
             </td>
