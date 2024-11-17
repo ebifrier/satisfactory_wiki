@@ -25,7 +25,7 @@ export const ProductAmountTable: React.FC<{
         <tr>
           <td className="text-center">生産物</td>
           <td className="text-center w-[6rem]">生産個数</td>
-          <td className="text-center w-[6rem]">削除</td>
+          <td className="text-center w-[6rem]">操作</td>
         </tr>
       </thead>
       <tbody>
@@ -67,7 +67,9 @@ export const ProductAmountTable: React.FC<{
             </td>
             <td className="text-center">
               <button
+                type="button"
                 className="size-6 text-blue-400"
+                title="上に新しい項目を追加"
                 onClick={() =>
                   dispatch(actions.addProductAmount({ chartId, index }))
                 }
@@ -75,7 +77,9 @@ export const ProductAmountTable: React.FC<{
                 <Icon.ArrowUpOnSquareIcon />
               </button>
               <button
+                type="button"
                 className="size-6 text-blue-400"
+                title="下に新しい項目を追加"
                 onClick={() =>
                   dispatch(
                     actions.addProductAmount({ chartId, index: index + 1 })
@@ -85,8 +89,10 @@ export const ProductAmountTable: React.FC<{
                 <Icon.ArrowDownOnSquareIcon />
               </button>
               <button
+                type="button"
                 disabled={productAmounts.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"
+                title="項目を削除"
                 onClick={() =>
                   dispatch(actions.deleteProductAmount({ chartId, index }))
                 }

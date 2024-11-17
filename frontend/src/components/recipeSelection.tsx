@@ -163,23 +163,30 @@ export const RecipeSelection: React.FC<{
           value={name}
           onChange={handleName}
           placeholder="名前"
+          title="レシピ編成の名前"
           className="ml-2 p-1 flex-1 font-semibold min-w-[10rem] focus:outline-gray-400 rounded-lg"
         />
         <p className="flex-none inline-block ml-auto">
           <button
+            type="button"
             className="inline-block ml-1 size-6 align-middle text-blue-400"
+            title="上に新しいレシピ編成を追加"
             onClick={handleAddUpRecipe}
           >
             <Icon.ArrowUpOnSquareIcon />
           </button>
           <button
+            type="button"
             className="inline-block ml-1 size-6 align-middle text-blue-400"
+            title="下に新しいレシピ編成を追加"
             onClick={handleAddDownRecipe}
           >
             <Icon.ArrowDownOnSquareIcon />
           </button>
           <button
+            type="button"
             className="inline-block ml-1 size-6 align-middle text-red-400 disabled:text-gray-300"
+            title="レシピ編成を削除"
             onClick={handleDeleteRecipe}
             disabled={hasDelete != null && !hasDelete}
           >

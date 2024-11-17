@@ -173,7 +173,8 @@ const CompChartPage: React.FC = () => {
         <input
           type="text"
           className="flex-1 inline-block font-semibold text-xl p-2 ml-2 my-auto min-w-[4rem] border border-gray-400 rounded-lg"
-          title="名前"
+          placeholder="名前"
+          title="比較表の名前"
           value={chart?.name ?? ""}
           onChange={(ev) =>
             dispatch(
@@ -201,10 +202,12 @@ const CompChartPage: React.FC = () => {
         ))}
         <li className="ms-auto me-0 my-auto">
           <button
+            type="button"
             className="py-2 px-4 min-w-[5rem] bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full"
+            title="表の作成を行います。"
             onClick={handleCompChart}
           >
-            計算
+            表を作成
           </button>
         </li>
       </ul>
