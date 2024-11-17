@@ -229,7 +229,7 @@ const CompChartPage: React.FC = () => {
         </div>
 
         <div className="flex-1 flex flex-col p-4 m-1 bg-white rounded-lg shadow-md overflow-auto">
-          <h2 className="flex-none mt-2 text-2xl font-bold">レシピ編成</h2>
+          {/* <h2 className="flex-none mt-2 text-2xl font-bold">レシピ編成</h2> */}
           {recipeSels.map((recipeSel, index) => (
             <RecipeSelection
               key={index}

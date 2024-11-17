@@ -137,10 +137,11 @@ export const RecipeSelection: React.FC<{
     [dispatch, chartId, selIndex]
   );
 
-  const handleDeleteRecipe = React.useCallback(
-    () => dispatch(actions.deleteRecipeSel({ chartId, selIndex })),
-    [dispatch, chartId, selIndex]
-  );
+  const handleDeleteRecipe = React.useCallback(() => {
+    if (confirm(`このレシピ編成を削除してもよろしいですか？`)) {
+      dispatch(actions.deleteRecipeSel({ chartId, selIndex }));
+    }
+  }, [dispatch, chartId, selIndex]);
 
   const recipeErrors = React.useMemo(
     () =>

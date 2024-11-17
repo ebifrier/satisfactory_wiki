@@ -47,7 +47,13 @@ const CompChartListPage: React.FC = () => {
           <button
             type="button"
             className="float-right"
-            onClick={() => dispatch(actions.deleteChart({ chartId: chart.id }))}
+            onClick={() => {
+              if (
+                confirm(`"${chart.name}"レシピを削除してもよろしいですか？`)
+              ) {
+                dispatch(actions.deleteChart({ chartId: chart.id }));
+              }
+            }}
           >
             <Icon.TrashIcon className="size-6 text-red-400" />
           </button>
