@@ -9,7 +9,7 @@ from attrdict import AttrDict
 TRecipeItem = namedtuple('TRecipeItem', ['id', 'amount', 'minute'])
 TRecipe = namedtuple('TRecipe', ['id', 'buildings', 'production_times',
                                  'alternate', 'ingredients', 'products',
-                                 'conditions'])
+                                 'conditions', 'power'])
 TItemAmount = namedtuple('TItemAmount', ['id', 'amount'])
 TMilestone = namedtuple('TMilestone', ['id', 'tier', 'time', 'items'])
 TResearch = namedtuple('TResearch', ['id', 'category', 'time', 'link_anchor', 'items'])

@@ -152,6 +152,7 @@ export type TRecipe = TBase & {
   condition?: TCondition;
   productionTime: number;
   productionTime2?: number;
+  power?: number;
   buildingId: string;
   building: TBuilding;
   building2Id?: string;
