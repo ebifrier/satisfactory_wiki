@@ -95,17 +95,15 @@ export default function App({ Component, pageProps }: AppProps): ReactNode {
           />
         </Head>
 
-        <div className="flex flex-col">
-          <Header className="flex-none" />
-          <DndProvider backend={HTML5Backend}>
-            <div
-              id="main"
-              className="container flex-1 bg-white 2xl:max-w-8xl rounded-lg shadow-md p-6 mx-auto my-4"
-            >
-              <Component {...pageProps} />
-            </div>
-          </DndProvider>
-        </div>
+        <Header className="flex-none" />
+        <DndProvider backend={HTML5Backend}>
+          <div
+            id="main"
+            className="container flex-1 flex flex-col overflow-y-hidden bg-white 2xl:max-w-8xl rounded-lg shadow-md p-6 mx-auto my-4"
+          >
+            <Component {...pageProps} />
+          </div>
+        </DndProvider>
       </PersistGate>
     </Provider>
   );

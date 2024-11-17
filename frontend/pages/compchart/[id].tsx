@@ -158,10 +158,13 @@ const CompChartPage: React.FC = () => {
   }
 
   return (
-    <OutsideDropArea onDrop={handleDropOutside}>
+    <OutsideDropArea
+      className="flex-1 flex flex-col overflow-y-hidden"
+      onDrop={handleDropOutside}
+    >
       <PageHead title="レシピ比較表" />
 
-      <div className="flex mb-2">
+      <div className="flex flex-none mb-2">
         <h1 className="flex-none inline-block text-2xl my-auto text-gray-800">
           レシピ比較表:
         </h1>
@@ -178,7 +181,7 @@ const CompChartPage: React.FC = () => {
         />
       </div>
 
-      <ul className="flex flex-wrap mt-6 mb-6 text-sm font-medium text-center text-gray-500 border-b border-gray-300">
+      <ul className="flex flex-wrap flex-none mt-6 mb-6 text-sm font-medium text-center text-gray-500 border-b border-gray-300">
         {tabList.map((tabName, index) => (
           <li className="me-2">
             <button
@@ -206,11 +209,11 @@ const CompChartPage: React.FC = () => {
 
       {/* レシピ編成タブ */}
       <div
-        className={`grid grid-cols-1 md:grid-cols-[4fr_5fr] gap-4 ${
+        className={`flex-1 overflow-y-hidden grid grid-cols-1 md:grid-cols-[4fr_5fr] gap-4 ${
           activeTab === 0 ? "" : "hidden"
         }`}
       >
-        <div className="flex flex-col p-4 bg-white rounded-lg shadow-md">
+        <div className="overflow-y-hidden flex-1 flex flex-col p-4 m-1 bg-white rounded-lg shadow-md">
           {/* <h2 className="flex-none text-2xl font-bold mb-2">レシピ一覧</h2> */}
           <input
             type="text"
@@ -222,7 +225,7 @@ const CompChartPage: React.FC = () => {
           <div className="flex-1 overflow-auto">{FilteredDraggableRecipes}</div>
         </div>
 
-        <div className="flex flex-col p-4 bg-white rounded-lg shadow-md overflow-auto">
+        <div className="flex-1 flex flex-col p-4 m-1 bg-white rounded-lg shadow-md overflow-auto">
           <h2 className="flex-none mt-2 text-2xl font-bold">レシピ編成</h2>
           {recipeSels.map((recipeSel, index) => (
             <RecipeSelection
@@ -238,7 +241,9 @@ const CompChartPage: React.FC = () => {
       </div>
 
       {/* 原料／生産物タブ */}
-      <div className={`${activeTab === 1 ? "" : "hidden"}`}>
+      <div
+        className={`flex-1 overflow-y-auto ${activeTab === 1 ? "" : "hidden"}`}
+      >
         <h2 className="text-2xl font-bold mb-1">原料一覧</h2>
         <IngredientMultiSelect
           chartId={chartId}
@@ -265,23 +270,23 @@ const CompChartPage: React.FC = () => {
       </div>
 
       {/* WIKIテーブルタブ */}
-      <div className={`${activeTab === 2 ? "" : "hidden"}`}>
+      <div
+        className={`flex-1 overflow-y-auto ${activeTab === 2 ? "" : "hidden"}`}
+      >
         {chartErrors != null && chartErrors.length > 0 ? (
           <div
-            className="flex items-center p-4 mb-4 text-sm border rounded-lg bg-gray-800 text-red-400 border-red-800"
+            className="items-center p-4 mb-4 text-sm border rounded-lg bg-gray-800 text-red-400 border-red-800"
             role="alert"
           >
-            <div>
-              <p className="text-xl font-bold">
-                <SolidIcon.ExclamationCircleIcon className="inline size-6 align-top me-1" />
-                <span className="inline align-middle">実行エラー</span>
-              </p>
-              <ul className="mt-3">
-                {chartErrors.map((err) => (
-                  <li>{err}</li>
-                ))}
-              </ul>
-            </div>
+            <p className="text-xl font-bold">
+              <SolidIcon.ExclamationCircleIcon className="inline size-6 align-top me-1" />
+              <span className="inline align-middle">実行エラー</span>
+            </p>
+            <ul className="mt-3">
+              {chartErrors.map((err) => (
+                <li>{err}</li>
+              ))}
+            </ul>
           </div>
         ) : null}
 
