@@ -2,12 +2,13 @@ import React from "react";
 import Select from "react-select";
 import * as Icon from "@heroicons/react/24/outline";
 import { useAppDispatch, Option, GroupOption, findSelectedItem } from "@/index";
-import { TProductAmount, actions } from "@/slices/compchartSlice";
+import { TProductAmount, actions } from "@/features/compchartSlice";
 
-const ProductAmountTable: React.FC<{
+export const ProductAmountTable: React.FC<{
+  chartId: string;
   productAmounts?: TProductAmount[];
   itemOptions?: GroupOption[];
-}> = ({ productAmounts, itemOptions }) => {
+}> = ({ chartId, productAmounts, itemOptions }) => {
   const dispatch = useAppDispatch();
 
   const productOptions = React.useMemo(
@@ -19,17 +20,17 @@ const ProductAmountTable: React.FC<{
   );
 
   return (
-    <table>
+    <table className="table-fixed w-full">
       <thead>
         <tr>
           <td className="text-center">生産物</td>
-          <td className="text-center">生産個数</td>
-          <td className="text-center">削除</td>
+          <td className="text-center w-[6rem]">生産個数</td>
+          <td className="text-center w-[6rem]">削除</td>
         </tr>
       </thead>
       <tbody>
         {productAmounts?.map((product, index) => (
-          <tr key={index}>
+          <tr key={`${index}-${product?.itemId}`}>
             <td>
               <Select<Option, false>
                 options={itemOptions}
@@ -37,6 +38,7 @@ const ProductAmountTable: React.FC<{
                 onChange={(option) =>
                   dispatch(
                     actions.setProductAmount({
+                      chartId,
                       index,
                       value: { ...product, itemId: option?.value },
                     })
@@ -49,12 +51,13 @@ const ProductAmountTable: React.FC<{
             <td>
               <input
                 type="number"
-                className="w-full text-right"
+                className="text-right text-sm p-2 rounded-lg max-w-[5rem]"
                 min={0}
                 value={product.amount}
                 onChange={(ev) =>
                   dispatch(
                     actions.setProductAmount({
+                      chartId,
                       index,
                       value: { ...product, amount: parseInt(ev.target.value) },
                     })
@@ -64,9 +67,29 @@ const ProductAmountTable: React.FC<{
             </td>
             <td className="text-center">
               <button
+                className="size-6 text-blue-400"
+                onClick={() =>
+                  dispatch(actions.addProductAmount({ chartId, index }))
+                }
+              >
+                <Icon.ArrowUpOnSquareIcon />
+              </button>
+              <button
+                className="size-6 text-blue-400"
+                onClick={() =>
+                  dispatch(
+                    actions.addProductAmount({ chartId, index: index + 1 })
+                  )
+                }
+              >
+                <Icon.ArrowDownOnSquareIcon />
+              </button>
+              <button
                 disabled={productAmounts.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"
-                onClick={() => dispatch(actions.deleteProductAmount({ index }))}
+                onClick={() =>
+                  dispatch(actions.deleteProductAmount({ chartId, index }))
+                }
               >
                 <Icon.TrashIcon />
               </button>
@@ -77,5 +100,3 @@ const ProductAmountTable: React.FC<{
     </table>
   );
 };
-
-export default ProductAmountTable;

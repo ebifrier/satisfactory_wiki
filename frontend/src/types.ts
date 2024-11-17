@@ -152,6 +152,7 @@ export type TRecipe = TBase & {
   condition?: TCondition;
   productionTime: number;
   productionTime2?: number;
+  power?: number;
   buildingId: string;
   building: TBuilding;
   building2Id?: string;
@@ -165,6 +166,9 @@ export class RecipeUtil {
     const { wikiId, linkAnchor = "N1" } = recipe;
     return `素材/${wikiId}#Recipe_${linkAnchor}`;
   };
+
+  static getFullName = ({ name, id }: TRecipe): string =>
+    `${name} [${toDisplayId(id)}]`;
 
   static isByproduct = (recipe: TRecipe, itemId: string): boolean =>
     recipe.products[0]?.itemId !== itemId;

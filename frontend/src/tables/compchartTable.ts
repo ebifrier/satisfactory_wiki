@@ -6,19 +6,24 @@ import {
   TableUtil,
   TTableData,
   TTableColumn,
+  TTextTag,
 } from "@/index";
-import { TRecipeSelection, TProductAmount } from "../slices/compchartSlice";
+import { TRecipeSelection, TProductAmount } from "../features/compchartSlice";
 
 type StringToValueDic = { [key: string]: number };
 
-type TCompChart = {
+type APICompChart = {
   recipes: StringToValueDic;
-  ingredients: string[];
   buildings: StringToValueDic;
   net: StringToValueDic;
   consume: number;
   power: number;
   name: string;
+};
+
+type APICompChartResult = {
+  charts: APICompChart[];
+  errors: string[];
 };
 
 const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
@@ -29,15 +34,41 @@ const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
   );
 };
 
+const convertItemName = (name?: string): string | TTextTag => {
+  if (name == null) {
+    return "";
+  }
+
+  switch (name) {
+    case "未加工石英":
+      return "未加工&br;石英";
+    case "カテリウム鉱石":
+      return { type: "text", content: "カテリウム&br;鉱石", size: 10 };
+    case "ボーキサイト":
+      return "ボーキ&br;サイト";
+  }
+
+  const index = name.indexOf("のインゴット");
+  if (index >= 0) {
+    return `${name.substring(0, index)}の&br;インゴット`;
+  }
+
+  return name;
+};
+
 export const createCompChartData = (
-  charts: TCompChart[],
+  charts: APICompChart[],
+  ingredientIds: string[],
   items: TItem[]
 ): TTableData => {
   if (!charts || charts.length === 0) {
     return { rows: [] };
   }
 
-  const ingredients = [...charts[0].ingredients];
+  const ingredients = ingredientIds.map((ingId) =>
+    items.find((item) => item.id === ingId)
+  );
+
   const ingColumns = ingredients.map(() => TableUtil.newColumn(">"));
   if (ingColumns.length === 0) {
     return { rows: [] };
@@ -68,9 +99,9 @@ export const createCompChartData = (
     TableUtil.newRow(
       [
         TableUtil.newColumn("~"),
-        ...ingredients
-          .map((ingId) => items.find((item) => item.id === ingId))
-          .map((item) => TableUtil.newColumn(item?.name ?? "")),
+        ...ingredients.map((item) =>
+          TableUtil.newColumn(convertItemName(item?.name))
+        ),
         TableUtil.newColumn("~"),
         TableUtil.newColumn("~"),
       ],
@@ -98,7 +129,7 @@ export const createCompChartData = (
       return value.toFixed(0);
     };
 
-    for (const ingId of ingredients) {
+    for (const ingId of ingredientIds) {
       const tag = ingId in net && net[ingId] < 0 ? toFixed(-net[ingId]) : "-";
       columns.push(TableUtil.newColumn(tag));
     }
@@ -117,26 +148,41 @@ export const executeCompChart = async (
   recipeSels: TRecipeSelection[],
   productAmounts: TProductAmount[],
   ingredients: string[]
-): Promise<TCompChart[]> => {
+): Promise<APICompChartResult> => {
+  const errors: string[] = [];
+
+  if (ingredients.length === 0) {
+    errors.push("原料が指定されていません。");
+  }
+
+  const filtered = productAmounts.filter(({ itemId }) => itemId != null);
+  if (filtered.length === 0) {
+    errors.push("生産物が指定されていません。");
+  }
+
+  if (errors.length > 0) {
+    return { charts: [], errors };
+  }
+
   const productIds = productAmounts
     .filter(({ itemId }) => itemId != null)
     .map(({ itemId, amount }) => `${itemId}:${amount}`)
     .join(",");
   const ingredientIds = ingredients.join(",");
 
-  const charts: TCompChart[] = [];
-  for (const recipeSel of recipeSels) {
+  const charts: APICompChart[] = [];
+  for (const [i, recipeSel] of recipeSels.entries()) {
     const recipeIds = recipeSel.recipes.map((r) => r.id).join(",");
     const param = new URLSearchParams();
     param.append("recipes", recipeIds);
     param.append("products", productIds);
     param.append("ingredients", ingredientIds);
 
-    const chart: TCompChart = await fetcher(
+    const chart = await fetcher<APICompChart>(
       `/api/v1/planner?${param.toString()}`
     );
-    charts.push({ ...chart, name: recipeSel.name });
+    charts.push({ ...chart, name: recipeSel.name || `#${i + 1}` });
   }
 
-  return charts;
+  return { charts, errors };
 };

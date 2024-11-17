@@ -10,6 +10,7 @@ import {
   TTableData,
   useItemOptions,
   findSelectedItem,
+  paramToStr,
   fetcher,
   createRecipeData,
   createRecipesForBuildingData,
@@ -28,6 +29,11 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
   title,
   data,
 }) => {
+  const wikiText = React.useMemo(
+    () => `${TableUtil.dataToWIKI(data)}\n`,
+    [data]
+  );
+
   return (
     <>
       <div className="mt-8 col-span-full">
@@ -47,7 +53,7 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
             className="w-full h-full border border-gray-500 focus:border-blue-500"
             wrap="off"
             placeholder="placeholder"
-            defaultValue={`${TableUtil.dataToWIKI(data)}\n`}
+            defaultValue={wikiText}
           ></textarea>
         </>
       )}
@@ -56,8 +62,6 @@ const DataTableWithTitle: React.FC<DataTableWithTitleProps> = ({
 };
 
 function ItemPage() {
-  const paramToStr = (param?: string | string[]): string | undefined =>
-    param ? `${param}` : undefined;
   const router = useRouter();
   const itemId = paramToStr(router.query.itemId);
 
@@ -118,7 +122,10 @@ function ItemPage() {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-4 gap-y-2">
+    <div
+      id="main"
+      className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-4 gap-y-2 2xl:max-w-8xl"
+    >
       <PageHead title="素材詳細" />
 
       <div className="col-span-full">

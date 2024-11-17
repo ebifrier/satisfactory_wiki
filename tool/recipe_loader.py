@@ -29,6 +29,7 @@ def parse_recipe(elems: any) -> TRecipe:
     building_pairs = list(parse_buildings(elems[2]))
     building_ids = [pair[0] for pair in building_pairs]
     production_times = [pair[1] for pair in building_pairs]
+    power = building_pairs[0][2]
 
     # 設備などは分速がありません。
     has_minute = all(building_id != 'Build_Gun' for building_id in building_ids)
@@ -39,10 +40,20 @@ def parse_recipe(elems: any) -> TRecipe:
     conds = list(parse_milestones(elems[4]))
 
     return TRecipe(id, building_ids, production_times, alternate,
-                   ingredients, products, conds)
+                   ingredients, products, conds, power)
 
 
-def parse_buildings(building_root: any) -> Iterator[tuple[str, str]]:
+def parse_power(value: str) -> int:
+    m = re.match(r'([\d,]+)\s*\-\s*([\d,]+)', value)
+    if m:
+        v1 = int(m[1].replace(',',''))
+        v2 = int(m[2].replace(',',''))
+        return (v1 + v2) // 2
+
+    return int(value.replace(',',''))
+
+
+def parse_buildings(building_root: any) -> Iterator[tuple[str, str, int]]:
     building_elems = building_root.xpath('div[@class="recipe-building"]')
 
     for elem in building_elems:
@@ -51,21 +62,26 @@ def parse_buildings(building_root: any) -> Iterator[tuple[str, str]]:
         #     logging.error('Error: "%s" is the unknown building.', elem[0].text)
         #     raise Exception()
 
+        power = None
+        power_elem = elem.xpath('span[@class="recipe-energy"]')
+        if len(power_elem) >= 1:
+            power = parse_power(power_elem[0].text)
+
         span_elem = elem.xpath('span/img')
         if len(span_elem) >= 1:
             production_time = span_elem[0].tail
             production_time = normalize_value(production_time)
-            yield (building_id, production_time)
+            yield (building_id, production_time, power)
             continue
 
         br_elem = elem.xpath('br')
         if len(br_elem) >= 1:
             production_time = br_elem[0].tail
             production_time = normalize_value(production_time)
-            yield (building_id, production_time)
+            yield (building_id, production_time, power)
             continue
 
-        yield (building_id, 0)
+        yield (building_id, 0, power)
 
 
 def parse_recipe_items(items_root: any, has_minute: bool) -> Iterator[TRecipeItem]:

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "build": "npm run build:staging",
     "build:staging": "cross-env APP_ENV=\"staging\" next build",
     "build:main": "npm run build:production",
     "build:production": "cross-env APP_ENV=\"production\" next build",
@@ -23,6 +24,8 @@
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
     "react-select": "^5.8.2",
+    "react-tooltip": "^5.28.0",
+    "redux-persist": "^6.0.0",
     "sass": "^1.80.6",
     "swr": "^2.2.5"
   },

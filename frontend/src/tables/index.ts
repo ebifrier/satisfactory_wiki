@@ -1,3 +1,3 @@
 export * from "./table";
-export * from "./tableExt";
+export * from "./itemTable";
 export * from "./compchartTable";

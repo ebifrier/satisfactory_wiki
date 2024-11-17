@@ -20,6 +20,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Copper_Ore_(Quartz)
   name: 銅鉱石（石英）
   wiki_id: Copper_Ore
@@ -42,6 +43,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Copper_Ore_(Sulfur)
   name: 銅鉱石（硫黄）
   wiki_id: Copper_Ore
@@ -64,6 +66,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Limestone_(Sulfur)
   name: 石灰岩（硫黄）
   wiki_id: Limestone
@@ -86,6 +89,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Coal_(Iron)
   name: 石炭（鉄）
   wiki_id: Coal
@@ -108,6 +112,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Coal_(Limestone)
   name: 石炭（石灰岩）
   wiki_id: Coal
@@ -130,6 +135,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Biocoal
   name: バイオ炭
   wiki_id: Coal
@@ -192,6 +198,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Caterium_Ore_(Quartz)
   name: カテリウム鉱石（石英）
   wiki_id: Caterium_Ore
@@ -214,6 +221,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Raw_Quartz_(Bauxite)
   name: 未加工石英（ボーキサイト）
   wiki_id: Raw_Quartz
@@ -236,6 +244,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Raw_Quartz_(Coal)
   name: 未加工石英（石炭）
   wiki_id: Raw_Quartz
@@ -258,6 +267,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Sulfur_(Coal)
   name: 硫黄（石炭）
   wiki_id: Sulfur
@@ -280,6 +290,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Sulfur_(Iron)
   name: 硫黄（鉄）
   wiki_id: Sulfur
@@ -302,6 +313,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Bauxite_(Caterium)
   name: ボーキサイト（カテリウム）
   wiki_id: Bauxite
@@ -324,6 +336,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Bauxite_(Copper)
   name: ボーキサイト（銅）
   wiki_id: Bauxite
@@ -346,6 +359,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Uranium_Ore_(Bauxite)
   name: ウラン鉱石（ボーキサイト）
   wiki_id: Uranium
@@ -368,6 +382,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Unpackage_Oil
   name: 原油･容器取り出し
   wiki_id: Crude_Oil
@@ -634,6 +649,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Nitrogen_Gas_(Caterium)
   name: 窒素ガス（カテリウム）
   wiki_id: Nitrogen_Gas
@@ -656,6 +672,7 @@
     minute: 120
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Unpackage_Nitrogen_Gas
   name: 窒素ガス・容器取り出し
   wiki_id: Nitrogen_Gas
@@ -877,6 +894,7 @@
     minute: 60
   conditions:
   - MAM Power Slugs Research - Synthetic Power Shards
+  power: -1000
 - id: Biomass_(Alien_Protein)
   name: バイオマス(エイリアンのタンパク質)
   wiki_id: Biomass
@@ -1375,6 +1393,7 @@
   conditions:
   - Tier 9 - Quantum Encoding
   - MAM Sulfur Research - Ionized Fuel
+  power: -250
 - id: Nitro_Rocket_Fuel
   name: ニトロロケット燃料
   wiki_id: Rocket_Fuel
@@ -2534,6 +2553,7 @@
     minute: 30
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Ficsite_Ingot_(Caterium)
   name: FICSITEのインゴット(カテリウム)
   wiki_id: Ficsite_Ingot
@@ -2556,6 +2576,7 @@
     minute: 15
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Ficsite_Ingot_(Iron)
   name: FICSITEのインゴット(鉄)
   wiki_id: Ficsite_Ingot
@@ -2578,6 +2599,7 @@
     minute: 10
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Iron_Plate
   name: 鉄板
   wiki_id: Iron_Plate
@@ -5179,6 +5201,7 @@
     minute: 30
   conditions:
   - Tier 9 - Matter Conversion
+  power: -500
 - id: Cloudy_Diamonds
   name: ダイヤモンド(曇り)
   wiki_id: Diamonds
@@ -5201,6 +5224,7 @@
     minute: 20
   conditions:
   - Tier 9 - Matter Conversion
+  power: -500
 - id: Oil-Based_Diamonds
   name: ダイヤモンド(油性)
   wiki_id: Diamonds
@@ -5220,6 +5244,7 @@
     minute: 40
   conditions:
   - Tier 9 - Matter Conversion
+  power: -500
 - id: Petroleum_Diamonds
   name: ダイヤモンド(石油)
   wiki_id: Diamonds
@@ -5239,6 +5264,7 @@
     minute: 30
   conditions:
   - Tier 9 - Matter Conversion
+  power: -500
 - id: Pink_Diamonds
   name: ダイヤモンド(ピンク)
   wiki_id: Diamonds
@@ -5261,6 +5287,7 @@
     minute: 15
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Turbo_Diamonds
   name: ダイヤモンド(ターボ)
   wiki_id: Diamonds
@@ -5284,6 +5311,7 @@
   conditions:
   - Tier 9 - Matter Conversion
   - MAM Sulfur Research - Turbofuel
+  power: -500
 - id: Time_Crystal
   name: 時の結晶
   wiki_id: Time_Crystal
@@ -5303,6 +5331,7 @@
     minute: 6
   conditions:
   - Tier 9 - Matter Conversion
+  power: -250
 - id: Excited_Photonic_Matter
   name: 励起フォトニック物質
   wiki_id: Excited_Photonic_Matter
@@ -5319,6 +5348,7 @@
     minute: 200
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -250
 - id: AI_Expansion_Server
   name: AI拡張サーバー
   wiki_id: AI_Expansion_Server
@@ -5350,6 +5380,7 @@
     minute: 100
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -1000
 - id: Alien_Power_Matrix
   name: 異星のパワーマトリックス
   wiki_id: Alien_Power_Matrix
@@ -5381,6 +5412,7 @@
     minute: 60
   conditions:
   - MAM Alien Technology Research - Alien Power Matrix
+  power: -1000
 - id: Dark_Matter_Residue
   name: ダークマターの残留物
   wiki_id: Dark_Matter_Residue
@@ -5400,6 +5432,7 @@
     minute: 100
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -250
 - id: Ficsonium_Fuel_Rod
   name: FICSONIUM燃料棒
   wiki_id: Ficsonium_Fuel_Rod
@@ -5431,6 +5464,7 @@
     minute: 50
   conditions:
   - Tier 9 - Peak Efficiency
+  power: -1000
 - id: Neural-Quantum_Processor
   name: ニューラル量子プロセッサー
   wiki_id: Neural-Quantum_Processor
@@ -5462,6 +5496,7 @@
     minute: 75
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -1000
 - id: Superposition_Oscillator
   name: 重ね合わせ発振器
   wiki_id: Superposition_Oscillator
@@ -5493,6 +5528,7 @@
     minute: 125
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -1000
 - id: Dark_Matter_Crystal
   name: ダークマターの結晶
   wiki_id: Dark_Matter_Crystal
@@ -5515,6 +5551,7 @@
     minute: 30
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -1000
 - id: Dark_Matter_Crystallization
   name: ダークマターの結晶化
   wiki_id: Dark_Matter_Crystal
@@ -5534,6 +5571,7 @@
     minute: 20
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -1000
 - id: Dark_Matter_Trap
   name: ダークマターのトラップ
   wiki_id: Dark_Matter_Crystal
@@ -5556,6 +5594,7 @@
     minute: 60
   conditions:
   - Tier 9 - Quantum Encoding
+  power: -1000
 - id: Singularity_Cell
   name: シンギュラリティセル
   wiki_id: Singularity_Cell
@@ -6156,6 +6195,7 @@
     minute: 30
   conditions:
   - Tier 8 - Particle Enrichment
+  power: -500
 - id: Encased_Plutonium_Cell
   name: 被覆型プルトニウム・セル
   wiki_id: Encased_Plutonium_Cell
@@ -6202,6 +6242,7 @@
     minute: 10
   conditions:
   - Tier 8 - Particle Enrichment
+  power: -500
 - id: Plutonium_Fuel_Rod
   name: プルトニウム燃料棒
   wiki_id: Plutonium_Fuel_Rod
@@ -6299,6 +6340,7 @@
     minute: 10
   conditions:
   - Tier 9 - Peak Efficiency
+  power: -1000
 - id: Smart_Plating
   name: スマート･プレート
   wiki_id: Smart_Plating
@@ -6588,6 +6630,7 @@
     minute: 0.5
   conditions:
   - Tier 8 - Particle Enrichment
+  power: -1000
 - id: Biochemical_Sculptor
   name: 生化学スカルプター
   wiki_id: Biochemical_Sculptor
@@ -8387,7 +8430,7 @@
   - Tier 1 - Logistics
 - id: Crafting_Bench
   name: 工作台
-  wiki_id: Crafting_Bench
+  wiki_id: Craft_Bench
   buildings:
   - Build_Gun
   production_times:

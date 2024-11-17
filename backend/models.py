@@ -164,6 +164,7 @@ class Recipe(db.Model):
     wiki_id = db.Column(db.String(128), nullable=False)
     link_anchor = db.Column(db.String(32), nullable=False)
     alternate = db.Column(db.Boolean, nullable=False)
+    power = db.Column(db.Integer)
     condition_id = db.Column(db.String(256), db.ForeignKey('condition.id'), nullable=True)
     condition = db.relationship('Condition', foreign_keys=[condition_id])
     production_time = db.Column(db.Float, nullable=False)
@@ -197,6 +198,9 @@ class Recipe(db.Model):
     def wiki_link(self) -> str:
         link_anchor = self.link_anchor if self.link_anchor else "N1"
         return f'素材/{self.wiki_id}#Recipe_{link_anchor}'
+
+    def get_power(self) -> int:
+        return self.power or self.building.power
 
     def is_byproduct(self, item_id: str) -> bool:
         return self.products[0].item_id != item_id

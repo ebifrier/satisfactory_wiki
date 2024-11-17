@@ -47,7 +47,7 @@ def recipe_to_dict(recipe: TRecipe) -> dict | None:
         if find_item(item.id) is None:
             logging.error('"%s" is unknown item', item.id)
 
-    return {
+    dic = {
         'id': to_id(hrecipe.id),
         'name': hrecipe.name,
         'wiki_id': to_id(getattr(hrecipe, 'wiki_id', recipe.id)),
@@ -59,6 +59,9 @@ def recipe_to_dict(recipe: TRecipe) -> dict | None:
         'products': class_to_dict(recipe.products),
         'conditions': recipe.conditions,
     }
+    if recipe.power is not None:
+        dic['power'] = -recipe.power
+    return dic
 
 
 def recipe_to_dict_building(recipe: TRecipe) -> dict | None:

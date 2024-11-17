@@ -2,14 +2,18 @@ import React, { ReactNode } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
-import store from "@/store";
+import store, { persistor } from "@/store";
 
 import "@/styles/style.scss";
 
-const HeaderLinks = [["素材詳細", "/item"]];
+const HeaderLinks = [
+  ["素材詳細", "/item"],
+  ["レシピ比較", "/compchart"],
+];
 
 const Header: React.FC<{ className?: string }> = ({ className }) => {
   const [mobileHidden, setMobileHidden] = React.useState(true);
@@ -25,7 +29,7 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
         <div className="text-2xl font-bold">
           <Link href="/">
             <img
-              src="./favicon.png"
+              src="/favicon.png"
               title="logo"
               alt="logo"
               className="logo-image inline mr-2"
@@ -76,22 +80,26 @@ const Header: React.FC<{ className?: string }> = ({ className }) => {
 export default function App({ Component, pageProps }: AppProps): ReactNode {
   return (
     <Provider store={store}>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
+      <PersistGate loading={null} persistor={persistor}>
+        <Head>
+          <meta charSet="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <link rel="icon" href="/favicon.ico" id="favicon" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+        </Head>
 
-      <div className="flex flex-col">
         <Header className="flex-none" />
         <DndProvider backend={HTML5Backend}>
-          <div
-            id="main"
-            className="container flex-1 bg-white xl:max-w-7xl rounded-lg shadow-md p-6 mx-auto my-4"
-          >
-            <Component {...pageProps} />
-          </div>
+          <Component {...pageProps} />
         </DndProvider>
-      </div>
+      </PersistGate>
     </Provider>
   );
 }

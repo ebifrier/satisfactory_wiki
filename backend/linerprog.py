@@ -69,12 +69,13 @@ class ProductionPlanner:
         consums = []
         powers = []
         for [recipe, p_recipe] in self.recipes_data:
-            if recipe.building.power is None:
+            power = recipe.get_power()
+            if power is None:
                 pass
-            elif recipe.building.power >= 0:
-                powers.append(recipe.building.power * p_recipe)
+            elif power >= 0:
+                powers.append(power * p_recipe)
             else:
-                consums.append(-recipe.building.power * p_recipe)
+                consums.append(-power * p_recipe)
         return pulp.lpSum(consums), pulp.lpSum(powers)
 
     def solve(self) -> tuple[dict[str, float], float, float]:

@@ -112,6 +112,7 @@ def load_recipes() -> Iterator[Recipe]:
                      wiki_id = data.get('wiki_id', to_id(recipe_id)),
                      link_anchor = data.get('link_anchor', ''),
                      alternate = data['alternate'],
+                     power = data.get('power', None),
                      condition_id = condition_id,
                      building_id = to_id(data['buildings'][0]),
                      building2_id = building2_id,

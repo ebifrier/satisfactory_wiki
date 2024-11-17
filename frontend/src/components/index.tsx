@@ -10,4 +10,7 @@ export const PageHead: React.FC<{ title: string }> = ({ title }) => (
   </Head>
 );
 
+export * from "./ingredientSelectTable";
+export * from "./productAmountTable";
+export * from "./recipeSelection";
 export * from "./table";
