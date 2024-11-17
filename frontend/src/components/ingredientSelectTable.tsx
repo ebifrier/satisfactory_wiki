@@ -28,7 +28,7 @@ export const IngredientSelectTable: React.FC<{
       </thead>
       <tbody>
         {selectedOptions.map((selectedOption, index) => (
-          <tr key={index}>
+          <tr key={`${index}-${selectedOption?.value}`}>
             <td>
               <Select<Option, false>
                 options={itemOptions}
