@@ -48,7 +48,9 @@ export const IngredientSelectTable: React.FC<{
             </td>
             <td className="text-center">
               <button
+                type="button"
                 className="size-6 text-blue-400"
+                title="上に新しい項目を追加"
                 onClick={() => {
                   const newList = ingredients.toSpliced(index, 0, "");
                   dispatch(
@@ -59,7 +61,9 @@ export const IngredientSelectTable: React.FC<{
                 <Icon.ArrowUpOnSquareIcon />
               </button>
               <button
+                type="button"
                 className="size-6 text-blue-400"
+                title="下に新しい項目を追加"
                 onClick={() => {
                   const newList = ingredients.toSpliced(index + 1, 0, "");
                   dispatch(
@@ -70,8 +74,10 @@ export const IngredientSelectTable: React.FC<{
                 <Icon.ArrowDownOnSquareIcon />
               </button>
               <button
+                type="button"
                 disabled={ingredients == null || ingredients.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"
+                title="項目を削除"
                 onClick={() => {
                   const newList = ingredients.toSpliced(index, 1);
                   dispatch(
