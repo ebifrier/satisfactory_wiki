@@ -155,11 +155,14 @@ export const RecipeSelection: React.FC<{
       className="p-2 mt-2 border-2 border-dashed border-gray-300 rounded-lg bg-gray-100"
     >
       <h2 className="flex mb-3">
-        <p className="flex-none p-1 my-auto inline-block">名前:</p>
+        <p className="flex-none p-1 my-auto inline-block">{`#${
+          selIndex + 1
+        }`}</p>
         <input
           type="text"
           value={name}
           onChange={handleName}
+          placeholder="名前"
           className="ml-2 p-1 flex-1 font-semibold min-w-[10rem] focus:outline-gray-400 rounded-lg"
         />
         <p className="flex-none inline-block ml-auto">

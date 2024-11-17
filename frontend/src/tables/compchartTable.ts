@@ -171,7 +171,7 @@ export const executeCompChart = async (
   const ingredientIds = ingredients.join(",");
 
   const charts: APICompChart[] = [];
-  for (const recipeSel of recipeSels) {
+  for (const [i, recipeSel] of recipeSels.entries()) {
     const recipeIds = recipeSel.recipes.map((r) => r.id).join(",");
     const param = new URLSearchParams();
     param.append("recipes", recipeIds);
@@ -181,7 +181,7 @@ export const executeCompChart = async (
     const chart = await fetcher<APICompChart>(
       `/api/v1/planner?${param.toString()}`
     );
-    charts.push({ ...chart, name: recipeSel.name });
+    charts.push({ ...chart, name: recipeSel.name || `#${i + 1}` });
   }
 
   return { charts, errors };
