@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ActionMeta } from "react-select";
-import { Option, TRecipe } from "@/index";
+import { TRecipe } from "@/index";
 
 export type TRecipeSelection = {
   name: string;

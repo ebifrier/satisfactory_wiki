@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useDrop } from "react-dnd";
-import * as Icon from "@heroicons/react/24/outline";
 import * as SolidIcon from "@heroicons/react/24/solid";
 import {
   TRecipe,
