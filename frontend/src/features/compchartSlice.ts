@@ -209,9 +209,10 @@ const compChartSlice = createSlice({
     addProductAmount(
       { charts },
       {
-        payload: { chartId, productAmounts },
+        payload: { chartId, index, productAmounts },
       }: PayloadAction<{
         chartId: string;
+        index: number;
         productAmounts?: TProductAmount;
       }>
     ) {
@@ -220,7 +221,11 @@ const compChartSlice = createSlice({
         return;
       }
 
-      chart.productAmounts.push(productAmounts ?? makeDefualtProductAmount());
+      chart.productAmounts.splice(
+        index,
+        0,
+        productAmounts ?? makeDefualtProductAmount()
+      );
     },
 
     setProductAmount(
@@ -295,42 +300,6 @@ const compChartSlice = createSlice({
       }
 
       chart.ingredients = ingredients;
-    },
-
-    operateIngredients(
-      { charts },
-      {
-        payload: { chartId, options, meta },
-      }: PayloadAction<{
-        chartId: string;
-        options: readonly Option[];
-        meta?: ActionMeta<Option>;
-      }>
-    ) {
-      const chart = charts.find(({ id }) => id === chartId);
-      if (chart == null) {
-        return;
-      }
-
-      const { ingredients } = chart;
-      switch (meta?.action) {
-        case "select-option":
-        case undefined:
-          const notIncluded = options
-            .map((option) => option.value)
-            .filter((ingId) => !ingredients.includes(ingId));
-          ingredients.push(...notIncluded);
-          break;
-        case "remove-value":
-          const index = ingredients.indexOf(meta.removedValue.value);
-          if (index >= 0) {
-            ingredients.splice(index, 1);
-          }
-          break;
-        case "clear":
-          ingredients.splice(0, ingredients.length);
-          break;
-      }
     },
   },
 });

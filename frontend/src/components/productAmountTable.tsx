@@ -30,7 +30,7 @@ export const ProductAmountTable: React.FC<{
       </thead>
       <tbody>
         {productAmounts?.map((product, index) => (
-          <tr key={index}>
+          <tr key={`${index}-${product?.itemId}`}>
             <td>
               <Select<Option, false>
                 options={itemOptions}
@@ -66,6 +66,24 @@ export const ProductAmountTable: React.FC<{
               />
             </td>
             <td className="text-center">
+              <button
+                className="size-6 text-blue-400"
+                onClick={() =>
+                  dispatch(actions.addProductAmount({ chartId, index }))
+                }
+              >
+                <Icon.ArrowUpOnSquareIcon />
+              </button>
+              <button
+                className="size-6 text-blue-400"
+                onClick={() =>
+                  dispatch(
+                    actions.addProductAmount({ chartId, index: index + 1 })
+                  )
+                }
+              >
+                <Icon.ArrowDownOnSquareIcon />
+              </button>
               <button
                 disabled={productAmounts.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"

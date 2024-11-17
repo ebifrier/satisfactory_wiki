@@ -252,17 +252,7 @@ const CompChartPage: React.FC = () => {
           itemOptions={itemOptions}
         />
 
-        <h2 className="text-2xl font-bold mt-6 mb-1">
-          生産物一覧
-          <span className="float-right font-normal">
-            <button
-              className="size-6 text-blue-400 align-bottom"
-              onClick={() => dispatch(actions.addProductAmount({ chartId }))}
-            >
-              <Icon.ArrowDownOnSquareIcon />
-            </button>
-          </span>
-        </h2>
+        <h2 className="text-2xl font-bold mt-6 mb-1">生産物一覧</h2>
         <ProductAmountTable
           chartId={chartId}
           productAmounts={productAmounts}
