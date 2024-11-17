@@ -21,6 +21,10 @@ body {
   max-height: 100vh;
 }
 
+#main {
+  @apply container bg-white rounded-lg shadow-md p-6 mx-auto my-4;
+}
+
 #main a {
   text-decoration-color: #ccc !important;
   text-decoration-line: underline !important;

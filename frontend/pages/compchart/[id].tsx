@@ -159,7 +159,10 @@ const CompChartPage: React.FC = () => {
 
   return (
     <OutsideDropArea
-      className="flex-1 flex flex-col overflow-y-hidden"
+      id="main"
+      className={`flex-1 flex flex-col 2xl:max-w-8xl ${
+        activeTab === 0 ? "overflow-y-hidden" : ""
+      }`}
       onDrop={handleDropOutside}
     >
       <PageHead title="レシピ比較表" />
@@ -241,9 +244,7 @@ const CompChartPage: React.FC = () => {
       </div>
 
       {/* 原料／生産物タブ */}
-      <div
-        className={`flex-1 overflow-y-auto ${activeTab === 1 ? "" : "hidden"}`}
-      >
+      <div className={`flex-1 ${activeTab === 1 ? "" : "hidden"}`}>
         <h2 className="text-2xl font-bold mb-1">原料一覧</h2>
         <IngredientSelectTable
           chartId={chartId}
@@ -270,9 +271,7 @@ const CompChartPage: React.FC = () => {
       </div>
 
       {/* WIKIテーブルタブ */}
-      <div
-        className={`flex-1 overflow-y-auto ${activeTab === 2 ? "" : "hidden"}`}
-      >
+      <div className={`flex-1 ${activeTab === 2 ? "" : "hidden"}`}>
         {chartErrors != null && chartErrors.length > 0 ? (
           <div
             className="items-center p-4 mb-4 text-sm border rounded-lg bg-gray-800 text-red-400 border-red-800"

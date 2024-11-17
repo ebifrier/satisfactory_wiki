@@ -122,7 +122,10 @@ function ItemPage() {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-4 gap-y-2">
+    <div
+      id="main"
+      className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-x-4 gap-y-2 2xl:max-w-8xl"
+    >
       <PageHead title="素材詳細" />
 
       <div className="col-span-full">

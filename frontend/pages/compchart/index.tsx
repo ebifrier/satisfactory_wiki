@@ -13,7 +13,10 @@ const CompChartListPage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <div
+      id="main"
+      className="grid grid-cols-1 md:grid-cols-2 gap-2 2xl:max-w-8xl"
+    >
       <PageHead title="レシピ比較表一覧" />
 
       <div className="col-span-full flex mb-2">
