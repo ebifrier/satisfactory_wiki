@@ -19,16 +19,17 @@ const CompChartListPage: React.FC = () => {
     >
       <PageHead title="レシピ比較表一覧" />
 
-      <div className="col-span-full flex mb-2">
+      <div className="col-span-full flex mb-6">
         <h1 className="flex-none inline-block text-4xl font-bold text-gray-800">
           レシピ比較表一覧
         </h1>
         <span className="flex-1 inline-block my-auto text-right">
           <button
-            className="size-6 text-blue-400"
+            className="text-blue-600 px-3 py-2 rounded-lg border border-blue-600"
             onClick={() => dispatch(actions.addChart({}))}
           >
-            <Icon.ArrowDownOnSquareIcon />
+            <Icon.FolderPlusIcon className="size-6 inline" />
+            <span className="align-middle ms-1">レシピ比較表を追加</span>
           </button>
         </span>
       </div>
