@@ -22,7 +22,7 @@ import {
   RecipeSelection,
   DraggableRecipe,
   ProductAmountTable,
-  IngredientMultiSelect,
+  IngredientSelectTable,
 } from "@/components";
 import { actions } from "@/features/compchartSlice";
 
@@ -183,7 +183,7 @@ const CompChartPage: React.FC = () => {
 
       <ul className="flex flex-wrap flex-none mt-6 mb-6 text-sm font-medium text-center text-gray-500 border-b border-gray-300">
         {tabList.map((tabName, index) => (
-          <li className="me-2">
+          <li key={tabName} className="me-2">
             <button
               type="button"
               className={`inline-block p-4 rounded-t-lg ${
@@ -245,7 +245,7 @@ const CompChartPage: React.FC = () => {
         className={`flex-1 overflow-y-auto ${activeTab === 1 ? "" : "hidden"}`}
       >
         <h2 className="text-2xl font-bold mb-1">原料一覧</h2>
-        <IngredientMultiSelect
+        <IngredientSelectTable
           chartId={chartId}
           ingredients={ingredients}
           itemOptions={itemOptions}
@@ -283,8 +283,8 @@ const CompChartPage: React.FC = () => {
               <span className="inline align-middle">実行エラー</span>
             </p>
             <ul className="mt-3">
-              {chartErrors.map((err) => (
-                <li>{err}</li>
+              {chartErrors.map((err, index) => (
+                <li key={index}>{err}</li>
               ))}
             </ul>
           </div>

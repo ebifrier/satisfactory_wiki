@@ -263,6 +263,40 @@ const compChartSlice = createSlice({
       chart.productAmounts.splice(index, 1);
     },
 
+    addIngredient(
+      { charts },
+      {
+        payload: { chartId, ingredient },
+      }: PayloadAction<{
+        chartId: string;
+        ingredient?: string;
+      }>
+    ) {
+      const chart = charts.find(({ id }) => id === chartId);
+      if (chart == null) {
+        return;
+      }
+
+      chart.ingredients.push(ingredient ?? "");
+    },
+
+    setIngredients(
+      { charts },
+      {
+        payload: { chartId, ingredients },
+      }: PayloadAction<{
+        chartId: string;
+        ingredients: string[];
+      }>
+    ) {
+      const chart = charts.find(({ id }) => id === chartId);
+      if (chart == null) {
+        return;
+      }
+
+      chart.ingredients = ingredients;
+    },
+
     operateIngredients(
       { charts },
       {
