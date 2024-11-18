@@ -7,11 +7,19 @@ from models import Item, Recipe
 # 
 def get_value(var: pulp.LpVariable, ndigits: int | None = None) -> float:
     value = var.value()
-    if var.value() is None:
-        value = 0
+    if value is None:
+        return 0
     if ndigits is not None:
-        value = round(value, ndigits)
+        return round(value, ndigits)
     return value
+
+
+def calc_consum(power: float, count: float) -> float:
+    """ダウンクロックを含めた、施設の電力計算を行います。"""
+    EXP = 1.321928
+    count_int = math.floor(count)
+    count_decimal = count - count_int
+    return power * (count_int + math.pow(count_decimal, EXP))
 
 
 class ProductionPlanner:
@@ -61,7 +69,7 @@ class ProductionPlanner:
         for product_id, value in self.products:
             net_prod = net_productions.get(product_id, None)
             if net_prod is not None:
-                prob += net_prod >= value
+                prob += net_prod == value
 
         return net_productions
 
@@ -73,16 +81,14 @@ class ProductionPlanner:
             if power is None:
                 pass
             elif power >= 0:
-                powers.append(power * p_recipe)
+                powers.append(power * p_recipe.value())
             else:
-                consums.append(-power * p_recipe)
-        return pulp.lpSum(consums), pulp.lpSum(powers)
+                consums.append(calc_consum(-power, p_recipe.value()))
+        return sum(consums), sum(powers)
 
     def solve(self) -> tuple[dict[str, float], float, float]:
         prob = pulp.LpProblem('ProductionPlanning', pulp.LpMinimize)
         net_productions = self._make_net_productions(prob)
-        p_consum, p_power = self._get_powers()
-        p_consum += net_productions['Water'] / 120 * 20
 
         # 生産対象ではない副産物(valueが0以上)の合計生産量が
         # 最小になるようにします。
@@ -91,7 +97,7 @@ class ProductionPlanner:
             if self.has_product(item_id):
                 continue
 
-            # up0には max(value, 0) の値が入ります。
+            # up0には max(生産量, 0) の値が入ります。
             up0 = pulp.LpVariable(f'up0_{item_id}')
             prob += up0 >= value
             prob += up0 >= 0
@@ -101,9 +107,11 @@ class ProductionPlanner:
         solver = pulp.PULP_CBC_CMD(gapRel=1e-7)
         prob.solve(solver)
 
+        consum, power = self._get_powers()
+        consum += calc_consum(20, -get_value(net_productions['Water']) / 120.0)
         net_result = {k: get_value(v, 3) for k,v in net_productions.items()
                       if math.fabs(get_value(v)) > 1e-4}
-        return net_result, get_value(p_consum, 3), get_value(p_power, 3)
+        return net_result, round(consum, 3), round(power, 3)
 
     def get_building_counts(self) -> dict[int]:
         result = {}
@@ -115,24 +123,3 @@ class ProductionPlanner:
     def get_recipe_counts(self) -> dict[float]:
         return {p_recipe.name: get_value(p_recipe, 3)
                 for _, p_recipe in self.recipes_data}
-
-
-# recipe_ids = ['Bauxite_(Caterium)', 'Reanimated_SAM', 'Ficsite_Ingot_(Aluminum)',
-#               'Pure_Aluminum_Ingot', 'Electrode_Aluminum_Scrap', 'Sloppy_Alumina',
-#               'Heavy_Oil_Residue', 'Petroleum_Coke']
-# products = [('Ficsite_Ingot', 100), ('Bauxite', 0)]
-# planner = ProductionPlanner(recipe_ids, products)
-# net, power, consum = planner.solve()
-
-# print(net, power, consum)
-# print([(p_recipe, p_recipe.value()) for _, p_recipe in planner.recipes_data])
-# print(planner.get_buildings())
-
-# recipe_ids = ['Reanimated_SAM', 'Pure_Caterium_Ingot', 'Ficsite_Ingot_(Caterium)']
-# products = [('Ficsite_Ingot', 100)]
-# planner = ProductionPlanner(recipe_ids, products)
-# net, power, consum = planner.solve()
-
-# print(net, power, consum)
-# print([(p_recipe, p_recipe.value()) for _, p_recipe in planner.recipes_data])
-# print(planner.get_buildings())

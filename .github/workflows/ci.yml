@@ -4,6 +4,10 @@ on:
     paths:
       - .github/workflows/ci.yml
       - frontend/**
+  pull_request:
+    paths:
+      - .github/workflows/ci.yml
+      - frontend/**
 
 jobs:
   build:
