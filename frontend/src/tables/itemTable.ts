@@ -103,8 +103,9 @@ export const createRecipeData = (
   const { maxInputs = 0, maxOutputs = 0 } = building;
   const nInputs = Math.max(maxInputs, ingredients.length, products.length);
   const nOutputs = Math.max(1, maxOutputs);
+  const divide = nInputs % nOutputs === 0 ? nInputs / nOutputs : 1;
   for (let i = 0; i < nInputs; ++i) {
-    const product = i % nOutputs == 0 ? products[i / nOutputs] : null;
+    const product = i % divide === 0 ? products[i / divide] : null;
     const ingredient = ingredients[i];
     const columns = [
       TableUtil.newColumn(
