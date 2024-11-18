@@ -18,6 +18,12 @@ def to_int(value: str) -> int | None:
     return int(value)
 
 
+def to_float(value: str) -> float | None:
+    if value is None:
+        return None
+    return float(value)
+
+
 def make_seeddata(db: SQLAlchemy) -> Iterator[any]:
     for item in load_items():
         yield item
@@ -78,6 +84,7 @@ def load_buildings() -> Iterator[Building]:
                        category = data['category'],
                        subcategory = data['subcategory'],
                        power = to_int(data.get('power', None)),
+                       area = to_float(data.get('area', None)),
                        max_inputs = to_int(data.get('max_inputs', None)),
                        max_outputs = to_int(data.get('max_outputs', None)),
                        wiki_id = data.get('wiki_id', building_id))

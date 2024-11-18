@@ -97,13 +97,15 @@
   max_inputs: 1
   max_outputs: 1
   power: -4
+  area: 45
   category: 生産
   subcategory: 製錬炉
 - id: Foundry
+  name: 鋳造炉
   max_inputs: 2
   max_outputs: 1
   power: -16
-  name: 鋳造炉
+  area: 90
   category: 生産
   subcategory: 製錬炉
 
@@ -112,6 +114,7 @@
   max_inputs: 1
   max_outputs: 1
   power: -4
+  area: 78.21
   category: 生産
   subcategory: 製造機
 - id: Assembler
@@ -119,6 +122,7 @@
   max_inputs: 2
   max_outputs: 1
   power: -15
+  area: 150
   category: 生産
   subcategory: 製造機
 - id: Manufacturer
@@ -126,6 +130,7 @@
   max_inputs: 4
   max_outputs: 1
   power: -55
+  area: 360
   category: 生産
   subcategory: 製造機
 - id: Packager
@@ -133,6 +138,7 @@
   max_inputs: 2
   max_outputs: 2
   power: -10
+  area: 64
   category: 生産
   subcategory: 製造機
 - id: Refinery
@@ -140,6 +146,7 @@
   max_inputs: 2
   max_outputs: 2
   power: -30
+  area: 200
   category: 生産
   subcategory: 製造機
 - id: Blender
@@ -147,6 +154,7 @@
   max_inputs: 4
   max_outputs: 2
   power: -75
+  area: 288
   category: 生産
   subcategory: 製造機
 - id: Particle Accelerator
@@ -154,6 +162,7 @@
   max_inputs: 3
   max_outputs: 1
   power: -1500
+  area: 912
   category: 生産
   subcategory: 製造機
 - id: Quantum Encoder
@@ -161,6 +170,7 @@
   max_inputs: 4
   max_outputs: 2
   power: -2000
+  area: 1056
   category: 生産
   subcategory: 製造機
 - id: Converter
@@ -168,6 +178,7 @@
   max_inputs: 2
   max_outputs: 2
   power: -250
+  area: 256
   category: 生産
   subcategory: 製造機
 
@@ -176,6 +187,7 @@
   power: 30
   max_inputs: 1
   max_outputs: 0
+  area: 64
   category: 電力
   subcategory: 発電機
 - id: Coal-Powered Generator
@@ -183,6 +195,7 @@
   power: 75
   max_inputs: 2
   max_outputs: 0
+  area: 260
   category: 電力
   subcategory: 発電機
 - id: Fuel-Powered Generator
@@ -191,11 +204,13 @@
   power: 250
   max_inputs: 1
   max_outputs: 0
+  area: 400
   category: 電力
   subcategory: 発電機
 - id: Geothermal Generator
   name: 地熱発電機
   power: 150
+  area: 380
   category: 電力
   subcategory: 発電機
 - id: Nuclear Power Plant
@@ -203,11 +218,13 @@
   power: 2500
   max_inputs: 2
   max_outputs: 1
+  area: 1548
   category: 電力
   subcategory: 発電機
 - id: Alien Power Augmenter
   name: 異星の増幅装置
   power: 500
+  area: 784
   category: 電力
   subcategory: 発電機
 - id: Power Storage
