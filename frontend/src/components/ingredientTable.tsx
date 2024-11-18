@@ -1,20 +1,18 @@
 import React from "react";
 import Select from "react-select";
 import * as Icon from "@heroicons/react/24/outline";
-import { useAppDispatch, Option, GroupOption, findSelectedItem } from "@/index";
+import { useAppDispatch, Option, GroupOption } from "@/index";
+import { findSelectedItem } from "@/components";
 import { actions } from "@/features/compchartSlice";
 
-export const IngredientSelectTable: React.FC<{
+export const IngredientTable: React.FC<{
   chartId: string;
   ingredients: string[];
   itemOptions?: GroupOption[];
 }> = ({ chartId, ingredients, itemOptions }) => {
   const dispatch = useAppDispatch();
   const selectedOptions = React.useMemo(
-    () =>
-      ingredients.length > 0
-        ? ingredients.map((ingId) => findSelectedItem(ingId, itemOptions))
-        : [undefined],
+    () => ingredients.map((ingId) => findSelectedItem(ingId, itemOptions)),
     [ingredients, itemOptions]
   );
 
@@ -49,33 +47,38 @@ export const IngredientSelectTable: React.FC<{
             <td className="text-center">
               <button
                 type="button"
-                className="size-6 text-blue-400"
-                title="上に新しい項目を追加"
-                onClick={() => {
-                  const newList = ingredients.toSpliced(index, 0, "");
+                className="size-6 text-blue-400 disabled:text-gray-200"
+                title="上に項目を移動"
+                onClick={() =>
                   dispatch(
-                    actions.setIngredients({ chartId, ingredients: newList })
-                  );
-                }}
+                    actions.swapIngredient({
+                      chartId,
+                      from: index,
+                      to: index - 1,
+                    })
+                  )
+                }
               >
                 <Icon.ArrowUpOnSquareIcon />
               </button>
               <button
                 type="button"
-                className="size-6 text-blue-400"
-                title="下に新しい項目を追加"
-                onClick={() => {
-                  const newList = ingredients.toSpliced(index + 1, 0, "");
+                className="size-6 text-blue-400 disabled:text-gray-200"
+                title="下に項目を移動"
+                onClick={() =>
                   dispatch(
-                    actions.setIngredients({ chartId, ingredients: newList })
-                  );
-                }}
+                    actions.swapIngredient({
+                      chartId,
+                      from: index,
+                      to: index + 1,
+                    })
+                  )
+                }
               >
                 <Icon.ArrowDownOnSquareIcon />
               </button>
               <button
                 type="button"
-                disabled={ingredients == null || ingredients.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"
                 title="項目を削除"
                 onClick={() => {

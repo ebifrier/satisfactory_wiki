@@ -17,9 +17,11 @@ import {
   PageHead,
   TableData,
   ItemTypes,
+  AddButton,
   RecipeSelection,
   DraggableRecipe,
   ProductAmountTable,
+  IngredientTable,
   useItemOptions,
 } from "@/components";
 import { actions } from "@/features/compchartSlice";
@@ -230,7 +232,14 @@ const CompChartPage: React.FC = () => {
         </div>
 
         <div className="flex-1 flex flex-col p-4 m-1 bg-white rounded-lg shadow-md overflow-auto">
-          {/* <h2 className="flex-none mt-2 text-2xl font-bold">レシピ編成</h2> */}
+          <h2 className="flex-none mt-2">
+            <span className="text-2xl font-bold">レシピ編成</span>
+            <AddButton
+              className="inline align-bottom float-right"
+              content="レシピ編成を追加"
+              onClick={() => dispatch(actions.addRecipeSel({ chartId }))}
+            />
+          </h2>
           {recipeSels.map((recipeSel, index) => (
             <RecipeSelection
               key={index}
@@ -238,7 +247,6 @@ const CompChartPage: React.FC = () => {
               selIndex={index}
               recipeSel={recipeSel}
               ingredients={ingredients}
-              hasDelete={recipeSels.length > 1}
             />
           ))}
         </div>
@@ -246,14 +254,28 @@ const CompChartPage: React.FC = () => {
 
       {/* 原料／生産物タブ */}
       <div className={`flex-1 ${activeTab === 1 ? "" : "hidden"}`}>
-        <h2 className="text-2xl font-bold mb-1">原料一覧</h2>
-        <IngredientSelectTable
+        <h2 className="mb-1">
+          <span className="text-2xl font-bold">原料一覧</span>
+          <AddButton
+            className="inline align-bottom float-right"
+            content="原料を追加"
+            onClick={() => dispatch(actions.addIngredient({ chartId }))}
+          />
+        </h2>
+        <IngredientTable
           chartId={chartId}
           ingredients={ingredients}
           itemOptions={itemOptions}
         />
 
-        <h2 className="text-2xl font-bold mt-6 mb-1">生産物一覧</h2>
+        <h2 className="mt-6 mb-1">
+          <span className="text-2xl font-bold">生産物一覧</span>
+          <AddButton
+            className="inline align-bottom float-right"
+            content="生産物を追加"
+            onClick={() => dispatch(actions.addProductAmount({ chartId }))}
+          />
+        </h2>
         <ProductAmountTable
           chartId={chartId}
           productAmounts={productAmounts}

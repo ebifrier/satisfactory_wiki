@@ -37,7 +37,7 @@ const makeDefaultChart = (): TCompChartState => ({
   name: "新規レシピ比較表",
   recipeSels: [makeDefualtRecipeSel()],
   productAmounts: [makeDefualtProductAmount()],
-  ingredients: [],
+  ingredients: [""],
 });
 
 const getUniqueStr = (strong?: number): string => {
@@ -86,27 +86,12 @@ const compChartSlice = createSlice({
       Object.assign(existedChart, chart);
     },
 
-    setRecipeSels(
-      { charts },
-      {
-        payload: { chartId, recipeSels },
-      }: PayloadAction<{ chartId: string; recipeSels: TRecipeSelection[] }>
-    ) {
-      const chart = charts.find(({ id }) => id === chartId);
-      if (chart == null) {
-        return;
-      }
-
-      chart.recipeSels = recipeSels;
-    },
-
     addRecipeSel(
       { charts },
       {
-        payload: { chartId, selIndex, recipeSel },
+        payload: { chartId, recipeSel },
       }: PayloadAction<{
         chartId: string;
-        selIndex: number;
         recipeSel?: TRecipeSelection;
       }>
     ) {
@@ -115,11 +100,7 @@ const compChartSlice = createSlice({
         return;
       }
 
-      if (selIndex < 0 || selIndex > chart.recipeSels.length) {
-        return;
-      }
-
-      chart.recipeSels.splice(selIndex, 0, recipeSel ?? makeDefualtRecipeSel());
+      chart.recipeSels.push(recipeSel ?? makeDefualtRecipeSel());
     },
 
     updateRecipeSel(
@@ -142,6 +123,34 @@ const compChartSlice = createSlice({
       }
 
       chart.recipeSels[selIndex] = recipeSel;
+    },
+
+    swapRecipeSel(
+      { charts },
+      {
+        payload: { chartId, from, to },
+      }: PayloadAction<{
+        chartId: string;
+        from: number;
+        to: number;
+      }>
+    ) {
+      const chart = charts.find(({ id }) => id === chartId);
+      if (chart == null) {
+        return;
+      }
+
+      if (from < 0 || from >= chart.recipeSels.length) {
+        return;
+      }
+
+      if (to < 0 || to >= chart.recipeSels.length) {
+        return;
+      }
+
+      const tmp = chart.recipeSels[from];
+      chart.recipeSels[from] = chart.recipeSels[to];
+      chart.recipeSels[to] = tmp;
     },
 
     deleteRecipeSel(
@@ -208,10 +217,9 @@ const compChartSlice = createSlice({
     addProductAmount(
       { charts },
       {
-        payload: { chartId, index, productAmounts },
+        payload: { chartId, productAmounts },
       }: PayloadAction<{
         chartId: string;
-        index: number;
         productAmounts?: TProductAmount;
       }>
     ) {
@@ -220,14 +228,10 @@ const compChartSlice = createSlice({
         return;
       }
 
-      chart.productAmounts.splice(
-        index,
-        0,
-        productAmounts ?? makeDefualtProductAmount()
-      );
+      chart.productAmounts.push(productAmounts ?? makeDefualtProductAmount());
     },
 
-    setProductAmount(
+    updateProductAmount(
       { charts },
       {
         payload: { chartId, index, value },
@@ -299,6 +303,34 @@ const compChartSlice = createSlice({
       }
 
       chart.ingredients = ingredients;
+    },
+
+    swapIngredient(
+      { charts },
+      {
+        payload: { chartId, from, to },
+      }: PayloadAction<{
+        chartId: string;
+        from: number;
+        to: number;
+      }>
+    ) {
+      const chart = charts.find(({ id }) => id === chartId);
+      if (chart == null) {
+        return;
+      }
+
+      if (from < 0 || from >= chart.ingredients.length) {
+        return;
+      }
+
+      if (to < 0 || to >= chart.ingredients.length) {
+        return;
+      }
+
+      const tmp = chart.ingredients[from];
+      chart.ingredients[from] = chart.ingredients[to];
+      chart.ingredients[to] = tmp;
     },
   },
 });
