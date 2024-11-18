@@ -14,3 +14,4 @@ export * from "./ingredientSelectTable";
 export * from "./productAmountTable";
 export * from "./recipeSelection";
 export * from "./table";
+export * from "./tinyComponents";

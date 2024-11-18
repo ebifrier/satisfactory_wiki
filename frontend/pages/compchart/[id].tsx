@@ -8,7 +8,6 @@ import {
   fetcher,
   useAppDispatch,
   useAppSelector,
-  useItemOptions,
   TTableData,
   TableUtil,
   createCompChartData,
@@ -21,7 +20,7 @@ import {
   RecipeSelection,
   DraggableRecipe,
   ProductAmountTable,
-  IngredientSelectTable,
+  useItemOptions,
 } from "@/components";
 import { actions } from "@/features/compchartSlice";
 
