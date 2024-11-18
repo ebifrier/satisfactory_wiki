@@ -56,6 +56,11 @@ const convertItemName = (name?: string): string | TTextTag => {
   return name;
 };
 
+const getFixedDigits = (values: number[], ndigits: number): number => {
+  const comp = Math.pow(10, ndigits);
+  return values.some((v) => v < comp) ? 1 : 0;
+};
+
 export const createCompChartData = (
   charts: APICompChart[],
   ingredientIds: string[],
@@ -123,6 +128,15 @@ export const createCompChartData = (
     ),
   ];
 
+  const consumDigits = getFixedDigits(
+    charts.map((c) => c.consume),
+    2
+  );
+  const areaDigits = getFixedDigits(
+    charts.map((c) => getBuildingsAreaSize(c.buildings)),
+    1
+  );
+
   for (const { name, buildings, consume, net } of charts) {
     const columns: TTableColumn[] = [TableUtil.newColumn(name)];
     const toFixed = (value: number) => {
@@ -134,9 +148,9 @@ export const createCompChartData = (
       columns.push(TableUtil.newColumn(tag));
     }
 
-    columns.push(TableUtil.newColumn(consume.toFixed(0)));
+    columns.push(TableUtil.newColumn(consume.toFixed(consumDigits)));
     columns.push(
-      TableUtil.newColumn(getBuildingsAreaSize(buildings).toFixed(0))
+      TableUtil.newColumn(getBuildingsAreaSize(buildings).toFixed(areaDigits))
     );
     rows.push(TableUtil.newRow(columns));
   }
