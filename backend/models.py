@@ -71,6 +71,7 @@ class Building(db.Model):
     category = db.Column(db.String(64), nullable=False)
     subcategory = db.Column(db.String(64), nullable=False)
     power = db.Column(db.Integer)
+    area = db.Column(db.Float)
     max_inputs = db.Column(db.Integer)
     max_outputs = db.Column(db.Integer)
 

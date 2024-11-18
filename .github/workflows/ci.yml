@@ -1,0 +1,19 @@
+name: Build
+on:
+  push:
+    paths:
+      - .github/workflows/ci.yml
+      - frontend/**
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+          npm run build

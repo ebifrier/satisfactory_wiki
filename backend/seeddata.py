@@ -18,6 +18,12 @@ def to_int(value: str) -> int | None:
     return int(value)
 
 
+def to_float(value: str) -> float | None:
+    if value is None:
+        return None
+    return float(value)
+
+
 def make_seeddata(db: SQLAlchemy) -> Iterator[any]:
     for item in load_items():
         yield item
@@ -78,6 +84,7 @@ def load_buildings() -> Iterator[Building]:
                        category = data['category'],
                        subcategory = data['subcategory'],
                        power = to_int(data.get('power', None)),
+                       area = to_float(data.get('area', None)),
                        max_inputs = to_int(data.get('max_inputs', None)),
                        max_outputs = to_int(data.get('max_outputs', None)),
                        wiki_id = data.get('wiki_id', building_id))
@@ -90,7 +97,9 @@ def load_recipes() -> Iterator[Recipe]:
     for i, data in enumerate(recipes_data):
         recipe_id = to_id(data['id'])
         prefix = "代替: " if data['alternate'] else ""
+        building_id = to_id(data['buildings'][0])
         building2_id = None
+        production_time = float(data['production_times'][0])
         production_time2 = None
 
         if len(data['buildings']) > 1:
@@ -114,26 +123,42 @@ def load_recipes() -> Iterator[Recipe]:
                      alternate = data['alternate'],
                      power = data.get('power', None),
                      condition_id = condition_id,
-                     building_id = to_id(data['buildings'][0]),
+                     building_id = building_id,
                      building2_id = building2_id,
-                     production_time = float(data['production_times'][0]),
+                     production_time = production_time,
                      production_time2 = production_time2)
 
+        # production_timeが0のときは、minute=0とします。
+        def get_minute(amount: float) -> float:
+            if production_time == 0:
+                return 0
+            if building_id in ('Craft_Bench', 'Crafting_Bench',
+                               'Build_Gun', 'Equipment_Workshop'):
+                return 30.0 * amount / production_time
+            else:
+                return 60.0 * amount / production_time
+
         for j, ing in enumerate(data['ingredients']):
+            amount = float(ing['amount'])
+            if float(ing['minute']) != get_minute(amount):
+                print(f'invalid minute value {building_id} handy:{ing['minute']} calc:{get_minute(amount)}')
             yield RecipeItem(recipe_id = recipe_id,
                              item_id = to_id(ing['id']),
                              role = 'ingredient',
                              index = j,
-                             amount = float(ing['amount']),
-                             minute = float(ing['minute']))
+                             amount = amount,
+                             minute = get_minute(amount))
 
         for j, prod in enumerate(data['products']):
+            amount = float(prod['amount'])
+            if float(prod['minute']) != get_minute(amount):
+                print(f'invalid minute value {building_id} handy:{prod['minute']} calc:{get_minute(amount)}')
             yield RecipeItem(recipe_id = recipe_id,
                              item_id = to_id(prod['id']),
                              role = 'product',
                              index = j,
-                             amount = float(prod['amount']),
-                             minute = float(prod['minute']))
+                             amount = amount,
+                             minute = get_minute(amount))
 
 
 def load_milestones() -> Iterator[Condition]:
