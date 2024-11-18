@@ -53,6 +53,7 @@ export type TBuilding = TBase & {
   category: string;
   subcategory: string;
   power?: number;
+  area?: number;
   maxInputs?: number;
   maxOutputs?: number;
 };
@@ -66,26 +67,35 @@ export class BuildingUtil {
 
   static getAreaSize = (buildingId: string): number => {
     switch (buildingId) {
+      case "Build_Gun":
+      case "Equipment_Workshop":
+      case "Crafting_Bench":
+      case "Equipment_Workshop":
+        return 0;
+
       case "Smelter":
         return 45 / 64;
       case "Foundry":
         return 90 / 64;
+
       case "Constructor":
         return 78.21 / 64;
       case "Assembler":
         return 150 / 64;
       case "Manufacturer":
         return 360 / 64;
+      case "Packager":
+        return 64 / 64;
       case "Refinery":
         return 200 / 64;
       case "Blender":
         return 288 / 64;
       case "Particle_Accelerator":
         return 912 / 64;
-      case "Converter":
-        return 256 / 64;
       case "Quantum_Encoder":
         return 1056 / 64;
+      case "Converter":
+        return 256 / 64;
 
       case "Biomass_Burner":
         return 64 / 64;
