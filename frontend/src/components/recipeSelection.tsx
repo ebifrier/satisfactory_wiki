@@ -94,8 +94,7 @@ export const RecipeSelection: React.FC<{
   selIndex: number;
   recipeSel: TRecipeSelection;
   ingredients?: string[];
-  hasDelete?: boolean;
-}> = ({ chartId, selIndex, recipeSel, ingredients, hasDelete }) => {
+}> = ({ chartId, selIndex, recipeSel, ingredients }) => {
   const dispatch = useAppDispatch();
   const ref = React.useRef<HTMLDivElement>(null);
   const { recipes, name } = recipeSel ?? {};
@@ -127,13 +126,19 @@ export const RecipeSelection: React.FC<{
     [dispatch, chartId, selIndex, recipeSel]
   );
 
-  const handleAddUpRecipe = React.useCallback(
-    () => dispatch(actions.addRecipeSel({ chartId, selIndex })),
+  const handleMoveUpRecipe = React.useCallback(
+    () =>
+      dispatch(
+        actions.swapRecipeSel({ chartId, from: selIndex, to: selIndex - 1 })
+      ),
     [dispatch, chartId, selIndex]
   );
 
-  const handleAddDownRecipe = React.useCallback(
-    () => dispatch(actions.addRecipeSel({ chartId, selIndex: selIndex + 1 })),
+  const handleMoveDownRecipe = React.useCallback(
+    () =>
+      dispatch(
+        actions.swapRecipeSel({ chartId, from: selIndex, to: selIndex + 1 })
+      ),
     [dispatch, chartId, selIndex]
   );
 
@@ -169,26 +174,25 @@ export const RecipeSelection: React.FC<{
         <p className="flex-none inline-block ml-auto">
           <button
             type="button"
-            className="inline-block ml-1 size-6 align-middle text-blue-400"
-            title="上に新しいレシピ編成を追加"
-            onClick={handleAddUpRecipe}
+            className="inline-block ml-1 size-6 align-middle text-blue-400 disabled:text-gray-300"
+            title="レシピ編成を上に移動"
+            onClick={handleMoveUpRecipe}
           >
             <Icon.ArrowUpOnSquareIcon />
           </button>
           <button
             type="button"
-            className="inline-block ml-1 size-6 align-middle text-blue-400"
-            title="下に新しいレシピ編成を追加"
-            onClick={handleAddDownRecipe}
+            className="inline-block size-6 align-middle text-blue-400 disabled:text-gray-300"
+            title="レシピ編成を下に移動"
+            onClick={handleMoveDownRecipe}
           >
             <Icon.ArrowDownOnSquareIcon />
           </button>
           <button
             type="button"
-            className="inline-block ml-1 size-6 align-middle text-red-400 disabled:text-gray-300"
+            className="inline-block size-6 align-middle text-red-400 disabled:text-gray-300"
             title="レシピ編成を削除"
             onClick={handleDeleteRecipe}
-            disabled={hasDelete != null && !hasDelete}
           >
             <Icon.TrashIcon />
           </button>

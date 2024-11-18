@@ -1,7 +1,8 @@
 import React from "react";
 import Select from "react-select";
 import * as Icon from "@heroicons/react/24/outline";
-import { useAppDispatch, Option, GroupOption, findSelectedItem } from "@/index";
+import { useAppDispatch, Option, GroupOption } from "@/index";
+import { findSelectedItem } from "@/components";
 import { TProductAmount, actions } from "@/features/compchartSlice";
 
 export const ProductAmountTable: React.FC<{
@@ -25,7 +26,7 @@ export const ProductAmountTable: React.FC<{
         <tr>
           <td className="text-center">生産物</td>
           <td className="text-center w-[6rem]">生産個数</td>
-          <td className="text-center w-[6rem]">操作</td>
+          <td className="text-center w-[4rem]">削除</td>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +38,7 @@ export const ProductAmountTable: React.FC<{
                 value={productOptions?.[index]}
                 onChange={(option) =>
                   dispatch(
-                    actions.setProductAmount({
+                    actions.updateProductAmount({
                       chartId,
                       index,
                       value: { ...product, itemId: option?.value },
@@ -56,7 +57,7 @@ export const ProductAmountTable: React.FC<{
                 value={product.amount}
                 onChange={(ev) =>
                   dispatch(
-                    actions.setProductAmount({
+                    actions.updateProductAmount({
                       chartId,
                       index,
                       value: { ...product, amount: parseInt(ev.target.value) },
@@ -68,29 +69,6 @@ export const ProductAmountTable: React.FC<{
             <td className="text-center">
               <button
                 type="button"
-                className="size-6 text-blue-400"
-                title="上に新しい項目を追加"
-                onClick={() =>
-                  dispatch(actions.addProductAmount({ chartId, index }))
-                }
-              >
-                <Icon.ArrowUpOnSquareIcon />
-              </button>
-              <button
-                type="button"
-                className="size-6 text-blue-400"
-                title="下に新しい項目を追加"
-                onClick={() =>
-                  dispatch(
-                    actions.addProductAmount({ chartId, index: index + 1 })
-                  )
-                }
-              >
-                <Icon.ArrowDownOnSquareIcon />
-              </button>
-              <button
-                type="button"
-                disabled={productAmounts.length <= 1}
                 className="size-6 text-red-500 disabled:text-gray-200"
                 title="項目を削除"
                 onClick={() =>
