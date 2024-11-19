@@ -21,10 +21,15 @@ export const DraggableRecipe: React.FC<
     errors?: string[];
   }
 > = ({ recipe, full, selIndex, errors = [], className, ...args }) => {
+  const [tooltipVisible, setTooltipVisible] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
   const [, drag] = useDrag(() => ({
     type: ItemTypes.RECIPE,
-    item: { recipe, selIndex },
+    item: () => {
+      // ドラッグ開始時にツールチップを閉じます。
+      setTooltipVisible(false);
+      return { recipe, selIndex };
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -58,22 +63,31 @@ export const DraggableRecipe: React.FC<
   const tooltipId = `recipe-${selIndex}-${recipe.id}`;
 
   return (
-    <div
-      ref={ref}
-      data-tooltip-id={tooltipId}
-      className={`p-2 mb-1 border rounded-lg cursor-move shadow-md ${
-        full ? "" : "inline-block"
-      } ${errors.length > 0 ? "bg-red-500 text-white" : "bg-white"} ${
-        className ?? ""
-      }`}
-      {...args}
-    >
-      {full ? getDisplayName(recipe) : recipe.name}
+    <>
+      <div
+        ref={ref}
+        data-tooltip-id={tooltipId}
+        onMouseEnter={() => setTooltipVisible(true)}
+        onMouseLeave={() => setTooltipVisible(false)}
+        className={`p-2 mb-1 border rounded-lg cursor-move shadow-md ${
+          full ? "" : "inline-block"
+        } ${errors.length > 0 ? "bg-red-500 text-white" : "bg-white"} ${
+          className ?? ""
+        }`}
+        {...args}
+      >
+        {full ? getDisplayName(recipe) : recipe.name}
+      </div>
       {!full ? (
-        <Tooltip id={tooltipId} place="bottom" className="z-10">
+        <Tooltip
+          id={tooltipId}
+          place="bottom"
+          className="z-10"
+          isOpen={tooltipVisible}
+        >
           {tooltipContent}
           {errors.length > 0 ? (
-            <div className="mt-2">
+            <div className="mt-2 text-red-400">
               エラー
               {errors.map((err, index) => (
                 <p key={index}>{err}</p>
@@ -82,7 +96,7 @@ export const DraggableRecipe: React.FC<
           ) : null}
         </Tooltip>
       ) : null}
-    </div>
+    </>
   );
 };
 
