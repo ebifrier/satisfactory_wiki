@@ -34,7 +34,7 @@ const getBuildingsAreaSize = (buildings: StringToValueDic): number => {
   );
 };
 
-const convertItemName = (name?: string): string | TTextTag => {
+const convertItemName = (name?: string): string | TTextTag[] => {
   if (name == null) {
     return "";
   }
@@ -43,14 +43,17 @@ const convertItemName = (name?: string): string | TTextTag => {
     case "未加工石英":
       return "未加工&br;石英";
     case "カテリウム鉱石":
-      return { type: "text", content: "カテリウム&br;鉱石", size: 10 };
+      return [{ type: "text", content: "カテリウム&br;鉱石", size: 10 }];
     case "ボーキサイト":
       return "ボーキ&br;サイト";
   }
 
   const index = name.indexOf("のインゴット");
   if (index >= 0) {
-    return `${name.substring(0, index)}の&br;インゴット`;
+    return [
+      { type: "text", content: `${name.substring(0, index)}の&br;` },
+      { type: "text", content: "インゴット", size: 10 },
+    ];
   }
 
   return name;
