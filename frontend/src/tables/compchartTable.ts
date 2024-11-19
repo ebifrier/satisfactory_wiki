@@ -136,21 +136,23 @@ export const createCompChartData = (
     charts.map((c) => getBuildingsAreaSize(c.buildings)),
     1
   );
+  const ngidits = Math.max(consumDigits, areaDigits);
 
   for (const { name, buildings, consume, net } of charts) {
     const columns: TTableColumn[] = [TableUtil.newColumn(name)];
-    const toFixed = (value: number) => {
-      return value.toFixed(0);
+    const toCeil = (value: number, ndigits: number): string => {
+      const base = Math.pow(10, ndigits);
+      return `${Math.ceil(value * base) / base}`;
     };
 
     for (const ingId of ingredientIds) {
-      const tag = ingId in net && net[ingId] < 0 ? toFixed(-net[ingId]) : "-";
-      columns.push(TableUtil.newColumn(tag));
+      const tag = ingId in net && net[ingId] < 0 ? Math.ceil(-net[ingId]) : "-";
+      columns.push(TableUtil.newColumn(`${tag}`));
     }
 
-    columns.push(TableUtil.newColumn(consume.toFixed(consumDigits)));
+    columns.push(TableUtil.newColumn(toCeil(consume, ngidits)));
     columns.push(
-      TableUtil.newColumn(getBuildingsAreaSize(buildings).toFixed(areaDigits))
+      TableUtil.newColumn(toCeil(getBuildingsAreaSize(buildings), ngidits))
     );
     rows.push(TableUtil.newRow(columns));
   }
