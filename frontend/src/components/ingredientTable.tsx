@@ -48,7 +48,7 @@ export const IngredientTable: React.FC<{
               <button
                 type="button"
                 className="size-6 text-blue-400 disabled:text-gray-200"
-                title="上に項目を移動"
+                title="項目を上に移動"
                 onClick={() =>
                   dispatch(
                     actions.swapIngredient({
@@ -64,7 +64,7 @@ export const IngredientTable: React.FC<{
               <button
                 type="button"
                 className="size-6 text-blue-400 disabled:text-gray-200"
-                title="下に項目を移動"
+                title="項目を下に移動"
                 onClick={() =>
                   dispatch(
                     actions.swapIngredient({
