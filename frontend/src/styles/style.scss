@@ -81,6 +81,10 @@ textarea {
   }
 }
 
-.recipe-item + .recipe-item {
-  margin-left: 0.1rem;
+.recipe-item {
+  margin-right: 0.1rem;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
