@@ -145,7 +145,7 @@ export const createCompChartData = (
     const columns: TTableColumn[] = [TableUtil.newColumn(name)];
     const toCeil = (value: number, ndigits: number): string => {
       const base = Math.pow(10, ndigits);
-      return `${Math.ceil(value * base) / base}`;
+      return (Math.ceil(value * base) / base).toFixed(ngidits);
     };
 
     for (const ingId of ingredientIds) {
