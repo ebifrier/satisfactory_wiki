@@ -19,7 +19,13 @@ def calc_consum(power: float, count: float) -> float:
     EXP = 1.321928
     count_int = math.floor(count)
     count_decimal = count - count_int
-    return power * (count_int + math.pow(count_decimal, EXP))
+
+    # オーバークロックを含めた消費電力は
+    #   施設電力 * (percent / 100) ^ 1.321928
+    # という式で計算されます。
+    # これにより 200%OC時は約2.5倍、250%OC時は約3.6倍の消費電力となります。
+    decimal_power = power * math.pow(count_decimal, EXP)
+    return power * count_int + decimal_power
 
 
 class ProductionPlanner:
