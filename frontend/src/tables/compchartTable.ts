@@ -145,15 +145,19 @@ export const createCompChartData = (
     const columns: TTableColumn[] = [TableUtil.newColumn(name)];
     const toCeil = (value: number, ndigits: number): string => {
       const base = Math.pow(10, ndigits);
-      return (Math.ceil(value * base) / base).toFixed(ngidits);
+      return (Math.ceil(value * base) / base).toFixed(ndigits);
+    };
+    const toFixed = (value: number, ndigits: number): string => {
+      return value.toFixed(ndigits);
     };
 
     for (const ingId of ingredientIds) {
-      const tag = ingId in net && net[ingId] < 0 ? Math.ceil(-net[ingId]) : "-";
+      const tag =
+        ingId in net && net[ingId] < 0 ? toFixed(-net[ingId], 0) : "-";
       columns.push(TableUtil.newColumn(`${tag}`));
     }
 
-    columns.push(TableUtil.newColumn(toCeil(consume, ngidits)));
+    columns.push(TableUtil.newColumn(toFixed(consume, ngidits)));
     columns.push(
       TableUtil.newColumn(toCeil(getBuildingsAreaSize(buildings), ngidits))
     );
