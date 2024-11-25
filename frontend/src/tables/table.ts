@@ -53,7 +53,7 @@ export class TagUtil {
   };
 
   static getSmallImageLink = (item: TRecipe | TBuilding | TItem): TLinkTag => {
-    return this.getImageLink(item.name, item.wikiLink, item.wikiId);
+    return this.getImageLink(` ${item.name}`, item.wikiLink, item.wikiId);
   };
 
   static getBuildingLink = (building: TBuilding): TLinkTag =>
@@ -183,12 +183,12 @@ export class TableUtil {
       return "";
     }
     return [
-      attr.background ? `BGCOLOR(${attr.background}):` : null,
-      attr.textAlign ? `${attr.textAlign.toUpperCase()}:` : null,
+      attr.background ? `BGCOLOR(${attr.background})` : null,
+      attr.textAlign ? attr.textAlign.toUpperCase() : null,
       attr.width ? attr.width : null,
     ]
       .filter((x) => x != null)
-      .join("");
+      .join(":");
   };
 
   static columnToWIKI = (column: TTableColumn): string => {

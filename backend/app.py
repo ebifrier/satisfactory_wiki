@@ -108,7 +108,7 @@ def recipes_using_for_item(item_id: str):
         .join(product_alias, Recipe.id == product_alias.recipe_id)
         .filter(product_alias.role == 'product')
         .join(Item, product_alias.item_id == Item.id)
-        .order_by(asc(Recipe.index), desc(Item.kind))
+        .order_by(desc(Item.kind), asc(Recipe.index))
         .all())
 
     return jsonify([recipe.to_dict() for recipe in recipes])

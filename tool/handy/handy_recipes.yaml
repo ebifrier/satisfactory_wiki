@@ -1466,11 +1466,11 @@
   alternate: false
 - id: Xeno-Zapper
   name: ゼノ・ザッパー
-  link_anchor: Xeno-Zapper N1
+  link_anchor: N1
   alternate: false
 - id: Xeno-Basher
   name: ゼノ・バッシャー
-  link_anchor: Xeno-Basher N1
+  link_anchor: N1
   alternate: false
 - id: Rebar Gun
   name: 鉄筋ガン

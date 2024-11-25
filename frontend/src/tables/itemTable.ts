@@ -182,12 +182,13 @@ export const createRecipesForItemData = (
   for (const recipe of recipes) {
     const ingredient = RecipeUtil.findIngredient(recipe, itemId);
     const product = recipe.products[0];
+    const equipment = product.item?.kind === "equipment";
     const columns = [
       ItemUtil.getKindName(product.item!),
       TagUtil.getLink(recipe.name, recipe.wikiLink),
       TagUtil.getSmallImageLink(product.item!),
       TagUtil.amountToStr(ingredient?.amount) ?? "",
-      TagUtil.minuteToStr(ingredient?.minute) ?? "",
+      equipment ? "" : TagUtil.minuteToStr(ingredient?.minute) ?? "",
       TagUtil.amountToStr(product.amount) ?? "",
     ];
     rows.push(TableUtil.newRow(columns));

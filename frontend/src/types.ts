@@ -32,8 +32,6 @@ export type TItem = TBase & {
 };
 
 export class ItemUtil {
-  static getWikiLink = ({ wikiId }: TItem): string => `素材/${wikiId}`;
-
   static getFullName = ({ name, id }: TItem): string =>
     `${name} [${toDisplayId(id)}]`;
 
@@ -59,12 +57,6 @@ export type TBuilding = TBase & {
 };
 
 export class BuildingUtil {
-  static getWIKILink = (building: TBuilding): string => {
-    const { wikiId, category } = building;
-    const cat = category != "特殊" ? category : "スペシャル";
-    return `建築物/${cat}#${wikiId}`;
-  };
-
   static getAreaSize = (buildingId: string): number => {
     switch (buildingId) {
       case "Build_Gun":
@@ -172,11 +164,6 @@ export type TRecipe = TBase & {
 };
 
 export class RecipeUtil {
-  static getWIKILink = (recipe: TRecipe): string => {
-    const { wikiId, linkAnchor = "N1" } = recipe;
-    return `素材/${wikiId}#Recipe_${linkAnchor}`;
-  };
-
   static getFullName = ({ name, id }: TRecipe): string =>
     `${name} [${toDisplayId(id)}]`;
 

@@ -6862,7 +6862,7 @@
 - id: Xeno-Zapper
   name: ゼノ・ザッパー
   wiki_id: Xeno-Zapper
-  link_anchor: Xeno-Zapper N1
+  link_anchor: N1
   buildings:
   - Equipment_Workshop
   production_times:
@@ -6890,7 +6890,7 @@
 - id: Xeno-Basher
   name: ゼノ・バッシャー
   wiki_id: Xeno-Basher
-  link_anchor: Xeno-Basher N1
+  link_anchor: N1
   buildings:
   - Equipment_Workshop
   production_times:
